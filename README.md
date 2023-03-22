@@ -4,9 +4,9 @@
 
 
 
-Autores: @Boris Mejías
-	   @David Ochoa
-	   @Diego Salvador
+Autores: https://github.com/BorisMejiasII
+	   https://github.com/davicito8a
+	   https://github.com/dsalvador21
 
 
 Enlaces de interés: 
