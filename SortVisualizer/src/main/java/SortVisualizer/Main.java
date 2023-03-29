@@ -17,7 +17,7 @@ public class Main extends Application {
     ArrayList<Integer> arreglo = new ArrayList();
 
 
-    public final static int n = 25;
+    public final static int n = 99;
     public final static int windowHeight = 800;
     public final static int windowWidth = 1000;
     public static double rectangleWidth = 0.75 * 0.9 * windowWidth / n;
@@ -56,8 +56,7 @@ public class Main extends Application {
             rectangle.setFill(Color.BLACK);
             rectangles.add(rectangle);
             
-            Label numero = new Label();
-            numero.setText("1");
+            
             
             
         }
