@@ -50,7 +50,8 @@ public class Main extends Application {
             Rectangle rectangle = new Rectangle();
             rectangle.setX(0.05 * windowWidth + (rectangleWidth + separation) * i);
             rectangle.setY(100);
-            rectangle.setHeight(percentage * rectangleMaxHeight);
+            //No queremos distintos tamaños de rectangulos(btw queremos cuadrados )
+            rectangle.setHeight( rectangleMaxHeight);
             rectangle.setWidth(rectangleWidth);
             rectangle.setFill(Color.GREEN);
             rectangles.add(rectangle);
