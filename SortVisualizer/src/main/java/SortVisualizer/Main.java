@@ -92,14 +92,25 @@ public class Main extends Application {
         Button button = new Button();
         button.setLayoutX(0.9 * windowWidth);
         button.setLayoutY(0.9 * windowHeight);
+        button.setText("UP");
         button.setOnAction(event -> {
-            switchScene(stage);
+            //switchScene(stage);
+            Velocidad++;
+        });
+        
+        Button button2 = new Button();
+        button2.setLayoutX(0.7 * windowWidth);
+        button2.setLayoutY(0.9 * windowHeight);
+        button2.setText("DOWN");
+        button2.setOnAction(event -> {
+            //switchScene(stage);
+            Velocidad--;
         });
         DibujarNumeros d = new DibujarNumeros();
         Label label = new Label(arreglo.toString());
         root.getChildren().add(label);
         root.getChildren().addAll(rectangles);
-        root.getChildren().addAll(d.dibujarTres();
+        root.getChildren().add(button2);  
         root.getChildren().add(button);
         Scene scene = new Scene(root);
         scene.setFill(Color.GRAY);
