@@ -39,7 +39,7 @@ public class Main extends Application {
         }
         return max;
     }
-    
+    // que sucede con estos commmits
     public ArrayList<Rectangle> getRectangles(ArrayList<Integer> alturas) {
         ArrayList<Rectangle> rectangles = new ArrayList();
         
