@@ -16,10 +16,16 @@ import javafx.stage.Stage;
  *
  * @author david
  */
-public class DibujarNumeros {
 
+    public class DibujarNumeros{
+   public void DibujarNumeros(GraphicsContext gc) {
+        //dibujarCero(gc, 50, 100);
+        //dibujarUno(gc, 200, 100);
+        dibujarDos(gc, 200, 100);
+        //dibujarTres(gc, 250, 100);
+        //dibujarCuatro(gc, 300, 100);
 
-    
+}
 
     public void dibujarCero(GraphicsContext gc, double x, double y) {
         gc.strokeOval(x, y, 50, 50);
@@ -27,7 +33,8 @@ public class DibujarNumeros {
 
     public void dibujarUno(GraphicsContext gc, double x, double y) {
         gc.strokeLine(x + 25, y, x + 25, y + 50);
-        gc.strokeLine(x, y + 25, x + 50, y + 25);
+        gc.strokeLine(x + 25,y, x + 10, y + 17 );
+        gc.strokeLine(x + 10,y + 50, x + 40, y+50);
     }
 
     public void dibujarDos(GraphicsContext gc, double x, double y) {
@@ -46,4 +53,8 @@ public class DibujarNumeros {
         gc.strokeLine(x, y + 50, x + 50, y + 50);
     }
 
-}
+    public void dibujarCuatro(GraphicsContext gc, double x, double y) {
+        gc.strokeLine(x, y, x, y + 25);
+        gc.strokeLine(x, y + 25, x + 50, y + 25);
+        gc.strokeLine(x + 25, y, x + 25, y + 50);
+    }}
