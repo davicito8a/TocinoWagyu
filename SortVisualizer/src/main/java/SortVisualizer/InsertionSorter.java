@@ -35,7 +35,7 @@ public class InsertionSorter {
             while(j > 0 && currentHeight < rectangles.get(j - 1).getHeight()){
                 contador++;
                 
-                TranslateTransition moverDerecha = new TranslateTransition();
+            TranslateTransition moverDerecha = new TranslateTransition();
                 moverDerecha.setNode(rectangles.get(j - 1));
                 moverDerecha.setByX(Main.separation + Main.rectangleWidth);
                 moverDerecha.setDuration(Duration.seconds(Main.Velocidad));
