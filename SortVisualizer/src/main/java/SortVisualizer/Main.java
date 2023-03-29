@@ -53,8 +53,13 @@ public class Main extends Application {
             rectangle.setY(100);
             rectangle.setHeight(percentage * rectangleMaxHeight);
             rectangle.setWidth(rectangleWidth);
-            rectangle.setFill(Color.GREEN);
+            rectangle.setFill(Color.BLACK);
             rectangles.add(rectangle);
+            
+            Label numero = new Label();
+            numero.setText("1");
+            
+            
         }
 
         return rectangles;

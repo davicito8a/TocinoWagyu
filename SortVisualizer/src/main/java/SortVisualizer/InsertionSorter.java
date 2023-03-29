@@ -12,6 +12,7 @@ public class InsertionSorter {
     
     public InsertionSorter(ArrayList<Rectangle> rectangles){
         this.rectangles = rectangles;
+        
     }
     
     public ArrayList<Transition> getSortingTransitions(){
