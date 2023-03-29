@@ -1,5 +1,6 @@
 package SortVisualizer;
 
+import static java.lang.System.gc;
 import static java.nio.file.Files.lines;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -60,30 +61,10 @@ public class Main extends Application {
             rectangle.setHeight(percentage * rectangleMaxHeight);
             rectangle.setWidth(rectangleWidth);
             rectangle.setFill(Color.WHITE);
-             rectangles.add(rectangle);
-           
-        Line DiagonalDelUno = new Line();
-        DiagonalDelUno.setStartY(rectangle.getY()+45);
-        DiagonalDelUno.setStartX(rectangle.getX()+60);
-        DiagonalDelUno.setEndX(rectangle.getX()+90);
-        DiagonalDelUno.setEndY(rectangle.getY()+10);
-        
-    
-        DiagonalDelUno.setStrokeWidth(5);
-        
-        
-       
-        Line VerticalDelUno = new Line();
-        
-        VerticalDelUno.setStartY(rectangle.getY()+70);
-        VerticalDelUno.setStartX(rectangle.getX()+92);
-        VerticalDelUno.setEndX(rectangle.getX()+92);
-        VerticalDelUno.setEndY(rectangle.getY()+10);
-        VerticalDelUno.setStrokeWidth(5);    
-        
-        
-            
-            //DrawingNumbers numero  = new DrawingNumbers();
+            rectangle.setStroke(Color.BLACK);
+            rectangle.setStrokeWidth(5);
+            rectangles.add(rectangle);
+             
             
             
             
@@ -114,13 +95,14 @@ public class Main extends Application {
         button.setOnAction(event -> {
             switchScene(stage);
         });
-
+        DibujarNumeros d = new DibujarNumeros();
         Label label = new Label(arreglo.toString());
         root.getChildren().add(label);
         root.getChildren().addAll(rectangles);
+        root.getChildren().addAll(d.dibujarTres();
         root.getChildren().add(button);
         Scene scene = new Scene(root);
-        scene.setFill(BLACK);
+        scene.setFill(Color.GRAY);
         stage.setScene(scene);
         stage.setWidth(windowWidth);
         stage.setHeight(windowHeight);
