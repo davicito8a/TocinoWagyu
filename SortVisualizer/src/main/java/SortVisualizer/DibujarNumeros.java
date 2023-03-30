@@ -21,10 +21,14 @@ import javafx.stage.Stage;
    public void DibujarNumeros(GraphicsContext gc) {
         //dibujarCero(gc, 50, 100);
         //dibujarUno(gc, 200, 100);
-        dibujarDos(gc, 200, 100);
+        //dibujarDos(gc, 200, 100);
         //dibujarTres(gc, 250, 100);
         //dibujarCuatro(gc, 300, 100);
-
+        //dibujarCinco(gc, 100, 100);
+        //dibujarSeis(gc, 150, 100);
+        //mejorar dibujarSiete(gc, 200, 100);
+        //dibujarOcho(gc, 250, 100);
+        //dibujarNueve(gc, 300, 100);
 }
 
     public void dibujarCero(GraphicsContext gc, double x, double y) {
@@ -57,4 +61,35 @@ import javafx.stage.Stage;
         gc.strokeLine(x, y, x, y + 25);
         gc.strokeLine(x, y + 25, x + 50, y + 25);
         gc.strokeLine(x + 25, y, x + 25, y + 50);
-    }}
+    }
+        public void dibujarCinco(GraphicsContext gc, double x, double y) {
+        gc.strokeLine(x, y, x + 50, y);
+        gc.strokeLine(x , y, x , y + 25);
+        gc.strokeLine(x + 50, y + 25, x, y + 25);
+        gc.strokeLine(x + 50, y + 25, x + 50, y + 50);
+        gc.strokeLine(x, y + 50, x + 50, y + 50);
+    }
+
+    public void dibujarSeis(GraphicsContext gc, double x, double y) {
+        gc.strokeOval(x, y + 65, 35, 35);
+        gc.strokeLine(x + 15  , y + 30, x, y + 80);
+    }
+
+    public void dibujarSiete(GraphicsContext gc, double x, double y) {
+        gc.strokeLine(x, y, x + 50, y);
+        gc.strokeLine(x + 50, y, x, y + 50);
+    }
+
+    public void dibujarOcho(GraphicsContext gc, double x, double y) {
+        gc.strokeOval(x, y, 50, 50);
+        gc.strokeOval(x + 12.5, y - 25, 25, 25);
+    }
+
+    public void dibujarNueve(GraphicsContext gc, double x, double y) {
+        gc.strokeOval(x, y, 35, 35);
+        gc.strokeLine(x + 35, y + 55, x + 35, y + 20);
+    }
+    
+    
+    
+    }
