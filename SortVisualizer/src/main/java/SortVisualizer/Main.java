@@ -7,7 +7,6 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -50,8 +49,7 @@ public class Main extends Application {
             Rectangle rectangle = new Rectangle();
             rectangle.setX(0.05 * windowWidth + (rectangleWidth + separation) * i);
             rectangle.setY(100);
-            //No queremos distintos tamaños de rectangulos(btw queremos cuadrados )
-            rectangle.setHeight( rectangleMaxHeight);
+            rectangle.setHeight(percentage * rectangleMaxHeight);
             rectangle.setWidth(rectangleWidth);
             rectangle.setFill(Color.GREEN);
             rectangles.add(rectangle);
@@ -68,17 +66,21 @@ public class Main extends Application {
  
         Group root = new Group();
         
-        Button button = new Button();
-        button.setLayoutX(0.9 * windowWidth);
-        button.setLayoutY(0.9 * windowHeight);
-        button.setOnAction(event -> {
-            switchScene(stage);
-        });
+        
+        
+        Button button1 = new Button("Increase");
+        button1.setLayoutX(0.9 * windowWidth);
+        button1.setLayoutY(0.9 * windowHeight);
+        
+        Button button2 = new Button("Decrease");
+        button2.setLayoutX(0.8 * windowWidth);
+        button2.setLayoutY(0.9 * windowHeight);
         
         Label label = new Label(arreglo.toString());
         root.getChildren().add(label);
         root.getChildren().addAll(rectangles);
-        root.getChildren().add(button);
+        root.getChildren().add(button1);
+        root.getChildren().add(button2);
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
@@ -92,17 +94,26 @@ public class Main extends Application {
         timeline.getChildren().addAll(sorter.getSortingTransitions());
         timeline.play();
         
+        button1.setOnAction(event -> {
+            increaseSpeed(timeline);
+        });
+        
+        button2.setOnAction(event -> {
+            decreaseSpeed(timeline);
+        });
         
         
-        
+   
     }
     
-    private void switchScene(Stage stage){
-        AnchorPane root = new AnchorPane();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
+    private void increaseSpeed(SequentialTransition timeline){
+        timeline.setRate(timeline.getRate() * 1.5);
     }
-
+    
+    private void decreaseSpeed(SequentialTransition timeline){
+        timeline.setRate(timeline.getRate() * 0.5);
+    }
+    
     public static void main(String[] args) {
         launch();
     }

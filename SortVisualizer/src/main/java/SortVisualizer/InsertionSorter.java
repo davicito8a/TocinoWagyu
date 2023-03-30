@@ -28,7 +28,7 @@ public class InsertionSorter {
             TranslateTransition moverAbajo = new TranslateTransition();
             moverAbajo.setNode(rectangles.get(i));
             moverAbajo.setByY(1.5 * Main.rectangleMaxHeight);
-            moverAbajo.setDuration(Duration.seconds(0.5));
+            //moverAbajo.setDuration(Duration.seconds(0.5));
             transitions.add(moverAbajo);
             
             while(j > 0 && currentHeight < rectangles.get(j - 1).getHeight()){
@@ -37,7 +37,7 @@ public class InsertionSorter {
                 TranslateTransition moverDerecha = new TranslateTransition();
                 moverDerecha.setNode(rectangles.get(j - 1));
                 moverDerecha.setByX(Main.separation + Main.rectangleWidth);
-                moverDerecha.setDuration(Duration.seconds(0.5));
+                //moverDerecha.setDuration(Duration.seconds(0.5));
                 transitions.add(moverDerecha);
                 
                 rectangles.set(j, rectangles.get(j - 1));
@@ -47,8 +47,9 @@ public class InsertionSorter {
             
             TranslateTransition reubicar = new TranslateTransition();
             reubicar.setNode(r);
-            reubicar.setToX(-1 * (Main.separation + Main.rectangleWidth) * contador);
+            reubicar.setByX(-1 * (Main.separation + Main.rectangleWidth) * contador);
             reubicar.setByY(-1.5 * Main.rectangleMaxHeight);
+            //reubicar.setDuration(Duration.seconds(0.5));
             transitions.add(reubicar);
             
             rectangles.set(j, r); 
