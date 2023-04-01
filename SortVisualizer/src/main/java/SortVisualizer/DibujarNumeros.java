@@ -18,9 +18,13 @@ import javafx.stage.Stage;
  */
 
     public class DibujarNumeros{
-   public void DibujarNumeros(GraphicsContext gc) {
-        dibujarCero(gc, 50, 100);
-        dibujarUno(gc, 125, 100);
+    public void dibujarNumeros(GraphicsContext gc, int cons) {
+        
+       // dibujarCero(gc, 50, 100);
+        //dibujarUno(gc, 125, 100);
+        
+       
+       /*
         dibujarDos(gc, 200, 100);
         dibujarTres(gc, 275, 100);
         dibujarCuatro(gc, 350, 100);
@@ -29,7 +33,59 @@ import javafx.stage.Stage;
         dibujarSiete(gc, 575, 100);
         dibujarOcho(gc, 650, 100);
         dibujarNueve(gc, 725, 100);
-}
+        */
+       
+       String numCadena = String.valueOf(cons);
+       int digit = numCadena.length();
+       
+       for(int i = 0; i<digit; i++){
+           
+          
+           
+           switch(digit){
+               case 0: 
+                  dibujarCero(gc, 50, 100);
+                break;
+               case 1:
+                  dibujarUno(gc, 125, 100);
+                break;
+               case 2:
+                  dibujarDos(gc, 200, 100);
+                break;
+               case 3:
+                  dibujarTres(gc, 275, 100);
+                break;
+               case 4:
+                  dibujarCuatro(gc, 350, 100);
+                break;
+               case 5:
+                  dibujarCinco(gc, 425, 100);
+                break;
+               case 6:
+                  dibujarSeis(gc, 500, 100);
+                break; 
+               case 7:
+                  dibujarSiete(gc, 575, 100); 
+                break;
+               case 8:
+                  dibujarOcho(gc, 650, 100); 
+                break;
+               case 9:
+                  dibujarNueve(gc, 725, 100);
+                break;
+               default:
+                   System.out.println("fail");
+                break;
+               
+           }
+
+           
+       }
+           
+       
+                  
+       
+    }
 
     public void dibujarCero(GraphicsContext gc, double x, double y) {
         gc.strokeOval(x, y, 50, 50);
@@ -90,8 +146,4 @@ import javafx.stage.Stage;
         gc.strokeOval(x, y, 35, 35);
         gc.strokeLine(x + 35, y + 55, x + 35, y + 20);
     }
-
-    
-    
-    
     }
