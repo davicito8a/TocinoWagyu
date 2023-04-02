@@ -57,44 +57,50 @@ import javafx.stage.Stage;
     
     public void dibujarNumeros(GraphicsContext gc, int cons) {
         
-       if(cons > 9){ // Este fragmento de código tiene dos switch´s dentro de un switch mayor para dibujar primer y segundo digito
+      if(cons > 9){ // Este fragmento de código tiene dos switch´s dentro de un switch mayor para dibujar primer y segundo digito
         int digito1 = cons / 10; // primer digito
         int digito2 = cons % 10; // segundo digito
-            
+        
+        
+        
+        
+        int coordenadaX = 50;
+        int coordenadaY = 100;
+        
             for(int DobleD = 1; DobleD < 3; DobleD++){
                 switch(DobleD){
                     case 1:
                         switch(digito1){
                         //Primer digito
                              case 0: 
-                                dibujarCero(gc, 50, 100);
+                                dibujarCero(gc, coordenadaX, coordenadaY);
                               break;
                              case 1:
-                                dibujarUno(gc, 125, 100);
+                                dibujarUno(gc, coordenadaX, coordenadaY);
                               break;
                              case 2:
-                                dibujarDos(gc, 200, 100);
+                                dibujarDos(gc, coordenadaX, coordenadaY);
                               break;
                              case 3:
-                                dibujarTres(gc, 275, 100);
+                                dibujarTres(gc, coordenadaX, coordenadaY);
                               break;
                              case 4:
-                                dibujarCuatro(gc, 350, 100);
+                                dibujarCuatro(gc, coordenadaX, coordenadaY);
                               break;
                              case 5:
-                                dibujarCinco(gc, 425, 100);
+                                dibujarCinco(gc, coordenadaX, coordenadaY);
                               break;
                              case 6:
-                                dibujarSeis(gc, 500, 100);
+                                dibujarSeis(gc, coordenadaX, coordenadaY);
                               break; 
                              case 7:
-                                dibujarSiete(gc, 575, 100); 
+                                dibujarSiete(gc, coordenadaX, coordenadaY); 
                               break;
                              case 8:
-                                dibujarOcho(gc, 650, 100); 
+                                dibujarOcho(gc, coordenadaX, coordenadaY); 
                               break;
                              case 9:
-                                dibujarNueve(gc, 725, 100);
+                                dibujarNueve(gc, coordenadaX, coordenadaY);
                               break;
                              default:
                                  System.out.println("fail");
@@ -106,34 +112,34 @@ import javafx.stage.Stage;
                         switch(digito2){
                             // Segundo digito
                             case 0: 
-                               dibujarCero(gc, 100, 100);
+                               dibujarCero(gc, coordenadaX+50, coordenadaY);
                              break;
                             case 1:
-                               dibujarUno(gc, 200, 100);
+                               dibujarUno(gc, coordenadaX+50, coordenadaY);
                              break;
                             case 2:
-                               dibujarDos(gc, 275, 100);
+                               dibujarDos(gc, coordenadaX+50, coordenadaY);
                              break;
                             case 3:
-                               dibujarTres(gc, 350, 100);
+                               dibujarTres(gc, coordenadaX+50, coordenadaY);
                              break;
                             case 4:
-                               dibujarCuatro(gc, 425, 100);
+                               dibujarCuatro(gc, coordenadaX+50, coordenadaY);
                              break;
                             case 5:
-                               dibujarCinco(gc, 500, 100);
+                               dibujarCinco(gc, coordenadaX+50, coordenadaY);
                              break;
                             case 6:
-                               dibujarSeis(gc, 575, 100);
+                               dibujarSeis(gc,coordenadaX+50, coordenadaY);
                              break; 
                             case 7:
-                               dibujarSiete(gc, 650, 100); 
+                               dibujarSiete(gc, coordenadaX+50, coordenadaY); 
                              break;
                             case 8:
-                               dibujarOcho(gc, 725, 100); 
+                               dibujarOcho(gc,coordenadaX+50, coordenadaY); 
                              break;
                             case 9:
-                               dibujarNueve(gc, 800, 100);
+                               dibujarNueve(gc, coordenadaX+50, coordenadaY);
                              break;
                             default:
                                 System.out.println("fail");
@@ -143,7 +149,7 @@ import javafx.stage.Stage;
                      
                     default:
                         System.out.println("que pasa por dios mio santo");
-                    break;
+                     break;
                 } 
             }
        }else{
