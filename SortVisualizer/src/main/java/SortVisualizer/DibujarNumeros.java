@@ -18,13 +18,47 @@ import javafx.stage.Stage;
  */
 
     public class DibujarNumeros{
+     
+    
+    
+        private static String obtenerDigitos(int numero) {
+        return Integer.toString(numero);
+    }
+    
+       public int digits2(int numero) {
+        // Obtener el número ingresado por el usuario
+
+        // Obtener los dígitos del número y guardarlos en variables distintas
+        String digitos = obtenerDigitos(numero);
+        int cantidadDigitos = digitos.length();
+        int[] digitosSeparados = new int[cantidadDigitos];
+        for (int i = 0; i < cantidadDigitos; i++) {
+            digitosSeparados[i] = Integer.parseInt(Character.toString(digitos.charAt(i)));
+        }
+        
+        return digitosSeparados[1];
+        
+    }
+        public int digits(int numero) {
+        // Obtener el número ingresado por el usuario
+
+        // Obtener los dígitos del número y guardarlos en variables distintas
+        String digitos = obtenerDigitos(numero);
+        int cantidadDigitos = digitos.length();
+        int[] digitosSeparados = new int[cantidadDigitos];
+        for (int i = 0; i < cantidadDigitos; i++) {
+            digitosSeparados[i] = Integer.parseInt(Character.toString(digitos.charAt(i)));
+        }
+        
+        return digitosSeparados[0];
+        
+    }
+    
+    
     public void dibujarNumeros(GraphicsContext gc, int cons) {
-        
-       // dibujarCero(gc, 50, 100);
-        //dibujarUno(gc, 125, 100);
-        
-       
-       /*
+        /*
+        dibujarCero(gc, 50, 100);
+        dibujarUno(gc, 125, 100);
         dibujarDos(gc, 200, 100);
         dibujarTres(gc, 275, 100);
         dibujarCuatro(gc, 350, 100);
@@ -33,24 +67,70 @@ import javafx.stage.Stage;
         dibujarSiete(gc, 575, 100);
         dibujarOcho(gc, 650, 100);
         dibujarNueve(gc, 725, 100);
-        */
+        
+        
+        //
+               int uno = digits(num);
+        System.out.println(uno);
        
+        int dos = digits2(num);
+        System.out.println(dos);
+       */
+        
+        
+
+        
+       int num = cons;
+       
+       
+
+       
+        
+        
+        
+        
        String numCadena = String.valueOf(cons);
        int digit = numCadena.length();
+    
+        int uno = digits(num);
+        System.out.println(uno);
+       
+        int dos = digits2(num);
+        System.out.println(dos);
+        
+        int evalua = 0;
+       
+       
+       
        
        for(int i = 0; i<digit; i++){
-           
-          
-           
-           switch(digit){
+           if(i == 0){
+               evalua = uno;
+           }else if(i == 1){
+               evalua = dos;
+           }
+           switch(evalua){
                case 0: 
-                  dibujarCero(gc, 50, 100);
+                   if(digit == 2){
+                    dibujarCero(gc, 100, 100); 
+                   }
+                   else{
+                    dibujarCero(gc, 50, 100);
+                    }
                 break;
                case 1:
-                  dibujarUno(gc, 125, 100);
+
+                  if(digit == 2){
+                  dibujarUno(gc, 270, 100);
+                   }else{
+                  dibujarUno(gc, 125, 100);}
                 break;
                case 2:
-                  dibujarDos(gc, 200, 100);
+
+                  if(digit == 2){
+                    dibujarDos(gc, 200, 100);
+                   }else{
+                    dibujarDos(gc, 275, 100);}
                 break;
                case 3:
                   dibujarTres(gc, 275, 100);
@@ -83,7 +163,13 @@ import javafx.stage.Stage;
        }
            
        
-                  
+             
+        
+        
+        
+        
+
+        
        
     }
 
@@ -146,4 +232,7 @@ import javafx.stage.Stage;
         gc.strokeOval(x, y, 35, 35);
         gc.strokeLine(x + 35, y + 55, x + 35, y + 20);
     }
+
+
+
     }
