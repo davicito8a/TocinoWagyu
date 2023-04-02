@@ -56,81 +56,107 @@ import javafx.stage.Stage;
     
     
     public void dibujarNumeros(GraphicsContext gc, int cons) {
-        /*
-        dibujarCero(gc, 50, 100);
-        dibujarUno(gc, 125, 100);
-        dibujarDos(gc, 200, 100);
-        dibujarTres(gc, 275, 100);
-        dibujarCuatro(gc, 350, 100);
-        dibujarCinco(gc, 425, 100);
-        dibujarSeis(gc, 500, 100);
-        dibujarSiete(gc, 575, 100);
-        dibujarOcho(gc, 650, 100);
-        dibujarNueve(gc, 725, 100);
         
-        
-        //
-               int uno = digits(num);
-        System.out.println(uno);
-       
-        int dos = digits2(num);
-        System.out.println(dos);
-       */
-        
-        
-
-        
-       int num = cons;
-       
-       
-
-       
-        
-        
-        
-        
-       String numCadena = String.valueOf(cons);
-       int digit = numCadena.length();
-    
-        int uno = digits(num);
-        System.out.println(uno);
-       
-        int dos = digits2(num);
-        System.out.println(dos);
-        
-        int evalua = 0;
-       
-       
-       
-       
-       for(int i = 0; i<digit; i++){
-           if(i == 0){
-               evalua = uno;
-           }else if(i == 1){
-               evalua = dos;
-           }
-           switch(evalua){
-               case 0: 
-                   if(digit == 2){
-                    dibujarCero(gc, 100, 100); 
-                   }
-                   else{
-                    dibujarCero(gc, 50, 100);
+       if(cons > 9){ // Este fragmento de código tiene dos switch´s dentro de un switch mayor para dibujar primer y segundo digito
+        int digito1 = cons / 10; // primer digito
+        int digito2 = cons % 10; // segundo digito
+            
+            for(int DobleD = 1; DobleD < 3; DobleD++){
+                switch(DobleD){
+                    case 1:
+                        switch(digito1){
+                        //Primer digito
+                             case 0: 
+                                dibujarCero(gc, 50, 100);
+                              break;
+                             case 1:
+                                dibujarUno(gc, 125, 100);
+                              break;
+                             case 2:
+                                dibujarDos(gc, 200, 100);
+                              break;
+                             case 3:
+                                dibujarTres(gc, 275, 100);
+                              break;
+                             case 4:
+                                dibujarCuatro(gc, 350, 100);
+                              break;
+                             case 5:
+                                dibujarCinco(gc, 425, 100);
+                              break;
+                             case 6:
+                                dibujarSeis(gc, 500, 100);
+                              break; 
+                             case 7:
+                                dibujarSiete(gc, 575, 100); 
+                              break;
+                             case 8:
+                                dibujarOcho(gc, 650, 100); 
+                              break;
+                             case 9:
+                                dibujarNueve(gc, 725, 100);
+                              break;
+                             default:
+                                 System.out.println("fail");
+                              break;    
                     }
+                     break;
+                     
+                   case 2:
+                        switch(digito2){
+                            // Segundo digito
+                            case 0: 
+                               dibujarCero(gc, 100, 100);
+                             break;
+                            case 1:
+                               dibujarUno(gc, 200, 100);
+                             break;
+                            case 2:
+                               dibujarDos(gc, 275, 100);
+                             break;
+                            case 3:
+                               dibujarTres(gc, 350, 100);
+                             break;
+                            case 4:
+                               dibujarCuatro(gc, 425, 100);
+                             break;
+                            case 5:
+                               dibujarCinco(gc, 500, 100);
+                             break;
+                            case 6:
+                               dibujarSeis(gc, 575, 100);
+                             break; 
+                            case 7:
+                               dibujarSiete(gc, 650, 100); 
+                             break;
+                            case 8:
+                               dibujarOcho(gc, 725, 100); 
+                             break;
+                            case 9:
+                               dibujarNueve(gc, 800, 100);
+                             break;
+                            default:
+                                System.out.println("fail");
+                             break;
+                    }   
+                     break;
+                     
+                    default:
+                        System.out.println("que pasa por dios mio santo");
+                    break;
+                } 
+            }
+       }else{
+            // En caso de que sea un número de un solo dígito solo se busca el que corresponda al dígito 
+           switch(cons){
+               case 0: 
+                  dibujarCero(gc, 50, 100);
                 break;
                case 1:
-
-                  if(digit == 2){
-                  dibujarUno(gc, 270, 100);
-                   }else{
-                  dibujarUno(gc, 125, 100);}
+                  dibujarUno(gc, 125, 100);
                 break;
                case 2:
-
-                  if(digit == 2){
-                    dibujarDos(gc, 200, 100);
-                   }else{
-                    dibujarDos(gc, 275, 100);}
+                  dibujarDos(gc, 200, 100);
                 break;
                case 3:
                   dibujarTres(gc, 275, 100);
@@ -156,21 +182,8 @@ import javafx.stage.Stage;
                default:
                    System.out.println("fail");
                 break;
-               
-           }
-
-           
        }
-           
-       
-             
-        
-        
-        
-        
-
-        
-       
+       }
     }
 
     public void dibujarCero(GraphicsContext gc, double x, double y) {
