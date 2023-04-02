@@ -1,5 +1,6 @@
 package SortVisualizer;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import static javafx.animation.Animation.Status.RUNNING;
@@ -24,7 +25,7 @@ public class Main extends Application {
     ArrayList<Rectangle> rectangles = new ArrayList();
     
     
-    public final static int n = 20;
+    public final static int n = 10;
     public final static int windowHeight = 800;
     public final static int windowWidth = 1000;
     public static double rectangleWidth = 0.75 * 0.9 * windowWidth / n;
@@ -64,6 +65,7 @@ public class Main extends Application {
             rectangle.setWidth(rectangleWidth);
             rectangle.setFill(Color.WHITE);
             rectangle.setStroke(Color.BLACK);
+            rectangle.setStrokeWidth(5);
             rectangles.add(rectangle);
             
             Text number = new Text(alturas.get(i) + "");
@@ -96,27 +98,26 @@ public class Main extends Application {
         Button button1 = new Button("Increase");
         button1.setLayoutX(0.9 * windowWidth);
         button1.setLayoutY(0.9 * windowHeight);
-        button1.setStyle(style);
+   
         
         Button button2 = new Button("Decrease");
         button2.setLayoutX(0.8 * windowWidth);
         button2.setLayoutY(0.9 * windowHeight);
-        button2.setStyle(style);
+       
         
         Button button3 = new Button("Pause");
         button3.setLayoutX(0.7 * windowWidth);
         button3.setLayoutY(0.9 * windowHeight);
-        button3.setStyle(style);
         
         Button button4 = new Button("Play");
         button4.setLayoutX(0.6 * windowWidth);
         button4.setLayoutY(0.9 * windowHeight);
-        button4.setStyle(style);
+       
         
         Button button5 = new Button("Forward");
         button5.setLayoutX(0.8 * windowWidth);
         button5.setLayoutY(0.8 * windowHeight);
-        button5.setStyle(style);
+
         
        
        
@@ -133,25 +134,28 @@ public class Main extends Application {
         
         Scene scene = new Scene(root);
         scene.setFill(Color.GRAY);
-        scene.getStylesheets().add("Styles.css");
+        scene.getStylesheets().add(new File("Styles.css").toURI().toURL().toExternalForm());
         
         
         Button button6 = new Button("Backward");
         button6.setLayoutX(0.9 * windowWidth);
         button6.setLayoutY(0.8 * windowHeight);
-        button6.setStyle(style);
+       
        
         
         root.getChildren().add(button6);
         button6.getStyleClass().add("button");
         
-        //FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Input.fxml"));
-        //stage.setScene(new Scene(fxmlLoader.load()));
+        FXMLLoader fxmlLoader = new FXMLLoader(new File("Input.fxml").toURI().toURL());
+        stage.setScene(new Scene(fxmlLoader.load()));
+        
+        
         
         stage.setScene(scene);
         stage.setWidth(windowWidth);
         stage.setHeight(windowHeight);
         stage.setResizable(false);
+        
       
         stage.show();
         
@@ -169,6 +173,8 @@ public class Main extends Application {
         
         SequentialTransition timeline = new SequentialTransition();
         timeline.getChildren().addAll(transitions);
+        
+        
         
         button1.setOnAction(event -> {
             increaseSpeed(timeline);
@@ -200,6 +206,9 @@ public class Main extends Application {
             stepBackward(transitions);
         });
 */
+
+
+
 
         
 
