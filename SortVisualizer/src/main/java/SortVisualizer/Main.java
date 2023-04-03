@@ -12,7 +12,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -21,21 +20,23 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     
-    ArrayList<Integer> arreglo = new ArrayList();
+    ArrayList<Integer> numbers = new ArrayList();
     ArrayList<Rectangle> rectangles = new ArrayList();
     
+    private final static int windowHeight = 800;
+    private final static int windowWidth = 1000;
     
-    public final static int n = 10;
-    public final static int windowHeight = 800;
-    public final static int windowWidth = 1000;
+    public static int n = 10;
+    
     public static double rectangleWidth = 0.75 * 0.9 * windowWidth / n;
     public static double rectangleMaxHeight = 0.2 * windowHeight;
     public static double separation = 0.25 * 0.9 * windowWidth / n;
+    
     private int index = 0;
     
     public void llenarArreglo(){
         for(int i = 0; i < n; i++){
-            arreglo.add((int)(Math.random()*10 + 1));
+            numbers.add((int)(Math.random()*10 + 1));
         }
     }
     
@@ -65,7 +66,7 @@ public class Main extends Application {
             rectangle.setWidth(rectangleWidth);
             rectangle.setFill(Color.WHITE);
             rectangle.setStroke(Color.BLACK);
-            rectangle.setStrokeWidth(5);
+            rectangle.setStrokeWidth(50/n);
             rectangles.add(rectangle);
             
             Text number = new Text(alturas.get(i) + "");
@@ -74,103 +75,78 @@ public class Main extends Application {
             stackpane.getChildren().addAll(rectangle, number);
             stackpanes.add(stackpane);
             stackpane.setLayoutX(0.05 * windowWidth + (rectangleWidth + separation) * i);
-            stackpane.setLayoutY(100);
-            
+            stackpane.setLayoutY(50);
         }
         
         //return rectangles;
         return stackpanes;
     }
     
-    @Override
-    public void start(Stage stage) throws InterruptedException, IOException {
+    public static void startVisualization(){
         
-        String style = "-fx-background-color: slateblue; -fx-text-fill: white";
+    }
+    
+    @Override
+    public void start(Stage stage) throws IOException {
         llenarArreglo();
        
         //ArrayList<Rectangle> rectangles = new ArrayList(getRectangles(arreglo));
-        ArrayList<StackPane> stackpanes = new ArrayList(getRectangles(arreglo));
+        ArrayList<StackPane> stackpanes = new ArrayList(getRectangles(numbers));
  
         Group root = new Group();
         
         
-        
+        /*
         Button button1 = new Button("Increase");
-        button1.setLayoutX(0.9 * windowWidth);
+        button1.setLayoutX(0.75 * windowWidth);
         button1.setLayoutY(0.9 * windowHeight);
-   
-        
-        Button button2 = new Button("Decrease");
-        button2.setLayoutX(0.8 * windowWidth);
-        button2.setLayoutY(0.9 * windowHeight);
+        button1.setPrefWidth(75);
        
-        
+        Button button2 = new Button("Decrease");
+        button2.setLayoutX(0.85 * windowWidth);
+        button2.setLayoutY(0.9 * windowHeight);
+        button2.setPrefWidth(75);
+       
         Button button3 = new Button("Pause");
-        button3.setLayoutX(0.7 * windowWidth);
+        button3.setLayoutX(0.65 * windowWidth);
         button3.setLayoutY(0.9 * windowHeight);
+        button3.setPrefWidth(75);
         
         Button button4 = new Button("Play");
-        button4.setLayoutX(0.6 * windowWidth);
+        button4.setLayoutX(0.55 * windowWidth);
         button4.setLayoutY(0.9 * windowHeight);
-       
+        button4.setPrefWidth(75);
         
-        Button button5 = new Button("Forward");
-        button5.setLayoutX(0.8 * windowWidth);
-        button5.setLayoutY(0.8 * windowHeight);
-
-        
-       
-       
-        
-        Label label = new Label(arreglo.toString());
-        root.getChildren().add(label);
-        //root.getChildren().addAll(rectangles);
-        root.getChildren().addAll(stackpanes);
         root.getChildren().add(button1);
         root.getChildren().add(button2);
         root.getChildren().add(button3);
         root.getChildren().add(button4);
-        root.getChildren().add(button5);
+        */
+       
+        //root.getChildren().addAll(rectangles);
+        root.getChildren().addAll(stackpanes);
         
         Scene scene = new Scene(root);
         scene.setFill(Color.GRAY);
-        scene.getStylesheets().add(new File("Styles.css").toURI().toURL().toExternalForm());
+        scene.getStylesheets().add(new File("C:\\Users\\diego\\OneDrive\\Documentos\\TocinoWagyu\\SortVisualizer\\src\\main\\java\\SortVisualizer\\Styles.css").toURI().toURL().toExternalForm());
         
-        
-        Button button6 = new Button("Backward");
-        button6.setLayoutX(0.9 * windowWidth);
-        button6.setLayoutY(0.8 * windowHeight);
+        FXMLLoader fxmlLoader = new FXMLLoader(new File("C:\\Users\\diego\\OneDrive\\Documentos\\TocinoWagyu\\SortVisualizer\\src\\main\\java\\SortVisualizer\\Input.fxml").toURI().toURL());
        
-       
-        
-        root.getChildren().add(button6);
-        button6.getStyleClass().add("button");
-        
-        FXMLLoader fxmlLoader = new FXMLLoader(new File("Input.fxml").toURI().toURL());
-        stage.setScene(new Scene(fxmlLoader.load()));
-        
-        
-        
         stage.setScene(scene);
         stage.setWidth(windowWidth);
         stage.setHeight(windowHeight);
         stage.setResizable(false);
-        
-      
         stage.show();
         
-        /*
         Stage stage2 = new Stage();
-        stage2.setScene(new Scene(new Group()));
-        stage2.show();
-        */
-        
+        stage2.setScene(new Scene(fxmlLoader.load()));
+       
         InsertionSorter sorter = new InsertionSorter(rectangles, stackpanes);
-        
         ArrayList<Transition> transitions = sorter.getSortingTransitions();
         
         
         
+        /*
         SequentialTransition timeline = new SequentialTransition();
         timeline.getChildren().addAll(transitions);
         
@@ -192,12 +168,24 @@ public class Main extends Application {
             play(timeline);
         });
         
+        */
         
-
         
+         
        
-       /*
-       
+        Button button5 = new Button("Forward");
+        button5.setLayoutX(0.75 * windowWidth);
+        button5.setLayoutY(0.9 * windowHeight);
+        button5.setPrefWidth(75); 
+         
+        Button button6 = new Button("Backward");
+        button6.setLayoutX(0.85 * windowWidth);
+        button6.setLayoutY(0.9 * windowHeight);
+        button6.setPrefWidth(75);
+        
+        root.getChildren().add(button5);
+        root.getChildren().add(button6);
+        
         button5.setOnAction(event -> {
             stepForward(transitions);
         });
@@ -205,25 +193,17 @@ public class Main extends Application {
         button6.setOnAction(event -> {
             stepBackward(transitions);
         });
-*/
 
-
-
-
-        
-
-
-  
     }
     
     private void increaseSpeed(SequentialTransition timeline){
         if(timeline.getStatus().equals(RUNNING))
-            timeline.setRate(timeline.getRate() * 1.5);
+            timeline.setRate(timeline.getRate() * 1.25);
     }
     
     private void decreaseSpeed(SequentialTransition timeline){
         if(timeline.getStatus().equals(RUNNING))
-            timeline.setRate(timeline.getRate() * 0.5);
+            timeline.setRate(timeline.getRate() * 0.8);
     }
     
     private void pause(SequentialTransition timeline){
@@ -231,7 +211,7 @@ public class Main extends Application {
     }
     
     private void play(SequentialTransition timeline){
-        timeline.play();
+        timeline.play();   
     }
     
     private void stepForward(ArrayList<Transition> transitions){
