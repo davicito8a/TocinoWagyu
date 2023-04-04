@@ -128,10 +128,11 @@ public class Main extends Application {
         
         Scene scene = new Scene(root);
         scene.setFill(Color.GRAY);
-        scene.getStylesheets().add(new File("C:\\Users\\diego\\OneDrive\\Documentos\\TocinoWagyu\\SortVisualizer\\src\\main\\java\\SortVisualizer\\Styles.css").toURI().toURL().toExternalForm());
+        /*
+        scene.getStylesheets().add(new File("D:\\Users\\david\\Documentos\\TocinoWagyu\\SortVisualizer\\src\\main\\java\\SortVisualizer\\Styles.css").toURI().toURL().toExternalForm());
         
-        FXMLLoader fxmlLoader = new FXMLLoader(new File("C:\\Users\\diego\\OneDrive\\Documentos\\TocinoWagyu\\SortVisualizer\\src\\main\\java\\SortVisualizer\\Input.fxml").toURI().toURL());
-       
+        FXMLLoader fxmlLoader = new FXMLLoader(new File("D:\\Users\\david\\Documentos\\TocinoWagyu\\SortVisualizer\\src\\main\\java\\SortVisualizer\\Input.fxml").toURI().toURL());
+       */
         stage.setScene(scene);
         stage.setWidth(windowWidth);
         stage.setHeight(windowHeight);
@@ -139,7 +140,7 @@ public class Main extends Application {
         stage.show();
         
         Stage stage2 = new Stage();
-        stage2.setScene(new Scene(fxmlLoader.load()));
+        //stage2.setScene(new Scene(fxmlLoader.load()));
        
         InsertionSorter sorter = new InsertionSorter(rectangles, stackpanes);
         ArrayList<Transition> transitions = sorter.getSortingTransitions();
