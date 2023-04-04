@@ -12,6 +12,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+
 //Este es el de la Carpeta Git
 public class App extends Application {
     
