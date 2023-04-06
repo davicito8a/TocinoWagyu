@@ -11,6 +11,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -69,10 +71,21 @@ public class Main extends Application {
             rectangle.setStrokeWidth(50/n);
             rectangles.add(rectangle);
             
-            Text number = new Text(alturas.get(i) + "");
+            //Text number = new Text(alturas.get(i) + "");
             
+            // Creación de Canvas con las mismas dimensiones del rectángulo
+            Canvas numberDrawing = new Canvas(rectangleWidth, percentage * rectangleMaxHeight);
+            GraphicsContext gc = numberDrawing.getGraphicsContext2D();
+            gc.beginPath();
+            // Empezar dibujo al medio del rectángulo
+            gc.moveTo(rectangleWidth / 2, 0.3 * percentage * rectangleMaxHeight);
+            // Dibujar línea, es un 1
+            gc.lineTo(rectangleWidth / 2, 0.7 * percentage * rectangleMaxHeight);
+            gc.stroke();
+            
+            // Canvas se coloca dentro de un StackPane, por lo que queda encima del rectángulo, listo para dibujar.
             StackPane stackpane = new StackPane();
-            stackpane.getChildren().addAll(rectangle, number);
+            stackpane.getChildren().addAll(rectangle, numberDrawing);
             stackpanes.add(stackpane);
             stackpane.setLayoutX(0.05 * windowWidth + (rectangleWidth + separation) * i);
             stackpane.setLayoutY(50);
@@ -96,7 +109,7 @@ public class Main extends Application {
         Group root = new Group();
         
         
-        /*
+        
         Button button1 = new Button("Increase");
         button1.setLayoutX(0.75 * windowWidth);
         button1.setLayoutY(0.9 * windowHeight);
@@ -121,7 +134,7 @@ public class Main extends Application {
         root.getChildren().add(button2);
         root.getChildren().add(button3);
         root.getChildren().add(button4);
-        */
+        
        
         //root.getChildren().addAll(rectangles);
         root.getChildren().addAll(stackpanes);
@@ -147,7 +160,7 @@ public class Main extends Application {
         
         
         
-        /*
+        
         SequentialTransition timeline = new SequentialTransition();
         timeline.getChildren().addAll(transitions);
         
@@ -169,11 +182,11 @@ public class Main extends Application {
             play(timeline);
         });
         
-        */
+        
         
         
          
-       
+        /*
         Button button5 = new Button("Forward");
         button5.setLayoutX(0.75 * windowWidth);
         button5.setLayoutY(0.9 * windowHeight);
@@ -194,6 +207,7 @@ public class Main extends Application {
         button6.setOnAction(event -> {
             stepBackward(transitions);
         });
+        */
 
     }
     
