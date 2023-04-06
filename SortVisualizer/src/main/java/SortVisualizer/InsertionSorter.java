@@ -52,13 +52,13 @@ public class InsertionSorter {
                 j--;    
             }
             
-            TranslateTransition reubicar = new TranslateTransition();
-            reubicar.setNode(stackpane);
+            TranslateTransition relocate = new TranslateTransition();
+            relocate.setNode(stackpane);
             //reubicar.setNode(r);
-            reubicar.setByX(-1 * (Main.separation + Main.rectangleWidth) * contador);
-            reubicar.setByY(-1.5 * Main.rectangleMaxHeight);
-            reubicar.setDuration(Duration.seconds(0.5));
-            transitions.add(reubicar);
+            relocate.setByX(-1 * (Main.separation + Main.rectangleWidth) * contador);
+            relocate.setByY(-1.5 * Main.rectangleMaxHeight);
+            relocate.setDuration(Duration.seconds(0.5));
+            transitions.add(relocate);
             
             stackpanes.set(j, stackpane);
             rectangles.set(j, r); 

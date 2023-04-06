@@ -60,10 +60,8 @@ import javafx.stage.Stage;
       if(cons > 9){ // Este fragmento de código tiene dos switch´s dentro de un switch mayor para dibujar primer y segundo digito
         int digito1 = cons / 10; // primer digito
         int digito2 = cons % 10; // segundo digito
-        
-        
-        
-        
+
+        // 
         int coordenadaX = 50;
         int coordenadaY = 100;
         
@@ -251,7 +249,4 @@ import javafx.stage.Stage;
         gc.strokeOval(x, y, 35, 35);
         gc.strokeLine(x + 35, y + 55, x + 35, y + 20);
     }
-
-
-
     }
