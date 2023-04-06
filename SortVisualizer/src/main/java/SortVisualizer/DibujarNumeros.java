@@ -19,51 +19,28 @@ import javafx.stage.Stage;
 
     public class DibujarNumeros{
      
-    
-    
-        private static String obtenerDigitos(int numero) {
-        return Integer.toString(numero);
+        Canvas rectangul;
+        GraphicsContext gc;
+        
+        
+     public DibujarNumeros(Canvas reciboRetangul){
+         rectangul = reciboRetangul;
+         gc = reciboRetangul.getGraphicsContext2D();
+   
     }
-    
-       public int digits2(int numero) {
-        // Obtener el número ingresado por el usuario
-
-        // Obtener los dígitos del número y guardarlos en variables distintas
-        String digitos = obtenerDigitos(numero);
-        int cantidadDigitos = digitos.length();
-        int[] digitosSeparados = new int[cantidadDigitos];
-        for (int i = 0; i < cantidadDigitos; i++) {
-            digitosSeparados[i] = Integer.parseInt(Character.toString(digitos.charAt(i)));
-        }
+    public void dibujarNumeros(int cons) {
         
-        return digitosSeparados[1];
         
-    }
-        public int digits(int numero) {
-        // Obtener el número ingresado por el usuario
-
-        // Obtener los dígitos del número y guardarlos en variables distintas
-        String digitos = obtenerDigitos(numero);
-        int cantidadDigitos = digitos.length();
-        int[] digitosSeparados = new int[cantidadDigitos];
-        for (int i = 0; i < cantidadDigitos; i++) {
-            digitosSeparados[i] = Integer.parseInt(Character.toString(digitos.charAt(i)));
-        }
         
-        return digitosSeparados[0];
-        
-    }
-    
-    
-    public void dibujarNumeros(GraphicsContext gc, int cons) {
-        
+                          dibujarUno(gc, 10, 50);
+       /* 
       if(cons > 9){ // Este fragmento de código tiene dos switch´s dentro de un switch mayor para dibujar primer y segundo digito
         int digito1 = cons / 10; // primer digito
         int digito2 = cons % 10; // segundo digito
 
         // 
-        int coordenadaX = 50;
-        int coordenadaY = 100;
+        int coordenadaX = 0;
+        int coordenadaY = 0;
         
             for(int DobleD = 1; DobleD < 3; DobleD++){
                 switch(DobleD){
@@ -187,7 +164,7 @@ import javafx.stage.Stage;
                    System.out.println("fail");
                 break;
        }
-       }
+       }*/
     }
 
     public void dibujarCero(GraphicsContext gc, double x, double y) {

@@ -75,13 +75,10 @@ public class Main extends Application {
             
             // Creación de Canvas con las mismas dimensiones del rectángulo
             Canvas numberDrawing = new Canvas(rectangleWidth, percentage * rectangleMaxHeight);
-            GraphicsContext gc = numberDrawing.getGraphicsContext2D();
-            gc.beginPath();
-            // Empezar dibujo al medio del rectángulo
-            gc.moveTo(rectangleWidth / 2, 0.3 * percentage * rectangleMaxHeight);
-            // Dibujar línea, es un 1
-            gc.lineTo(rectangleWidth / 2, 0.7 * percentage * rectangleMaxHeight);
-            gc.stroke();
+            DibujarNumeros numberDrawingg = new DibujarNumeros(numberDrawing);
+            
+            // Dibujando con clase
+            numberDrawingg.dibujarNumeros(numbers.get(index));
             
             // Canvas se coloca dentro de un StackPane, por lo que queda encima del rectángulo, listo para dibujar.
             StackPane stackpane = new StackPane();
