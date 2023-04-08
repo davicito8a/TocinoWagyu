@@ -102,7 +102,7 @@ public class Main extends Application {
             */
 
             
-			Canvas numberDrawing = new Canvas(rectangleWidth, percentage * rectangleMaxHeight);
+            Canvas numberDrawing = new Canvas(rectangleWidth, rectangleWidth);
             DibujarNumeros numberDrawingg = new DibujarNumeros(numberDrawing);
 
             // Dibujando con clase
