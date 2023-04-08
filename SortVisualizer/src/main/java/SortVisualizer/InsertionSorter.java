@@ -9,34 +9,33 @@ import javafx.util.Duration;
 
 public class InsertionSorter {
     
-    private ArrayList<Rectangle> rectangles = new ArrayList();
+    private ArrayList<Integer> numbers = new ArrayList();
     private ArrayList<StackPane> stackpanes = new ArrayList();
     
-    public InsertionSorter(ArrayList<Rectangle> rectangles, ArrayList<StackPane> stackpanes){
-        this.rectangles = rectangles;
+    public InsertionSorter(ArrayList<Integer> numbers, ArrayList<StackPane> stackpanes){
+        this.numbers = numbers;
         this.stackpanes = stackpanes;
     }
     
     public ArrayList<Transition> getSortingTransitions(){
         ArrayList<Transition> transitions = new ArrayList();
         
-        for(int i = 1; i < rectangles.size(); i++){
+        for(int i = 1; i < numbers.size(); i++){
             int j = i;
             
-            Rectangle r = rectangles.get(i);
             StackPane stackpane = stackpanes.get(i);
-            double currentHeight = r.getHeight();
-          
+            int currentNumber = numbers.get(i);
+            
             int contador = 0;
             
             TranslateTransition moverAbajo = new TranslateTransition();
             //moverAbajo.setNode(rectangles.get(i));
             moverAbajo.setNode(stackpanes.get(i));
-            moverAbajo.setByY(1.5 * Main.rectangleMaxHeight);
+            moverAbajo.setByY(- 1 * 2 * Main.rectangleWidth);
             //moverAbajo.setDuration(Duration.seconds(0.5));
             transitions.add(moverAbajo);
             
-            while(j > 0 && currentHeight < rectangles.get(j - 1).getHeight()){
+            while(j > 0 && currentNumber < numbers.get(j - 1)){
                 contador++;
                 
                 TranslateTransition moverDerecha = new TranslateTransition();
@@ -46,22 +45,22 @@ public class InsertionSorter {
                 //moverDerecha.setDuration(Duration.seconds(0.5));
                 transitions.add(moverDerecha);
                 
-                stackpanes.set(j, stackpanes.get(j-1));
-                rectangles.set(j, rectangles.get(j - 1));
+                stackpanes.set(j, stackpanes.get(j - 1));
+                numbers.set(j, numbers.get(j - 1));
                 
                 j--;    
             }
             
-            TranslateTransition relocate = new TranslateTransition();
-            relocate.setNode(stackpane);
+            TranslateTransition reubicar = new TranslateTransition();
+            reubicar.setNode(stackpane);
             //reubicar.setNode(r);
-            relocate.setByX(-1 * (Main.separation + Main.rectangleWidth) * contador);
-            relocate.setByY(-1.5 * Main.rectangleMaxHeight);
-            relocate.setDuration(Duration.seconds(0.5));
-            transitions.add(relocate);
+            reubicar.setByX(-1 * (Main.separation + Main.rectangleWidth) * contador);
+            reubicar.setByY(2 * Main.rectangleWidth);
+            reubicar.setDuration(Duration.seconds(0.5));
+            transitions.add(reubicar);
             
-            stackpanes.set(j, stackpane);
-            rectangles.set(j, r); 
+            stackpanes.set(j, stackpane); 
+            numbers.set(j, currentNumber);
         }
         
         return transitions;
