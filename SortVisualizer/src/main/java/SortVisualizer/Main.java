@@ -14,9 +14,11 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -24,6 +26,7 @@ public class Main extends Application {
     
     ArrayList<Integer> numbers = new ArrayList();
     ArrayList<Rectangle> rectangles = new ArrayList();
+    Label etiqueta = new Label("Hello World");
     
     private final static int windowHeight = 800;
     private final static int windowWidth = 1000;
@@ -104,7 +107,11 @@ public class Main extends Application {
         ArrayList<StackPane> stackpanes = new ArrayList(getRectangles(numbers));
  
         Group root = new Group();
-        
+        etiqueta.setLayoutX(0.2*windowWidth);
+        etiqueta.setLayoutY(0.9 * windowHeight);
+        etiqueta.setFont(new Font("Georgia",20));
+        etiqueta.relocate(10,550);
+        root.getChildren().add(etiqueta);
         
         
         Button button1 = new Button("Increase");
@@ -137,7 +144,7 @@ public class Main extends Application {
         root.getChildren().addAll(stackpanes);
         
         Scene scene = new Scene(root);
-        scene.setFill(Color.GRAY);
+        //scene.setFill(Color.GRAY);
         /*
         scene.getStylesheets().add(new File("D:\\Users\\david\\Documentos\\TocinoWagyu\\SortVisualizer\\src\\main\\java\\SortVisualizer\\Styles.css").toURI().toURL().toExternalForm());
         

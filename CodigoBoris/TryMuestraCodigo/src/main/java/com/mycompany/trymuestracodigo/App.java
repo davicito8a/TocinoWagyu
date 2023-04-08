@@ -31,52 +31,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
         AnchorPane ventana = new AnchorPane();
-        Rectangle rec = new Rectangle();
-        Rectangle rec2 = new Rectangle();
-        Rectangle rec3 = new Rectangle();
-        Rectangle rec4 = new Rectangle();
-        Rectangle rec5 = new Rectangle();
-        Rectangle rec6 = new Rectangle();
-        //Scene escena = new Scene(ventana);
         //escena.setFill(ColorFondo);
-        
-        //Crear Rectángulo Grande
-        rec.setX(0);
-        rec.setY(0);
-        rec.setWidth(400);
-        rec.setHeight(400);
-        rec.setFill(Color.BLUE);
-        
-        //Rec Pequeños
-        rec2.setX(0);
-        rec2.setY(0);
-        rec2.setWidth(30);
-        rec2.setHeight(60);
-        rec2.setFill(ColorRec);
-        
-        rec3.setX(50);
-        rec3.setY(110);
-        rec3.setWidth(340);
-        rec3.setHeight(60);
-        rec3.setFill(ColorRec);
-        
-        rec4.setX(50);
-        rec4.setY(170);
-        rec4.setWidth(340);
-        rec4.setHeight(60);
-        rec4.setFill(ColorRec);
-        
-        rec5.setX(50);
-        rec5.setY(230);
-        rec5.setWidth(340);
-        rec5.setHeight(60);
-        rec5.setFill(ColorRec);
-        
-        rec6.setX(50);
-        rec6.setY(290);
-        rec6.setWidth(340);
-        rec6.setHeight(60);
-        rec6.setFill(ColorRec);
 
         //Etiquetas
         pasos[0] = new Label("mark first element as sorted");
