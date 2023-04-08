@@ -45,7 +45,8 @@ public class Main extends Application {
     
     public void llenarArreglo(){
         for(int i = 0; i < n; i++){
-            numbers.add((int)(Math.random()*10 + 1));
+            
+            numbers.add((int)(Math.random()*98 + 1));
         }
     }
     
@@ -106,7 +107,7 @@ public class Main extends Application {
             DibujarNumeros numberDrawingg = new DibujarNumeros(numberDrawing);
 
             // Dibujando con clase
-            numberDrawingg.dibujarNumeros(numbers.get(index));
+            numberDrawingg.dibujarNumeros(numbers.get(i));
 
             // Canvas se coloca dentro de un StackPane, por lo que queda encima del rectángulo, listo para dibujar.
             StackPane stackpane = new StackPane();
@@ -133,7 +134,7 @@ public class Main extends Application {
  
         AnchorPane root = new AnchorPane();
         
-        BackgroundImage myBI= new BackgroundImage(new Image(new File("src/main/java/SortVisualizer/background.png").toURI().toURL().toExternalForm()),
+        BackgroundImage myBI = new BackgroundImage(new Image(new File("src/main/java/SortVisualizer/background.png").toURI().toURL().toExternalForm()),
         BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT,
         BackgroundSize.DEFAULT);
         
@@ -169,17 +170,8 @@ public class Main extends Application {
 */        
         //root.getChildren().addAll(rectangles);
         root.getChildren().addAll(stackpanes);
-        
         Scene scene = new Scene(root);
-
         scene.setFill(Color.GRAY);
-        /*
-        scene.getStylesheets().add(new File("D:\\Users\\david\\Documentos\\TocinoWagyu\\SortVisualizer\\src\\main\\java\\SortVisualizer\\Styles.css").toURI().toURL().toExternalForm());
-        
-        FXMLLoader fxmlLoader = new FXMLLoader(new File("D:\\Users\\david\\Documentos\\TocinoWagyu\\SortVisualizer\\src\\main\\java\\SortVisualizer\\Input.fxml").toURI().toURL());
-       */
-
-        //scene.setFill(Color.GRAY);
         scene.getStylesheets().add(new File("src/main/java/SortVisualizer/Styles.css").toURI().toURL().toExternalForm());
         
         FXMLLoader fxmlLoader = new FXMLLoader(new File("src/main/java/SortVisualizer/Input.fxml").toURI().toURL());
@@ -231,10 +223,12 @@ public class Main extends Application {
         button5.setPrefWidth(75); 
          
         Button button6 = new Button("Backward");
+        
         button6.setLayoutX(0.85 * windowWidth);
         button6.setLayoutY(0.85 * windowHeight);
         button6.setPrefWidth(75);
         
+ 
         root.getChildren().add(button5);
         root.getChildren().add(button6);
         
@@ -243,6 +237,7 @@ public class Main extends Application {
         });
         
         button6.setOnAction(event -> {
+            
             stepBackward(transitions);
         });
         
