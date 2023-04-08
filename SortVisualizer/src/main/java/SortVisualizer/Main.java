@@ -32,10 +32,10 @@ public class Main extends Application {
     ArrayList<Integer> numbers = new ArrayList();
     ArrayList<Rectangle> rectangles = new ArrayList();
     
-    private final static int windowHeight = 700;
+    private final static int windowHeight = 600;
     private final static int windowWidth = 1000;
     
-    public static int n = 10;
+    public static int n = 12;
     
     public static double rectangleWidth = 0.75 * 0.9 * windowWidth / n;
     public static double rectangleMaxHeight = 0.2 * windowHeight;
@@ -71,7 +71,7 @@ public class Main extends Application {
             Rectangle rectangle = new Rectangle();
             //rectangle.setX(0.05 * windowWidth + (rectangleWidth + separation) * i);
             //rectangle.setY(100);
-            rectangle.setHeight(percentage * rectangleMaxHeight);
+            rectangle.setHeight(rectangleWidth);
             rectangle.setWidth(rectangleWidth);
             rectangle.setFill(Color.rgb(101, 67, 33));
             rectangle.setStroke(Color.BLACK);
@@ -100,7 +100,7 @@ public class Main extends Application {
             stackpane.getChildren().addAll(rectangle, number);
             stackpanes.add(stackpane);
             stackpane.setLayoutX(0.05 * windowWidth + (rectangleWidth + separation) * i);
-            stackpane.setLayoutY(50);
+            stackpane.setLayoutY(0.65 * windowHeight);
         }
         
         //return rectangles;
@@ -126,31 +126,34 @@ public class Main extends Application {
         
         root.setBackground(new Background(myBI));
         
+        /*
+        
         Button button1 = new Button("Increase");
         button1.setLayoutX(0.75 * windowWidth);
-        button1.setLayoutY(0.9 * windowHeight);
+        button1.setLayoutY(0.85 * windowHeight);
         button1.setPrefWidth(75);
        
         Button button2 = new Button("Decrease");
         button2.setLayoutX(0.85 * windowWidth);
-        button2.setLayoutY(0.9 * windowHeight);
+        button2.setLayoutY(0.85 * windowHeight);
         button2.setPrefWidth(75);
        
         Button button3 = new Button("Pause");
         button3.setLayoutX(0.65 * windowWidth);
-        button3.setLayoutY(0.9 * windowHeight);
+        button3.setLayoutY(0.85 * windowHeight);
         button3.setPrefWidth(75);
         
         Button button4 = new Button("Play");
         button4.setLayoutX(0.55 * windowWidth);
-        button4.setLayoutY(0.9 * windowHeight);
+        button4.setLayoutY(0.85 * windowHeight);
         button4.setPrefWidth(75);
         
         root.getChildren().add(button1);
         root.getChildren().add(button2);
         root.getChildren().add(button3);
         root.getChildren().add(button4);
-        
+
+*/        
         //root.getChildren().addAll(rectangles);
         root.getChildren().addAll(stackpanes);
         
@@ -169,11 +172,11 @@ public class Main extends Application {
         Stage stage2 = new Stage();
         stage2.setScene(new Scene(fxmlLoader.load()));
        
-        InsertionSorter sorter = new InsertionSorter(rectangles, stackpanes);
+        InsertionSorter sorter = new InsertionSorter(numbers, stackpanes);
         ArrayList<Transition> transitions = sorter.getSortingTransitions();
         
         
-        
+        /*
         
         SequentialTransition timeline = new SequentialTransition();
         timeline.getChildren().addAll(transitions);
@@ -196,19 +199,19 @@ public class Main extends Application {
             play(timeline);
         });
         
-        
+        */
         
         
          
-        /*
+        
         Button button5 = new Button("Forward");
         button5.setLayoutX(0.75 * windowWidth);
-        button5.setLayoutY(0.9 * windowHeight);
+        button5.setLayoutY(0.85 * windowHeight);
         button5.setPrefWidth(75); 
          
         Button button6 = new Button("Backward");
         button6.setLayoutX(0.85 * windowWidth);
-        button6.setLayoutY(0.9 * windowHeight);
+        button6.setLayoutY(0.85 * windowHeight);
         button6.setPrefWidth(75);
         
         root.getChildren().add(button5);
@@ -221,7 +224,7 @@ public class Main extends Application {
         button6.setOnAction(event -> {
             stepBackward(transitions);
         });
-        */
+        
 
     }
     
