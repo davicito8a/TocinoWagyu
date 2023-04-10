@@ -1,5 +1,5 @@
 package SortVisualizer;
-
+// En esta clase se controla el modo y se controla la cantidad elementos del arreglo
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -61,6 +61,7 @@ public class InputController implements Initializable {
     }
     
     private boolean numberValidation(){
+        // Uso de expresiones regulares para validaciones 
         Pattern pattern = Pattern.compile("^[0-9]+(,[0-9]+)*$");
         Matcher matcher = pattern.matcher(n.getText());
         
