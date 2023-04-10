@@ -64,7 +64,7 @@ public class Main extends Application {
             numberDrawingg.dibujarNumeros(alturas.get(i));
             
             StackPane stackpane = new StackPane();
-            stackpane.getChildren().addAll(rectangle, number);
+            stackpane.getChildren().addAll(rectangle, numberDrawing);
             stackpanes.add(stackpane);
             stackpane.setLayoutX(0.05 * windowWidth + (rectangleWidth + separation) * i);
             stackpane.setLayoutY(0.65 * windowHeight);
