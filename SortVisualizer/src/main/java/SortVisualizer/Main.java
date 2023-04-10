@@ -111,7 +111,7 @@ public class Main extends Application {
 
             // Canvas se coloca dentro de un StackPane, por lo que queda encima del rectángulo, listo para dibujar.
             StackPane stackpane = new StackPane();
-            stackpane.getChildren().addAll(rectangle, numberDrawing);
+            stackpane.getChildren().addAll(rectangle, number);
             stackpanes.add(stackpane);
             stackpane.setLayoutX(0.05 * windowWidth + (rectangleWidth + separation) * i);
             stackpane.setLayoutY(0.65 * windowHeight);
