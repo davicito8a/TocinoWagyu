@@ -1,7 +1,7 @@
 SortVisualizer\InsertionSorter.class
 SortVisualizer\Main.class
+SortVisualizer\ShowCode.class
 SortVisualizer\InputController.class
 SortVisualizer\AnimationWindowGenerator.class
 SortVisualizer\Informer.class
-.netbeans_automatic_build
 SortVisualizer\DibujarNumeros.class

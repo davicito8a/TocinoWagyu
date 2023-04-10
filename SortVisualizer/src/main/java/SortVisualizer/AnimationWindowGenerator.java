@@ -21,6 +21,7 @@ import javafx.scene.layout.StackPane;
 public class AnimationWindowGenerator {
     private final int type;
    
+    private final ArrayList<Integer> numbers;
     private final ArrayList<StackPane> stackpanes;
     private ArrayList<Transition> transitions;
     private SequentialTransition timeline;
@@ -37,7 +38,8 @@ public class AnimationWindowGenerator {
     private final Button stepBackward = new Button("Backward");
     private final int prefWidth = 75;
     
-    public AnimationWindowGenerator(ArrayList<StackPane> stackpanes, int type) throws MalformedURLException{
+    public AnimationWindowGenerator(ArrayList<Integer> numbers, ArrayList<StackPane> stackpanes, int type) throws MalformedURLException{
+        this.numbers = numbers;
         this.stackpanes = stackpanes;
         this.type = type;
         start();
@@ -124,7 +126,7 @@ public class AnimationWindowGenerator {
     }
     
     private void getTransitions(){
-        InsertionSorter sorter = new InsertionSorter(Main.numbers, stackpanes);
+        InsertionSorter sorter = new InsertionSorter(numbers, stackpanes);
         transitions = sorter.getSortingTransitions();
     }
     
