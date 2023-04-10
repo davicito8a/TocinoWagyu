@@ -35,7 +35,7 @@ public class Main extends Application {
     private final static int windowHeight = 600;
     private final static int windowWidth = 1000;
     
-    public static int n = 12;
+    public static int n = 15;
     
     public static double rectangleWidth = 0.75 * 0.9 * windowWidth / n;
     public static double rectangleMaxHeight = 0.2 * windowHeight;
