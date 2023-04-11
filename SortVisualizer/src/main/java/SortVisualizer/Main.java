@@ -17,15 +17,20 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     
+    // Definimos variables estáticas para la altura y anchura de la ventana principal
     public static int windowHeight = 600;
     public static int windowWidth = 1000;
     
+    // Definimos variables estáticas para el ancho del rectángulo, la altura máxima del rectángulo
+    // y la separación entre ellos.
     public static double rectangleWidth;
     public static double rectangleMaxHeight;
     public static double separation;
     
+    // Definimos la variable estática para el tipo de ordenamiento.
     public static int type = 0;
         
+    // Método para obtener el máximo de una lista de enteros.
     public static int max (ArrayList<Integer> alturas){
         int max = alturas.get(0);
         
@@ -36,6 +41,7 @@ public class Main extends Application {
         return max;
     }
     
+    // Método para obtener una lista de StackPanes (rectángulos con números) a partir de una lista de alturas.
     public static ArrayList<StackPane> getRectangles(ArrayList<Integer> alturas) {
         rectangleWidth = 0.75 * 0.9 * windowWidth / alturas.size();
         rectangleMaxHeight = 0.2 * windowHeight;
@@ -72,7 +78,7 @@ public class Main extends Application {
         
         return stackpanes;
     }
-    
+     // Método sobreescrito de la clase Application, que se ejecuta al iniciar la aplicación.
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(new File("src/main/java/SortVisualizer/Input.fxml").toURI().toURL());
@@ -82,16 +88,40 @@ public class Main extends Application {
         stage.show();
     }
     
-    public static void newAnimationWindow(ArrayList<Integer> numbers, ArrayList<StackPane> stackpanes) throws MalformedURLException{
-        Stage stage = new Stage();
-        AnimationWindowGenerator windowGenerator = new AnimationWindowGenerator(numbers, stackpanes, type);
-        stage.setScene(windowGenerator.getScene());
-        stage.setWidth(windowWidth);
-        stage.setHeight(windowHeight);
-        stage.setResizable(false);
-        stage.setTitle("SortVisualizer");
-        stage.show();
-    }
+/**
+ * Crea y muestra una ventana de animación para visualizar el proceso de ordenamiento de una lista de enteros en una interfaz gráfica de usuario.
+ * @param numbers Lista de enteros a ordenar
+ * @param stackpanes Lista de StackPanes para mostrar los elementos de la lista en la animación
+ * @throws MalformedURLException si ocurre un error al crear la ventana de animación
+ */
+public static void newAnimationWindow(ArrayList<Integer> numbers, ArrayList<StackPane> stackpanes) throws MalformedURLException{
+    // Crea una nueva instancia de la clase Stage, que es una ventana en JavaFX
+    Stage stage = new Stage();
+
+    // Crea una nueva instancia de AnimationWindowGenerator, una clase que genera una ventana de animación
+    // usando los números y stackpanes dados como argumentos.
+    // El tercer argumento "type" podría ser una variable global que determina qué tipo de animación se muestra,
+    // o podría ser un parámetro adicional que especifica el tipo de ordenamiento a realizar (por ejemplo, burbuja, selección, etc.)
+    AnimationWindowGenerator windowGenerator = new AnimationWindowGenerator(numbers, stackpanes, type);
+
+    // Establece la escena de la ventana (el contenido que se muestra dentro de la ventana)
+    // utilizando el método "getScene" de AnimationWindowGenerator
+    stage.setScene(windowGenerator.getScene());
+
+    // Establece el ancho y la altura de la ventana en píxeles
+    stage.setWidth(windowWidth);
+    stage.setHeight(windowHeight);
+
+    // Establece la ventana para que no se pueda redimensionar
+    stage.setResizable(false);
+
+    // Establece el título de la ventana
+    stage.setTitle("SortVisualizer");
+
+    // Muestra la ventana
+    stage.show();
+}
+
     
     public static void main(String[] args) {
         launch();
