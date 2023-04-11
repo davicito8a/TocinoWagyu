@@ -91,18 +91,22 @@ public void dibujarDigito(int num, int x, int y) {
 
     // Números
     public void dibujarCero(GraphicsContext gc, double x, double y) {
+        gc.setStroke(Color.WHITE);  // Establecer el color de trazo en blanco
+        gc.setLineWidth(1.5);  // Establecer el grosor de línea en 1.5
         gc.strokeOval(x/CT, y/CT, 50/CT , 50/CT);
     }
 
     public void dibujarUno(GraphicsContext gc, double x, double y) {
-
+        gc.setStroke(Color.WHITE);  // Establecer el color de trazo en blanco
+        gc.setLineWidth(1.5);  // Establecer el grosor de línea en 1.5
         gc.strokeLine((x + 25)/CT, y/CT, (x + 25)/CT, (y + 50)/CT);
         gc.strokeLine((x + 25)/CT,y/CT, (x + 10)/CT, (y + 17)/CT );
         gc.strokeLine((x + 10)/CT,(y + 50)/CT, (x + 40)/CT, (y+50)/CT);
     }
 
     public void dibujarDos(GraphicsContext gc, double x, double y) {
-        
+        gc.setStroke(Color.WHITE);  // Establecer el color de trazo en blanco
+        gc.setLineWidth(1.5);  // Establecer el grosor de línea en 1.5       
         gc.strokeLine(x/CT, y/CT, (x + 35)/CT, y/CT); // Horizontal
         gc.strokeLine((x + 35)/CT, y/CT, (x + 35)/CT, (y + 25)/CT);
         gc.strokeLine((x + 35)/CT, (y + 25)/CT, x/CT, (y + 25)/CT); // Horizontal 2 
@@ -111,6 +115,8 @@ public void dibujarDigito(int num, int x, int y) {
     }
 
 public void dibujarTres(GraphicsContext gc, double x, double y) {
+    gc.setStroke(Color.WHITE);  // Establecer el color de trazo en blanco
+    gc.setLineWidth(1.5);  // Establecer el grosor de línea en 1.5
     double ancho = 40;
     gc.strokeLine(x/CT, y/CT, (x + ancho)/CT, y/CT);
     gc.strokeLine((x + ancho)/CT, y/CT, (x + ancho)/CT, (y + 25)/CT);
@@ -121,12 +127,16 @@ public void dibujarTres(GraphicsContext gc, double x, double y) {
 
 
     public void dibujarCuatro(GraphicsContext gc, double x, double y) {
+        gc.setStroke(Color.WHITE);  // Establecer el color de trazo en blanco
+        gc.setLineWidth(1.5);  // Establecer el grosor de línea en 1.5
         gc.strokeLine(x/CT, y/CT, x/CT, (y + 25)/CT);
         gc.strokeLine(x/CT, (y + 25)/CT, (x + 30)/CT, (y + 25)/CT);
         gc.strokeLine((x + 25)/CT, y/CT, (x + 25)/CT, (y + 50)/CT);
         
     }
     public void dibujarCinco(GraphicsContext gc, double x, double y) {
+        gc.setStroke(Color.WHITE);  // Establecer el color de trazo en blanco
+        gc.setLineWidth(1.5);  // Establecer el grosor de línea en 1.5
         gc.strokeLine(x/CT, y/CT, (x + 35)/CT, y/CT);
         gc.strokeLine(x/CT, y/CT, x/CT , (y + 25)/CT);
         gc.strokeLine((x + 35)/CT, (y + 25)/CT, x/CT, (y + 25)/CT);
@@ -135,21 +145,29 @@ public void dibujarTres(GraphicsContext gc, double x, double y) {
     }
 
     public void dibujarSeis(GraphicsContext gc, double x, double y) {
+        gc.setStroke(Color.WHITE);  // Establecer el color de trazo en blanco
+        gc.setLineWidth(1.5);  // Establecer el grosor de línea en 1.5
         gc.strokeOval(x/CT, (y + 18)/CT, 35/CT, 35/CT);
         gc.strokeLine((x + 16)/CT  , y/CT , (x+1)/CT, (y + 30)/CT);
     }
 
     public void dibujarSiete(GraphicsContext gc, double x, double y) {
+        gc.setStroke(Color.WHITE);  // Establecer el color de trazo en blanco
+        gc.setLineWidth(1.5);  // Establecer el grosor de línea en 1.5
         gc.strokeLine(x/CT, y/CT, (x + 50)/CT, y/CT);
         gc.strokeLine((x + 50)/CT, y/CT, x/CT, (y + 50)/CT);
     }
 
     public void dibujarOcho(GraphicsContext gc, double x, double y) {
+        gc.setStroke(Color.WHITE);  // Establecer el color de trazo en blanco
+        gc.setLineWidth(1.5);  // Establecer el grosor de línea en 1.5
         gc.strokeOval(x/CT, (y + 20)/CT, 35/CT, 35/CT);
         gc.strokeOval((x + 6)/CT, (y - 0.5)/CT, 20/CT, 20/CT); // circulo más pequeño
     }
 
     public void dibujarNueve(GraphicsContext gc, double x, double y) {
+        gc.setStroke(Color.WHITE);  // Establecer el color de trazo en blanco
+        gc.setLineWidth(1.5);  // Establecer el grosor de línea en 1.5
         gc.strokeOval(x/CT, y/CT, 35/CT, 35/CT);
         gc.strokeLine((x + 35)/CT, (y + 55)/CT, (x + 35)/CT, (y + 20)/CT);
     }
