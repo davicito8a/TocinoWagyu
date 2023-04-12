@@ -1,4 +1,5 @@
 SortVisualizer\InsertionSorter.class
+SortVisualizer\Main.class
 SortVisualizer\InputController.class
 SortVisualizer\Informer.class
-SortVisualizer\Main.class
+SortVisualizer\DibujarNumeros.class
