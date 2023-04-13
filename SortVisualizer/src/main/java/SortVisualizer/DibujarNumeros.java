@@ -18,8 +18,7 @@ import javafx.stage.Stage;
         Constructor que recibe un objeto Canvas que se utiliza 
         para dibujar los números.*/
         
-         int CT = 4; // CT = Constante de Tamaño(números)
-        Canvas rectangul;
+         int CT = 1; // CT = Constante de Tamaño(números)
         GraphicsContext gc;
         int coordenadaX = 10;
         int coordenadaY = 20;
@@ -27,15 +26,18 @@ import javafx.stage.Stage;
         
      public DibujarNumeros(Canvas reciboRetangul){
          
-         rectangul = reciboRetangul;
          gc = reciboRetangul.getGraphicsContext2D();
+         
    
     }
-public void dibujarNumeros(int cons) {
+public void dibujarNumeros(int cons, int quantity) {
     /*
      dibuja el dígito dado en las coordenadas x e y que se le pasan como argumentos. 
     Usa un switch para llamar a los métodos */
+    CT = quantity;
     
+    
+
     int digito1 = cons / 10; // primer digito
     int digito2 = cons % 10; // segundo digito
     int coordenadaX2 = coordenadaX + 50; // coordenada para el segundo dígito
@@ -85,6 +87,7 @@ public void dibujarDigito(int num, int x, int y) {
             break;
     }
 }
+
 
 
 

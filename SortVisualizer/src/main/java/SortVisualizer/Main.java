@@ -20,7 +20,7 @@ public class Main extends Application {
     
     // Definimos variables estáticas para la altura y anchura de la ventana principal
     public static int windowHeight = 600;
-    public static int windowWidth = 1000;
+    public static int windowWidth = 1500;
     
     // Definimos variables estáticas para el ancho del rectángulo, la altura máxima del rectángulo
     // y la separación entre ellos.
@@ -51,25 +51,22 @@ public class Main extends Application {
         ArrayList<StackPane> stackpanes = new ArrayList();
         
         double max = max(alturas);
-        
+        int size = NumberSize(alturas.size());
         for(int i = 0; i < alturas.size(); i++){
             double percentage = alturas.get(i)/max;
             
             Rectangle rectangle = new Rectangle();
             rectangle.setHeight(rectangleWidth);
-            rectangle.setWidth(rectangleWidth);
+        rectangle.setWidth(rectangleWidth);
             rectangle.setFill(Color.rgb(101, 67, 33));
             rectangle.setStroke(Color.BLACK);
             rectangle.setStrokeWidth(50/alturas.size());
-            
             Text number = new Text(alturas.get(i) + "");
             number.setFill(Color.WHITE);
             number.setFont(Font.font(15));
-            
             Canvas numberDrawing = new Canvas(rectangleWidth, rectangleWidth);
             DibujarNumeros numberDrawingg = new DibujarNumeros(numberDrawing);
-            numberDrawingg.dibujarNumeros(alturas.get(i));
-            
+            numberDrawingg.dibujarNumeros(alturas.get(i), size);
             StackPane stackpane = new StackPane();
             stackpane.getChildren().addAll(rectangle, numberDrawing);
             stackpanes.add(stackpane);
@@ -89,6 +86,25 @@ public class Main extends Application {
         stage.show();
     }
     
+    
+    
+    
+public static int NumberSize(int num) {
+    if (num >= 0 && num < 10) {
+        return 1; 
+    } else if (num < 20) {
+        return 2; 
+    } else if (num < 30) {
+        return 3; 
+    } else if (num <= 48) {
+        return 5; 
+    } else if (num <= 70) {
+        return 8; 
+    } else {
+        return 10; 
+    }
+}
+
 /**
  * Crea y muestra una ventana de animación para visualizar el proceso de ordenamiento de una lista de enteros en una interfaz gráfica de usuario.
  * @param numbers Lista de enteros a ordenar
