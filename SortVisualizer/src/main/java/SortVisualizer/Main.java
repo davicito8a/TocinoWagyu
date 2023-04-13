@@ -20,7 +20,7 @@ public class Main extends Application {
     
     // Definimos variables estáticas para la altura y anchura de la ventana principal
     public static int windowHeight = 600;
-    public static int windowWidth = 1000;
+    public static int windowWidth = 1500;
     
     // Definimos variables estáticas para el ancho del rectángulo, la altura máxima del rectángulo
     // y la separación entre ellos.
