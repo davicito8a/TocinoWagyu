@@ -3,6 +3,7 @@ package SortVisualizer;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -10,7 +11,11 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -62,7 +67,20 @@ private void continueToVisualization(ActionEvent event) throws MalformedURLExcep
         Main.newAnimationWindow(numbers, rectangles);
     } else {
         // Si los números ingresados no son válidos, muestra un mensaje de error en la consola
-        System.out.println("Ingresa de nuevo");
+        System.out.println("error papasito");
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("Por favor, inténtalo de nuevo");
+
+        ButtonType okButton = new ButtonType("Aceptar", ButtonData.OK_DONE);
+        alert.getButtonTypes().setAll(okButton);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == okButton) {
+            // Código para cerrar el cuadro de diálogo
+        }
+
     }
 }
 
