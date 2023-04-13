@@ -537,46 +537,47 @@ public class AnimationWindowGenerator {
         
         TranslateTransition translation = new TranslateTransition();
         translation.setByX(-230f);
-        translation.setCycleCount(10);
+        translation.setCycleCount(20);
         translation.setDuration(Duration.millis(1000));
         translation.setAutoReverse(true);
         
         TranslateTransition translation2 = new TranslateTransition();
         translation2.setByX(-230f);
         translation2.setByY(50);
-        translation2.setCycleCount(10);
+        translation2.setCycleCount(20);
         translation2.setDuration(Duration.millis(1000));
         translation2.setAutoReverse(true);
         
         TranslateTransition translation3 = new TranslateTransition();
         translation3.setByX(-230f);
-        translation3.setCycleCount(10);
+        translation3.setCycleCount(20);
         translation3.setDuration(Duration.millis(1000));
         translation3.setAutoReverse(true);
         
         TranslateTransition translation4 = new TranslateTransition();
         translation4.setByX(-230f);
         translation4.setByY(50);
-        translation4.setCycleCount(10);
+        translation4.setCycleCount(20);
         translation4.setDuration(Duration.millis(1000));
         translation4.setAutoReverse(true);
         
         TranslateTransition translation5 = new TranslateTransition();
         translation5.setByX(-230f);
-        translation5.setCycleCount(10);
+        translation5.setByY(50);
+        translation5.setCycleCount(20);
         translation5.setDuration(Duration.millis(1000));
         translation5.setAutoReverse(true);
         
         TranslateTransition translation6 = new TranslateTransition();
         translation6.setByX(-230f);
         translation6.setByY(50);
-        translation6.setCycleCount(10);
+        translation6.setCycleCount(20);
         translation6.setDuration(Duration.millis(1000));
         translation6.setAutoReverse(true);
         
         //Linea De las Garras:
-        Line l70 = new Line(290/EscalaGrua,30/EscalaGrua,290/EscalaGrua,300/EscalaGrua);//De Rec3
-        Line l71 = new Line(540/EscalaGrua,30/EscalaGrua,540/EscalaGrua,300/EscalaGrua);//De Rec4
+        Line l70 = new Line(290/EscalaGrua,10/EscalaGrua,290/EscalaGrua,300/EscalaGrua);//De Rec3
+        Line l71 = new Line(540/EscalaGrua,10/EscalaGrua,540/EscalaGrua,300/EscalaGrua);//De Rec4
         
         //La garra provisoria:
         Circle c1 = new Circle();
