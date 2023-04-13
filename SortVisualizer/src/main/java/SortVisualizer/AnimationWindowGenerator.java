@@ -548,6 +548,32 @@ public class AnimationWindowGenerator {
         translation2.setDuration(Duration.millis(1000));
         translation2.setAutoReverse(true);
         
+        TranslateTransition translation3 = new TranslateTransition();
+        translation3.setByX(-230f);
+        translation3.setCycleCount(10);
+        translation3.setDuration(Duration.millis(1000));
+        translation3.setAutoReverse(true);
+        
+        TranslateTransition translation4 = new TranslateTransition();
+        translation4.setByX(-230f);
+        translation4.setByY(50);
+        translation4.setCycleCount(10);
+        translation4.setDuration(Duration.millis(1000));
+        translation4.setAutoReverse(true);
+        
+        TranslateTransition translation5 = new TranslateTransition();
+        translation5.setByX(-230f);
+        translation5.setCycleCount(10);
+        translation5.setDuration(Duration.millis(1000));
+        translation5.setAutoReverse(true);
+        
+        TranslateTransition translation6 = new TranslateTransition();
+        translation6.setByX(-230f);
+        translation6.setByY(50);
+        translation6.setCycleCount(10);
+        translation6.setDuration(Duration.millis(1000));
+        translation6.setAutoReverse(true);
+        
         //Linea De las Garras:
         Line l70 = new Line(290/EscalaGrua,30/EscalaGrua,290/EscalaGrua,300/EscalaGrua);//De Rec3
         Line l71 = new Line(540/EscalaGrua,30/EscalaGrua,540/EscalaGrua,300/EscalaGrua);//De Rec4
@@ -566,8 +592,18 @@ public class AnimationWindowGenerator {
         
         translation.setNode(rec3);
         translation2.setNode(l70);
+        translation3.setNode(rec4);
+        translation4.setNode(l71);
+        translation5.setNode(c1);
+        translation6.setNode(c2);
+        
+        
         translation.play(); 
-        translation2.play(); 
+        translation2.play();
+        translation3.play(); 
+        translation4.play();
+        translation5.play(); 
+        translation6.play(); 
         
         
         // Establece la escena en el escenario y lo muestra
