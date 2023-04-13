@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import javafx.animation.Transition;
 import javafx.animation.TranslateTransition;
 import javafx.scene.layout.StackPane;
-import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
 
 public class InsertionSorter {
     
@@ -29,20 +27,19 @@ public class InsertionSorter {
             int contador = 0;
             
             TranslateTransition moverAbajo = new TranslateTransition();
-            //moverAbajo.setNode(rectangles.get(i));
             moverAbajo.setNode(stackpanes.get(i));
             moverAbajo.setByY(- 1 * 2 * Main.rectangleWidth);
-            //moverAbajo.setDuration(Duration.seconds(0.5));
             transitions.add(moverAbajo);
+            System.out.println(moverAbajo.getDuration());
+            
+            
             
             while(j > 0 && currentNumber < numbers.get(j - 1)){
                 contador++;
                 
                 TranslateTransition moverDerecha = new TranslateTransition();
-                //moverDerecha.setNode(rectangles.get(j - 1));
                 moverDerecha.setNode(stackpanes.get(j - 1));
                 moverDerecha.setByX(Main.separation + Main.rectangleWidth);
-                //moverDerecha.setDuration(Duration.seconds(0.5));
                 transitions.add(moverDerecha);
                 
                 stackpanes.set(j, stackpanes.get(j - 1));
@@ -51,13 +48,15 @@ public class InsertionSorter {
                 j--;    
             }
             
-            TranslateTransition reubicar = new TranslateTransition();
-            reubicar.setNode(stackpane);
-            //reubicar.setNode(r);
-            reubicar.setByX(-1 * (Main.separation + Main.rectangleWidth) * contador);
-            reubicar.setByY(2 * Main.rectangleWidth);
-            reubicar.setDuration(Duration.seconds(0.5));
-            transitions.add(reubicar);
+            TranslateTransition reubicarX = new TranslateTransition();
+            reubicarX.setNode(stackpane);
+            reubicarX.setByX(-1 * (Main.separation + Main.rectangleWidth) * contador);
+            transitions.add(reubicarX);
+            
+            TranslateTransition reubicarY = new TranslateTransition();
+            reubicarY.setNode(stackpane);
+            reubicarY.setByY(2 * Main.rectangleWidth);
+            transitions.add(reubicarY);
             
             stackpanes.set(j, stackpane); 
             numbers.set(j, currentNumber);

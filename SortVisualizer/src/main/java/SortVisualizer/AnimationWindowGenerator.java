@@ -17,6 +17,7 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 public class AnimationWindowGenerator {
     private final int type;
@@ -25,10 +26,12 @@ public class AnimationWindowGenerator {
     private final ArrayList<StackPane> stackpanes;
     private ArrayList<Transition> transitions;
     private SequentialTransition timeline;
+    private SequentialTransition pseudo;
     private int index = 0;
     
     private Scene scene;
     private AnchorPane root;
+    private VBox pseudocodeBox;
     
     private final Button play = new Button("Play");
     private final Button pause = new Button("Pause");
@@ -61,6 +64,8 @@ public class AnimationWindowGenerator {
         setButtonsLayout();
         scene = new Scene(root);
         scene.getStylesheets().add(new File("src/main/java/SortVisualizer/Styles.css").toURI().toURL().toExternalForm());
+        root.getChildren().add(pseudocodeBox);
+        
     }
     
     private void setButtonsLayout(){
@@ -123,11 +128,17 @@ public class AnimationWindowGenerator {
             increaseSpeed.setVisible(false);
             decreaseSpeed.setVisible(false);
         }
+        
     }
     
     private void getTransitions(){
+        ArrayList<Integer> numbers2 = (ArrayList<Integer>) numbers.clone();
         InsertionSorter sorter = new InsertionSorter(numbers, stackpanes);
         transitions = sorter.getSortingTransitions();
+        Pseudocode pseudo = new Pseudocode(numbers2);
+        setVBox(pseudo.getVBox());
+        this.pseudo = pseudo.getPseudocodeTransitions();
+        System.out.println(this.pseudo.getChildren());
     }
     
     private void createTimeline(){
@@ -138,6 +149,7 @@ public class AnimationWindowGenerator {
     private void increaseSpeed(SequentialTransition timeline){
         if(timeline.getStatus().equals(RUNNING))
             timeline.setRate(timeline.getRate() * 1.25);
+        pseudo.setRate(pseudo.getRate() * 1.25);
     }
     
     private void decreaseSpeed(SequentialTransition timeline){
@@ -147,10 +159,12 @@ public class AnimationWindowGenerator {
     
     private void pause(SequentialTransition timeline){
         timeline.pause();
+        pseudo.pause();
     }
     
     private void play(SequentialTransition timeline){
-        timeline.play();   
+        timeline.play();
+        pseudo.play();
     }
     
     private void stepForward(ArrayList<Transition> transitions){
@@ -173,6 +187,11 @@ public class AnimationWindowGenerator {
             transition.setByY(-1 * transition.getByY());
             transition.play();
         }  
+    }
+    
+    public void setVBox(VBox pseudocodeBox){
+        this.pseudocodeBox = pseudocodeBox;
+      
     }
     
     public Scene getScene(){
