@@ -10,19 +10,19 @@
 <AnchorPane fx:id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SortVisualizer.InputController">
    <children>
       <ComboBox fx:id="modes" layoutX="124.0" layoutY="228.0" prefWidth="150.0" />
-      <TextField fx:id="n" layoutX="124.0" layoutY="175.0" />
-      <Button fx:id="button" layoutX="166.0" layoutY="313.0" mnemonicParsing="false" onAction="#continueToVisualization" stylesheets="@Styles.css" text="Continue" />
+      <TextField fx:id="numbers" layoutX="124.0" layoutY="175.0" />
+      <Button fx:id="continueButton" layoutX="166.0" layoutY="313.0" mnemonicParsing="false" onAction="#continueToVisualization" stylesheets="@Styles.css" text="Continue" />
       <Label layoutX="124.0" layoutY="149.0" text="number1,number2,number3,...">
          <font>
             <Font size="11.0" />
          </font>
       </Label>
-      <TextField fx:id="numeroRectangulos" layoutX="124.0" layoutY="108.0" prefHeight="25.0" prefWidth="75.0" />
+      <TextField fx:id="numberOfBoxes" layoutX="124.0" layoutY="108.0" prefHeight="25.0" prefWidth="75.0" />
       <Label layoutX="124.0" layoutY="81.0" text="n">
          <font>
             <Font size="11.0" />
          </font>
       </Label>
-      <Button fx:id="random" layoutX="212.0" layoutY="108.0" mnemonicParsing="false" onAction="#generateRandom" stylesheets="@Styles.css" text="Random" />
+      <Button fx:id="randomButton" layoutX="212.0" layoutY="108.0" mnemonicParsing="false" onAction="#generateRandomNumbers" stylesheets="@Styles.css" text="Random" />
    </children>
 </AnchorPane>

@@ -1,6 +1,6 @@
 package SortVisualizer;
 
-import java.net.MalformedURLException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -23,13 +23,13 @@ public class InputController implements Initializable {
     @FXML
     private ComboBox<String> modes;
     @FXML
-    private TextField n;
+    private TextField numbers;
     @FXML
-    private Button button;
+    private Button continueButton;
     @FXML
-    private TextField numeroRectangulos;
+    private TextField numberOfBoxes;
     @FXML
-    private Button random;
+    private Button randomButton;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -37,48 +37,46 @@ public class InputController implements Initializable {
     }    
     
     @FXML
-    private void continueToVisualization(ActionEvent event) throws MalformedURLException { 
-        if(numberValidation()){
-            if(modes.getValue().equals("Step by step mode"))
-                Main.type = 1;
-            else
+    private void continueToVisualization(ActionEvent event) throws IOException { 
+        if(numbersPatternValidation()){
+            if(modes.getValue().equals( "Normal mode")){
                 Main.type = 0;
+            } else if (modes.getValue().equals("Step by step mode")){ 
+                Main.type = 1;
+            }
             
             ArrayList<Integer> numbers = new ArrayList();
+            String[] numberStrings = this.numbers.getText().split(",");
 
-            String[] numberStrings = this.n.getText().split(",");
-
-            for (String numberString : numberStrings) {
+            for(String numberString : numberStrings) {
                 int number = Integer.parseInt(numberString);
                 numbers.add(number);
             }
-            System.out.println(numbers);
+            
+            Main.coordinates.clear();
             ArrayList<StackPane> rectangles = Main.getRectangles(numbers);
             Main.newAnimationWindow(numbers, rectangles);
-        } else {
-            System.out.println("Ingresa de nuevo");
         }
     }
     
-    private boolean numberValidation(){
+    private boolean numbersPatternValidation(){
         Pattern pattern = Pattern.compile("^[0-9]+(,[0-9]+)*$");
-        Matcher matcher = pattern.matcher(n.getText());
+        Matcher matcher = pattern.matcher(numbers.getText());
         
         return matcher.find();
     }
-
+    
     @FXML
-    private void generateRandom(ActionEvent event) {
+    private void generateRandomNumbers(ActionEvent event) {
         String numeros = "";
-        int numeroRectangulos = Integer.parseInt(this.numeroRectangulos.getText());
+        int numeroRectangulos = Integer.parseInt(this.numberOfBoxes.getText());
         
         for(int i = 0; i < numeroRectangulos; i++){
             numeros += ((int)(Math.random()*99 + 1)) + ",";
         }
+        
         numeros = numeros.substring(0, numeros.length() - 1);
-        System.out.println(numeros);
-        n.setText(numeros);
+        numbers.setText(numeros);
     }
  
 }
-

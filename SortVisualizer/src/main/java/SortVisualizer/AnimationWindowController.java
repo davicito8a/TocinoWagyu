@@ -1,11 +1,11 @@
 package SortVisualizer;
 
 import java.io.File;
-import java.net.MalformedURLException;
+import java.io.IOException;
 import java.util.ArrayList;
+import javafx.animation.Animation;
 import static javafx.animation.Animation.Status.RUNNING;
 import javafx.animation.SequentialTransition;
-import javafx.animation.Transition;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,15 +19,16 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
-public class AnimationWindowGenerator {
+public class AnimationWindowController {
     private final int type;
    
     private final ArrayList<Integer> numbers;
     private final ArrayList<StackPane> stackpanes;
-    private ArrayList<Transition> transitions;
-    private SequentialTransition timeline;
-    private SequentialTransition pseudo;
-    private int index = 0;
+    private ArrayList<TranslateTransition> translateTransitions;
+    private ArrayList<Animation> pseudocodeAnimations;
+    private SequentialTransition sequentialTranslateTransitions;
+    private SequentialTransition sequentialPseudocodeAnimations = new SequentialTransition();
+    private int currentTransitionIndex = 0;
     
     private Scene scene;
     private AnchorPane root;
@@ -39,16 +40,16 @@ public class AnimationWindowGenerator {
     private final Button decreaseSpeed = new Button("Decrease");
     private final Button stepForward = new Button("Forward");
     private final Button stepBackward = new Button("Backward");
-    private final int prefWidth = 75;
+    private final int prefWidth = Main.windowWidth/15;
     
-    public AnimationWindowGenerator(ArrayList<Integer> numbers, ArrayList<StackPane> stackpanes, int type) throws MalformedURLException{
+    public AnimationWindowController(ArrayList<Integer> numbers, ArrayList<StackPane> stackpanes, int type) throws IOException{
         this.numbers = numbers;
         this.stackpanes = stackpanes;
         this.type = type;
         start();
     }
     
-    private void start () throws MalformedURLException{
+    private void start () throws IOException{
         getTransitions();
         
         if(type == 0){
@@ -94,27 +95,27 @@ public class AnimationWindowGenerator {
         stepBackward.setPrefWidth(prefWidth);
         
         play.setOnAction(event -> {
-            play(timeline);
+            play(sequentialTranslateTransitions);
         });
         
         pause.setOnAction(event -> {
-            pause(timeline);
+            pause(sequentialTranslateTransitions);
         });
         
         increaseSpeed.setOnAction(event -> {
-            increaseSpeed(timeline);
+            increaseSpeed(sequentialTranslateTransitions);
         });
         
         decreaseSpeed.setOnAction(event -> {
-            decreaseSpeed(timeline);
+            decreaseSpeed(sequentialTranslateTransitions);
         });
         
         stepForward.setOnAction(event -> {
-            stepForward(transitions);
+            stepForward(translateTransitions);
         });
         
         stepBackward.setOnAction(event -> {
-            stepBackward(transitions);
+            stepBackward(translateTransitions);
         });   
         
         root.getChildren().addAll(play, pause, increaseSpeed, decreaseSpeed, stepForward, stepBackward);
@@ -122,7 +123,7 @@ public class AnimationWindowGenerator {
         if(type == 0){
             stepForward.setVisible(false);
             stepBackward.setVisible(false);
-        } else {
+        } else if(type == 1) {
             play.setVisible(false);
             pause.setVisible(false);
             increaseSpeed.setVisible(false);
@@ -132,69 +133,63 @@ public class AnimationWindowGenerator {
     }
     
     private void getTransitions(){
-        ArrayList<Integer> numbers2 = (ArrayList<Integer>) numbers.clone();
-        InsertionSorter sorter = new InsertionSorter(numbers, stackpanes);
-        transitions = sorter.getSortingTransitions();
-        Pseudocode pseudo = new Pseudocode(numbers2);
-        setVBox(pseudo.getVBox());
-        this.pseudo = pseudo.getPseudocodeTransitions();
-        System.out.println(this.pseudo.getChildren());
+        Animator animator = new Animator(numbers, stackpanes);
+        translateTransitions = animator.getTranslateTransitions();
+        pseudocodeBox = animator.getPseudocodeBox();
+        sequentialPseudocodeAnimations.getChildren().addAll(animator.getPseudocodeAnimations());
+       
     }
     
     private void createTimeline(){
-        timeline = new SequentialTransition();
-        timeline.getChildren().addAll(transitions);
+        sequentialTranslateTransitions = new SequentialTransition();
+        sequentialTranslateTransitions.getChildren().addAll(translateTransitions);
     }
     
     private void increaseSpeed(SequentialTransition timeline){
-        if(timeline.getStatus().equals(RUNNING))
+        if(timeline.getStatus().equals(RUNNING)){
             timeline.setRate(timeline.getRate() * 1.25);
-        pseudo.setRate(pseudo.getRate() * 1.25);
+            sequentialPseudocodeAnimations.setRate(sequentialPseudocodeAnimations.getRate() * 1.25);
+        }
     }
     
     private void decreaseSpeed(SequentialTransition timeline){
-        if(timeline.getStatus().equals(RUNNING))
+        if(timeline.getStatus().equals(RUNNING)){
             timeline.setRate(timeline.getRate() * 0.8);
+            sequentialPseudocodeAnimations.setRate(sequentialPseudocodeAnimations.getRate() * 0.8);
+        }
     }
+    
     
     private void pause(SequentialTransition timeline){
         timeline.pause();
-        pseudo.pause();
+        sequentialPseudocodeAnimations.pause();
     }
     
     private void play(SequentialTransition timeline){
         timeline.play();
-        pseudo.play();
+        sequentialPseudocodeAnimations.play();
     }
     
-    private void stepForward(ArrayList<Transition> transitions){
-        if(index <= transitions.size() - 1){
-            TranslateTransition transition = (TranslateTransition) transitions.get(index);
-            transition.setOnFinished(e -> index++);
+    private void stepForward(ArrayList<TranslateTransition> transitions){
+        if(currentTransitionIndex <= transitions.size() - 1){
+            TranslateTransition transition = transitions.get(currentTransitionIndex);
+            transition.setOnFinished(e -> currentTransitionIndex++);
+            transition.setRate(1);
             transition.play();
         }
     }
     
-    private void stepBackward(ArrayList<Transition> transitions){
-        if(index >= 1){
-            TranslateTransition transition = (TranslateTransition) transitions.get(index - 1);
-            transition.setOnFinished(e -> {
-                transition.setByX(-1 * transition.getByX());
-                transition.setByY(-1 * transition.getByY());
-                index--;
-            });
-            transition.setByX(-1 * transition.getByX());
-            transition.setByY(-1 * transition.getByY());
+    private void stepBackward(ArrayList<TranslateTransition> transitions){
+        if(currentTransitionIndex >= 1){
+            TranslateTransition transition = transitions.get(currentTransitionIndex - 1);
+            transition.setOnFinished(e -> currentTransitionIndex--);
+            transition.setRate(-1);
             transition.play();
         }  
     }
-    
-    public void setVBox(VBox pseudocodeBox){
-        this.pseudocodeBox = pseudocodeBox;
-      
-    }
-    
+     
     public Scene getScene(){
         return scene;
     }
+    
 }

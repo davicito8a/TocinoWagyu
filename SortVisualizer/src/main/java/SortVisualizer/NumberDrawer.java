@@ -4,7 +4,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
 
-    public class DibujarNumeros{
+    public class NumberDrawer{
          int CT = 4; // CT = Constante de Tamaño(números)
         Canvas rectangul;
         GraphicsContext gc;
@@ -12,13 +12,13 @@ import javafx.scene.canvas.GraphicsContext;
         int coordenadaY = 20;
         
         
-     public DibujarNumeros(Canvas reciboRetangul){
+     public NumberDrawer(Canvas reciboRetangul){
          
          rectangul = reciboRetangul;
          gc = reciboRetangul.getGraphicsContext2D();
    
     }
-    public void dibujarNumeros(int cons) {
+    public void drawNumber(int cons) {
         
         
 
@@ -30,8 +30,8 @@ import javafx.scene.canvas.GraphicsContext;
         // 
 
         
-            for(int DobleD = 1; DobleD < 3; DobleD++){
-                switch(DobleD){
+        for(int DobleD = 1; DobleD < 3; DobleD++){
+            switch(DobleD){
                     case 1:
                         switch(digito1){
                         //Primer digito

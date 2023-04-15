@@ -1,6 +1,2 @@
-SortVisualizer\InsertionSorter.class
-SortVisualizer\Main.class
 SortVisualizer\InputController.class
-SortVisualizer\AnimationWindowGenerator.class
-SortVisualizer\Informer.class
-SortVisualizer\DibujarNumeros.class
+SortVisualizer\Main.class
