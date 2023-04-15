@@ -9,6 +9,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 public class Animator {
@@ -18,26 +20,46 @@ public class Animator {
     
     private final ArrayList<TranslateTransition> translateTransitions;
     private final ArrayList<Animation> pseudocodeAnimations;
+    private final ArrayList<Animation> AnimacionesDeGrua;
     
     private VBox pseudocodeBox;
     private Label label1, label2, label3;
     private final String initialStyle = "-fx-text-fill: white";
     private final String finalStyle = "-fx-background-color: yellow";
     
+    Rectangle rectangleAnimation1 = new Rectangle();
+    Rectangle rectangleAnimation2 = new Rectangle();
+    
+    
     public Animator(ArrayList<Integer> numbers, ArrayList<StackPane> stackpanes){
         this.numbers = numbers;
         this.stackpanes = stackpanes;
         translateTransitions = new ArrayList();
         pseudocodeAnimations = new ArrayList();
+        AnimacionesDeGrua = new ArrayList();
+        
+        rectangleAnimation1.setTranslateX(Main.coordinates.get(0));
+        rectangleAnimation1.setWidth(Main.squareDimension);
+        rectangleAnimation1.setHeight(Main.squareDimension);
+        rectangleAnimation1.setFill(Color.BLUE);//Grua que Ordena lo demás
+        rectangleAnimation1.setTranslateY(5);
+        
+        rectangleAnimation2.setTranslateX(Main.coordinates.get(1));
+        rectangleAnimation2.setWidth(Main.squareDimension);
+        rectangleAnimation2.setHeight(Main.squareDimension);
+        rectangleAnimation2.setFill(Color.RED);//Grua que levanta
+        rectangleAnimation2.setTranslateY(5);
+        
         setLabels();
         getInsertionSortTransitions();
        
     }
     
     private void getInsertionSortTransitions(){
-        int j;
+        int j=1;
         
         for(int i = 1; i < numbers.size(); i++){
+            moveInXCaja(rectangleAnimation2,Main.coordinates.get(j),Main.coordinates.get(i));
             j = i;
             
             StackPane stackpane = stackpanes.get(i);
@@ -55,7 +77,7 @@ public class Animator {
                 
                 j--;    
             }
-            
+            moveInXCaja(rectangleAnimation2,Main.coordinates.get(i),Main.coordinates.get(j));
             changeLabelProperties(label3, "\tnumbers[" + j + "]" + " = " + currentNumber, initialStyle, finalStyle, Duration.millis(800));
             moveInX(stackpane, Main.coordinates.get(i), Main.coordinates.get(j));
             moveInY(stackpane, 0.65 * Main.windowHeight - 2 * Main.squareDimension, 0.65 * Main.windowHeight);
@@ -65,6 +87,11 @@ public class Animator {
         }
     }
     
+    public double getConstant(){
+        double constant =translateTransitions.size()/AnimacionesDeGrua.size(); 
+        return constant;
+    }
+
     private void setLabels(){
         pseudocodeBox = new VBox();
         
@@ -96,6 +123,22 @@ public class Animator {
         translateTransitions.add(moveInY);
     }
     
+    private void moveInXCaja(Node node, double fromX, double toX){
+        TranslateTransition moveInX = new TranslateTransition();
+        moveInX.setNode(node);
+        moveInX.setFromX(fromX);
+        moveInX.setToX(toX);
+        AnimacionesDeGrua.add(moveInX);
+    }
+    
+    private void moveInYCaja(Node node, double fromY, double toY){
+        TranslateTransition moveInY = new TranslateTransition();
+        moveInY.setNode(node);
+        moveInY.setFromY(fromY);
+        moveInY.setToY(toY);
+        AnimacionesDeGrua.add(moveInY);
+    }
+    
     private void changeLabelProperties(Label label, String newText, String initialStyle, String newStyle, Duration duration){
         Timeline changeLabelPropertiesAnimation = new Timeline();
         KeyFrame newTextFrame = new KeyFrame(Duration.ZERO, event -> label.setText(newText));
@@ -116,5 +159,19 @@ public class Animator {
     public VBox getPseudocodeBox() {
         return pseudocodeBox;
     }
+
+    public Rectangle getRectangleAnimation1() {
+        return rectangleAnimation1;
+    }
+
+    public Rectangle getRectangleAnimation2() {
+        return rectangleAnimation2;
+    }
+
+    public ArrayList<Animation> getAnimacionesDeGrua() {
+        return AnimacionesDeGrua;
+    }
     
+    
+
 }

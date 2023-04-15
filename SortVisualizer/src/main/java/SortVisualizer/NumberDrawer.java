@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  * @author david
  */
 
-    public class DibujarNumeros{
+    public class NumberDrawer{
         /*
         Constructor que recibe un objeto Canvas que se utiliza 
         para dibujar los números.*/
@@ -25,13 +25,13 @@ import javafx.stage.Stage;
         int coordenadaY = 20;
         
         
-     public DibujarNumeros(Canvas reciboRetangul){
+     public NumberDrawer(Canvas reciboRetangul){
          
          rectangul = reciboRetangul;
          gc = reciboRetangul.getGraphicsContext2D();
    
     }
-public void dibujarNumeros(int cons) {
+public void drawNumber(int cons) {
     /*
      dibuja el dígito dado en las coordenadas x e y que se le pasan como argumentos. 
     Usa un switch para llamar a los métodos */

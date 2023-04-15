@@ -20,19 +20,23 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Rectangle; 
 import javafx.scene.transform.Translate;
 import javafx.util.Duration;
 import javafx.scene.layout.VBox;
 
 public class AnimationWindowController {
     private final int type;
+    
+    private ArrayList<Animation> AnimacionesDeGrua;
+    
+    private SequentialTransition sequentialTranslateTransitionsCaja = new SequentialTransition();
     // La lista de números que se van a ordenar
     private final ArrayList<Integer> numbers;
     // La lista de paneles de apilamiento asociados a los números
     private final ArrayList<StackPane> stackpanes;
     // La lista de transiciones de animación de ordenamiento
-    private ArrayList<Transition> transitions;
+    private ArrayList<TranslateTransition> transitions;
     // La línea de tiempo de animación
     private SequentialTransition timeline;
     // El índice de la transición actual
@@ -42,6 +46,7 @@ public class AnimationWindowController {
     private SequentialTransition sequentialTranslateTransitions;
     private SequentialTransition sequentialPseudocodeAnimations = new SequentialTransition();
     private int currentTransitionIndex = 0;
+    Animator animator;
     
     // La escena de la ventana de animación
     private Scene scene;
@@ -63,14 +68,18 @@ public class AnimationWindowController {
     public AnimationWindowController(ArrayList<Integer> numbers, ArrayList<StackPane> stackpanes, int type) throws IOException{
         this.numbers = numbers;
         this.stackpanes = stackpanes;
+        animator = new Animator(numbers, stackpanes);
         // Se asigna el tipo de animación de ordenamiento
         this.type = type;
         // Se inicia la generación de la ventana de animación
         start();
+        this.AnimacionesDeGrua = null;
     }
     
+
     private void start () throws IOException{
         getTransitions();
+        
         
         // Si el tipo de animación es 0 (es decir, es una animación de ordenamiento automática)
         if(type == 0){
@@ -164,6 +173,15 @@ public class AnimationWindowController {
         
     }
     
+    private void getTransitions(){
+        translateTransitions = animator.getTranslateTransitions();
+        pseudocodeBox = animator.getPseudocodeBox();
+        sequentialPseudocodeAnimations.getChildren().addAll(animator.getPseudocodeAnimations());
+        AnimacionesDeGrua = animator.getAnimacionesDeGrua();
+        sequentialTranslateTransitionsCaja.getChildren().addAll(animator.getAnimacionesDeGrua());
+               
+    }
+    
     private void createTimeline(){
         sequentialTranslateTransitions = new SequentialTransition();
         sequentialTranslateTransitions.getChildren().addAll(translateTransitions);
@@ -195,6 +213,8 @@ public class AnimationWindowController {
     
     private void play(SequentialTransition timeline){
         /*Este método reanuda la animación respectivamente.*/
+        sequentialPseudocodeAnimations.play();
+        sequentialTranslateTransitionsCaja.play();
         timeline.play();   
     }
     
@@ -508,16 +528,10 @@ public class AnimationWindowController {
         //Guardar Line l16 = new Line(800,500,830,500);
         
         //Garra N°1:
-        /*
-        Rectangle rec3 = new Rectangle();
-        rec3.setX(250/EscalaGrua); rec3.setY(10/EscalaGrua);
-        rec3.setWidth(80/EscalaGrua); rec3.setHeight(55/EscalaGrua);
-        rec3.setFill(ColorInterno);*/
         
-        Rectangle rec4 = new Rectangle();
-        rec4.setX(500/EscalaGrua); rec4.setY(10/EscalaGrua);
-        rec4.setWidth(80/EscalaGrua); rec4.setHeight(55/EscalaGrua);
-        rec4.setFill(ColorExterno);
+        Rectangle rec3 = animator.getRectangleAnimation1();
+        
+        Rectangle rec4 = animator.getRectangleAnimation2();
         
         //================================================
         //Traslaciones de la Grua
@@ -567,10 +581,10 @@ public class AnimationWindowController {
         Line l71 = new Line(540/EscalaGrua,10/EscalaGrua,540/EscalaGrua,300/EscalaGrua);//De Rec4
         
         //La garra provisoria:
-        Circle c1 = new Circle();
+       /* Circle c1 = new Circle();
         c1.setCenterX(290/EscalaGrua); c1.setCenterY(300/EscalaGrua);
         c1.setRadius(6/EscalaGrua);
-        c1.setFill(ColorInterno);
+        c1.setFill(ColorInterno);*/
         
         Circle c2 = new Circle();
         c2.setCenterX(540/EscalaGrua); c2.setCenterY(300/EscalaGrua);
@@ -591,10 +605,10 @@ public class AnimationWindowController {
         
         
         //translation.setNode(rec3);
-        translation2.setNode(l70);
+        //translation2.setNode(l70);
         translation3.setNode(rec4);
         translation4.setNode(l71);
-        translation5.setNode(c1);
+        //translation5.setNode(c1);
         //translation6.setNode(c2);
         
         
@@ -621,9 +635,9 @@ public class AnimationWindowController {
         root.getChildren().addAll(l56,l57,l58,l59,l60);
         root.getChildren().addAll(l61,l62,l63,l64,l65);
         root.getChildren().addAll(l66,l67,l68,l69);
-        root.getChildren().addAll(l70,l71);
-        root.getChildren().addAll(rec,rec2,rec4);
-        root.getChildren().addAll(c1,c2);
+        //root.getChildren().addAll(l70,l71);
+        root.getChildren().addAll(rec,rec2,rec3,rec4);
+        //root.getChildren().addAll(c1,c2);
 
     }
 }
