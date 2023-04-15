@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javafx.animation.Transition;
 import javafx.animation.TranslateTransition;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
@@ -17,16 +18,26 @@ public class InsertionSorter {
     private ArrayList<Integer> numbers = new ArrayList();
     private ArrayList<StackPane> stackpanes = new ArrayList();
     
+    Rectangle rec3 = new Rectangle();
+    Color color = Color.BLUE;
+    
     // Constructor que toma dos ArrayLists como argumentos
     public InsertionSorter(ArrayList<Integer> numbers, ArrayList<StackPane> stackpanes){
         this.numbers = numbers;
         this.stackpanes = stackpanes;
+        rec3.setX(250); rec3.setY(10);
+        rec3.setWidth(80); rec3.setHeight(55);
+        rec3.setFill(color);
     }
-    
+
+    public Rectangle getRec3() {
+        return rec3;
+    }
+
     /**
      * Devuelve una lista de transiciones de animación para visualizar el proceso de ordenamiento por inserción.
      * @return Una lista de objetos Transition que contienen información sobre cómo se deben animar los StackPanes para visualizar el proceso de ordenamiento por inserción.
-     */
+     */    
     public ArrayList<Transition> getSortingTransitions(){
         ArrayList<Transition> transitions = new ArrayList();
         

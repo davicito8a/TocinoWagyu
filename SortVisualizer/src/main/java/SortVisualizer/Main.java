@@ -15,6 +15,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.awt.BorderLayout;
+import javafx.scene.effect.DropShadow;
 
 public class Main extends Application {
     
@@ -56,6 +57,12 @@ public class Main extends Application {
             double percentage = alturas.get(i)/max;
             
             Rectangle rectangle = new Rectangle();
+            DropShadow shadow = new DropShadow();
+            shadow.setRadius(10.0);
+            shadow.setOffsetX(5.0);
+            shadow.setOffsetY(5.0);
+            shadow.setColor(Color.BLACK);
+            rectangle.setEffect(shadow);
             rectangle.setHeight(rectangleWidth);
             rectangle.setWidth(rectangleWidth);
             rectangle.setFill(Color.rgb(101, 67, 33));

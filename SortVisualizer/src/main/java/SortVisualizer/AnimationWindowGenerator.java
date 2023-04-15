@@ -53,6 +53,8 @@ public class AnimationWindowGenerator {
     // La anchura predefinida de los botones
     private final int prefWidth = 75;
     
+    Rectangle rec3 = new Rectangle();
+    
     
     // Constructor de la clase
     public AnimationWindowGenerator(ArrayList<Integer> numbers, ArrayList<StackPane> stackpanes, int type) throws MalformedURLException{
@@ -522,10 +524,11 @@ public class AnimationWindowGenerator {
         //Guardar Line l16 = new Line(800,500,830,500);
         
         //Garra N°1:
+        /*
         Rectangle rec3 = new Rectangle();
         rec3.setX(250/EscalaGrua); rec3.setY(10/EscalaGrua);
         rec3.setWidth(80/EscalaGrua); rec3.setHeight(55/EscalaGrua);
-        rec3.setFill(ColorInterno);
+        rec3.setFill(ColorInterno);*/
         
         Rectangle rec4 = new Rectangle();
         rec4.setX(500/EscalaGrua); rec4.setY(10/EscalaGrua);
@@ -591,20 +594,32 @@ public class AnimationWindowGenerator {
         c2.setFill(ColorExterno);
         
         
-        translation.setNode(rec3);
+        for(int i=0;i<2;i++){
+            TranslateTransition trans = new TranslateTransition();
+            //trans.setByX();
+            trans.setByY(20);
+            trans.setCycleCount(i);
+            trans.setDuration(Duration.millis(1000));
+            trans.setAutoReverse(true);
+            trans.setNode(c2);
+            trans.play();
+        }
+        
+        
+        //translation.setNode(rec3);
         translation2.setNode(l70);
         translation3.setNode(rec4);
         translation4.setNode(l71);
         translation5.setNode(c1);
-        translation6.setNode(c2);
+        //translation6.setNode(c2);
         
         
-        translation.play(); 
-        translation2.play();
-        translation3.play(); 
-        translation4.play();
-        translation5.play(); 
-        translation6.play(); 
+        //translation.play(); 
+        //translation2.play();
+        //translation3.play(); 
+        //translation4.play();
+        //translation5.play(); 
+        //translation6.play(); 
         
         
         // Establece la escena en el escenario y lo muestra
@@ -623,7 +638,7 @@ public class AnimationWindowGenerator {
         root.getChildren().addAll(l61,l62,l63,l64,l65);
         root.getChildren().addAll(l66,l67,l68,l69);
         root.getChildren().addAll(l70,l71);
-        root.getChildren().addAll(rec,rec2,rec3,rec4);
+        root.getChildren().addAll(rec,rec2,rec4);
         root.getChildren().addAll(c1,c2);
 
     }
