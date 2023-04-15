@@ -1,11 +1,11 @@
 package SortVisualizer;
 
 import java.io.File;
-import java.net.MalformedURLException;
+import java.io.IOException;
 import java.util.ArrayList;
+import javafx.animation.Animation;
 import static javafx.animation.Animation.Status.RUNNING;
 import javafx.animation.SequentialTransition;
-import javafx.animation.Transition;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -23,8 +23,9 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Translate;
 import javafx.util.Duration;
+import javafx.scene.layout.VBox;
 
-public class AnimationWindowGenerator {
+public class AnimationWindowController {
     private final int type;
     // La lista de números que se van a ordenar
     private final ArrayList<Integer> numbers;
@@ -36,6 +37,11 @@ public class AnimationWindowGenerator {
     private SequentialTransition timeline;
     // El índice de la transición actual
     private int index = 0;
+    private ArrayList<TranslateTransition> translateTransitions;
+    private ArrayList<Animation> pseudocodeAnimations;
+    private SequentialTransition sequentialTranslateTransitions;
+    private SequentialTransition sequentialPseudocodeAnimations = new SequentialTransition();
+    private int currentTransitionIndex = 0;
     
     // La escena de la ventana de animación
     private Scene scene;
@@ -43,22 +49,18 @@ public class AnimationWindowGenerator {
     private AnchorPane root;
 
     // Los botones de control de la animación
+    private VBox pseudocodeBox;
+    
     private final Button play = new Button("Play");
     private final Button pause = new Button("Pause");
     private final Button increaseSpeed = new Button("Increase");
     private final Button decreaseSpeed = new Button("Decrease");
     private final Button stepForward = new Button("Forward");
     private final Button stepBackward = new Button("Backward");
-
-    // La anchura predefinida de los botones
-    private final int prefWidth = 75;
     
-    Rectangle rec3 = new Rectangle();
+    private final int prefWidth = Main.windowWidth/15;
     
-    
-    // Constructor de la clase
-    public AnimationWindowGenerator(ArrayList<Integer> numbers, ArrayList<StackPane> stackpanes, int type) throws MalformedURLException{
-        // Se asignan las listas de números y paneles de apilamiento
+    public AnimationWindowController(ArrayList<Integer> numbers, ArrayList<StackPane> stackpanes, int type) throws IOException{
         this.numbers = numbers;
         this.stackpanes = stackpanes;
         // Se asigna el tipo de animación de ordenamiento
@@ -67,8 +69,7 @@ public class AnimationWindowGenerator {
         start();
     }
     
-    private void start () throws MalformedURLException{
-        // Se obtienen las transiciones de animación de ordenamiento
+    private void start () throws IOException{
         getTransitions();
         
         // Si el tipo de animación es 0 (es decir, es una animación de ordenamiento automática)
@@ -92,6 +93,8 @@ public class AnimationWindowGenerator {
         scene = new Scene(root);
         scene.getStylesheets().add(new File("src/main/java/SortVisualizer/Styles.css").toURI().toURL().toExternalForm());
         setGrua();
+        root.getChildren().add(pseudocodeBox);
+        
     }
     
     private void setButtonsLayout(){
@@ -124,27 +127,27 @@ public class AnimationWindowGenerator {
         stepBackward.setPrefWidth(prefWidth);
         
         play.setOnAction(event -> {
-            play(timeline);
+            play(sequentialTranslateTransitions);
         });
         
         pause.setOnAction(event -> {
-            pause(timeline);
+            pause(sequentialTranslateTransitions);
         });
         
         increaseSpeed.setOnAction(event -> {
-            increaseSpeed(timeline);
+            increaseSpeed(sequentialTranslateTransitions);
         });
         
         decreaseSpeed.setOnAction(event -> {
-            decreaseSpeed(timeline);
+            decreaseSpeed(sequentialTranslateTransitions);
         });
         
         stepForward.setOnAction(event -> {
-            stepForward(transitions);
+            stepForward(translateTransitions);
         });
         
         stepBackward.setOnAction(event -> {
-            stepBackward(transitions);
+            stepBackward(translateTransitions);
         });   
         
         root.getChildren().addAll(play, pause, increaseSpeed, decreaseSpeed, stepForward, stepBackward);
@@ -152,39 +155,25 @@ public class AnimationWindowGenerator {
         if(type == 0){
             stepForward.setVisible(false);
             stepBackward.setVisible(false);
-        } else {
+        } else if(type == 1) {
             play.setVisible(false);
             pause.setVisible(false);
             increaseSpeed.setVisible(false);
             decreaseSpeed.setVisible(false);
         }
-    }
-    
-    private void getTransitions(){
-        /*
-        Este método crea una instancia de la clase InsertionSorter que toma una lista de números y un arreglo de paneles, 
-        y devuelve una lista de objetos de transición. Estos objetos se usan en la animación para cambiar la posición de los paneles 
-        para demostrar la clasificación.*/
         
-        InsertionSorter sorter = new InsertionSorter(numbers, stackpanes);
-        transitions = sorter.getSortingTransitions();
     }
     
     private void createTimeline(){
-        /*
-        : Este método crea una instancia de SequentialTransition que agrega los objetos de transición que se obtienen del método getTransitions(). Esto crea una animación secuencial que cambia la posición de los paneles en una secuencia específica.
-        */
-        timeline = new SequentialTransition();
-        timeline.getChildren().addAll(transitions);
+        sequentialTranslateTransitions = new SequentialTransition();
+        sequentialTranslateTransitions.getChildren().addAll(translateTransitions);
     }
     
     private void increaseSpeed(SequentialTransition timeline){
-        /*
-        Este método aumenta la velocidad de la animación, se verifica si la 
-        animación esta en ejecución antes de cambiar la velocidad.
-        */
-        if(timeline.getStatus().equals(RUNNING))
+        if(timeline.getStatus().equals(RUNNING)){
             timeline.setRate(timeline.getRate() * 1.25);
+            sequentialPseudocodeAnimations.setRate(sequentialPseudocodeAnimations.getRate() * 1.25);
+        }
     }
     
     private void decreaseSpeed(SequentialTransition timeline){
@@ -192,13 +181,16 @@ public class AnimationWindowGenerator {
         Este método disminuye la velocidad de la animación, se verifica si la 
         animación esta en ejecución antes de cambiar la velocidad.
         */
-        if(timeline.getStatus().equals(RUNNING))
+        if(timeline.getStatus().equals(RUNNING)){
             timeline.setRate(timeline.getRate() * 0.8);
+            sequentialPseudocodeAnimations.setRate(sequentialPseudocodeAnimations.getRate() * 0.8);
+        }
     }
     
     private void pause(SequentialTransition timeline){
         /*Este método pausan la animación respectivamente.*/
         timeline.pause();
+        sequentialPseudocodeAnimations.pause();
     }
     
     private void play(SequentialTransition timeline){
@@ -206,32 +198,24 @@ public class AnimationWindowGenerator {
         timeline.play();   
     }
     
-    private void stepForward(ArrayList<Transition> transitions){
-        /*Este método se usa para avanzar un paso en la animación. 
-        Cada uno toma una lista de transiciones y cambia la posición de los paneles en la animación en consecuencia.*/
-        if(index <= transitions.size() - 1){
-            TranslateTransition transition = (TranslateTransition) transitions.get(index);
-            transition.setOnFinished(e -> index++);
+    private void stepForward(ArrayList<TranslateTransition> transitions){
+        if(currentTransitionIndex <= transitions.size() - 1){
+            TranslateTransition transition = transitions.get(currentTransitionIndex);
+            transition.setOnFinished(e -> currentTransitionIndex++);
+            transition.setRate(1);
             transition.play();
         }
     }
     
-    private void stepBackward(ArrayList<Transition> transitions){
-        /*Este método se usa para retroceder un paso en la animación. 
-        Cada uno toma una lista de transiciones y cambia la posición de los paneles en la animación en consecuencia.*/
-        if(index >= 1){
-            TranslateTransition transition = (TranslateTransition) transitions.get(index - 1);
-            transition.setOnFinished(e -> {
-                transition.setByX(-1 * transition.getByX());
-                transition.setByY(-1 * transition.getByY());
-                index--;
-            });
-            transition.setByX(-1 * transition.getByX());
-            transition.setByY(-1 * transition.getByY());
+    private void stepBackward(ArrayList<TranslateTransition> transitions){
+        if(currentTransitionIndex >= 1){
+            TranslateTransition transition = transitions.get(currentTransitionIndex - 1);
+            transition.setOnFinished(e -> currentTransitionIndex--);
+            transition.setRate(-1);
             transition.play();
         }  
     }
-    
+     
     public Scene getScene(){
         /*Este método devuelve la escena de la GUI que contiene todos 
         los elementos que se utilizan en la animación.*/
