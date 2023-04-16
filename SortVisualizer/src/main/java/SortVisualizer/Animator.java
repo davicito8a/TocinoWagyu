@@ -103,35 +103,38 @@ public class Animator {
     
     private void setCrane(){
         rectangleAnimation1.setTranslateX(Main.coordinates.get(0));
-        rectangleAnimation1.setWidth(Main.squareDimension);
-        rectangleAnimation1.setHeight(Main.squareDimension);
-        rectangleAnimation1.setFill(Color.YELLOW);//Grua que Ordena lo demás
         rectangleAnimation1.setTranslateY(5);
+        rectangleAnimation1.setWidth(80);
+        rectangleAnimation1.setHeight(20);
+        rectangleAnimation1.setLayoutX(Main.squareDimension/2 - rectangleAnimation1.getWidth()/2);
+        rectangleAnimation1.setFill(Color.YELLOW);//Grua que Ordena lo demás
         
         rectangleAnimation2.setTranslateX(Main.coordinates.get(1));
-        rectangleAnimation2.setWidth(Main.squareDimension);
-        rectangleAnimation2.setHeight(Main.squareDimension);
+        rectangleAnimation2.setWidth(100);
+        rectangleAnimation2.setHeight(30);
         rectangleAnimation2.setFill(Color.GREEN);//Grua que levanta
+        rectangleAnimation2.setLayoutX(Main.squareDimension/2 - rectangleAnimation2.getWidth()/2);
         rectangleAnimation2.setTranslateY(35);
         
         rectangleGrua.setTranslateX(Main.coordinates.get(0));
         rectangleGrua.setTranslateY(5);
-        rectangleGrua.setHeight(20);
-        rectangleGrua.setWidth(20);
-        rectangleGrua.setLayoutX(Main.squareDimension/2-10);
+        rectangleGrua.setHeight(22);
+        rectangleGrua.setWidth(40);
+        rectangleGrua.setLayoutX(Main.squareDimension/2- rectangleGrua.getWidth()/2);
         rectangleGrua.setLayoutY(0.65*Main.windowHeight-25);
         rectangleGrua.setFill(Color.ORANGE);
         
         rectangleGrua2.setTranslateX(Main.coordinates.get(1));
         rectangleGrua2.setTranslateY(35);
-        rectangleGrua2.setLayoutX(Main.squareDimension/2-10);
-        rectangleGrua2.setLayoutY(0.65*Main.windowHeight-2*Main.squareDimension-55);
-        rectangleGrua2.setHeight(10);
-        rectangleGrua2.setWidth(30);
+        rectangleGrua2.setHeight(20);
+        rectangleGrua2.setWidth(40);
+        rectangleGrua2.setLayoutX(Main.squareDimension/2-rectangleGrua2.getWidth()/2);
+        rectangleGrua2.setLayoutY(0.65*Main.windowHeight-2*Main.squareDimension - 35 - rectangleGrua2.getHeight());
+        
         rectangleGrua2.setFill(Color.ORANGE);
-         
+        
         Grua1 = new Line(Main.squareDimension/2,0,Main.squareDimension/2,0.65*Main.windowHeight - 5);
-        Grua2 = new Line(Main.squareDimension/2,0,Main.squareDimension/2,0.65*Main.windowHeight - 55 - 2 * Main.squareDimension);
+        Grua2 = new Line(Main.squareDimension/2,0,Main.squareDimension/2,0.65*Main.windowHeight - 2 * Main.squareDimension - rectangleGrua2.getHeight() - 35);
         Grua1.setTranslateY(5);
         Grua1.setTranslateX(Main.coordinates.get(0));
         Grua2.setTranslateX(Main.coordinates.get(1));
