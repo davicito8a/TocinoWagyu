@@ -18,7 +18,7 @@
          </font>
       </Label>
       <TextField fx:id="numeroRectangulos" layoutX="124.0" layoutY="108.0" prefHeight="25.0" prefWidth="75.0" />
-      <Label layoutX="124.0" layoutY="81.0" text="n">
+      <Label layoutX="119.0" layoutY="80.0" prefHeight="16.0" prefWidth="162.0" text="Número de cajas (entre 16 y 64)">
          <font>
             <Font size="11.0" />
          </font>
