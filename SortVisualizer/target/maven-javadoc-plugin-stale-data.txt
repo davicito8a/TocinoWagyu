@@ -1,0 +1,56 @@
+@options
+@packages
+-classpath
+'C:/Users/david/.m2/repository/org/openjfx/javafx-controls/13/javafx-controls-13.jar;C:/Users/david/.m2/repository/org/openjfx/javafx-controls/13/javafx-controls-13-win.jar;C:/Users/david/.m2/repository/org/openjfx/javafx-graphics/13/javafx-graphics-13.jar;C:/Users/david/.m2/repository/org/openjfx/javafx-graphics/13/javafx-graphics-13-win.jar;C:/Users/david/.m2/repository/org/openjfx/javafx-base/13/javafx-base-13.jar;C:/Users/david/.m2/repository/org/openjfx/javafx-base/13/javafx-base-13-win.jar;C:/Users/david/.m2/repository/org/openjfx/javafx-fxml/13/javafx-fxml-13.jar;C:/Users/david/.m2/repository/org/openjfx/javafx-fxml/13/javafx-fxml-13-win.jar'
+-encoding
+'UTF-8'
+-protected
+-source
+'11'
+-sourcepath
+'D:/david/Documents/TocinoWagyu/SortVisualizer/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2023. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'D:/david/Documents/TocinoWagyu/SortVisualizer/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'SortVisualizer 1.0-SNAPSHOT API'
+-linkoffline
+'https://docs.oracle.com/en/java/javase/11/docs/api' 'D:/david/Documents/TocinoWagyu/SortVisualizer/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'SortVisualizer 1.0-SNAPSHOT API'
+SortVisualizer
+C:\Users\david\.m2\repository\org\openjfx\javafx-controls\13\javafx-controls-13.jar = 1655326705535
+C:\Users\david\.m2\repository\org\openjfx\javafx-controls\13\javafx-controls-13-win.jar = 1655326715551
+C:\Users\david\.m2\repository\org\openjfx\javafx-graphics\13\javafx-graphics-13.jar = 1655326705849
+C:\Users\david\.m2\repository\org\openjfx\javafx-graphics\13\javafx-graphics-13-win.jar = 1655326717902
+C:\Users\david\.m2\repository\org\openjfx\javafx-base\13\javafx-base-13.jar = 1655326705862
+C:\Users\david\.m2\repository\org\openjfx\javafx-base\13\javafx-base-13-win.jar = 1655326706946
+C:\Users\david\.m2\repository\org\openjfx\javafx-fxml\13\javafx-fxml-13.jar = 1655326707954
+C:\Users\david\.m2\repository\org\openjfx\javafx-fxml\13\javafx-fxml-13-win.jar = 1655326708392
+D:\david\Documents\TocinoWagyu\SortVisualizer\src\main\java = 1680811081769
+D:\david\Documents\TocinoWagyu\SortVisualizer\target\site\apidocs\allclasses-index.html = 1681488098314
+D:\david\Documents\TocinoWagyu\SortVisualizer\target\site\apidocs\allpackages-index.html = 1681488098330
+D:\david\Documents\TocinoWagyu\SortVisualizer\target\site\apidocs\constant-values.html = 1681488097859
+D:\david\Documents\TocinoWagyu\SortVisualizer\target\site\apidocs\deprecated-list.html = 1681488098088
+D:\david\Documents\TocinoWagyu\SortVisualizer\target\site\apidocs\element-list = 1681488097723
+D:\david\Documents\TocinoWagyu\SortVisualizer\target\site\apidocs\help-doc.html = 1681488098367
+D:\david\Documents\TocinoWagyu\SortVisualizer\target\site\apidocs\index-all.html = 1681488098284
+D:\david\Documents\TocinoWagyu\SortVisualizer\target\site\apidocs\index.html = 1681488098344
+D:\david\Documents\TocinoWagyu\SortVisualizer\target\site\apidocs\jquery-ui.overrides.css = 1681488098571
+D:\david\Documents\TocinoWagyu\SortVisualizer\target\site\apidocs\member-search-index.js = 1681488098242
+D:\david\Documents\TocinoWagyu\SortVisualizer\target\site\apidocs\module-search-index.js = 1681488098218
+D:\david\Documents\TocinoWagyu\SortVisualizer\target\site\apidocs\overview-tree.html = 1681488098064
+D:\david\Documents\TocinoWagyu\SortVisualizer\target\site\apidocs\package-search-index.js = 1681488098225
+D:\david\Documents\TocinoWagyu\SortVisualizer\target\site\apidocs\script.js = 1681488098393
+D:\david\Documents\TocinoWagyu\SortVisualizer\target\site\apidocs\search.js = 1681488098402
+D:\david\Documents\TocinoWagyu\SortVisualizer\target\site\apidocs\stylesheet.css = 1681488098384
+D:\david\Documents\TocinoWagyu\SortVisualizer\target\site\apidocs\tag-search-index.js = 1681488098253
+D:\david\Documents\TocinoWagyu\SortVisualizer\target\site\apidocs\type-search-index.js = 1681488098234
