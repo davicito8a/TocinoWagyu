@@ -534,92 +534,17 @@ public class AnimationWindowController {
         
         Rectangle rec4 = animator.getRectangleAnimation2();
         
+        Rectangle rec5 = animator.getRectangleGrua();
+        
+        Rectangle rec6 = animator.getRectangleGrua2();
+        
+        
         //================================================
-        //Traslaciones de la Grua
-        
-        TranslateTransition translation = new TranslateTransition();
-        translation.setByX(-230f);
-        translation.setCycleCount(20);
-        translation.setDuration(Duration.millis(1000));
-        translation.setAutoReverse(true);
-        
-        TranslateTransition translation2 = new TranslateTransition();
-        translation2.setByX(-230f);
-        translation2.setByY(50);
-        translation2.setCycleCount(20);
-        translation2.setDuration(Duration.millis(1000));
-        translation2.setAutoReverse(true);
-        
-        TranslateTransition translation3 = new TranslateTransition();
-        translation3.setByX(-230f);
-        translation3.setCycleCount(20);
-        translation3.setDuration(Duration.millis(1000));
-        translation3.setAutoReverse(true);
-        
-        TranslateTransition translation4 = new TranslateTransition();
-        translation4.setByX(-230f);
-        translation4.setByY(50);
-        translation4.setCycleCount(20);
-        translation4.setDuration(Duration.millis(1000));
-        translation4.setAutoReverse(true);
-        
-        TranslateTransition translation5 = new TranslateTransition();
-        translation5.setByX(-230f);
-        translation5.setByY(50);
-        translation5.setCycleCount(20);
-        translation5.setDuration(Duration.millis(1000));
-        translation5.setAutoReverse(true);
-        
-        TranslateTransition translation6 = new TranslateTransition();
-        translation6.setByX(-230f);
-        translation6.setByY(50);
-        translation6.setCycleCount(20);
-        translation6.setDuration(Duration.millis(1000));
-        translation6.setAutoReverse(true);
-        
+               
         //Linea De las Garras:
         Line l70 = animator.getGrua1() ;//De Rec3
         Line l71 = animator.getGrua2();//De Rec4
-        
-        //La garra provisoria:
-       /* Circle c1 = new Circle();
-        c1.setCenterX(290/EscalaGrua); c1.setCenterY(300/EscalaGrua);
-        c1.setRadius(6/EscalaGrua);
-        c1.setFill(ColorInterno);*/
-        
-        Circle c2 = new Circle();
-        c2.setCenterX(540/EscalaGrua); c2.setCenterY(300/EscalaGrua);
-        c2.setRadius(6/EscalaGrua);
-        c2.setFill(ColorExterno);
-        
-        
-        for(int i=0;i<2;i++){
-            TranslateTransition trans = new TranslateTransition();
-            //trans.setByX();
-            trans.setByY(20);
-            trans.setCycleCount(i);
-            trans.setDuration(Duration.millis(1000));
-            trans.setAutoReverse(true);
-            trans.setNode(c2);
-            trans.play();
-        }
-        
-        
-        //translation.setNode(rec3);
-        //translation2.setNode(l70);
-        translation3.setNode(rec4);
-        translation4.setNode(l71);
-        //translation5.setNode(c1);
-        //translation6.setNode(c2);
-        
-        
-        //translation.play(); 
-        //translation2.play();
-        //translation3.play(); 
-        //translation4.play();
-        //translation5.play(); 
-        //translation6.play(); 
-        
+
         
         // Establece la escena en el escenario y lo muestra
         root.getChildren().addAll(l,l2,l3,l4,l5,l6);
@@ -637,7 +562,7 @@ public class AnimationWindowController {
         root.getChildren().addAll(l61,l62,l63,l64,l65);
         root.getChildren().addAll(l66,l67,l68,l69);
         root.getChildren().addAll(l70,l71);
-        root.getChildren().addAll(rec,rec2,rec3,rec4);
+        root.getChildren().addAll(rec,rec2,rec3,rec4,rec5,rec6);
         //root.getChildren().addAll(c1,c2);
 
     }

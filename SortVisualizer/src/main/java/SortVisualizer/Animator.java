@@ -30,9 +30,21 @@ public class Animator {
     
     Rectangle rectangleAnimation1 = new Rectangle();
     Rectangle rectangleAnimation2 = new Rectangle();
+    Rectangle rectangleGrua = new Rectangle();
+    Rectangle rectangleGrua2 = new Rectangle();
+
+    public Rectangle getRectangleGrua() {
+        return rectangleGrua;
+    }
+
+    public Rectangle getRectangleGrua2() {
+        return rectangleGrua2;
+    }
     
     Line Grua1 ;
     Line Grua2 ;
+    
+    
     
     public Animator(ArrayList<Integer> numbers, ArrayList<StackPane> stackpanes){
         this.numbers = numbers;
@@ -52,26 +64,23 @@ public class Animator {
         
         for(int i = 1; i < numbers.size(); i++){
             if (j > 0){
-                //moveInX(rectangleAnimation1, Main.coordinates.get(j - 1), Main.coordinates.get(i - 1));
-                moveInX(Main.coordinates.get(j - 1), Main.coordinates.get(i - 1), rectangleAnimation1,Grua1);
+                moveInX(Main.coordinates.get(j - 1), Main.coordinates.get(i - 1), rectangleAnimation1,Grua1,rectangleGrua);
             } else if (j == 0){
-                moveInX(Main.coordinates.get(j + 1), Main.coordinates.get(i - 1), rectangleAnimation1,Grua1);
-                //moveInX(rectangleAnimation1, Main.coordinates.get(j + 1), Main.coordinates.get(i - 1));
+                moveInX(Main.coordinates.get(j + 1), Main.coordinates.get(i - 1), rectangleAnimation1,Grua1,rectangleGrua);
             }
-            moveInX(Main.coordinates.get(j), Main.coordinates.get(i), rectangleAnimation2,Grua2);
-            //moveInX(rectangleAnimation2,Main.coordinates.get(j),Main.coordinates.get(i));
+            
+            moveInX(Main.coordinates.get(j), Main.coordinates.get(i), rectangleAnimation2,Grua2,rectangleGrua2);
          
             j = i;
             
             StackPane stackpane = stackpanes.get(i);
             int currentNumber = numbers.get(i);
             
-            //moveInY(stackpanes.get(i), 0.65* Main.windowHeight, 0.65* Main.windowHeight - 2 * Main.squareDimension);
             moveInY(0.65* Main.windowHeight, 0.65* Main.windowHeight - 2 * Main.squareDimension, stackpanes.get(i));
             changeLabelProperties(label1, "for i = " + i, initialStyle, finalStyle, Duration.millis(400));
          
             while(j > 0 && currentNumber < numbers.get(j - 1)){
-                moveInX(Main.coordinates.get(j - 1), Main.coordinates.get(j), stackpanes.get(j - 1), rectangleAnimation1,Grua1);
+                moveInX(Main.coordinates.get(j - 1), Main.coordinates.get(j), stackpanes.get(j - 1), rectangleAnimation1,Grua1,rectangleGrua);
                 changeLabelProperties(label2, "\twhile(" + currentNumber + " < numbers[" + (j - 1) + "])\n\t\tnumbers[" + j + "] = numbers [" + (j - 1) + "]", initialStyle, finalStyle, Duration.millis(800));
               
                 stackpanes.set(j, stackpanes.get(j - 1));
@@ -79,14 +88,12 @@ public class Animator {
                 
                 
                 if(j - 2 >= 0)
-                    //moveInX(rectangleAnimation1, Main.coordinates.get(j), Main.coordinates.get(j - 2));
-                    moveInX(Main.coordinates.get(j), Main.coordinates.get(j - 2), rectangleAnimation1,Grua1);
+                    moveInX(Main.coordinates.get(j), Main.coordinates.get(j - 2), rectangleAnimation1,Grua1,rectangleGrua);
                 j--;  
                 
             }
-            moveInX(Main.coordinates.get(i), Main.coordinates.get(j), stackpane, rectangleAnimation2,Grua2);
+            moveInX(Main.coordinates.get(i), Main.coordinates.get(j), stackpane, rectangleAnimation2,Grua2,rectangleGrua2);
             changeLabelProperties(label3, "\tnumbers[" + j + "]" + " = " + currentNumber, initialStyle, finalStyle, Duration.millis(1400));
-            //moveInY(stackpane, 0.65 * Main.windowHeight - 2 * Main.squareDimension, 0.65 * Main.windowHeight);
             moveInY(0.65 * Main.windowHeight - 2 * Main.squareDimension, 0.65 * Main.windowHeight, stackpane);
          
             stackpanes.set(j, stackpane); 
@@ -96,28 +103,41 @@ public class Animator {
     
     private void setCrane(){
         rectangleAnimation1.setTranslateX(Main.coordinates.get(0));
-        rectangleAnimation1.setWidth(50);
-        rectangleAnimation1.setHeight(50);
+        rectangleAnimation1.setWidth(Main.squareDimension);
+        rectangleAnimation1.setHeight(Main.squareDimension);
         rectangleAnimation1.setFill(Color.YELLOW);//Grua que Ordena lo demás
         rectangleAnimation1.setTranslateY(5);
         
         rectangleAnimation2.setTranslateX(Main.coordinates.get(1));
-        rectangleAnimation2.setWidth(50);
-        rectangleAnimation2.setHeight(50);
+        rectangleAnimation2.setWidth(Main.squareDimension);
+        rectangleAnimation2.setHeight(Main.squareDimension);
         rectangleAnimation2.setFill(Color.GREEN);//Grua que levanta
         rectangleAnimation2.setTranslateY(35);
         
-        Grua1 = new Line(Main.squareDimension/2,5,Main.squareDimension/2,0.65*Main.windowHeight);
-        Grua2 = new Line(Main.squareDimension/2,35,Main.squareDimension/2,0.65*Main.windowHeight);
+        rectangleGrua.setTranslateX(Main.coordinates.get(0));
+        rectangleGrua.setTranslateY(5);
+        rectangleGrua.setHeight(20);
+        rectangleGrua.setWidth(20);
+        rectangleGrua.setLayoutX(Main.squareDimension/2-10);
+        rectangleGrua.setLayoutY(0.65*Main.windowHeight-25);
+        rectangleGrua.setFill(Color.ORANGE);
+        
+        rectangleGrua2.setTranslateX(Main.coordinates.get(1));
+        rectangleGrua2.setTranslateY(35);
+        rectangleGrua2.setLayoutX(Main.squareDimension/2-10);
+        rectangleGrua2.setLayoutY(0.65*Main.windowHeight-2*Main.squareDimension-55);
+        rectangleGrua2.setHeight(10);
+        rectangleGrua2.setWidth(30);
+        rectangleGrua2.setFill(Color.ORANGE);
+         
+        Grua1 = new Line(Main.squareDimension/2,0,Main.squareDimension/2,0.65*Main.windowHeight - 5);
+        Grua2 = new Line(Main.squareDimension/2,0,Main.squareDimension/2,0.65*Main.windowHeight - 55 - 2 * Main.squareDimension);
+        Grua1.setTranslateY(5);
         Grua1.setTranslateX(Main.coordinates.get(0));
         Grua2.setTranslateX(Main.coordinates.get(1));
+        Grua2.setTranslateY(35);
     }
     
-    public double getConstant(){
-        double constant = translateTransitions.size()/AnimacionesDeGrua.size(); 
-        return constant;
-    }
-
     private void setLabels(){
         pseudocodeBox = new VBox();
         
