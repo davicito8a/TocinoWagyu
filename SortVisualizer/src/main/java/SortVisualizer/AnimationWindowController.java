@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javafx.animation.Animation;
 import static javafx.animation.Animation.Status.RUNNING;
 import javafx.animation.SequentialTransition;
+import javafx.animation.Transition;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -36,12 +37,12 @@ public class AnimationWindowController {
     // La lista de paneles de apilamiento asociados a los números
     private final ArrayList<StackPane> stackpanes;
     // La lista de transiciones de animación de ordenamiento
-    private ArrayList<TranslateTransition> transitions;
+    private ArrayList<Transition> transitions;
     // La línea de tiempo de animación
     private SequentialTransition timeline;
     // El índice de la transición actual
     private int index = 0;
-    private ArrayList<TranslateTransition> translateTransitions;
+    private ArrayList<Animation> translateTransitions;
     private ArrayList<Animation> pseudocodeAnimations;
     private SequentialTransition sequentialTranslateTransitions;
     private SequentialTransition sequentialPseudocodeAnimations = new SequentialTransition();
@@ -196,7 +197,7 @@ public class AnimationWindowController {
     
     private void decreaseSpeed(SequentialTransition timeline){
         /*
-        Este método disminuye la velocidad de la animación, se verifica si la 
+        Este método disminuye la velocidad de la animación. Se verifica si la 
         animación esta en ejecución antes de cambiar la velocidad.
         */
         if(timeline.getStatus().equals(RUNNING)){
@@ -214,22 +215,22 @@ public class AnimationWindowController {
     private void play(SequentialTransition timeline){
         /*Este método reanuda la animación respectivamente.*/
         sequentialPseudocodeAnimations.play();
-        sequentialTranslateTransitionsCaja.play();
+        //sequentialTranslateTransitionsCaja.play();
         timeline.play();   
     }
     
-    private void stepForward(ArrayList<TranslateTransition> transitions){
+    private void stepForward(ArrayList<Animation> transitions){
         if(currentTransitionIndex <= transitions.size() - 1){
-            TranslateTransition transition = transitions.get(currentTransitionIndex);
+            Animation transition = transitions.get(currentTransitionIndex);
             transition.setOnFinished(e -> currentTransitionIndex++);
             transition.setRate(1);
             transition.play();
         }
     }
     
-    private void stepBackward(ArrayList<TranslateTransition> transitions){
+    private void stepBackward(ArrayList<Animation> transitions){
         if(currentTransitionIndex >= 1){
-            TranslateTransition transition = transitions.get(currentTransitionIndex - 1);
+            Animation transition = transitions.get(currentTransitionIndex - 1);
             transition.setOnFinished(e -> currentTransitionIndex--);
             transition.setRate(-1);
             transition.play();
@@ -577,7 +578,7 @@ public class AnimationWindowController {
         translation6.setAutoReverse(true);
         
         //Linea De las Garras:
-        Line l70 = new Line(290/EscalaGrua,10/EscalaGrua,290/EscalaGrua,300/EscalaGrua);//De Rec3
+        Line l70 = new Line();//De Rec3
         Line l71 = new Line(540/EscalaGrua,10/EscalaGrua,540/EscalaGrua,300/EscalaGrua);//De Rec4
         
         //La garra provisoria:
@@ -635,7 +636,7 @@ public class AnimationWindowController {
         root.getChildren().addAll(l56,l57,l58,l59,l60);
         root.getChildren().addAll(l61,l62,l63,l64,l65);
         root.getChildren().addAll(l66,l67,l68,l69);
-        //root.getChildren().addAll(l70,l71);
+        root.getChildren().addAll(l70,l71);
         root.getChildren().addAll(rec,rec2,rec3,rec4);
         //root.getChildren().addAll(c1,c2);
 

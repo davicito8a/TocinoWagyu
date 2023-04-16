@@ -3,6 +3,7 @@ package SortVisualizer;
 import java.util.ArrayList;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Node;
@@ -10,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
@@ -18,7 +20,7 @@ public class Animator {
     private final ArrayList<Integer> numbers;
     private final ArrayList<StackPane> stackpanes;
     
-    private final ArrayList<TranslateTransition> translateTransitions;
+    private final ArrayList<Animation> translateTransitions;
     private final ArrayList<Animation> pseudocodeAnimations;
     private final ArrayList<Animation> AnimacionesDeGrua;
     
@@ -29,7 +31,7 @@ public class Animator {
     
     Rectangle rectangleAnimation1 = new Rectangle();
     Rectangle rectangleAnimation2 = new Rectangle();
-    
+    Line Grua1 = new Line(Main.coordinates.get(1),30,290,300);
     
     public Animator(ArrayList<Integer> numbers, ArrayList<StackPane> stackpanes){
         this.numbers = numbers;
@@ -41,15 +43,15 @@ public class Animator {
         rectangleAnimation1.setTranslateX(Main.coordinates.get(0));
         rectangleAnimation1.setWidth(Main.squareDimension);
         rectangleAnimation1.setHeight(Main.squareDimension);
-        rectangleAnimation1.setFill(Color.BLUE);//Grua que Ordena lo demás
+        rectangleAnimation1.setFill(Color.YELLOW);//Grua que Ordena lo demás
         rectangleAnimation1.setTranslateY(5);
         
         rectangleAnimation2.setTranslateX(Main.coordinates.get(1));
         rectangleAnimation2.setWidth(Main.squareDimension);
         rectangleAnimation2.setHeight(Main.squareDimension);
-        rectangleAnimation2.setFill(Color.RED);//Grua que levanta
+        rectangleAnimation2.setFill(Color.GREEN);//Grua que levanta
         rectangleAnimation2.setTranslateY(5);
-        
+
         setLabels();
         getInsertionSortTransitions();
        
@@ -59,7 +61,13 @@ public class Animator {
         int j=1;
         
         for(int i = 1; i < numbers.size(); i++){
-            moveInXCaja(rectangleAnimation2,Main.coordinates.get(j),Main.coordinates.get(i));
+            if(j>0){
+                moveInX(rectangleAnimation1,Main.coordinates.get(j-1),Main.coordinates.get(i-1));//Para la caja verde delante de la amarilla
+            }
+            else if (j == 0){
+                moveInX(rectangleAnimation1, Main.coordinates.get(j +1), Main.coordinates.get(i - 1));//Para el caso de la primera posición.
+            }
+            moveInX(rectangleAnimation2,Main.coordinates.get(j),Main.coordinates.get(i));
             j = i;
             
             StackPane stackpane = stackpanes.get(i);
@@ -69,17 +77,22 @@ public class Animator {
             changeLabelProperties(label1, "for i = " + i, initialStyle, finalStyle, Duration.millis(400));
          
             while(j > 0 && currentNumber < numbers.get(j - 1)){
-                moveInX(stackpanes.get(j - 1), Main.coordinates.get(j - 1), Main.coordinates.get(j));
+                parallelMoveInX(stackpanes.get(j-1),rectangleAnimation1, Main.coordinates.get(j - 1), Main.coordinates.get(j));
+                
                 changeLabelProperties(label2, "\twhile(" + currentNumber + " < numbers[" + (j - 1) + "])\n\t\tnumbers[" + j + "] = numbers [" + (j - 1) + "]", initialStyle, finalStyle, Duration.millis(400));
               
                 stackpanes.set(j, stackpanes.get(j - 1));
                 numbers.set(j, numbers.get(j - 1));
+                if(j - 2 >= 0)
+                    moveInX(rectangleAnimation1, Main.coordinates.get(j), Main.coordinates.get(j - 2));
                 
                 j--;    
             }
-            moveInXCaja(rectangleAnimation2,Main.coordinates.get(i),Main.coordinates.get(j));
-            changeLabelProperties(label3, "\tnumbers[" + j + "]" + " = " + currentNumber, initialStyle, finalStyle, Duration.millis(800));
-            moveInX(stackpane, Main.coordinates.get(i), Main.coordinates.get(j));
+            parallelMoveInX(stackpane, rectangleAnimation2, Main.coordinates.get(i),Main.coordinates.get(j));
+            
+            //moveInX(rectangleAnimation2, Main.coordinates.get(i),Main.coordinates.get(i-1));
+            changeLabelProperties(label3, "\tnumbers[" + j + "]" + " = " + currentNumber, initialStyle, finalStyle, Duration.millis(1200));
+            //moveInX(stackpane, Main.coordinates.get(i), Main.coordinates.get(j));
             moveInY(stackpane, 0.65 * Main.windowHeight - 2 * Main.squareDimension, 0.65 * Main.windowHeight);
          
             stackpanes.set(j, stackpane); 
@@ -88,7 +101,7 @@ public class Animator {
     }
     
     public double getConstant(){
-        double constant =translateTransitions.size()/AnimacionesDeGrua.size(); 
+        double constant = translateTransitions.size()/AnimacionesDeGrua.size(); 
         return constant;
     }
 
@@ -108,14 +121,28 @@ public class Animator {
     }
     
     private void moveInX(Node node, double fromX, double toX){
+        /*
+        Timeline moveInX = new Timeline();
+        KeyFrame moveInXFrame = new KeyFrame(Duration.millis(400), event -> node.setTranslateX(toX));
+        moveInX.getKeyFrames().addAll(moveInXFrame);
+        translateTransitions.add(moveInX);
+        */
+
         TranslateTransition moveInX = new TranslateTransition();
         moveInX.setNode(node);
-        moveInX.setFromX(fromX);
+        //moveInX.setFromX(fromX);
         moveInX.setToX(toX);
         translateTransitions.add(moveInX);
     }
     
     private void moveInY(Node node, double fromY, double toY){
+        /*
+        Timeline moveInY = new Timeline();
+        KeyFrame moveInYFrame = new KeyFrame(Duration.millis(400), event -> node.setTranslateY(toY));
+        moveInY.getKeyFrames().addAll(moveInYFrame);
+        translateTransitions.add(moveInY);
+        */
+        
         TranslateTransition moveInY = new TranslateTransition();
         moveInY.setNode(node);
         moveInY.setFromY(fromY);
@@ -123,20 +150,21 @@ public class Animator {
         translateTransitions.add(moveInY);
     }
     
-    private void moveInXCaja(Node node, double fromX, double toX){
-        TranslateTransition moveInX = new TranslateTransition();
-        moveInX.setNode(node);
-        moveInX.setFromX(fromX);
-        moveInX.setToX(toX);
-        AnimacionesDeGrua.add(moveInX);
-    }
-    
-    private void moveInYCaja(Node node, double fromY, double toY){
-        TranslateTransition moveInY = new TranslateTransition();
-        moveInY.setNode(node);
-        moveInY.setFromY(fromY);
-        moveInY.setToY(toY);
-        AnimacionesDeGrua.add(moveInY);
+    private void parallelMoveInX(Node node1, Node node2, double fromX, double toX){
+        Timeline parallelMoveInX = new Timeline();
+        KeyValue fromX1 = new KeyValue(node1.translateXProperty(), fromX);
+        KeyValue toX1 = new KeyValue(node1.translateXProperty(), toX);
+        KeyFrame moveFromX1 = new KeyFrame(Duration.ZERO, fromX1);
+        KeyFrame moveToX1 = new KeyFrame(Duration.millis(400), toX1);
+        
+        KeyValue fromX2 = new KeyValue(node2.translateXProperty(), fromX);
+        KeyValue toX2 = new KeyValue(node2.translateXProperty(), toX);
+        KeyFrame moveFromX2 = new KeyFrame(Duration.ZERO, fromX2);
+        KeyFrame moveToX2 = new KeyFrame(Duration.millis(400), toX2);
+        
+        parallelMoveInX.getKeyFrames().addAll(moveFromX1, moveFromX2, moveToX1, moveToX2);
+        
+        translateTransitions.add(parallelMoveInX);
     }
     
     private void changeLabelProperties(Label label, String newText, String initialStyle, String newStyle, Duration duration){
@@ -148,7 +176,7 @@ public class Animator {
         pseudocodeAnimations.add(changeLabelPropertiesAnimation);
     }
 
-    public ArrayList<TranslateTransition> getTranslateTransitions() {
+    public ArrayList<Animation> getTranslateTransitions() {
         return translateTransitions;
     }
 
@@ -171,7 +199,5 @@ public class Animator {
     public ArrayList<Animation> getAnimacionesDeGrua() {
         return AnimacionesDeGrua;
     }
-    
-    
 
 }
