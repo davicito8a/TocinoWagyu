@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
@@ -30,6 +31,8 @@ public class Animator {
     Rectangle rectangleAnimation1 = new Rectangle();
     Rectangle rectangleAnimation2 = new Rectangle();
     
+    Line Grua1 ;
+    Line Grua2 ;
     
     public Animator(ArrayList<Integer> numbers, ArrayList<StackPane> stackpanes){
         this.numbers = numbers;
@@ -48,14 +51,14 @@ public class Animator {
         int j = 1;
         
         for(int i = 1; i < numbers.size(); i++){
-            if (j > 0)
+            if (j > 0){
                 //moveInX(rectangleAnimation1, Main.coordinates.get(j - 1), Main.coordinates.get(i - 1));
-                moveInX(Main.coordinates.get(j - 1), Main.coordinates.get(i - 1), rectangleAnimation1);
-            else if (j == 0){
-                moveInX(Main.coordinates.get(j + 1), Main.coordinates.get(i - 1), rectangleAnimation1);
+                moveInX(Main.coordinates.get(j - 1), Main.coordinates.get(i - 1), rectangleAnimation1,Grua1);
+            } else if (j == 0){
+                moveInX(Main.coordinates.get(j + 1), Main.coordinates.get(i - 1), rectangleAnimation1,Grua1);
                 //moveInX(rectangleAnimation1, Main.coordinates.get(j + 1), Main.coordinates.get(i - 1));
             }
-            moveInX(Main.coordinates.get(j), Main.coordinates.get(i), rectangleAnimation2);
+            moveInX(Main.coordinates.get(j), Main.coordinates.get(i), rectangleAnimation2,Grua2);
             //moveInX(rectangleAnimation2,Main.coordinates.get(j),Main.coordinates.get(i));
          
             j = i;
@@ -68,7 +71,7 @@ public class Animator {
             changeLabelProperties(label1, "for i = " + i, initialStyle, finalStyle, Duration.millis(400));
          
             while(j > 0 && currentNumber < numbers.get(j - 1)){
-                moveInX(Main.coordinates.get(j - 1), Main.coordinates.get(j), stackpanes.get(j - 1), rectangleAnimation1);
+                moveInX(Main.coordinates.get(j - 1), Main.coordinates.get(j), stackpanes.get(j - 1), rectangleAnimation1,Grua1);
                 changeLabelProperties(label2, "\twhile(" + currentNumber + " < numbers[" + (j - 1) + "])\n\t\tnumbers[" + j + "] = numbers [" + (j - 1) + "]", initialStyle, finalStyle, Duration.millis(800));
               
                 stackpanes.set(j, stackpanes.get(j - 1));
@@ -77,11 +80,11 @@ public class Animator {
                 
                 if(j - 2 >= 0)
                     //moveInX(rectangleAnimation1, Main.coordinates.get(j), Main.coordinates.get(j - 2));
-                    moveInX(Main.coordinates.get(j), Main.coordinates.get(j - 2), rectangleAnimation1);
+                    moveInX(Main.coordinates.get(j), Main.coordinates.get(j - 2), rectangleAnimation1,Grua1);
                 j--;  
                 
             }
-            moveInX(Main.coordinates.get(i), Main.coordinates.get(j), stackpane, rectangleAnimation2);
+            moveInX(Main.coordinates.get(i), Main.coordinates.get(j), stackpane, rectangleAnimation2,Grua2);
             changeLabelProperties(label3, "\tnumbers[" + j + "]" + " = " + currentNumber, initialStyle, finalStyle, Duration.millis(1400));
             //moveInY(stackpane, 0.65 * Main.windowHeight - 2 * Main.squareDimension, 0.65 * Main.windowHeight);
             moveInY(0.65 * Main.windowHeight - 2 * Main.squareDimension, 0.65 * Main.windowHeight, stackpane);
@@ -93,17 +96,21 @@ public class Animator {
     
     private void setCrane(){
         rectangleAnimation1.setTranslateX(Main.coordinates.get(0));
-        rectangleAnimation1.setWidth(Main.squareDimension);
-        rectangleAnimation1.setHeight(Main.squareDimension);
+        rectangleAnimation1.setWidth(50);
+        rectangleAnimation1.setHeight(50);
         rectangleAnimation1.setFill(Color.YELLOW);//Grua que Ordena lo demás
         rectangleAnimation1.setTranslateY(5);
         
         rectangleAnimation2.setTranslateX(Main.coordinates.get(1));
-        rectangleAnimation2.setWidth(Main.squareDimension);
-        rectangleAnimation2.setHeight(Main.squareDimension);
+        rectangleAnimation2.setWidth(50);
+        rectangleAnimation2.setHeight(50);
         rectangleAnimation2.setFill(Color.GREEN);//Grua que levanta
         rectangleAnimation2.setTranslateY(35);
         
+        Grua1 = new Line(Main.squareDimension/2,5,Main.squareDimension/2,0.65*Main.windowHeight);
+        Grua2 = new Line(Main.squareDimension/2,35,Main.squareDimension/2,0.65*Main.windowHeight);
+        Grua1.setTranslateX(Main.coordinates.get(0));
+        Grua2.setTranslateX(Main.coordinates.get(1));
     }
     
     public double getConstant(){
@@ -125,43 +132,6 @@ public class Animator {
         pseudocodeBox.setLayoutX(0.05 * Main.windowWidth);
         pseudocodeBox.setLayoutY(0.8 * Main.windowHeight);
     }
-    
-    /*
-    
-    private void moveInX(Node node, double fromX, double toX){
-        
-        Timeline moveInX = new Timeline();
-        KeyFrame moveInXFrame = new KeyFrame(Duration.millis(400), event -> node.setTranslateX(toX));
-        moveInX.getKeyFrames().addAll(moveInXFrame);
-        translateTransitions.add(moveInX);
-        
-
-        TranslateTransition moveInX = new TranslateTransition();
-        moveInX.setNode(node);
-        moveInX.setFromX(fromX);
-        moveInX.setToX(toX);
-        translateTransitions.add(moveInX); 
-    }
-
-
-    
-    private void moveInY(Node node, double fromY, double toY){
-        
-        Timeline moveInY = new Timeline();
-        KeyFrame moveInYFrame = new KeyFrame(Duration.millis(400), event -> node.setTranslateY(toY));
-        moveInY.getKeyFrames().addAll(moveInYFrame);
-        translateTransitions.add(moveInY);
-        
-        
-        TranslateTransition moveInY = new TranslateTransition();
-        moveInY.setNode(node);
-        moveInY.setFromY(fromY);
-        moveInY.setToY(toY);
-        translateTransitions.add(moveInY);
-
-    }
-
-    */
       
     private void moveInX(double fromX, double toX, Node... nodes){
         Timeline parallelMoveInX = new Timeline();
@@ -218,6 +188,14 @@ public class Animator {
 
     public ArrayList<Animation> getAnimacionesDeGrua() {
         return AnimacionesDeGrua;
+    }
+
+    public Line getGrua1() {
+        return Grua1;
+    }
+
+    public Line getGrua2() {
+        return Grua2;
     }
     
 }

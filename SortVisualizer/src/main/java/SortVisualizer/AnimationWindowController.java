@@ -578,8 +578,8 @@ public class AnimationWindowController {
         translation6.setAutoReverse(true);
         
         //Linea De las Garras:
-        Line l70 = new Line();//De Rec3
-        Line l71 = new Line(540/EscalaGrua,10/EscalaGrua,540/EscalaGrua,300/EscalaGrua);//De Rec4
+        Line l70 = animator.getGrua1() ;//De Rec3
+        Line l71 = animator.getGrua2();//De Rec4
         
         //La garra provisoria:
        /* Circle c1 = new Circle();
