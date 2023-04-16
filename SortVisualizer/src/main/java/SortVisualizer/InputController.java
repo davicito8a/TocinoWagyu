@@ -43,8 +43,6 @@ public void initialize(URL url, ResourceBundle rb) {
     modes.setItems(FXCollections.observableArrayList("Normal mode", "Step by step mode"));
 }    
 
-
-
 @FXML
 private void continueToVisualization(ActionEvent event) throws IOException { 
     // Verifica si se ha seleccionado un modo
@@ -113,19 +111,37 @@ private boolean numberValidation(){
 
     // Validar que todos los números estén entre 1 y 99
     boolean validNumbers = Arrays.stream(numberStrings)
-                                  .allMatch(s -> s.matches("^[0-9]+$") && Integer.parseInt(s) >= 1 && Integer.parseInt(s) <= 99);
+                                  .allMatch(s -> s.matches("^[0-9]{2}$") && Integer.parseInt(s) >= 1 && Integer.parseInt(s) <= 99);
 
     return matcher.find() && validNumberOfElements && validNumbers;
 }
 
 @FXML
 private void generateRandom(ActionEvent event) {
-    // Verificar si el campo de texto solo contiene números
-    if (!numeroRectangulos.getText().matches("^[0-9]+$")) {
+    // Verificar si el campo de texto solo contiene números y no tiene más de dos dígitos
+    if (!numeroRectangulos.getText().matches("^[0-9]{1,2}$")) {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText(null);
-        alert.setContentText("El campo debe contener solo números");
+        alert.setContentText("El campo debe contener solo números naturales de máximo 2 dígitos");
+
+        ButtonType okButton = new ButtonType("Aceptar", ButtonData.OK_DONE);
+        alert.getButtonTypes().setAll(okButton);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == okButton) {
+            // Código para cerrar el cuadro de diálogo
+        }
+        return;
+    }
+
+    // Verificar si el número ingresado está dentro del rango válido (mayor que 15 y menor que 65)
+    int numero = Integer.parseInt(numeroRectangulos.getText());
+    if (numero < 16 || numero > 64) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("El número debe estar entre 16 y 64");
 
         ButtonType okButton = new ButtonType("Aceptar", ButtonData.OK_DONE);
         alert.getButtonTypes().setAll(okButton);
@@ -138,14 +154,12 @@ private void generateRandom(ActionEvent event) {
     }
     // Genera una cadena separada por comas de números aleatorios y la establece como contenido de "n"
     String numeros = "";
-    int numeroRectangulos = Integer.parseInt(this.numeroRectangulos.getText());
-    for(int i = 0; i < numeroRectangulos; i++){
-        numeros += ((int)(Math.random()*99 + 1)) + ",";
+    for (int i = 0; i < numero; i++) {
+        numeros += ((int)(Math.random() * 99 + 1)) + ",";
     }
     numeros = numeros.substring(0, numeros.length() - 1);
     n.setText(numeros);
 }
 
- 
 }
 
