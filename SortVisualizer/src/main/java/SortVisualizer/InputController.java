@@ -1,8 +1,4 @@
 package SortVisualizer;
-
-
-import java.io.IOException;
-
 // En esta clase se controla el modo y se controla la cantidad elementos del arreglo
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -33,30 +29,19 @@ public class InputController implements Initializable {
     @FXML
     private ComboBox<String> modes;
     @FXML
-    private TextField numbers;
+    private TextField n;
     @FXML
-    private Button continueButton;
+    private Button button;
     @FXML
-    private TextField numberOfBoxes;
+    private TextField numeroRectangulos;
     @FXML
-    private Button randomButton;
+    private Button random;
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        modes.setItems(FXCollections.observableArrayList("Normal mode", "Step by step mode"));
-    }    
-    
- 
-    
-    private boolean numbersPatternValidation(){
-        Pattern pattern = Pattern.compile("^[0-9]+(,[0-9]+)*$");
-        Matcher matcher = pattern.matcher(numbers.getText());
-        
-        return matcher.find();
-    }
-    
- 
-}
+ @Override
+public void initialize(URL url, ResourceBundle rb) {
+    // Establece el contenido de "modes" a una lista observable de dos cadenas
+    modes.setItems(FXCollections.observableArrayList("Normal mode", "Step by step mode"));
+}    
 
 @FXML
 private void continueToVisualization(ActionEvent event) throws IOException { 
@@ -91,10 +76,11 @@ private void continueToVisualization(ActionEvent event) throws IOException {
             int number = Integer.parseInt(numberString); // Convierte la cadena a un número entero
             numbers.add(number); // Agrega el número a la lista
         }
-        
+                Main.coordinates.clear();
         // Crea una lista de objetos StackPane a partir de la lista de enteros "numbers"
         ArrayList<StackPane> rectangles = Main.getRectangles(numbers);
         
+
         // Crea una nueva ventana de visualización y pasa los números y rectángulos a la misma
         Main.newAnimationWindow(numbers, rectangles);
     } else { // Si los números no son válidos, muestra un mensaje de error
@@ -126,37 +112,19 @@ private boolean numberValidation(){
 
     // Validar que todos los números estén entre 1 y 99
     boolean validNumbers = Arrays.stream(numberStrings)
-                                  .allMatch(s -> s.matches("^[0-9]{2}$") && Integer.parseInt(s) >= 1 && Integer.parseInt(s) <= 99);
+                                  .allMatch(s -> s.matches("^[0-9]+$") && Integer.parseInt(s) >= 1 && Integer.parseInt(s) <= 99);
 
     return matcher.find() && validNumberOfElements && validNumbers;
 }
 
 @FXML
-private void generateRandomNumbers(ActionEvent event) {
-    // Verificar si el campo de texto solo contiene números y no tiene más de dos dígitos
-    if (!numeroRectangulos.getText().matches("^[0-9]{1,2}$")) {
+private void generateRandom(ActionEvent event) {
+    // Verificar si el campo de texto solo contiene números
+    if (!numeroRectangulos.getText().matches("^[0-9]+$")) {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText(null);
-        alert.setContentText("El campo debe contener solo números naturales de máximo 2 dígitos");
-
-        ButtonType okButton = new ButtonType("Aceptar", ButtonData.OK_DONE);
-        alert.getButtonTypes().setAll(okButton);
-
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == okButton) {
-            // Código para cerrar el cuadro de diálogo
-        }
-        return;
-    }
-
-    // Verificar si el número ingresado está dentro del rango válido (mayor que 15 y menor que 65)
-    int numero = Integer.parseInt(numeroRectangulos.getText());
-    if (numero < 16 || numero > 64) {
-        Alert alert = new Alert(AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText("El número debe estar entre 16 y 64");
+        alert.setContentText("El campo debe contener solo números");
 
         ButtonType okButton = new ButtonType("Aceptar", ButtonData.OK_DONE);
         alert.getButtonTypes().setAll(okButton);
@@ -169,13 +137,13 @@ private void generateRandomNumbers(ActionEvent event) {
     }
     // Genera una cadena separada por comas de números aleatorios y la establece como contenido de "n"
     String numeros = "";
-    for (int i = 0; i < numero; i++) {
-        numeros += ((int)(Math.random() * 99 + 1)) + ",";
+    int numeroRectangulos = Integer.parseInt(this.numeroRectangulos.getText());
+    for(int i = 0; i < numeroRectangulos; i++){
+        numeros += ((int)(Math.random()*99 + 1)) + ",";
     }
     numeros = numeros.substring(0, numeros.length() - 1);
     n.setText(numeros);
 }
 
+ 
 }
-
-

@@ -29,7 +29,7 @@ public class Main extends Application {
     static ArrayList<StackPane> getRectangles(ArrayList<Integer> numbers) {
         squareDimension = 0.75 * 0.9 * windowWidth / numbers.size();
         separation = 0.25 * 0.9 * windowWidth / numbers.size();
-        
+        int size = NumberSize(numbers.size());
         ArrayList<StackPane> stackpanes = new ArrayList();
        
         for(int i = 0; i < numbers.size(); i++){
@@ -48,7 +48,7 @@ public class Main extends Application {
 
             Canvas canvas = new Canvas(squareDimension, squareDimension);
             NumberDrawer numberDrawer = new NumberDrawer(canvas);
-            numberDrawer.drawNumber(numbers.get(i));
+            numberDrawer.drawNumber(numbers.get(i),size);
             
             coordinates.add(0.05 * windowWidth + (squareDimension + separation) * i);
             
@@ -62,6 +62,23 @@ public class Main extends Application {
         return stackpanes;
     }
 
+    
+    
+    public static int NumberSize(int num) {
+    if (num >= 0 && num < 10) {
+        return 1; 
+    } else if (num < 20) {
+        return 2; 
+    } else if (num < 30) {
+        return 3; 
+    } else if (num <= 48) {
+        return 5; 
+    } else if (num <= 70) {
+        return 8; 
+    } else {
+        return 10; 
+    }
+}
      // Método sobreescrito de la clase Application, que se ejecuta al iniciar la aplicación.
     
      public static void newAnimationWindow(ArrayList<Integer> numbers, ArrayList<StackPane> stackpanes) throws IOException{
