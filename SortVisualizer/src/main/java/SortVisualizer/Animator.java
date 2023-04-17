@@ -65,12 +65,10 @@ public class Animator {
     
 private void getInsertionSortTransitions(){
     /**
-     BLA BLA BLA ESTO HACE
+     * Implementa el algoritmo de ordenamiento por inserción en el array 'numbers',
+     * y visualiza el proceso con algunas animaciones.
      */
-    
-    
     int j = 1; // Inicializamos j en 1
-    
     for(int i = 1; i < numbers.size(); i++){ // Recorremos el array numbers desde el índice 1 hasta el final
         if (j > 0){ // Si j es mayor que 0
             moveInX(Main.coordinates.get(j - 1), Main.coordinates.get(i - 1), rectangleAnimation1,Grua1,rectangleGrua); // Movemos un rectángulo de una posición anterior a la actual
@@ -85,7 +83,7 @@ private void getInsertionSortTransitions(){
         StackPane stackpane = stackpanes.get(i); // Obtenemos una StackPane de la lista de StackPanes
         int currentNumber = numbers.get(i); // Obtenemos el número actual del array numbers
         
-        moveInY(0.65* Main.windowHeight, 0.65* Main.windowHeight - 2 * Main.squareDimension, stackpanes.get(i)); // Movemos la StackPane hacia arriba
+        moveInY(0.65* Main.windowHeight, 0.65* Main.windowHeight - 2 * Main.squareDimension, stackpanes.get(i)); // Movemos el StackPane hacia arriba
         changeLabelProperties(label1, "for i = " + i, initialStyle, finalStyle, Duration.millis(400)); // Cambiamos las propiedades de una etiqueta para mostrar información sobre el bucle
         
         while(j > 0 && currentNumber < numbers.get(j - 1)){ // Mientras j sea mayor que 0 y el número actual sea menor que el número anterior en el array numbers
@@ -115,6 +113,18 @@ private void getInsertionSortTransitions(){
     
         // Este método se encarga de configurar los elementos gráficos de la grúa
         private void setCrane(){
+            
+     /**
+        Este método configura dos grúas y sus componentes en la pantalla.
+        La primera grúa ordena los elementos mientras que la segunda los levanta.
+        El método utiliza los campos Main.coordinates, Main.squareDimension y Main.windowHeight.
+        Las grúas están representadas por rectángulos y líneas.
+        La primera grúa está representada por rectangleAnimation1 y la segunda grúa por rectangleAnimation2.
+        Los rectángulos rectangleGrua y rectangleGrua2 representan las bases de las grúas para la primera y segunda grúas respectivamente.
+        Las líneas Grua1 y Grua2 representan las grúas en sí para la primera y segunda grúas respectivamente.
+        El método establece las propiedades translateX y translateY de los rectángulos y líneas para posicionarlos correctamente.
+        El método también establece las propiedades width, height, layoutX, layoutY y fill de los rectángulos.
+    */
         // Configuración de la grúa que ordena lo demás
         rectangleAnimation1.setTranslateX(Main.coordinates.get(0));
         rectangleAnimation1.setTranslateY(5);

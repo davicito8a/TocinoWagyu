@@ -1,2 +1,5 @@
-SortVisualizer\Main.class
+SortVisualizer\AnimationWindowController.class
 SortVisualizer\InputController.class
+SortVisualizer\NumberDrawer.class
+SortVisualizer\Animator.class
+SortVisualizer\Main.class
