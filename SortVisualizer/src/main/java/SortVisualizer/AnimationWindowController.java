@@ -143,12 +143,12 @@ public class AnimationWindowController {
         });
         
         stepForward.setOnAction(event -> {
-            stepForward(translateTransitions);
+            stepForward(translateTransitions, pseudocodeAnimations);
         });
         
         stepBackward.setOnAction(event -> {
-            stepBackward(translateTransitions);
-        });   
+            stepBackward(translateTransitions, pseudocodeAnimations);
+        });  
         
         root.getChildren().addAll(play, pause, increaseSpeed, decreaseSpeed, stepForward, stepBackward);
         
@@ -170,11 +170,8 @@ public class AnimationWindowController {
          * de transiciones secuenciales para su posterior reproducción en la interfaz gráfica
          */
         translateTransitions = animator.getTranslateTransitions();
-        pseudocodeBox = animator.getPseudocodeBox();
-        sequentialPseudocodeAnimations.getChildren().addAll(animator.getPseudocodeAnimations());
-        animator.getAnimacionesDeGrua();
-        sequentialTranslateTransitionsCaja.getChildren().addAll(animator.getAnimacionesDeGrua());
-               
+        pseudocodeAnimations = animator.getPseudocodeAnimations();
+        pseudocodeBox = animator.getPseudocodeBox();               
     }
     
     private void createTimeline(){
@@ -183,6 +180,7 @@ public class AnimationWindowController {
          */
         sequentialTranslateTransitions = new SequentialTransition();
         sequentialTranslateTransitions.getChildren().addAll(translateTransitions);
+        sequentialPseudocodeAnimations.getChildren().addAll(pseudocodeAnimations);
     }
     
     private void increaseSpeed(SequentialTransition timeline){
@@ -220,21 +218,25 @@ public class AnimationWindowController {
         timeline.play();   
     }
     
-    private void stepForward(ArrayList<Animation> transitions){
+    private void stepForward(ArrayList<Animation> transitions, ArrayList<Animation> pseudocodeAnimations){
         if(currentTransitionIndex <= transitions.size() - 1){
             Animation transition = transitions.get(currentTransitionIndex);
             transition.setOnFinished(e -> currentTransitionIndex++);
             transition.setRate(1);
             transition.play();
+            Animation pseudocodeAnimation = pseudocodeAnimations.get(currentTransitionIndex);
+            //pseudocodeAnimation.play();
         }
     }
     
-    private void stepBackward(ArrayList<Animation> transitions){
+    private void stepBackward(ArrayList<Animation> transitions, ArrayList<Animation> pseudocodeAnimations){
         if(currentTransitionIndex >= 1){
             Animation transition = transitions.get(currentTransitionIndex - 1);
             transition.setOnFinished(e -> currentTransitionIndex--);
             transition.setRate(-1);
             transition.play();
+            Animation pseudocodeAnimation = pseudocodeAnimations.get(currentTransitionIndex);
+            //pseudocodeAnimation.play();
         }  
     }
      

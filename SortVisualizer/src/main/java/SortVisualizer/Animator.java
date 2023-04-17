@@ -90,23 +90,27 @@ private void getInsertionSortTransitions(){
         
         while(j > 0 && currentNumber < numbers.get(j - 1)){ // Mientras j sea mayor que 0 y el número actual sea menor que el número anterior en el array numbers
             moveInX(Main.coordinates.get(j - 1), Main.coordinates.get(j), stackpanes.get(j - 1), rectangleAnimation1,Grua1,rectangleGrua); // Movemos un rectángulo de una posición anterior a la actual
-            changeLabelProperties(label2, "\twhile(" + currentNumber + " < numbers[" + (j - 1) + "])\n\t\tnumbers[" + j + "] = numbers [" + (j - 1) + "]", initialStyle, finalStyle, Duration.millis(800)); // Cambiamos las propiedades de una etiqueta para mostrar información sobre el bucle
             
             stackpanes.set(j, stackpanes.get(j - 1)); // Actualizamos una StackPane en la lista de StackPanes
             numbers.set(j, numbers.get(j - 1)); // Actualizamos un número en el array numbers
             
-            if(j - 2 >= 0)
+            if(j - 2 >= 0){
+                changeLabelProperties(label2, "\twhile(" + currentNumber + " < numbers[" + (j - 1) + "])\n\t\tnumbers[" + j + "] = numbers [" + (j - 1) + "]", initialStyle, finalStyle, Duration.millis(800)); // Cambiamos las propiedades de una etiqueta para mostrar información sobre el bucle
                 moveInX(Main.coordinates.get(j), Main.coordinates.get(j - 2), rectangleAnimation1,Grua1,rectangleGrua); // Movemos un rectángulo de la posición actual a dos posiciones anteriores
-            
+            } else {
+                changeLabelProperties(label2, "\twhile(" + currentNumber + " < numbers[" + (j - 1) + "])\n\t\tnumbers[" + j + "] = numbers [" + (j - 1) + "]", initialStyle, finalStyle, Duration.millis(400));
+            }
+
             j--; // Decrementamos j
         }
         moveInX(Main.coordinates.get(i), Main.coordinates.get(j), stackpane, rectangleAnimation2,Grua2,rectangleGrua2); // Movemos una StackPane de la posición actual a la nueva posición
-            changeLabelProperties(label3, "\tnumbers[" + j + "]" + " = " + currentNumber, initialStyle, finalStyle, Duration.millis(1400));
-            moveInY(0.65 * Main.windowHeight - 2 * Main.squareDimension, 0.65 * Main.windowHeight, stackpane);
+        changeLabelProperties(label3, "\tnumbers[" + j + "]" + " = " + currentNumber, initialStyle, finalStyle, Duration.millis(1600));
+        moveInY(0.65 * Main.windowHeight - 2 * Main.squareDimension, 0.65 * Main.windowHeight, stackpane);
          
-            stackpanes.set(j, stackpane); 
-            numbers.set(j, currentNumber);
+        stackpanes.set(j, stackpane); 
+        numbers.set(j, currentNumber);
         }
+    
     }
     
         // Este método se encarga de configurar los elementos gráficos de la grúa
