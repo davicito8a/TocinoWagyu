@@ -7,7 +7,6 @@ import javafx.animation.Animation;
 import static javafx.animation.Animation.Status.RUNNING;
 import javafx.animation.SequentialTransition;
 import javafx.animation.Transition;
-import javafx.animation.TranslateTransition;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -19,17 +18,13 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle; 
-import javafx.scene.transform.Translate;
-import javafx.util.Duration;
 import javafx.scene.layout.VBox;
 
 public class AnimationWindowController {
     private final int type;
     
-    private ArrayList<Animation> AnimacionesDeGrua;
     
     private SequentialTransition sequentialTranslateTransitionsCaja = new SequentialTransition();
     // La lista de números que se van a ordenar
@@ -74,21 +69,16 @@ public class AnimationWindowController {
         this.type = type;
         // Se inicia la generación de la ventana de animación
         start();
-        this.AnimacionesDeGrua = null;
     }
-    
 
     private void start () throws IOException{
         getTransitions();
-        
-        
+
         // Si el tipo de animación es 0 (es decir, es una animación de ordenamiento automática)
         if(type == 0){
             // Se crea la línea de tiempo de animación
-            createTimeline();
-            
-        } 
-        
+            createTimeline();          
+        }    
         // Se crea el panel de anclaje raíz
         root = new AnchorPane();
         // Se establece el fondo de la ventana de animación
@@ -175,20 +165,31 @@ public class AnimationWindowController {
     }
     
     private void getTransitions(){
+        /**
+         * Inicializa varias variables y agrega transiciones de animación a un grupo
+         * de transiciones secuenciales para su posterior reproducción en la interfaz gráfica
+         */
         translateTransitions = animator.getTranslateTransitions();
         pseudocodeBox = animator.getPseudocodeBox();
         sequentialPseudocodeAnimations.getChildren().addAll(animator.getPseudocodeAnimations());
-        AnimacionesDeGrua = animator.getAnimacionesDeGrua();
+        animator.getAnimacionesDeGrua();
         sequentialTranslateTransitionsCaja.getChildren().addAll(animator.getAnimacionesDeGrua());
                
     }
     
     private void createTimeline(){
+        /**
+         * Agrega las transiciones translateTransitions a la secuencia.
+         */
         sequentialTranslateTransitions = new SequentialTransition();
         sequentialTranslateTransitions.getChildren().addAll(translateTransitions);
     }
     
     private void increaseSpeed(SequentialTransition timeline){
+       /*
+        Este método aumenta la velocidad de la animación. Se verifica si la 
+        animación esta en ejecución antes de cambiar la velocidad.
+        */
         if(timeline.getStatus().equals(RUNNING)){
             timeline.setRate(timeline.getRate() * 1.25);
             sequentialPseudocodeAnimations.setRate(sequentialPseudocodeAnimations.getRate() * 1.25);
@@ -244,6 +245,13 @@ public class AnimationWindowController {
     }
     
     private void setGrua(){
+        /**
+         * Este método dibuja una grúa en una interfaz de usuario. Primero se establecen los colores y la escala de la grúa. 
+         * Luego, se dibujan diferentes líneas que forman las estructuras de la grúa, incluyendo los soportes de las vigas, las vigas y las barras de adorno. 
+         * Cada línea se establece con un grosor y color específicos. 
+         * El resultado es una representación visual de una grúa :-).
+         */
+        
         Color ColorInterno = Color.LIGHTGREEN;
         Color ColorExterno = Color.LIGHTGREEN;
         float EscalaGrua = 0.9f;
@@ -285,24 +293,11 @@ public class AnimationWindowController {
         Line l13 = new Line(10/EscalaGrua,100/EscalaGrua,40/EscalaGrua,50/EscalaGrua);
         l13.setStroke(ColorInterno);
         l13.setStrokeWidth(3);
-        /*
-        Line l14 = new Line(10/EscalaGrua,150/EscalaGrua,40/EscalaGrua,100/EscalaGrua);
-        l14.setStroke(ColorInterno);
-        l14.setStrokeWidth(3);
-        Line l15 = new Line(10/EscalaGrua,100/EscalaGrua,40/EscalaGrua,50/EscalaGrua);
-        l15.setStroke(ColorInterno);
-        l15.setStrokeWidth(3);*/
 
         //=============================================================================
 
         //Bigas de Adorno Lado Derecho(De abajo a arriba)
         
-        //Line l16 = new Line((CoorBigaSuperior)/EscalaGrua,500/EscalaGrua,(CoorBigaSuperior+30)/EscalaGrua,450/EscalaGrua);
-        //l16.setStroke(ColorInterno);
-        //l16.setStrokeWidth(3);
-        //Line l17 = new Line((CoorBigaSuperior)/EscalaGrua,450/EscalaGrua,(CoorBigaSuperior+30)/EscalaGrua,400/EscalaGrua);
-        //l17.setStroke(ColorInterno);
-        //l17.setStrokeWidth(3);
         Line l18 = new Line((CoorBigaSuperior)/EscalaGrua,400/EscalaGrua,(CoorBigaSuperior+30)/EscalaGrua,350/EscalaGrua);
         l18.setStroke(ColorInterno);
         l18.setStrokeWidth(3);
@@ -324,20 +319,10 @@ public class AnimationWindowController {
         Line l24 = new Line((CoorBigaSuperior)/EscalaGrua,100/EscalaGrua,(CoorBigaSuperior+30)/EscalaGrua,50/EscalaGrua);
         l24.setStroke(ColorInterno);
         l24.setStrokeWidth(3);
-        //Line l25 = new Line(20/EscalaGrua,100/EscalaGrua,50/EscalaGrua,50/EscalaGrua);
-        //l25.setStroke(ColorInterno);
-        //l25.setStrokeWidth(3);
-       
+
         //=============================================================================
         
         //Bigas de Adorno Lado Izquierdo(De arriba a abajo)
-        
-        //Line l26 = new Line(40/EscalaGrua,500/EscalaGrua,10/EscalaGrua,450/EscalaGrua);
-        //l26.setStroke(ColorExterno);
-        //l26.setStrokeWidth(3);
-        //Line l27 = new Line(40/EscalaGrua,450/EscalaGrua,10/EscalaGrua,400/EscalaGrua);
-        //l27.setStroke(ColorExterno);
-        //l27.setStrokeWidth(3);
         
         Line l28 = new Line(40/EscalaGrua,400/EscalaGrua,10/EscalaGrua,350/EscalaGrua);
         l28.setStroke(ColorExterno);
@@ -364,13 +349,7 @@ public class AnimationWindowController {
         //=============================================================================
         
         //Bigas de Adorno Lado Derecho(De arriba a abajo)
-        
-        //Line l35 = new Line((CoorBigaSuperior+30)/EscalaGrua,500/EscalaGrua,(CoorBigaSuperior)/EscalaGrua,450/EscalaGrua);
-        //l35.setStroke(ColorExterno);
-        //l35.setStrokeWidth(3);
-        //Line l36 = new Line((CoorBigaSuperior+30)/EscalaGrua,450/EscalaGrua,(CoorBigaSuperior)/EscalaGrua,400/EscalaGrua);
-        //l36.setStroke(ColorExterno);
-        //l36.setStrokeWidth(3);
+
         Line l37 = new Line((CoorBigaSuperior+30)/EscalaGrua,400/EscalaGrua,(CoorBigaSuperior)/EscalaGrua,350/EscalaGrua);
         l37.setStroke(ColorExterno);
         l37.setStrokeWidth(3);
@@ -526,7 +505,6 @@ public class AnimationWindowController {
         l6.setStrokeWidth(5);
         
         //############################################################################################################
-        //Guardar Line l16 = new Line(800,500,830,500);
         
         //Garra N°1:
         
@@ -563,7 +541,6 @@ public class AnimationWindowController {
         root.getChildren().addAll(l66,l67,l68,l69);
         root.getChildren().addAll(l70,l71);
         root.getChildren().addAll(rec,rec2,rec3,rec4,rec5,rec6);
-        //root.getChildren().addAll(c1,c2);
 
     }
 }

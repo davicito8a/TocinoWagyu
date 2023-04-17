@@ -8,17 +8,13 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-/**
- *
- * @author david
- */
 
     public class NumberDrawer{
         /*
         Constructor que recibe un objeto Canvas que se utiliza 
         para dibujar los números.*/
         
-         int CT = 1; // CT = Constante de Tamaño(números)
+        int CT = 1; // CT = Constante de Tamaño(números)
         GraphicsContext gc;
         int coordenadaX = 10;
         int coordenadaY = 20;
@@ -83,7 +79,7 @@ public void dibujarDigito(int num, int x, int y) {
             dibujarNueve(gc, x, y);
             break;
         default:
-            System.out.println("fail");
+            System.out.println("falla papasito");
             break;
     }
 }

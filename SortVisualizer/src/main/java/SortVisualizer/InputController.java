@@ -124,7 +124,7 @@ private void generateRandom(ActionEvent event) {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText(null);
-        alert.setContentText("El campo debe contener solo números");
+        alert.setContentText("El campo debe contener solo números naturales");
 
         ButtonType okButton = new ButtonType("Aceptar", ButtonData.OK_DONE);
         alert.getButtonTypes().setAll(okButton);
