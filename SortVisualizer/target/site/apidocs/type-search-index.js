@@ -1,1 +1,0 @@
-typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"SortVisualizer","l":"AnimationWindowController"},{"p":"SortVisualizer","l":"Animator"},{"p":"SortVisualizer","l":"InputController"},{"p":"SortVisualizer","l":"Main"},{"p":"SortVisualizer","l":"NumberDrawer"}];updateSearchResults();
