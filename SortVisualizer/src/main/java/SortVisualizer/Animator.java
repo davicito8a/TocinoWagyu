@@ -57,17 +57,15 @@ public class Animator {
         AnimacionesDeGrua = new ArrayList();
         
         // Configura la grúa, las etiquetas y las transiciones de animación.
-        setCrane();
+        //setCrane();
         setLabels();
-        getInsertionSortTransitions();   
+        getBubbleSortTransitions();
+        //getInsertionSortTransitions();   
     }
 
-    
+/*    
 private void getInsertionSortTransitions(){
-    /**
-     * Implementa el algoritmo de ordenamiento por inserción en el array 'numbers',
-     * y visualiza el proceso con algunas animaciones.
-     */
+    
     int j = 1; // Inicializamos j en 1
     for(int i = 1; i < numbers.size(); i++){ // Recorremos el array numbers desde el índice 1 hasta el final
         if (j > 0){ // Si j es mayor que 0
@@ -110,11 +108,31 @@ private void getInsertionSortTransitions(){
         }
     
     }
+    */
+ 
+    private void getBubbleSortTransitions(){
+        for(int i = 0; i < numbers.size(); i++){
+            for(int j = 0; j < numbers.size() - 1 - i; j++){
+                if(numbers.get(j + 1) < numbers.get(j)){
+                    StackPane stackpane = stackpanes.get(j);
+                    int temp = numbers.get(j);
+                    moveInY(0.65 * Main.windowHeight, 0.65 * Main.windowHeight - 2 * Main.squareDimension, stackpane, stackpanes.get(j + 1));
+                    swapInX(Main.coordinates.get(j), Main.coordinates.get(j + 1), stackpane, stackpanes.get(j + 1));
+                    moveInY(0.65 * Main.windowHeight - 2 * Main.squareDimension, 0.65 * Main.windowHeight, stackpane, stackpanes.get(j + 1));
+                    stackpanes.set(j, stackpanes.get(j + 1));
+                    numbers.set(j, numbers.get(j + 1));
+                    stackpanes.set(j + 1, stackpane);
+                    numbers.set(j + 1, temp);
+                }
+            }
+        }
+        System.out.println(stackpanes.toString());
+    }
     
-        // Este método se encarga de configurar los elementos gráficos de la grúa
+        /*
         private void setCrane(){
             
-     /**
+    
         Este método configura dos grúas y sus componentes en la pantalla.
         La primera grúa ordena los elementos mientras que la segunda los levanta.
         El método utiliza los campos Main.coordinates, Main.squareDimension y Main.windowHeight.
@@ -124,7 +142,7 @@ private void getInsertionSortTransitions(){
         Las líneas Grua1 y Grua2 representan las grúas en sí para la primera y segunda grúas respectivamente.
         El método establece las propiedades translateX y translateY de los rectángulos y líneas para posicionarlos correctamente.
         El método también establece las propiedades width, height, layoutX, layoutY y fill de los rectángulos.
-    */
+   
         // Configuración de la grúa que ordena lo demás
         rectangleAnimation1.setTranslateX(Main.coordinates.get(0));
         rectangleAnimation1.setTranslateY(5);
@@ -163,6 +181,7 @@ private void getInsertionSortTransitions(){
         Grua2.setTranslateX(Main.coordinates.get(1));
         Grua2.setTranslateY(35);
     }
+*/
     
     private void setLabels(){
         // Este método se encarga de establecer los tres labels que contienen el pseudocódigo del algoritmo de ordenamiento Insertion Sort.
@@ -200,16 +219,33 @@ private void getInsertionSortTransitions(){
     }
     
     private void moveInY(double fromY, double toY, Node... nodes){
-        Timeline parallelMoveInY = new Timeline(); // Crea una instancia de la clase Timeline, que se utiliza para animar el movimiento de los nodos en el eje Y
+        Timeline parallelMoveInY = new Timeline(); 
         for(Node node: nodes){
-        KeyValue fromYValue = new KeyValue(node.translateYProperty(), fromY); // Crea un objeto KeyValue que representa el valor inicial de la propiedad translateY del nodo
-        KeyValue toYValue = new KeyValue(node.translateYProperty(), toY); // Crea un objeto KeyValue que representa el valor final de la propiedad translateY del nodo
-        KeyFrame moveFromY = new KeyFrame(Duration.ZERO, fromYValue); // Crea un objeto KeyFrame que representa el estado inicial de la animación
-        KeyFrame moveToY = new KeyFrame(Duration.millis(400), toYValue); // Crea un objeto KeyFrame que representa el estado final de la animación
-        parallelMoveInY.getKeyFrames().addAll(moveFromY, moveToY); // Agrega los KeyFrames a la instancia de la clase Timeline
+        KeyValue fromYValue = new KeyValue(node.translateYProperty(), fromY); 
+        KeyValue toYValue = new KeyValue(node.translateYProperty(), toY); 
+        KeyFrame moveFromY = new KeyFrame(Duration.ZERO, fromYValue); 
+        KeyFrame moveToY = new KeyFrame(Duration.millis(400), toYValue);
+        parallelMoveInY.getKeyFrames().addAll(moveFromY, moveToY); 
         }
-    translateTransitions.add(parallelMoveInY); // Agrega la instancia de la clase Timeline a una lista de animaciones que se ejecutarán en paralelo
+        translateTransitions.add(parallelMoveInY);
     }
+    
+    private void swapInX(double fromX, double toX, Node node1, Node node2){
+        Timeline swapInX = new Timeline(); 
+        KeyValue fromXValue1 = new KeyValue(node1.translateXProperty(), fromX);
+        KeyValue toXValue1 = new KeyValue(node1.translateXProperty(), toX);
+        KeyFrame moveFromX1 = new KeyFrame(Duration.ZERO, fromXValue1);
+        KeyFrame moveToX1 = new KeyFrame(Duration.millis(400), toXValue1);
+        
+        KeyValue fromXValue2 = new KeyValue(node2.translateXProperty(), toX);
+        KeyValue toXValue2 = new KeyValue(node2.translateXProperty(), fromX);
+        KeyFrame moveFromX2 = new KeyFrame(Duration.ZERO, fromXValue2);
+        KeyFrame moveToX2 = new KeyFrame(Duration.millis(400), toXValue2);
+        
+        swapInX.getKeyFrames().addAll(moveFromX1, moveToX1, moveFromX2, moveToX2);
+        translateTransitions.add(swapInX);
+    }
+    
     
     // Este método cambia la propiedad de texto y estilo de una etiqueta
     private void changeLabelProperties(Label label, String newText, String initialStyle, String newStyle, Duration duration){

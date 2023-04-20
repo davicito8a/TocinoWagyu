@@ -92,7 +92,7 @@ public class AnimationWindowController {
         setButtonsLayout();
         scene = new Scene(root);
         scene.getStylesheets().add(new File("src/main/java/SortVisualizer/Styles.css").toURI().toURL().toExternalForm());
-        setGrua();
+        //setGrua();
         root.getChildren().add(pseudocodeBox);
         
     }
@@ -246,13 +246,10 @@ public class AnimationWindowController {
         return scene;
     }
     
+    /*
+    
     private void setGrua(){
-        /**
-         * Este método dibuja una grúa en una interfaz de usuario. Primero se establecen los colores y la escala de la grúa. 
-         * Luego, se dibujan diferentes líneas que forman las estructuras de la grúa, incluyendo los soportes de las vigas, las vigas y las barras de adorno. 
-         * Cada línea se establece con un grosor y color específicos. 
-         * El resultado es una representación visual de una grúa :-).
-         */
+        
         
         Color ColorInterno = Color.LIGHTGREEN;
         Color ColorExterno = Color.LIGHTGREEN;
@@ -545,4 +542,5 @@ public class AnimationWindowController {
         root.getChildren().addAll(rec,rec2,rec3,rec4,rec5,rec6);
 
     }
+*/
 }
