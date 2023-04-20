@@ -9,7 +9,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
@@ -21,7 +20,6 @@ public class Animator {
     
     private final ArrayList<Animation> translateTransitions;
     private final ArrayList<Animation> pseudocodeAnimations;
-    private final ArrayList<Animation> AnimacionesDeGrua;
     
     private VBox pseudocodeBox;
     private Label label1, label2, label3;
@@ -54,7 +52,6 @@ public class Animator {
         // Crea nuevas listas para las transiciones de animación y las animaciones de grúa.
         translateTransitions = new ArrayList();
         pseudocodeAnimations = new ArrayList();
-        AnimacionesDeGrua = new ArrayList();
         
         // Configura la grúa, las etiquetas y las transiciones de animación.
         //setCrane();
@@ -132,17 +129,7 @@ private void getInsertionSortTransitions(){
         /*
         private void setCrane(){
             
-    
-        Este método configura dos grúas y sus componentes en la pantalla.
-        La primera grúa ordena los elementos mientras que la segunda los levanta.
-        El método utiliza los campos Main.coordinates, Main.squareDimension y Main.windowHeight.
-        Las grúas están representadas por rectángulos y líneas.
-        La primera grúa está representada por rectangleAnimation1 y la segunda grúa por rectangleAnimation2.
-        Los rectángulos rectangleGrua y rectangleGrua2 representan las bases de las grúas para la primera y segunda grúas respectivamente.
-        Las líneas Grua1 y Grua2 representan las grúas en sí para la primera y segunda grúas respectivamente.
-        El método establece las propiedades translateX y translateY de los rectángulos y líneas para posicionarlos correctamente.
-        El método también establece las propiedades width, height, layoutX, layoutY y fill de los rectángulos.
-   
+
         // Configuración de la grúa que ordena lo demás
         rectangleAnimation1.setTranslateX(Main.coordinates.get(0));
         rectangleAnimation1.setTranslateY(5);
@@ -232,6 +219,7 @@ private void getInsertionSortTransitions(){
     
     private void swapInX(double fromX, double toX, Node node1, Node node2){
         Timeline swapInX = new Timeline(); 
+        
         KeyValue fromXValue1 = new KeyValue(node1.translateXProperty(), fromX);
         KeyValue toXValue1 = new KeyValue(node1.translateXProperty(), toX);
         KeyFrame moveFromX1 = new KeyFrame(Duration.ZERO, fromXValue1);
@@ -243,9 +231,9 @@ private void getInsertionSortTransitions(){
         KeyFrame moveToX2 = new KeyFrame(Duration.millis(400), toXValue2);
         
         swapInX.getKeyFrames().addAll(moveFromX1, moveToX1, moveFromX2, moveToX2);
+        
         translateTransitions.add(swapInX);
     }
-    
     
     // Este método cambia la propiedad de texto y estilo de una etiqueta
     private void changeLabelProperties(Label label, String newText, String initialStyle, String newStyle, Duration duration){
@@ -281,10 +269,6 @@ private void getInsertionSortTransitions(){
 
     public Rectangle getRectangleAnimation2() {
         return rectangleAnimation2;
-    }
-
-    public ArrayList<Animation> getAnimacionesDeGrua() {
-        return AnimacionesDeGrua;
     }
 
     public Line getGrua1() {

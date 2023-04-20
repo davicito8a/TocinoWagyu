@@ -17,16 +17,11 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle; 
 import javafx.scene.layout.VBox;
 
 public class AnimationWindowController {
     private final int type;
     
-    
-    private SequentialTransition sequentialTranslateTransitionsCaja = new SequentialTransition();
     // La lista de números que se van a ordenar
     private final ArrayList<Integer> numbers;
     // La lista de paneles de apilamiento asociados a los números
@@ -82,7 +77,7 @@ public class AnimationWindowController {
         // Se crea el panel de anclaje raíz
         root = new AnchorPane();
         // Se establece el fondo de la ventana de animación
-        BackgroundImage background = new BackgroundImage(new Image(new File("src/main/java/SortVisualizer/background.png").toURI().toURL().toExternalForm()),
+        BackgroundImage background = new BackgroundImage(new Image(new File("src/main/java/Resources/background.png").toURI().toURL().toExternalForm()),
         BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT,
         BackgroundSize.DEFAULT);
         // Se añaden los paneles de apilamiento al panel de anclaje raíz
@@ -91,7 +86,7 @@ public class AnimationWindowController {
         root.setBackground(new Background(background));
         setButtonsLayout();
         scene = new Scene(root);
-        scene.getStylesheets().add(new File("src/main/java/SortVisualizer/Styles.css").toURI().toURL().toExternalForm());
+        scene.getStylesheets().add(new File("src/main/java/Resources/Styles.css").toURI().toURL().toExternalForm());
         //setGrua();
         root.getChildren().add(pseudocodeBox);
         

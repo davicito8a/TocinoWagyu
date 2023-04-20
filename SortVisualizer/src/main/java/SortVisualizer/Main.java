@@ -11,7 +11,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import java.awt.BorderLayout;
 import javafx.scene.effect.DropShadow;
 
 public class Main extends Application {
@@ -119,7 +118,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         // Carga la ventana de entrada usando un objeto FXMLLoader.
-        FXMLLoader fxmlLoader = new FXMLLoader(new File("src/main/java/SortVisualizer/Input.fxml").toURI().toURL());
+        FXMLLoader fxmlLoader = new FXMLLoader(new File("src/main/java/Resources/Input.fxml").toURI().toURL());
         // Establece la escena generada por el FXMLLoader.
         stage.setScene(new Scene(fxmlLoader.load()));
         // Establece la ventana como no redimensionable.
