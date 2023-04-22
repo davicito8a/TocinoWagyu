@@ -94,20 +94,13 @@ public class Main extends Application {
     @throws IOException Si hay un problema al cargar la ventana de animación.
     */
     public static void newAnimationWindow(ArrayList<Integer> numbers, ArrayList<StackPane> stackpanes) throws IOException{
-        // Crea una nueva ventana.
         Stage stage = new Stage();
-        // Crea una instancia de AnimationWindowController con los números y StackPanes dados.
         AnimationWindowController windowGenerator = new AnimationWindowController(numbers, stackpanes, type);
-        // Obtiene la escena generada por la instancia de AnimationWindowController.
         stage.setScene(windowGenerator.getScene());
-        // Establece el ancho y alto de la ventana.
         stage.setWidth(windowWidth);
         stage.setHeight(windowHeight);
-        // Establece la ventana como no redimensionable.
         stage.setResizable(false);
-        // Establece el título de la ventana.
         stage.setTitle("SortVisualizer");
-        // Muestra la ventana.
         stage.show();
     }
     /**
@@ -118,23 +111,14 @@ public class Main extends Application {
     */
     @Override
     public void start(Stage stage) throws IOException {
-        // Carga la ventana de entrada usando un objeto FXMLLoader.
         FXMLLoader fxmlLoader = new FXMLLoader(new File("src/main/java/Resources/Input.fxml").toURI().toURL());
-        // Establece la escena generada por el FXMLLoader.
         stage.setScene(new Scene(fxmlLoader.load()));
-        // Establece la ventana como no redimensionable.
         stage.setResizable(false);
-        // Establece el título de la ventana.
         stage.setTitle("SortVisualizer");
-        // Muestra la ventana.
         stage.show();
     }
-    /**
-        Método principal de la aplicación.
-     * @param args
-        */
+    
     public static void main(String[] args) {
-        // Llama al método launch() para iniciar la aplicación.
         launch();
     }
 }

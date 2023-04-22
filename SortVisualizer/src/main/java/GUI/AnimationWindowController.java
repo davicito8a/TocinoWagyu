@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
@@ -70,7 +71,7 @@ public class AnimationWindowController {
       
         root.getChildren().addAll(stackpanes);
        
-        //root.setBackground(new Background(background));
+        root.setBackground(new Background(background));
         setButtonsLayout();
         scene = new Scene(root);
         scene.getStylesheets().add(new File("src/main/java/Resources/Styles.css").toURI().toURL().toExternalForm());
