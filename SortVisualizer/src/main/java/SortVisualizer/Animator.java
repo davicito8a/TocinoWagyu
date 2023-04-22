@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
@@ -54,7 +55,7 @@ public class Animator {
         pseudocodeAnimations = new ArrayList();
         
         // Configura la grúa, las etiquetas y las transiciones de animación.
-        //setCrane();
+        setCrane();
         setLabels();
         getBubbleSortTransitions();
         //getInsertionSortTransitions();   
@@ -126,25 +127,26 @@ private void getInsertionSortTransitions(){
         System.out.println(stackpanes.toString());
     }
     
-        /*
-        private void setCrane(){
+    
+    
+    private void setCrane(){
             
 
-        // Configuración de la grúa que ordena lo demás
+   
         rectangleAnimation1.setTranslateX(Main.coordinates.get(0));
         rectangleAnimation1.setTranslateY(5);
         rectangleAnimation1.setWidth(80);
         rectangleAnimation1.setHeight(20);
         rectangleAnimation1.setLayoutX(Main.squareDimension/2 - rectangleAnimation1.getWidth()/2);
-        rectangleAnimation1.setFill(Color.YELLOW);//Grua que Ordena lo demás
-        // Configuración de la grúa que levanta
+        rectangleAnimation1.setFill(Color.YELLOW);
+      
         rectangleAnimation2.setTranslateX(Main.coordinates.get(1));
         rectangleAnimation2.setWidth(100);
         rectangleAnimation2.setHeight(30);
-        rectangleAnimation2.setFill(Color.GREEN);//Grua que levanta
+        rectangleAnimation2.setFill(Color.GREEN);
         rectangleAnimation2.setLayoutX(Main.squareDimension/2 - rectangleAnimation2.getWidth()/2);
         rectangleAnimation2.setTranslateY(35);
-        // Configuración del rectángulo de la grúa que ordena lo demás
+       
         rectangleGrua.setTranslateX(Main.coordinates.get(0));
         rectangleGrua.setTranslateY(5);
         rectangleGrua.setHeight(22);
@@ -152,7 +154,7 @@ private void getInsertionSortTransitions(){
         rectangleGrua.setLayoutX(Main.squareDimension/2- rectangleGrua.getWidth()/2);
         rectangleGrua.setLayoutY(0.65*Main.windowHeight-25);
         rectangleGrua.setFill(Color.ORANGE);
-        // Configuración del rectángulo de la grúa que levanta
+      
         rectangleGrua2.setTranslateX(Main.coordinates.get(1));
         rectangleGrua2.setTranslateY(35);
         rectangleGrua2.setHeight(20);
@@ -160,7 +162,7 @@ private void getInsertionSortTransitions(){
         rectangleGrua2.setLayoutX(Main.squareDimension/2-rectangleGrua2.getWidth()/2);
         rectangleGrua2.setLayoutY(0.65*Main.windowHeight-2*Main.squareDimension - 35 - rectangleGrua2.getHeight());
         rectangleGrua2.setFill(Color.ORANGE);
-        // Configuración de las líneas que representan las grúas
+ 
         Grua1 = new Line(Main.squareDimension/2,0,Main.squareDimension/2,0.65*Main.windowHeight - 5);
         Grua2 = new Line(Main.squareDimension/2,0,Main.squareDimension/2,0.65*Main.windowHeight - 2 * Main.squareDimension - rectangleGrua2.getHeight() - 35);
         Grua1.setTranslateY(5);
@@ -168,7 +170,7 @@ private void getInsertionSortTransitions(){
         Grua2.setTranslateX(Main.coordinates.get(1));
         Grua2.setTranslateY(35);
     }
-*/
+
     
     private void setLabels(){
         // Este método se encarga de establecer los tres labels que contienen el pseudocódigo del algoritmo de ordenamiento Insertion Sort.
@@ -235,19 +237,13 @@ private void getInsertionSortTransitions(){
         translateTransitions.add(swapInX);
     }
     
-    // Este método cambia la propiedad de texto y estilo de una etiqueta
+
     private void changeLabelProperties(Label label, String newText, String initialStyle, String newStyle, Duration duration){
-        // Crea una nueva animación de línea de tiempo
         Timeline changeLabelPropertiesAnimation = new Timeline();
-        // Crea una nueva KeyFrame para cambiar el texto de la etiqueta
         KeyFrame newTextFrame = new KeyFrame(Duration.ZERO, event -> label.setText(newText));
-        // Crea una nueva KeyFrame para cambiar el estilo de la etiqueta
         KeyFrame newStyleFrame = new KeyFrame(Duration.ZERO, event -> label.setStyle(newStyle));
-        // Crea una nueva KeyFrame para restaurar el estilo original de la etiqueta después de la duración especificada
         KeyFrame initialStyleFrame = new KeyFrame(duration, event -> label.setStyle(initialStyle));
-        // Agrega las tres KeyFrames a la animación de línea de tiempo
         changeLabelPropertiesAnimation.getKeyFrames().addAll(newTextFrame, newStyleFrame, initialStyleFrame);
-        // Agrega la animación a la lista de animaciones
         pseudocodeAnimations.add(changeLabelPropertiesAnimation);
     }
 
