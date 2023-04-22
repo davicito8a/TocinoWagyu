@@ -2,7 +2,6 @@ package GUI;
 // En esta clase se controla el modo y se controla la cantidad elementos del arreglo
 import SortVisualizerCore.Main;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
