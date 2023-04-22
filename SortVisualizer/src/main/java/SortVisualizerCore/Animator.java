@@ -111,9 +111,9 @@ private void getInsertionSortTransitions(){
         for(int i = 0; i < numbers.size(); i++){
             for(int j = 0; j < numbers.size() - 1 - i; j++){
                 if(numbers.get(j + 1) < numbers.get(j)){
+                    int currentNumber = numbers.get(j);
                     StackPane stackpane = stackpanes.get(j);
-                    int temp = numbers.get(j);
-                    
+ 
                     translateTransitions.add(mover.moveInY(
                             0.65 * Main.windowHeight, 
                             0.65 * Main.windowHeight - 2 * Main.squareDimension, 
@@ -128,12 +128,11 @@ private void getInsertionSortTransitions(){
                             0.65 * Main.windowHeight, 
                             stackpane, stackpanes.get(j + 1)));
                     
-                    
-                    stackpanes.set(j, stackpanes.get(j + 1));
                     numbers.set(j, numbers.get(j + 1));
+                    stackpanes.set(j, stackpanes.get(j + 1));
                     
+                    numbers.set(j + 1, currentNumber);
                     stackpanes.set(j + 1, stackpane);
-                    numbers.set(j + 1, temp);
                 }
             }
         }

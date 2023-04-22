@@ -9,6 +9,14 @@ import javafx.util.Duration;
 
 public class Mover {
     
+    /*
+    Clase Mover ("movedor"). 
+    Dentro de esta clase están los métodos que crean las animaciones de movimiento.
+    Los parámetros de los métodos son las coordenadas de inicio y final del movimiento, y las nodos sobre los cuales se aplicará la animación.
+    Los métodos permiten mover uno o más nodos en el eje X, Y o intercambiar la posición de dos nodos.
+    Las animaciones se crean a partir de las clases KeyValue, KeyFrame y Timeline, y la propiedad translate() de los nodos.
+    */
+    
     public Animation moveInX(double fromX, double toX, Node... nodes){
         Timeline moveInX = new Timeline();
         

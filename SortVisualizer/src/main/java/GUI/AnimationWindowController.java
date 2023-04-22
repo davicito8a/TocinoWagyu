@@ -208,8 +208,6 @@ public class AnimationWindowController {
         return scene;
     }
     
-    
-    
     private void setCrane(){
         Rectangle rec1 = animator.getRectangleAnimation1();
         Rectangle rec2 = animator.getRectangleAnimation2();
@@ -222,5 +220,4 @@ public class AnimationWindowController {
         root.getChildren().addAll(l1,l2);
         root.getChildren().addAll(rec1,rec2,rec3,rec4);
     }
-
 }
