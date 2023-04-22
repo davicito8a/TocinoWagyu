@@ -37,7 +37,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.4</version>
                 <configuration>
-                    <mainClass>SortVisualizer.Main</mainClass>
+                    <mainClass>SortVisualizerCore.Main</mainClass>
                 </configuration>
                 <executions>
                     <execution>

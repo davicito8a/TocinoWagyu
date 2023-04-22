@@ -1,11 +1,9 @@
-package SortVisualizer;
+package SortVisualizerCore;
 
 import java.util.ArrayList;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -15,6 +13,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 public class Animator {
+    private final Mover mover = new Mover();
     
     private final ArrayList<Integer> numbers;
     private final ArrayList<StackPane> stackpanes;
@@ -114,25 +113,35 @@ private void getInsertionSortTransitions(){
                 if(numbers.get(j + 1) < numbers.get(j)){
                     StackPane stackpane = stackpanes.get(j);
                     int temp = numbers.get(j);
-                    moveInY(0.65 * Main.windowHeight, 0.65 * Main.windowHeight - 2 * Main.squareDimension, stackpane, stackpanes.get(j + 1));
-                    swapInX(Main.coordinates.get(j), Main.coordinates.get(j + 1), stackpane, stackpanes.get(j + 1));
-                    moveInY(0.65 * Main.windowHeight - 2 * Main.squareDimension, 0.65 * Main.windowHeight, stackpane, stackpanes.get(j + 1));
+                    
+                    translateTransitions.add(mover.moveInY(
+                            0.65 * Main.windowHeight, 
+                            0.65 * Main.windowHeight - 2 * Main.squareDimension, 
+                            stackpane, stackpanes.get(j + 1)));
+                    
+                    translateTransitions.add(mover.swapInX(
+                            Main.coordinates.get(j), 
+                            Main.coordinates.get(j + 1), 
+                            stackpane, stackpanes.get(j + 1)));
+                    
+                    translateTransitions.add(mover.moveInY(0.65 * Main.windowHeight - 2 * Main.squareDimension, 
+                            0.65 * Main.windowHeight, 
+                            stackpane, stackpanes.get(j + 1)));
+                    
+                    
                     stackpanes.set(j, stackpanes.get(j + 1));
                     numbers.set(j, numbers.get(j + 1));
+                    
                     stackpanes.set(j + 1, stackpane);
                     numbers.set(j + 1, temp);
                 }
             }
         }
-        System.out.println(stackpanes.toString());
     }
     
     
     
     private void setCrane(){
-            
-
-   
         rectangleAnimation1.setTranslateX(Main.coordinates.get(0));
         rectangleAnimation1.setTranslateY(5);
         rectangleAnimation1.setWidth(80);
@@ -188,56 +197,6 @@ private void getInsertionSortTransitions(){
         pseudocodeBox.setLayoutY(0.8 * Main.windowHeight);
     }
       
-    
-    private void moveInX(double fromX, double toX, Node... nodes){
-        Timeline parallelMoveInX = new Timeline();
-        //Recorremos todos los nodos para aplicar la animación de movimiento en X
-        for(Node node: nodes){
-            //Establecemos los valores iniciales y finales de la animación para la propiedad translateX
-            KeyValue fromXValue = new KeyValue(node.translateXProperty(), fromX);
-            KeyValue toXValue = new KeyValue(node.translateXProperty(), toX);
-            //Creamos los keyframes que definirán la animación
-            KeyFrame moveFromX = new KeyFrame(Duration.ZERO, fromXValue);
-            KeyFrame moveToX = new KeyFrame(Duration.millis(400), toXValue);
-            //Añadimos los keyframes a la línea de tiempo de la animación
-            parallelMoveInX.getKeyFrames().addAll(moveFromX, moveToX);
-        }
-        //Añadimos la animación a la lista de animaciones de translación
-        translateTransitions.add(parallelMoveInX);  
-
-    }
-    
-    private void moveInY(double fromY, double toY, Node... nodes){
-        Timeline parallelMoveInY = new Timeline(); 
-        for(Node node: nodes){
-        KeyValue fromYValue = new KeyValue(node.translateYProperty(), fromY); 
-        KeyValue toYValue = new KeyValue(node.translateYProperty(), toY); 
-        KeyFrame moveFromY = new KeyFrame(Duration.ZERO, fromYValue); 
-        KeyFrame moveToY = new KeyFrame(Duration.millis(400), toYValue);
-        parallelMoveInY.getKeyFrames().addAll(moveFromY, moveToY); 
-        }
-        translateTransitions.add(parallelMoveInY);
-    }
-    
-    private void swapInX(double fromX, double toX, Node node1, Node node2){
-        Timeline swapInX = new Timeline(); 
-        
-        KeyValue fromXValue1 = new KeyValue(node1.translateXProperty(), fromX);
-        KeyValue toXValue1 = new KeyValue(node1.translateXProperty(), toX);
-        KeyFrame moveFromX1 = new KeyFrame(Duration.ZERO, fromXValue1);
-        KeyFrame moveToX1 = new KeyFrame(Duration.millis(400), toXValue1);
-        
-        KeyValue fromXValue2 = new KeyValue(node2.translateXProperty(), toX);
-        KeyValue toXValue2 = new KeyValue(node2.translateXProperty(), fromX);
-        KeyFrame moveFromX2 = new KeyFrame(Duration.ZERO, fromXValue2);
-        KeyFrame moveToX2 = new KeyFrame(Duration.millis(400), toXValue2);
-        
-        swapInX.getKeyFrames().addAll(moveFromX1, moveToX1, moveFromX2, moveToX2);
-        
-        translateTransitions.add(swapInX);
-    }
-    
-
     private void changeLabelProperties(Label label, String newText, String initialStyle, String newStyle, Duration duration){
         Timeline changeLabelPropertiesAnimation = new Timeline();
         KeyFrame newTextFrame = new KeyFrame(Duration.ZERO, event -> label.setText(newText));

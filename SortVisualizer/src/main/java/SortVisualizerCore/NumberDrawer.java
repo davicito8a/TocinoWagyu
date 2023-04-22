@@ -1,4 +1,4 @@
-package SortVisualizer;
+package SortVisualizerCore;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;

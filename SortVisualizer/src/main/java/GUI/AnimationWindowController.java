@@ -1,5 +1,7 @@
-package SortVisualizer;
+package GUI;
 
+import SortVisualizerCore.Animator;
+import SortVisualizerCore.Main;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,7 +12,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;

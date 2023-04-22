@@ -1,5 +1,6 @@
-package SortVisualizer;
+package SortVisualizerCore;
 
+import GUI.AnimationWindowController;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,21 +17,21 @@ import javafx.scene.effect.DropShadow;
 public class Main extends Application {
     
     // Variables de tamaño de ventana
-    static int windowHeight = 600;
-    static int windowWidth = 1500;
+    public static int windowHeight = 600;
+    public static int windowWidth = 1500;
     
     // Lista de coordenadas de los rectángulos
-    static ArrayList<Double> coordinates = new ArrayList();
+    public static ArrayList<Double> coordinates = new ArrayList();
     
     // Dimensiones de los cuadrados
     static double squareDimension;
     static double separation;
     
     // Variable para indicar el tipo de ordenamiento
-    static int type = 0;
+    public static int type = 0;
 
     // Método para generar la lista de StackPanes (contenedores para los rectángulos y números)
-    static ArrayList<StackPane> getRectangles(ArrayList<Integer> numbers) {
+    public static ArrayList<StackPane> getRectangles(ArrayList<Integer> numbers) {
         squareDimension = 0.75 * 0.9 * windowWidth / numbers.size();
         separation = 0.25 * 0.9 * windowWidth / numbers.size();
         int size = NumberSize(numbers.size());
