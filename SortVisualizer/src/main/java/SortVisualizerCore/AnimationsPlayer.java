@@ -5,7 +5,7 @@ import javafx.animation.Animation;
 import static javafx.animation.Animation.Status.RUNNING;
 import javafx.animation.SequentialTransition;
 
-public class AnimationPlayer {
+public class AnimationsPlayer {
     SequentialTransition sequentialTranslateAnimations = new SequentialTransition();
     SequentialTransition sequentialPseudocodeAnimations = new SequentialTransition();
     

@@ -12,7 +12,7 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
-public class Animator {
+public class AnimationsGenerator {
     private final Mover mover = new Mover();
     
     private final ArrayList<Integer> numbers;
@@ -33,7 +33,7 @@ public class Animator {
     Rectangle magnet1 = new Rectangle();
     Rectangle magnet2 = new Rectangle();
     
-    public Animator(ArrayList<Integer> numbers, ArrayList<StackPane> stackpanes){
+    public AnimationsGenerator(ArrayList<Integer> numbers, ArrayList<StackPane> stackpanes){
         this.numbers = numbers;
         this.boxes = stackpanes;
         
@@ -45,7 +45,6 @@ public class Animator {
         //getBubbleSortAnimations();
         getInsertionSortAnimations();   
     }
-
    
     private void getInsertionSortAnimations(){
         int j = 1; 
@@ -154,42 +153,45 @@ public class Animator {
     }
     
     private void setCrane(){
+        int y = 0;
+        int y2 = 10;
+        
         craneUpperBox1.setTranslateX(Main.coordinates.get(0));
-        craneUpperBox1.setTranslateY(5);
+        craneUpperBox1.setTranslateY(y);
         craneUpperBox1.setWidth(40);
         craneUpperBox1.setHeight(20);
         craneUpperBox1.setLayoutX(Main.squareDimension/2 - craneUpperBox1.getWidth()/2);
         craneUpperBox1.setFill(Color.YELLOW);
       
         craneUpperBox2.setTranslateX(Main.coordinates.get(1));
-        craneUpperBox2.setTranslateY(35);
+        craneUpperBox2.setTranslateY(y2);
         craneUpperBox2.setWidth(40);
         craneUpperBox2.setHeight(20);
         craneUpperBox2.setLayoutX(Main.squareDimension/2 - craneUpperBox2.getWidth()/2);
         craneUpperBox2.setFill(Color.GREEN);
        
         magnet1.setTranslateX(Main.coordinates.get(0));
-        magnet1.setTranslateY(5);
+        magnet1.setTranslateY(y);
         magnet1.setWidth(40);
         magnet1.setHeight(20);
         magnet1.setLayoutX(Main.squareDimension/2- magnet1.getWidth()/2);
-        magnet1.setLayoutY(0.65*Main.windowHeight-25);
+        magnet1.setLayoutY(0.65*Main.windowHeight - magnet1.getHeight() - y);
         magnet1.setFill(Color.ORANGE);
       
         magnet2.setTranslateX(Main.coordinates.get(1));
-        magnet2.setTranslateY(35);
+        magnet2.setTranslateY(y2);
         magnet2.setWidth(40);
         magnet2.setHeight(20);
         magnet2.setLayoutX(Main.squareDimension/2-magnet2.getWidth()/2);
-        magnet2.setLayoutY(0.65*Main.windowHeight-2*Main.squareDimension - magnet2.getTranslateY() - magnet2.getHeight());
+        magnet2.setLayoutY(0.65*Main.windowHeight-2*Main.squareDimension - magnet2.getHeight() - y2);
         magnet2.setFill(Color.ORANGE);
  
-        rope1 = new Line(Main.squareDimension/2,0,Main.squareDimension/2,0.65*Main.windowHeight - magnet1.getTranslateY());
-        rope2 = new Line(Main.squareDimension/2,0,Main.squareDimension/2,0.65*Main.windowHeight - 2 * Main.squareDimension - magnet2.getHeight() - magnet2.getTranslateY());
+        rope1 = new Line(Main.squareDimension/2,0,Main.squareDimension/2,0.65*Main.windowHeight - y);
+        rope2 = new Line(Main.squareDimension/2,0,Main.squareDimension/2,0.65*Main.windowHeight - 2 * Main.squareDimension - magnet2.getHeight() - y2);
         rope1.setTranslateX(Main.coordinates.get(0));
-        rope1.setTranslateY(5);
+        rope1.setTranslateY(y);
         rope2.setTranslateX(Main.coordinates.get(1));
-        rope2.setTranslateY(35);
+        rope2.setTranslateY(y2);
     }
 
     private void setLabels(){

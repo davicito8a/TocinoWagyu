@@ -16,28 +16,22 @@ import javafx.scene.effect.DropShadow;
 
 public class Main extends Application {
     
-    // Variables de tamaño de ventana
     public static int windowHeight = 600;
     public static int windowWidth = 1500;
     
-    // Lista de coordenadas de los rectángulos
     public static ArrayList<Double> coordinates = new ArrayList();
     
-    // Dimensiones de los cuadrados
     static double squareDimension;
     static double separation;
     
-    // Variable para indicar el tipo de ordenamiento
     public static int type = 0;
 
-    // Método para generar la lista de StackPanes (contenedores para los rectángulos y números)
     public static ArrayList<StackPane> getRectangles(ArrayList<Integer> numbers) {
         squareDimension = 0.75 * 0.9 * windowWidth / numbers.size();
         separation = 0.25 * 0.9 * windowWidth / numbers.size();
         int size = NumberSize(numbers.size());
         ArrayList<StackPane> stackpanes = new ArrayList();
         
-        // Para cada número, se genera un rectángulo con un número dentro y se agrega a un StackPane
         for(int i = 0; i < numbers.size(); i++){
             Rectangle rectangle = new Rectangle();
             DropShadow shadow = new DropShadow();
@@ -84,7 +78,6 @@ public class Main extends Application {
             return 10; 
         }
     }
-     // Método sobreescrito de la clase Application, que se ejecuta al iniciar la aplicación.
     
     /**
 

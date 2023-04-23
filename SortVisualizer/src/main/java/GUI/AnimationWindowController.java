@@ -1,13 +1,12 @@
 package GUI;
 
-import SortVisualizerCore.AnimationPlayer;
-import SortVisualizerCore.Animator;
+import SortVisualizerCore.AnimationsPlayer;
+import SortVisualizerCore.AnimationsGenerator;
 import SortVisualizerCore.Main;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import javafx.animation.Animation;
-import javafx.animation.SequentialTransition;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -28,10 +27,10 @@ public class AnimationWindowController {
     private final ArrayList<Integer> numbers;
     private final ArrayList<StackPane> stackpanes;
     
-    private Animator animator;
-    private AnimationPlayer animationPlayer = new AnimationPlayer();
+    private final AnimationsGenerator animator;
+    private final AnimationsPlayer animationPlayer = new AnimationsPlayer();
    
-    private ArrayList<Animation> translateTransitions;
+    private ArrayList<Animation> translateAnimations;
     private ArrayList<Animation> pseudocodeAnimations;
     private int currentTransitionIndex = 0;
   
@@ -39,19 +38,19 @@ public class AnimationWindowController {
     private AnchorPane root;
     private VBox pseudocodeBox;
     
-    private Button play = new Button("Play");
-    private Button pause = new Button("Pause");
-    private Button increaseSpeed = new Button("Increase");
-    private Button decreaseSpeed = new Button("Decrease");
-    private Button stepForward = new Button("Forward");
-    private Button stepBackward = new Button("Backward");
-    private int prefWidth = Main.windowWidth/15;
+    private final Button play = new Button("Play");
+    private final Button pause = new Button("Pause");
+    private final Button increaseSpeed = new Button("Increase");
+    private final Button decreaseSpeed = new Button("Decrease");
+    private final Button stepForward = new Button("Forward");
+    private final Button stepBackward = new Button("Backward");
+    private final int prefWidth = Main.windowWidth/15;
     
     public AnimationWindowController(ArrayList<Integer> numbers, ArrayList<StackPane> stackpanes, int type) throws IOException{
         this.type = type;
         this.numbers = numbers;
         this.stackpanes = stackpanes;
-        this.animator = new Animator(this.numbers, this.stackpanes);
+        this.animator = new AnimationsGenerator(this.numbers, this.stackpanes);
         start();
     }
 
@@ -59,7 +58,7 @@ public class AnimationWindowController {
         getTransitions();
         
         if(type == 0){
-            animationPlayer.createSequentialTransitions(translateTransitions, pseudocodeAnimations);        
+            animationPlayer.createSequentialTransitions(translateAnimations, pseudocodeAnimations);        
         }    
    
         root = new AnchorPane();
@@ -122,11 +121,11 @@ public class AnimationWindowController {
         });
         
         stepForward.setOnAction(event -> {
-            stepForward(translateTransitions, pseudocodeAnimations);
+            stepForward(translateAnimations, pseudocodeAnimations);
         });
         
         stepBackward.setOnAction(event -> {
-            stepBackward(translateTransitions, pseudocodeAnimations);
+            stepBackward(translateAnimations, pseudocodeAnimations);
         });  
         
         root.getChildren().addAll(play, pause, increaseSpeed, decreaseSpeed, stepForward, stepBackward);
@@ -144,7 +143,7 @@ public class AnimationWindowController {
     }
     
     private void getTransitions(){
-        translateTransitions = animator.getTranslateAnimations();
+        translateAnimations = animator.getTranslateAnimations();
         pseudocodeAnimations = animator.getPseudocodeAnimations();
         pseudocodeBox = animator.getPseudocodeBox();               
     }
@@ -156,7 +155,7 @@ public class AnimationWindowController {
             transition.setRate(1);
             transition.play();
             Animation pseudocodeAnimation = pseudocodeAnimations.get(currentTransitionIndex);
-            //pseudocodeAnimation.play();
+            pseudocodeAnimation.play();
         }
     }
     
@@ -167,24 +166,24 @@ public class AnimationWindowController {
             transition.setRate(-1);
             transition.play();
             Animation pseudocodeAnimation = pseudocodeAnimations.get(currentTransitionIndex);
-            //pseudocodeAnimation.play();
+            pseudocodeAnimation.play();
         }  
     }
      
-    public Scene getScene(){
-        return scene;
+    private void setCrane(){
+        Rectangle craneUpperBox1 = animator.getCraneUpperBox1();
+        Rectangle craneUpperBox2 = animator.getCraneUpperBox2();
+        Rectangle magnet1 = animator.getMagnet1();
+        Rectangle magnet2 = animator.getMagnet2();
+        
+        Line rope1 = animator.getRope1();
+        Line rope2 = animator.getRope2();
+
+        root.getChildren().addAll(rope1,rope2);
+        root.getChildren().addAll(craneUpperBox1,craneUpperBox2,magnet1,magnet2);
     }
     
-    private void setCrane(){
-        Rectangle rec1 = animator.getCraneUpperBox1();
-        Rectangle rec2 = animator.getCraneUpperBox2();
-        Rectangle rec3 = animator.getMagnet1();
-        Rectangle rec4 = animator.getMagnet2();
-        
-        Line l1 = animator.getRope1();
-        Line l2 = animator.getRope2();
-
-        root.getChildren().addAll(l1,l2);
-        root.getChildren().addAll(rec1,rec2,rec3,rec4);
+    public Scene getScene(){
+        return scene;
     }
 }
