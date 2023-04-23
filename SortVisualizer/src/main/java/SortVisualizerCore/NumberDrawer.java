@@ -8,7 +8,7 @@ import javafx.scene.paint.Color;
         GraphicsContext gc;
         int coordenadaX = 10;
         int coordenadaY = 20;
-        int scale = 1; 
+        int scale;
 
     public NumberDrawer(Canvas canvas){
         gc = canvas.getGraphicsContext2D();
@@ -102,16 +102,16 @@ import javafx.scene.paint.Color;
     }
 
     public void dibujarCuatro(GraphicsContext gc, double x, double y) {
-        gc.setStroke(Color.WHITE);  // Establecer el color de trazo en blanco
-        gc.setLineWidth(1.5);  // Establecer el grosor de línea en 1.5
+        gc.setStroke(Color.WHITE);  
+        gc.setLineWidth(1.5); 
         gc.strokeLine(x/scale, y/scale, x/scale, (y + 25)/scale);
         gc.strokeLine(x/scale, (y + 25)/scale, (x + 30)/scale, (y + 25)/scale);
         gc.strokeLine((x + 25)/scale, y/scale, (x + 25)/scale, (y + 50)/scale);
         
     }
     public void dibujarCinco(GraphicsContext gc, double x, double y) {
-        gc.setStroke(Color.WHITE);  // Establecer el color de trazo en blanco
-        gc.setLineWidth(1.5);  // Establecer el grosor de línea en 1.5
+        gc.setStroke(Color.WHITE); 
+        gc.setLineWidth(1.5);  
         gc.strokeLine(x/scale, y/scale, (x + 35)/scale, y/scale);
         gc.strokeLine(x/scale, y/scale, x/scale , (y + 25)/scale);
         gc.strokeLine((x + 35)/scale, (y + 25)/scale, x/scale, (y + 25)/scale);
@@ -120,29 +120,29 @@ import javafx.scene.paint.Color;
     }
 
     public void dibujarSeis(GraphicsContext gc, double x, double y) {
-        gc.setStroke(Color.WHITE);  // Establecer el color de trazo en blanco
-        gc.setLineWidth(1.5);  // Establecer el grosor de línea en 1.5
+        gc.setStroke(Color.WHITE); 
+        gc.setLineWidth(1.5);  
         gc.strokeOval(x/scale, (y + 18)/scale, 35/scale, 35/scale);
         gc.strokeLine((x + 16)/scale  , y/scale , (x+1)/scale, (y + 30)/scale);
     }
 
     public void dibujarSiete(GraphicsContext gc, double x, double y) {
-        gc.setStroke(Color.WHITE);  // Establecer el color de trazo en blanco
-        gc.setLineWidth(1.5);  // Establecer el grosor de línea en 1.5
+        gc.setStroke(Color.WHITE); 
+        gc.setLineWidth(1.5);  
         gc.strokeLine(x/scale, y/scale, (x + 50)/scale, y/scale);
         gc.strokeLine((x + 50)/scale, y/scale, x/scale, (y + 50)/scale);
     }
 
     public void dibujarOcho(GraphicsContext gc, double x, double y) {
-        gc.setStroke(Color.WHITE);  // Establecer el color de trazo en blanco
-        gc.setLineWidth(1.5);  // Establecer el grosor de línea en 1.5
+        gc.setStroke(Color.WHITE);  
+        gc.setLineWidth(1.5);  
         gc.strokeOval(x/scale, (y + 20)/scale, 35/scale, 35/scale);
         gc.strokeOval((x + 6)/scale, (y - 0.5)/scale, 20/scale, 20/scale); // circulo más pequeño
     }
 
     public void dibujarNueve(GraphicsContext gc, double x, double y) {
-        gc.setStroke(Color.WHITE);  // Establecer el color de trazo en blanco
-        gc.setLineWidth(1.5);  // Establecer el grosor de línea en 1.5
+        gc.setStroke(Color.WHITE); 
+        gc.setLineWidth(1.5); 
         gc.strokeOval(x/scale, y/scale, 35/scale, 35/scale);
         gc.strokeLine((x + 35)/scale, (y + 55)/scale, (x + 35)/scale, (y + 20)/scale);
     }

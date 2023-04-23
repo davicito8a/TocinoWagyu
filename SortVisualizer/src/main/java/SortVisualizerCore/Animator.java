@@ -42,7 +42,7 @@ public class Animator {
         
         setCrane();
         setLabels();
-        getBubbleSortAnimations();
+        //getBubbleSortAnimations();
         getInsertionSortAnimations();   
     }
 
@@ -184,10 +184,10 @@ public class Animator {
         magnet2.setLayoutY(0.65*Main.windowHeight-2*Main.squareDimension - magnet2.getTranslateY() - magnet2.getHeight());
         magnet2.setFill(Color.ORANGE);
  
-        rope1 = new Line(Main.squareDimension/2,0,Main.squareDimension/2,0.65*Main.windowHeight - 5);
-        rope2 = new Line(Main.squareDimension/2,0,Main.squareDimension/2,0.65*Main.windowHeight - 2 * Main.squareDimension - magnet2.getHeight() - 35);
-        rope1.setTranslateY(5);
+        rope1 = new Line(Main.squareDimension/2,0,Main.squareDimension/2,0.65*Main.windowHeight - magnet1.getTranslateY());
+        rope2 = new Line(Main.squareDimension/2,0,Main.squareDimension/2,0.65*Main.windowHeight - 2 * Main.squareDimension - magnet2.getHeight() - magnet2.getTranslateY());
         rope1.setTranslateX(Main.coordinates.get(0));
+        rope1.setTranslateY(5);
         rope2.setTranslateX(Main.coordinates.get(1));
         rope2.setTranslateY(35);
     }
@@ -219,7 +219,7 @@ public class Animator {
         pseudocodeAnimations.add(changeLabelPropertiesAnimation);
     }
 
-    public ArrayList<Animation> getTranslateTransitions() {
+    public ArrayList<Animation> getTranslateAnimations() {
         return translateAnimations;
     }
 
@@ -231,27 +231,27 @@ public class Animator {
         return pseudocodeBox;
     }
 
-    public Rectangle getRectangleAnimation1() {
+    public Rectangle getCraneUpperBox1() {
         return craneUpperBox1;
     }
 
-    public Rectangle getRectangleAnimation2() {
+    public Rectangle getCraneUpperBox2() {
         return craneUpperBox2;
     }
 
-    public Line getGrua1() {
+    public Line getRope1() {
         return rope1;
     }
 
-    public Line getGrua2() {
+    public Line getRope2() {
         return rope2;
     }
     
-    public Rectangle getRectangleGrua() {
+    public Rectangle getMagnet1() {
         return magnet1;
     }
 
-    public Rectangle getRectangleGrua2() {
+    public Rectangle getMagnet2() {
         return magnet2;
     }
     

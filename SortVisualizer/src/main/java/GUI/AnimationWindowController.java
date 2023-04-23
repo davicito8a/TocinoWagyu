@@ -1,12 +1,12 @@
 package GUI;
 
+import SortVisualizerCore.AnimationPlayer;
 import SortVisualizerCore.Animator;
 import SortVisualizerCore.Main;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import javafx.animation.Animation;
-import static javafx.animation.Animation.Status.RUNNING;
 import javafx.animation.SequentialTransition;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -29,11 +29,10 @@ public class AnimationWindowController {
     private final ArrayList<StackPane> stackpanes;
     
     private Animator animator;
+    private AnimationPlayer animationPlayer = new AnimationPlayer();
    
     private ArrayList<Animation> translateTransitions;
     private ArrayList<Animation> pseudocodeAnimations;
-    private SequentialTransition sequentialTranslateTransitions;
-    private SequentialTransition sequentialPseudocodeAnimations = new SequentialTransition();
     private int currentTransitionIndex = 0;
   
     private Scene scene;
@@ -49,9 +48,9 @@ public class AnimationWindowController {
     private int prefWidth = Main.windowWidth/15;
     
     public AnimationWindowController(ArrayList<Integer> numbers, ArrayList<StackPane> stackpanes, int type) throws IOException{
+        this.type = type;
         this.numbers = numbers;
         this.stackpanes = stackpanes;
-        this.type = type;
         this.animator = new Animator(this.numbers, this.stackpanes);
         start();
     }
@@ -60,7 +59,7 @@ public class AnimationWindowController {
         getTransitions();
         
         if(type == 0){
-            createTimeline();          
+            animationPlayer.createSequentialTransitions(translateTransitions, pseudocodeAnimations);        
         }    
    
         root = new AnchorPane();
@@ -107,19 +106,19 @@ public class AnimationWindowController {
         stepBackward.setPrefWidth(prefWidth);
         
         play.setOnAction(event -> {
-            play(sequentialTranslateTransitions);
+            animationPlayer.play();
         });
         
         pause.setOnAction(event -> {
-            pause(sequentialTranslateTransitions);
+            animationPlayer.pause();
         });
         
         increaseSpeed.setOnAction(event -> {
-            increaseSpeed(sequentialTranslateTransitions);
+            animationPlayer.increaseSpeed();
         });
         
         decreaseSpeed.setOnAction(event -> {
-            decreaseSpeed(sequentialTranslateTransitions);
+            animationPlayer.decreaseSpeed();
         });
         
         stepForward.setOnAction(event -> {
@@ -145,42 +144,9 @@ public class AnimationWindowController {
     }
     
     private void getTransitions(){
-        translateTransitions = animator.getTranslateTransitions();
+        translateTransitions = animator.getTranslateAnimations();
         pseudocodeAnimations = animator.getPseudocodeAnimations();
         pseudocodeBox = animator.getPseudocodeBox();               
-    }
-    
-    private void createTimeline(){
-        sequentialTranslateTransitions = new SequentialTransition();
-        sequentialTranslateTransitions.getChildren().addAll(translateTransitions);
-        sequentialPseudocodeAnimations.getChildren().addAll(pseudocodeAnimations);
-    }
-    
-    private void increaseSpeed(SequentialTransition timeline){
-        if(timeline.getStatus().equals(RUNNING)){
-            timeline.setRate(timeline.getRate() * 1.25);
-            sequentialPseudocodeAnimations.setRate(sequentialPseudocodeAnimations.getRate() * 1.25);
-        }
-    }
-    
-    private void decreaseSpeed(SequentialTransition timeline){
-        if(timeline.getStatus().equals(RUNNING)){
-            timeline.setRate(timeline.getRate() * 0.8);
-            sequentialPseudocodeAnimations.setRate(sequentialPseudocodeAnimations.getRate() * 0.8);
-        }
-    }
-    
-    private void pause(SequentialTransition timeline){
-        /*Este método pausan la animación respectivamente.*/
-        timeline.pause();
-        sequentialPseudocodeAnimations.pause();
-    }
-    
-    private void play(SequentialTransition timeline){
-        /*Este método reanuda la animación respectivamente.*/
-        sequentialPseudocodeAnimations.play();
-        //sequentialTranslateTransitionsCaja.play();
-        timeline.play();   
     }
     
     private void stepForward(ArrayList<Animation> transitions, ArrayList<Animation> pseudocodeAnimations){
@@ -210,13 +176,13 @@ public class AnimationWindowController {
     }
     
     private void setCrane(){
-        Rectangle rec1 = animator.getRectangleAnimation1();
-        Rectangle rec2 = animator.getRectangleAnimation2();
-        Rectangle rec3 = animator.getRectangleGrua();
-        Rectangle rec4 = animator.getRectangleGrua2();
+        Rectangle rec1 = animator.getCraneUpperBox1();
+        Rectangle rec2 = animator.getCraneUpperBox2();
+        Rectangle rec3 = animator.getMagnet1();
+        Rectangle rec4 = animator.getMagnet2();
         
-        Line l1 = animator.getGrua1() ;
-        Line l2 = animator.getGrua2();
+        Line l1 = animator.getRope1();
+        Line l2 = animator.getRope2();
 
         root.getChildren().addAll(l1,l2);
         root.getChildren().addAll(rec1,rec2,rec3,rec4);
