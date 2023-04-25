@@ -34,6 +34,8 @@ public class InputController implements Initializable {
     @FXML
     private TextField numbers;
     @FXML
+    private ComboBox<String> sortAlgorithm;
+    @FXML
     private ComboBox<String> modes;
     @FXML
     private Button continueButton;
@@ -41,6 +43,7 @@ public class InputController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         modes.setItems(FXCollections.observableArrayList("Normal mode", "Step by step mode"));
+        sortAlgorithm.setItems(FXCollections.observableArrayList("Insertion sort", "Bubble sort"));
     }    
 
     @FXML
@@ -58,10 +61,15 @@ public class InputController implements Initializable {
         }
 
         if(numberValidation()){ 
-            if(modes.getValue().equals("Step by step mode"))
-                Main.modeType = 1;
-            else
+            if(modes.getValue().equals("Normal mode"))
                 Main.modeType = 0;
+            else
+                Main.modeType = 1;
+            
+            if(sortAlgorithm.getValue().equals("Insertion sort"))
+                Main.sortType = 0;
+            else
+                Main.sortType = 1;
         
             ArrayList<Integer> numbers = new ArrayList(); 
             String[] numberStrings = this.numbers.getText().split(","); 
