@@ -43,7 +43,7 @@ public class InputController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         modes.setItems(FXCollections.observableArrayList("Normal mode", "Step by step mode"));
-        sortAlgorithm.setItems(FXCollections.observableArrayList("Insertion sort", "Bubble sort"));
+        sortAlgorithm.setItems(FXCollections.observableArrayList("Insertion sort", "Bubble sort", "Cocktail sort"));
     }    
 
     @FXML
@@ -68,8 +68,10 @@ public class InputController implements Initializable {
             
             if(sortAlgorithm.getValue().equals("Insertion sort"))
                 Main.sortType = 0;
-            else
+            else if(sortAlgorithm.getValue().equals("Bubble sort"))
                 Main.sortType = 1;
+            else
+                Main.sortType = 2;
         
             ArrayList<Integer> numbers = new ArrayList(); 
             String[] numberStrings = this.numbers.getText().split(","); 

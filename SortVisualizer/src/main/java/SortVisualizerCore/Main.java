@@ -25,7 +25,7 @@ public class Main extends Application {
     static double separation;
     
     public static int modeType = 0;
-    public static int sortType = 1;
+    public static int sortType = 2;
 
     public static ArrayList<StackPane> getRectangles(ArrayList<Integer> numbers) {
         squareDimension = 0.75 * 0.9 * windowWidth / numbers.size();

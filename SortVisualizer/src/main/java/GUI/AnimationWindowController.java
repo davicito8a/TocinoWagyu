@@ -155,7 +155,7 @@ public class AnimationWindowController {
             transition.setRate(1);
             transition.play();
             Animation pseudocodeAnimation = pseudocodeAnimations.get(currentTransitionIndex);
-            pseudocodeAnimation.play();
+            //pseudocodeAnimation.play();
         }
     }
     
@@ -166,7 +166,7 @@ public class AnimationWindowController {
             transition.setRate(-1);
             transition.play();
             Animation pseudocodeAnimation = pseudocodeAnimations.get(currentTransitionIndex);
-            pseudocodeAnimation.play();
+            //pseudocodeAnimation.play();
         }  
     }
      

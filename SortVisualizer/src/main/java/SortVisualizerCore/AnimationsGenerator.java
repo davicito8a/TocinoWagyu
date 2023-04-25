@@ -50,6 +50,8 @@ public class AnimationsGenerator {
             case 1: 
                 getBubbleSortAnimations();
                 break;
+            case 2:
+                getCocktailSortAnimations();
             default:
                 break;
         }
@@ -133,8 +135,8 @@ public class AnimationsGenerator {
     }
     
     private void getBubbleSortAnimations(){
-        for(int i = 0; i < numbers.size(); i++){
-            for(int j = 0; j < numbers.size() - 1 - i; j++){
+        for(int i = numbers.size() - 1; i > 0; i--){
+            for(int j = 0; j < i; j++){
                 if(numbers.get(j + 1) < numbers.get(j)){
                     int currentNumber = numbers.get(j);
                     StackPane stackpane = boxes.get(j);
@@ -159,6 +161,81 @@ public class AnimationsGenerator {
                 }
             }
         }
+    }
+    
+    private void getCocktailSortAnimations(){
+        boolean swapped = true;
+        int start = 0;
+        int end = numbers.size();
+        
+        while(swapped){
+            swapped = false;
+            
+            for(int i = start; i < end - 1; i++){
+                if(numbers.get(i + 1) < numbers.get(i)){
+                    int currentNumber = numbers.get(i);
+                    StackPane stackpane = boxes.get(i);
+                    
+                    translateAnimations.add(mover.moveInY(0.65 * Main.windowHeight, 
+                            0.65 * Main.windowHeight - 2 * Main.squareDimension, 
+                            stackpane, boxes.get(i + 1)));
+                    
+                    translateAnimations.add(mover.swapInX(Main.coordinates.get(i), 
+                            Main.coordinates.get(i + 1), 
+                            stackpane, boxes.get(i + 1)));
+                    
+                    translateAnimations.add(mover.moveInY(0.65 * Main.windowHeight - 2 * Main.squareDimension, 
+                            0.65 * Main.windowHeight, 
+                            stackpane, boxes.get(i + 1)));
+                    
+                    numbers.set(i, numbers.get(i + 1));
+                    boxes.set(i, boxes.get(i + 1));
+                    
+                    numbers.set(i + 1, currentNumber);
+                    boxes.set(i + 1, stackpane);
+                    
+                    swapped = true;
+                }
+            }
+            
+            if(swapped == false){
+                break;
+            }
+            
+            swapped = false;
+            
+            end = end - 1;
+            
+            for(int i = end - 1; i >= start; i--){
+                if(numbers.get(i + 1) < numbers.get(i)){
+                    int currentNumber = numbers.get(i);
+                    StackPane stackpane = boxes.get(i);
+                    
+                    translateAnimations.add(mover.moveInY(0.65 * Main.windowHeight, 
+                            0.65 * Main.windowHeight - 2 * Main.squareDimension, 
+                            stackpane, boxes.get(i + 1)));
+                    
+                    translateAnimations.add(mover.swapInX(Main.coordinates.get(i), 
+                            Main.coordinates.get(i + 1), 
+                            stackpane, boxes.get(i + 1)));
+                    
+                    translateAnimations.add(mover.moveInY(0.65 * Main.windowHeight - 2 * Main.squareDimension, 
+                            0.65 * Main.windowHeight, 
+                            stackpane, boxes.get(i + 1)));
+                    
+                    numbers.set(i, numbers.get(i + 1));
+                    boxes.set(i, boxes.get(i + 1));
+                    
+                    numbers.set(i + 1, currentNumber);
+                    boxes.set(i + 1, stackpane);
+                    
+                    swapped = true;
+                }
+            }
+            
+            start = start + 1;   
+        }
+        
     }
     
     private void setCrane(){

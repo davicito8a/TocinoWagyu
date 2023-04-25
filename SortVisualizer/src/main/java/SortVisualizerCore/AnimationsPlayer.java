@@ -11,7 +11,7 @@ public class AnimationsPlayer {
     
     public void createSequentialTransitions(ArrayList<Animation> translateAnimations, ArrayList<Animation> pseudocodeAnimations){
         sequentialTranslateAnimations.getChildren().addAll(translateAnimations);
-        sequentialPseudocodeAnimations.getChildren().addAll(pseudocodeAnimations);
+        //sequentialPseudocodeAnimations.getChildren().addAll(pseudocodeAnimations);
     }
     
     public void play(){
