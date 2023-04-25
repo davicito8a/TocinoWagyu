@@ -24,19 +24,20 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 
 public class InputController implements Initializable {
+    
     @FXML
-    private AnchorPane AnchorPane;
+    private AnchorPane root;
+    @FXML
+    private TextField numberOfBoxes;
+    @FXML
+    private Button randomButton;
+    @FXML
+    private TextField numbers;
     @FXML
     private ComboBox<String> modes;
     @FXML
-    private TextField n;
-    @FXML
-    private Button button;
-    @FXML
-    private TextField numeroRectangulos;
-    @FXML
-    private Button random;
-
+    private Button continueButton;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         modes.setItems(FXCollections.observableArrayList("Normal mode", "Step by step mode"));
@@ -58,12 +59,12 @@ public class InputController implements Initializable {
 
         if(numberValidation()){ 
             if(modes.getValue().equals("Step by step mode"))
-                Main.type = 1;
+                Main.modeType = 1;
             else
-                Main.type = 0;
+                Main.modeType = 0;
         
             ArrayList<Integer> numbers = new ArrayList(); 
-            String[] numberStrings = this.n.getText().split(","); 
+            String[] numberStrings = this.numbers.getText().split(","); 
             for (String numberString : numberStrings) { 
                 int number = Integer.parseInt(numberString); 
                 numbers.add(number); 
@@ -86,10 +87,10 @@ public class InputController implements Initializable {
 
     private boolean numberValidation(){
         Pattern pattern = Pattern.compile("^[0-9]+(,[0-9]+)*$");
-        Matcher matcher = pattern.matcher(n.getText());
+        Matcher matcher = pattern.matcher(numbers.getText());
 
     
-        String[] numberStrings = n.getText().split(",");
+        String[] numberStrings = numbers.getText().split(",");
         boolean validNumberOfElements = numberStrings.length >= 16 && numberStrings.length <= 64;
 
    
@@ -100,8 +101,8 @@ public class InputController implements Initializable {
     }
 
     @FXML
-    private void generateRandom(ActionEvent event) {
-        if (!numeroRectangulos.getText().matches("^[0-9]+$")) {
+    private void generateRandomNumbers(ActionEvent event) {
+        if (!numberOfBoxes.getText().matches("^[0-9]+$")) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText(null);
@@ -114,12 +115,12 @@ public class InputController implements Initializable {
         }
         
         String numeros = "";
-        int numeroRectangulos = Integer.parseInt(this.numeroRectangulos.getText());
+        int numeroRectangulos = Integer.parseInt(this.numberOfBoxes.getText());
         for(int i = 0; i < numeroRectangulos; i++){
         numeros += ((int)(Math.random()*99 + 1)) + ",";
         }
         numeros = numeros.substring(0, numeros.length() - 1);
-        n.setText(numeros);
+        numbers.setText(numeros);
     }
 
 }

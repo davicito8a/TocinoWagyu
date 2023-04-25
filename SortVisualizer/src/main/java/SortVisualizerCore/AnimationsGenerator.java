@@ -42,8 +42,17 @@ public class AnimationsGenerator {
         
         setCrane();
         setLabels();
-        //getBubbleSortAnimations();
-        getInsertionSortAnimations();   
+        
+        switch (Main.sortType){
+            case 0: 
+                getInsertionSortAnimations(); 
+                break;
+            case 1: 
+                getBubbleSortAnimations();
+                break;
+            default:
+                break;
+        }
     }
    
     private void getInsertionSortAnimations(){

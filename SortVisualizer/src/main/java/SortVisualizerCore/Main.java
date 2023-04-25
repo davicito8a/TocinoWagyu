@@ -24,7 +24,8 @@ public class Main extends Application {
     static double squareDimension;
     static double separation;
     
-    public static int type = 0;
+    public static int modeType = 0;
+    public static int sortType = 1;
 
     public static ArrayList<StackPane> getRectangles(ArrayList<Integer> numbers) {
         squareDimension = 0.75 * 0.9 * windowWidth / numbers.size();
@@ -88,7 +89,7 @@ public class Main extends Application {
     */
     public static void newAnimationWindow(ArrayList<Integer> numbers, ArrayList<StackPane> stackpanes) throws IOException{
         Stage stage = new Stage();
-        AnimationWindowController windowGenerator = new AnimationWindowController(numbers, stackpanes, type);
+        AnimationWindowController windowGenerator = new AnimationWindowController(numbers, stackpanes, modeType);
         stage.setScene(windowGenerator.getScene());
         stage.setWidth(windowWidth);
         stage.setHeight(windowHeight);
