@@ -171,7 +171,7 @@ public class AnimationWindowController {
             transition.setOnFinished(e -> currentTransitionIndex++);
             transition.setRate(1);
             transition.play();
-            Animation pseudocodeAnimation = pseudocodeAnimations.get(currentTransitionIndex);
+            //Animation pseudocodeAnimation = pseudocodeAnimations.get(currentTransitionIndex);
             //pseudocodeAnimation.play();
         }
     }
@@ -182,7 +182,7 @@ public class AnimationWindowController {
             transition.setOnFinished(e -> currentTransitionIndex--);
             transition.setRate(-1);
             transition.play();
-            Animation pseudocodeAnimation = pseudocodeAnimations.get(currentTransitionIndex);
+            //Animation pseudocodeAnimation = pseudocodeAnimations.get(currentTransitionIndex);
             //pseudocodeAnimation.play();
         }  
     }

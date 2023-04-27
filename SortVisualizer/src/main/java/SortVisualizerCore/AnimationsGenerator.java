@@ -3,6 +3,7 @@ package SortVisualizerCore;
 import java.util.ArrayList;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
+import javafx.animation.ParallelTransition;
 import javafx.animation.Timeline;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
@@ -80,54 +81,45 @@ public class AnimationsGenerator {
             StackPane stackpane = boxes.get(i); 
             int currentNumber = numbers.get(i); 
         
-            translateAnimations.add(mover.moveInY(0.65* Main.windowHeight, 
+            translateAnimations.add(parallelAnimations(mover.moveInY(0.65* Main.windowHeight, 
                     0.65* Main.windowHeight - 2 * Main.squareDimension, 
-                    boxes.get(i))); 
-            
-            changeLabelProperties(label1, 
+                    boxes.get(i)), changeLabelProperties(label1, 
                     "for i = " + i, 
                     initialStyle, finalStyle, 
-                    Duration.millis(400)); 
+                    Duration.millis(400)))); 
+            
+             
         
             while(j > 0 && currentNumber < numbers.get(j - 1)){ 
-                translateAnimations.add(mover.moveInX(Main.coordinates.get(j - 1), 
+                translateAnimations.add(parallelAnimations(mover.moveInX(Main.coordinates.get(j - 1), 
                         Main.coordinates.get(j), 
-                        boxes.get(j - 1), craneUpperBox1,rope1,magnet1)); 
+                        boxes.get(j - 1), craneUpperBox1,rope1,magnet1), changeLabelProperties(label2, 
+                            "\twhile(" + currentNumber + " < numbers[" + (j - 1) + "])\n\t\tnumbers[" + j + "] = numbers [" + (j - 1) + "]", 
+                            initialStyle, finalStyle, 
+                            Duration.millis(400)))); 
             
                 boxes.set(j, boxes.get(j - 1)); 
                 numbers.set(j, numbers.get(j - 1)); 
             
                 if(j - 2 >= 0){
-                    changeLabelProperties(label2, 
-                            "\twhile(" + currentNumber + " < numbers[" + (j - 1) + "])\n\t\tnumbers[" + j + "] = numbers [" + (j - 1) + "]", 
-                            initialStyle, finalStyle, 
-                            Duration.millis(800)); 
-                    
                     translateAnimations.add(mover.moveInX(Main.coordinates.get(j), 
-                            Main.coordinates.get(j - 2), 
-                            craneUpperBox1,rope1,magnet1)); 
-                } else {
-                    changeLabelProperties(label2, 
-                            "\twhile(" + currentNumber + " < numbers[" + (j - 1) + "])\n\t\tnumbers[" + j + "] = numbers [" + (j - 1) + "]", 
-                            initialStyle, finalStyle, 
-                            Duration.millis(400));
-                }
-
+                    Main.coordinates.get(j - 2), 
+                    craneUpperBox1,rope1,magnet1)); 
+                }  
+               
                 j--; 
             }
             
             translateAnimations.add(mover.moveInX(Main.coordinates.get(i), 
                     Main.coordinates.get(j), 
                     stackpane, craneUpperBox2,rope2,magnet2)); 
-            
-            changeLabelProperties(label3, 
+
+            translateAnimations.add(parallelAnimations(mover.moveInY(0.65 * Main.windowHeight - 2 * Main.squareDimension, 
+                    0.65 * Main.windowHeight, 
+                    stackpane), changeLabelProperties(label3, 
                     "\tnumbers[" + j + "]" + " = " + currentNumber, 
                     initialStyle, finalStyle, 
-                    Duration.millis(1600));
-            
-            translateAnimations.add(mover.moveInY(0.65 * Main.windowHeight - 2 * Main.squareDimension, 
-                    0.65 * Main.windowHeight, 
-                    stackpane));
+                    Duration.millis(400))));
          
             boxes.set(j, stackpane); 
             numbers.set(j, currentNumber);
@@ -295,7 +287,7 @@ public class AnimationsGenerator {
         pseudocodeBox.setLayoutY(0.8 * Main.windowHeight);
     }
       
-    private void changeLabelProperties(Label label, String newText, String initialStyle, String newStyle, Duration duration){
+    private Animation changeLabelProperties(Label label, String newText, String initialStyle, String newStyle, Duration duration){
         Timeline changeLabelPropertiesAnimation = new Timeline();
         
         KeyFrame newTextFrame = new KeyFrame(Duration.ZERO, event -> label.setText(newText));
@@ -304,7 +296,13 @@ public class AnimationsGenerator {
         
         changeLabelPropertiesAnimation.getKeyFrames().addAll(newTextFrame, newStyleFrame, initialStyleFrame);
         
-        pseudocodeAnimations.add(changeLabelPropertiesAnimation);
+        return changeLabelPropertiesAnimation;
+    }
+    
+    private ParallelTransition parallelAnimations(Animation animation1, Animation animation2){
+        ParallelTransition parallelAnimations = new ParallelTransition();
+        parallelAnimations.getChildren().addAll(animation1, animation2);
+        return parallelAnimations;
     }
 
     public ArrayList<Animation> getTranslateAnimations() {
