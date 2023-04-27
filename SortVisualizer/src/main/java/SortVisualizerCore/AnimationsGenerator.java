@@ -274,6 +274,7 @@ public class AnimationsGenerator {
 
     private void setLabels(){
         pseudocodeBox = new VBox();
+        pseudocodeBox.setStyle("-fx-background-color: black");
         
         label1 = new Label("for i = n");
         label2 = new Label("\twhile(currentNumber < numbers[j - 1])\n\t\tnumbers[j] = numbers [j - 1]");
@@ -283,7 +284,7 @@ public class AnimationsGenerator {
         label3.setStyle(initialStyle);
        
         pseudocodeBox.getChildren().addAll(label1, label2, label3);
-        pseudocodeBox.setLayoutX(0.05 * Main.windowWidth);
+        pseudocodeBox.setLayoutX(0.0 * Main.windowWidth);
         pseudocodeBox.setLayoutY(0.8 * Main.windowHeight);
     }
       
