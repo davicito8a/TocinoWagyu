@@ -6,6 +6,8 @@ import SortVisualizerCore.Main;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.Animation;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -44,7 +46,10 @@ public class AnimationWindowController {
     private final Button decreaseSpeed = new Button("Decrease");
     private final Button stepForward = new Button("Forward");
     private final Button stepBackward = new Button("Backward");
+    private final Button changeBackground = new Button("Background");
     private final int prefWidth = Main.windowWidth/15;
+    
+    private int backgroundCounter = 1;
     
     public AnimationWindowController(ArrayList<Integer> numbers, ArrayList<StackPane> stackpanes, int type) throws IOException{
         this.type = type;
@@ -104,6 +109,10 @@ public class AnimationWindowController {
         stepBackward.setLayoutY(0.85 * Main.windowHeight);
         stepBackward.setPrefWidth(prefWidth);
         
+        changeBackground.setLayoutX(0.9 * Main.windowWidth);
+        changeBackground.setLayoutY(0.05 * Main.windowHeight);
+        changeBackground.setPrefWidth(prefWidth);
+        
         play.setOnAction(event -> {
             animationPlayer.play();
         });
@@ -128,7 +137,15 @@ public class AnimationWindowController {
             stepBackward(translateAnimations, pseudocodeAnimations);
         });  
         
-        root.getChildren().addAll(play, pause, increaseSpeed, decreaseSpeed, stepForward, stepBackward);
+        changeBackground.setOnAction(event -> {
+            try {
+                changeBackground();
+            } catch (IOException ex) {
+                Logger.getLogger(AnimationWindowController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
+        root.getChildren().addAll(play, pause, increaseSpeed, decreaseSpeed, stepForward, stepBackward, changeBackground);
         
         if(type == 0){
             stepForward.setVisible(false);
@@ -181,6 +198,22 @@ public class AnimationWindowController {
 
         root.getChildren().addAll(rope1,rope2);
         root.getChildren().addAll(craneUpperBox1,craneUpperBox2,magnet1,magnet2);
+    }
+    
+    private void changeBackground() throws IOException{
+        BackgroundImage background = null;
+        if(backgroundCounter % 2 == 1){
+            background = new BackgroundImage(new Image(new File("src/main/java/Resources/background2.jpg").toURI().toURL().toExternalForm()),
+            BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT,
+            BackgroundSize.DEFAULT);
+        } else {
+            background = new BackgroundImage(new Image(new File("src/main/java/Resources/background.png").toURI().toURL().toExternalForm()),
+            BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT,
+            BackgroundSize.DEFAULT);
+        }
+        
+        backgroundCounter++;
+        root.setBackground(new Background(background));
     }
     
     public Scene getScene(){
