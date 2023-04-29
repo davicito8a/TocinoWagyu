@@ -10,6 +10,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.Animation;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
@@ -20,6 +22,7 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 
@@ -47,7 +50,7 @@ public class AnimationWindowController {
     private final Button stepForward = new Button("Forward");
     private final Button stepBackward = new Button("Backward");
     private final Button changeBackground = new Button("Background");
-    private final int prefWidth = Main.windowWidth/15;
+    private final int prefWidth = Main.windowWidth/20;
     
     private int backgroundCounter = 1;
     
@@ -61,6 +64,11 @@ public class AnimationWindowController {
 
     private void start () throws IOException{
         getTransitions();
+        Canvas canvas = new Canvas(Main.windowHeight, Main.windowWidth);
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+
+        gc.setFill(Color.BLUE);
+        gc.fillRect(50, 0.65*Main.windowHeight, 100, 50);
         
         if(type == 0){
             animationPlayer.createSequentialTransitions(translateAnimations, pseudocodeAnimations);        
@@ -72,24 +80,26 @@ public class AnimationWindowController {
         BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT,
         BackgroundSize.DEFAULT);
       
+        
         root.getChildren().addAll(stackpanes);
+        root.getChildren().add(canvas);
        
-        root.setBackground(new Background(background));
+        //root.setBackground(new Background(background));
         setButtonsLayout();
         scene = new Scene(root);
         scene.getStylesheets().add(new File("src/main/java/Resources/Styles.css").toURI().toURL().toExternalForm());
      
         root.getChildren().add(pseudocodeBox);
-        setCrane();
+        //setCrane();
         
     }
     
     private void setButtonsLayout(){
-        play.setLayoutX(0.55 * Main.windowWidth);
+        play.setLayoutX(0.6 * Main.windowWidth);
         play.setLayoutY(0.85 * Main.windowHeight);
         play.setPrefWidth(prefWidth);
         
-        pause.setLayoutX(0.65 * Main.windowWidth);
+        pause.setLayoutX(0.675 * Main.windowWidth);
         pause.setLayoutY(0.85 * Main.windowHeight);
         pause.setPrefWidth(prefWidth);
         
@@ -97,7 +107,7 @@ public class AnimationWindowController {
         increaseSpeed.setLayoutY(0.85 * Main.windowHeight);
         increaseSpeed.setPrefWidth(prefWidth);
         
-        decreaseSpeed.setLayoutX(0.85 * Main.windowWidth);
+        decreaseSpeed.setLayoutX(0.825 * Main.windowWidth);
         decreaseSpeed.setLayoutY(0.85 * Main.windowHeight);
         decreaseSpeed.setPrefWidth(prefWidth);
         
@@ -167,10 +177,10 @@ public class AnimationWindowController {
     
     private void stepForward(ArrayList<Animation> transitions, ArrayList<Animation> pseudocodeAnimations){
         if(currentTransitionIndex <= transitions.size() - 1){
-            Animation transition = transitions.get(currentTransitionIndex);
-            transition.setOnFinished(e -> currentTransitionIndex++);
-            transition.setRate(1);
-            transition.play();
+            Animation animation = transitions.get(currentTransitionIndex);
+            animation.setOnFinished(e -> currentTransitionIndex++);
+            animation.setRate(1);
+            animation.play();
             //Animation pseudocodeAnimation = pseudocodeAnimations.get(currentTransitionIndex);
             //pseudocodeAnimation.play();
         }
@@ -178,15 +188,15 @@ public class AnimationWindowController {
     
     private void stepBackward(ArrayList<Animation> transitions, ArrayList<Animation> pseudocodeAnimations){
         if(currentTransitionIndex >= 1){
-            Animation transition = transitions.get(currentTransitionIndex - 1);
-            transition.setOnFinished(e -> currentTransitionIndex--);
-            transition.setRate(-1);
-            transition.play();
+            Animation animation = transitions.get(currentTransitionIndex - 1);
+            animation.setOnFinished(e -> currentTransitionIndex--);
+            animation.setRate(-1);
+            animation.play();
             //Animation pseudocodeAnimation = pseudocodeAnimations.get(currentTransitionIndex);
             //pseudocodeAnimation.play();
         }  
     }
-     
+     /*
     private void setCrane(){
         Rectangle craneUpperBox1 = animator.getCraneUpperBox1();
         Rectangle craneUpperBox2 = animator.getCraneUpperBox2();
@@ -199,6 +209,7 @@ public class AnimationWindowController {
         root.getChildren().addAll(rope1,rope2);
         root.getChildren().addAll(craneUpperBox1,craneUpperBox2,magnet1,magnet2);
     }
+*/
     
     private void changeBackground() throws IOException{
         BackgroundImage background = null;

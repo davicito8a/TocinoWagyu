@@ -91,7 +91,7 @@ public class InputController implements Initializable {
             ButtonType okButton = new ButtonType("Aceptar", ButtonData.OK_DONE); 
             alert.getButtonTypes().setAll(okButton); 
 
-            Optional<ButtonType> result = alert.showAndWait(); 
+            //Optional<ButtonType> result = alert.showAndWait(); 
     }
 }
 
@@ -121,7 +121,7 @@ public class InputController implements Initializable {
             ButtonType okButton = new ButtonType("Aceptar", ButtonData.OK_DONE);
             alert.getButtonTypes().setAll(okButton);
 
-            Optional<ButtonType> result = alert.showAndWait();
+            //Optional<ButtonType> result = alert.showAndWait();
         }
         
         String numeros = "";

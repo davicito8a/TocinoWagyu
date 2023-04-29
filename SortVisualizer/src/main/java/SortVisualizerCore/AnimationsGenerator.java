@@ -2,16 +2,11 @@ package SortVisualizerCore;
 
 import java.util.ArrayList;
 import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
 import javafx.animation.ParallelTransition;
-import javafx.animation.Timeline;
-import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
 
 public class AnimationsGenerator {
     private final Mover mover = new Mover();
@@ -19,13 +14,11 @@ public class AnimationsGenerator {
     private final ArrayList<Integer> numbers;
     private final ArrayList<StackPane> boxes;
     
-    private final ArrayList<Animation> translateAnimations;
-    private final ArrayList<Animation> pseudocodeAnimations;
+    private final ArrayList<Animation> translateAnimations = new ArrayList();
+    private final ArrayList<Animation> pseudocodeAnimations = new ArrayList();
     
-    private VBox pseudocodeBox;
-    private Label label1, label2, label3;
-    private final String initialStyle = "-fx-text-fill: white";
-    private final String finalStyle = "-fx-background-color: yellow";
+    private VBox pseudocodeBox = new VBox();  
+    private Pseudocode pseudocode = new Pseudocode(pseudocodeBox);
     
     Rectangle craneUpperBox1 = new Rectangle();
     Rectangle craneUpperBox2 = new Rectangle();
@@ -38,21 +31,20 @@ public class AnimationsGenerator {
         this.numbers = numbers;
         this.boxes = stackpanes;
         
-        translateAnimations = new ArrayList();
-        pseudocodeAnimations = new ArrayList();
-        
-        setCrane();
-        setLabels();
+        //setCrane();
         
         switch (Main.sortType){
             case 0: 
                 getInsertionSortAnimations(); 
+                pseudocode.selectInsertionSortLines();
                 break;
             case 1: 
                 getBubbleSortAnimations();
+                pseudocode.selectBubbleSortLines();
                 break;
             case 2:
                 getCocktailSortAnimations();
+                pseudocode.selectCocktailSortLines();
             default:
                 break;
         }
@@ -62,6 +54,7 @@ public class AnimationsGenerator {
         int j = 1; 
         
         for(int i = 1; i < numbers.size(); i++){ 
+            /*
             if (j > 0){ 
                 translateAnimations.add(mover.moveInX(Main.coordinates.get(j - 1), 
                         Main.coordinates.get(i - 1), craneUpperBox1,
@@ -71,10 +64,12 @@ public class AnimationsGenerator {
                         Main.coordinates.get(i - 1), 
                         craneUpperBox1,rope1,magnet1)); 
             }
-        
+*/
+        /*
             translateAnimations.add(mover.moveInX(Main.coordinates.get(j), 
                     Main.coordinates.get(i), 
                     craneUpperBox2,rope2,magnet2)); 
+            */
         
             j = i; 
         
@@ -83,43 +78,38 @@ public class AnimationsGenerator {
         
             translateAnimations.add(parallelAnimations(mover.moveInY(0.65* Main.windowHeight, 
                     0.65* Main.windowHeight - 2 * Main.squareDimension, 
-                    boxes.get(i)), changeLabelProperties(label1, 
-                    "for i = " + i, 
-                    initialStyle, finalStyle, 
-                    Duration.millis(400)))); 
+                    boxes.get(i)), pseudocode.changeLabelProperties(1, 
+                    "for i = " + i))); 
             
              
         
             while(j > 0 && currentNumber < numbers.get(j - 1)){ 
                 translateAnimations.add(parallelAnimations(mover.moveInX(Main.coordinates.get(j - 1), 
                         Main.coordinates.get(j), 
-                        boxes.get(j - 1), craneUpperBox1,rope1,magnet1), changeLabelProperties(label2, 
-                            "\twhile(" + currentNumber + " < numbers[" + (j - 1) + "])\n\t\tnumbers[" + j + "] = numbers [" + (j - 1) + "]", 
-                            initialStyle, finalStyle, 
-                            Duration.millis(400)))); 
+                        boxes.get(j - 1)), pseudocode.changeLabelProperties(2, 
+                            "\twhile(" + currentNumber + " < numbers[" + (j - 1) + "])\n\t\tnumbers[" + j + "] = numbers [" + (j - 1) + "]"))); 
             
                 boxes.set(j, boxes.get(j - 1)); 
                 numbers.set(j, numbers.get(j - 1)); 
-            
+            /*
                 if(j - 2 >= 0){
                     translateAnimations.add(mover.moveInX(Main.coordinates.get(j), 
                     Main.coordinates.get(j - 2), 
                     craneUpperBox1,rope1,magnet1)); 
                 }  
                
+*/
                 j--; 
             }
-            
-            translateAnimations.add(mover.moveInX(Main.coordinates.get(i), 
+            if(i != j)
+                translateAnimations.add(mover.moveInX(Main.coordinates.get(i), 
                     Main.coordinates.get(j), 
-                    stackpane, craneUpperBox2,rope2,magnet2)); 
+                    stackpane)); 
 
             translateAnimations.add(parallelAnimations(mover.moveInY(0.65 * Main.windowHeight - 2 * Main.squareDimension, 
                     0.65 * Main.windowHeight, 
-                    stackpane), changeLabelProperties(label3, 
-                    "\tnumbers[" + j + "]" + " = " + currentNumber, 
-                    initialStyle, finalStyle, 
-                    Duration.millis(400))));
+                    stackpane), pseudocode.changeLabelProperties(3, 
+                    "\tnumbers[" + j + "]" + " = " + currentNumber)));
          
             boxes.set(j, stackpane); 
             numbers.set(j, currentNumber);
@@ -230,6 +220,7 @@ public class AnimationsGenerator {
         
     }
     
+    /*
     private void setCrane(){
         int y = 0;
         int y2 = 10;
@@ -271,34 +262,7 @@ public class AnimationsGenerator {
         rope2.setTranslateX(Main.coordinates.get(1));
         rope2.setTranslateY(y2);
     }
-
-    private void setLabels(){
-        pseudocodeBox = new VBox();
-        pseudocodeBox.setStyle("-fx-background-color: black");
-        
-        label1 = new Label("for i = n");
-        label2 = new Label("\twhile(currentNumber < numbers[j - 1])\n\t\tnumbers[j] = numbers [j - 1]");
-        label3 = new Label("\tnumbers[j] = currentNumber");
-        label1.setStyle(initialStyle);
-        label2.setStyle(initialStyle);
-        label3.setStyle(initialStyle);
-       
-        pseudocodeBox.getChildren().addAll(label1, label2, label3);
-        pseudocodeBox.setLayoutX(0.0 * Main.windowWidth);
-        pseudocodeBox.setLayoutY(0.8 * Main.windowHeight);
-    }
-      
-    private Animation changeLabelProperties(Label label, String newText, String initialStyle, String newStyle, Duration duration){
-        Timeline changeLabelPropertiesAnimation = new Timeline();
-        
-        KeyFrame newTextFrame = new KeyFrame(Duration.ZERO, event -> label.setText(newText));
-        KeyFrame newStyleFrame = new KeyFrame(Duration.ZERO, event -> label.setStyle(newStyle));
-        KeyFrame initialStyleFrame = new KeyFrame(duration, event -> label.setStyle(initialStyle));
-        
-        changeLabelPropertiesAnimation.getKeyFrames().addAll(newTextFrame, newStyleFrame, initialStyleFrame);
-        
-        return changeLabelPropertiesAnimation;
-    }
+*/
     
     private ParallelTransition parallelAnimations(Animation animation1, Animation animation2){
         ParallelTransition parallelAnimations = new ParallelTransition();
