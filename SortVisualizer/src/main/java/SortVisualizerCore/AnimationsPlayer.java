@@ -3,6 +3,7 @@ package SortVisualizerCore;
 import java.util.ArrayList;
 import javafx.animation.Animation;
 import static javafx.animation.Animation.Status.RUNNING;
+import javafx.animation.ParallelTransition;
 import javafx.animation.SequentialTransition;
 
 public class AnimationsPlayer {
@@ -10,8 +11,22 @@ public class AnimationsPlayer {
     SequentialTransition sequentialPseudocodeAnimations = new SequentialTransition();
     
     public void createSequentialTransitions(ArrayList<Animation> translateAnimations, ArrayList<Animation> pseudocodeAnimations){
-        sequentialTranslateAnimations.getChildren().addAll(translateAnimations);
-        //sequentialPseudocodeAnimations.getChildren().addAll(pseudocodeAnimations);
+        ArrayList<Animation> animations = new ArrayList();
+        
+        if(!pseudocodeAnimations.isEmpty()){
+            for(int i = 0; i < translateAnimations.size(); i++){
+                if(pseudocodeAnimations.get(i) != null){
+                    ParallelTransition parallel = new ParallelTransition();
+                    parallel.getChildren().addAll(translateAnimations.get(i), pseudocodeAnimations.get(i));  
+                    animations.add(parallel);
+                } else {
+                    animations.add(translateAnimations.get(i));
+                }
+            }
+            sequentialTranslateAnimations.getChildren().addAll(animations);
+        } else {
+            sequentialTranslateAnimations.getChildren().addAll(translateAnimations);
+        }
     }
     
     public void play(){
