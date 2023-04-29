@@ -27,7 +27,7 @@ public class Pseudocode {
     public void selectBubbleSortLines(){
         addLines("for i = n", 
                 "\tfor j = n2", 
-                "\tnumbers[j] = currentNumber");
+                "\t\tswap(j, j + 1)");
     }
     
     public void selectCocktailSortLines(){
@@ -48,7 +48,7 @@ public class Pseudocode {
     public Animation changeLabelProperties(int lineNumber, String newText){
         Timeline changeLabelPropertiesAnimation = new Timeline();
         
-        KeyFrame newTextFrame = new KeyFrame(Duration.millis(1), event -> labels.get(lineNumber - 1).setText(newText));
+        KeyFrame newTextFrame = new KeyFrame(Duration.millis(0.1), event -> labels.get(lineNumber - 1).setText(newText));
         KeyFrame newStyleFrame = new KeyFrame(Duration.millis(1), event -> labels.get(lineNumber - 1).setStyle(newStyle));
         KeyFrame initialStyleFrame = new KeyFrame(Duration.millis(400), event -> labels.get(lineNumber - 1).setStyle(initialStyle));
         

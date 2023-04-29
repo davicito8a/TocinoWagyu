@@ -3,7 +3,10 @@ package SortVisualizerCore;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
+import javafx.animation.ParallelTransition;
 import javafx.animation.Timeline;
+import javafx.animation.Transition;
+import javafx.animation.TranslateTransition;
 import javafx.scene.Node;
 import javafx.util.Duration;
 
@@ -17,6 +20,7 @@ public class Mover {
     Las animaciones se crean a partir de las clases KeyValue, KeyFrame y Timeline, y la propiedad translate() de los nodos.
     */
     
+    /*
     public Animation moveInX(double fromX, double toX, Node... nodes){
         Timeline moveInX = new Timeline();
         
@@ -32,7 +36,51 @@ public class Mover {
         
         return moveInX;
     }
+    */
     
+    public Animation moveInX(double fromX, double toX, Node... nodes){
+        ParallelTransition parallel = new ParallelTransition();
+        for(Node node: nodes){
+            TranslateTransition translate = new TranslateTransition();
+            translate.setNode(node);
+            translate.setFromX(fromX);
+            translate.setToX(toX);
+            parallel.getChildren().add(translate);
+        }
+        return parallel;
+    }
+    
+    public Animation swapInX(double fromX, double toX, Node node1, Node node2){
+        ParallelTransition swapInX = new ParallelTransition(); 
+        
+        TranslateTransition t1 = new TranslateTransition();
+        t1.setNode(node1);
+        t1.setFromX(fromX);
+        t1.setToX(toX);
+        
+        TranslateTransition t2 = new TranslateTransition();
+        t2.setNode(node2);
+        t2.setFromX(toX);
+        t2.setToX(fromX);
+        
+        swapInX.getChildren().addAll(t1, t2);
+        
+        return swapInX;
+    }
+    
+    public Animation moveInY(double fromY, double toY, Node... nodes){
+        ParallelTransition parallel = new ParallelTransition();
+        for(Node node: nodes){
+            TranslateTransition translate = new TranslateTransition();
+            translate.setNode(node);
+            translate.setFromY(fromY);
+            translate.setToY(toY);
+            parallel.getChildren().add(translate);
+        }
+        return parallel;
+    }
+    
+    /*
     public Animation swapInX(double fromX, double toX, Node node1, Node node2){
         Timeline swapInX = new Timeline(); 
         
@@ -50,7 +98,9 @@ public class Mover {
         
         return swapInX;
     }
+    */
     
+    /*
     public Animation moveInY(double fromY, double toY, Node... nodes){
         Timeline moveInY = new Timeline();
         
@@ -66,5 +116,6 @@ public class Mover {
         
         return moveInY;
     }
+    */
     
 }

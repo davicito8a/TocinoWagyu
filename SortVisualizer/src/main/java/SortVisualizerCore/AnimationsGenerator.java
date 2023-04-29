@@ -136,14 +136,17 @@ public class AnimationsGenerator {
                     translateAnimations.add(mover.moveInY(0.65 * Main.windowHeight, 
                             0.65 * Main.windowHeight - 2 * Main.squareDimension, 
                             stackpane, boxes.get(j + 1)));
+                    pseudocodeAnimations.add(pseudocode.changeLabelProperties(2, "\tfor j = " + j));
                     
                     translateAnimations.add(mover.swapInX(Main.coordinates.get(j), 
                             Main.coordinates.get(j + 1), 
                             stackpane, boxes.get(j + 1)));
+                    pseudocodeAnimations.add(pseudocode.changeLabelProperties(3, "\t\tswap(" + j + ", " + (j + 1) + ")"));
                     
                     translateAnimations.add(mover.moveInY(0.65 * Main.windowHeight - 2 * Main.squareDimension, 
                             0.65 * Main.windowHeight, 
                             stackpane, boxes.get(j + 1)));
+                    pseudocodeAnimations.add(null);
                     
                     numbers.set(j, numbers.get(j + 1));
                     boxes.set(j, boxes.get(j + 1));
