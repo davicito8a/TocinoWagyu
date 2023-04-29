@@ -5,6 +5,7 @@ import javafx.animation.Animation;
 import javafx.animation.ParallelTransition;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 
@@ -31,7 +32,7 @@ public class AnimationsGenerator {
         this.numbers = numbers;
         this.boxes = stackpanes;
         
-        //setCrane();
+        setCrane();
         
         switch (Main.sortType){
             case 0: 
@@ -54,7 +55,7 @@ public class AnimationsGenerator {
         int j = 1; 
         
         for(int i = 1; i < numbers.size(); i++){ 
-            /*
+            
             if (j > 0){ 
                 translateAnimations.add(mover.moveInX(Main.coordinates.get(j - 1), 
                         Main.coordinates.get(i - 1), craneUpperBox1,
@@ -64,12 +65,14 @@ public class AnimationsGenerator {
                         Main.coordinates.get(i - 1), 
                         craneUpperBox1,rope1,magnet1)); 
             }
-*/
-        /*
+            pseudocodeAnimations.add(null);
+
+        
             translateAnimations.add(mover.moveInX(Main.coordinates.get(j), 
                     Main.coordinates.get(i), 
                     craneUpperBox2,rope2,magnet2)); 
-            */
+            pseudocodeAnimations.add(null);
+            
         
             j = i; 
         
@@ -86,27 +89,28 @@ public class AnimationsGenerator {
             while(j > 0 && currentNumber < numbers.get(j - 1)){ 
                 translateAnimations.add(mover.moveInX(Main.coordinates.get(j - 1), 
                         Main.coordinates.get(j), 
-                        boxes.get(j - 1))); 
+                        boxes.get(j - 1), craneUpperBox1, rope1, magnet1)); 
                 
                 pseudocodeAnimations.add(pseudocode.changeLabelProperties(2, 
                             "\twhile(" + currentNumber + " < numbers[" + (j - 1) + "])\n\t\tnumbers[" + j + "] = numbers [" + (j - 1) + "]"));
             
                 boxes.set(j, boxes.get(j - 1)); 
                 numbers.set(j, numbers.get(j - 1)); 
-            /*
+            
                 if(j - 2 >= 0){
                     translateAnimations.add(mover.moveInX(Main.coordinates.get(j), 
                     Main.coordinates.get(j - 2), 
-                    craneUpperBox1,rope1,magnet1)); 
+                    craneUpperBox1,rope1,magnet1));
+                    pseudocodeAnimations.add(null);
                 }  
                
-*/
+
                 j--; 
             }
             if(i != j){
                 translateAnimations.add(mover.moveInX(Main.coordinates.get(i), 
                     Main.coordinates.get(j), 
-                    stackpane)); 
+                    stackpane, craneUpperBox2, rope2, magnet2)); 
                 pseudocodeAnimations.add(null);
             }
 
@@ -226,7 +230,7 @@ public class AnimationsGenerator {
         
     }
     
-    /*
+    
     private void setCrane(){
         int y = 0;
         int y2 = 10;
@@ -268,7 +272,7 @@ public class AnimationsGenerator {
         rope2.setTranslateX(Main.coordinates.get(1));
         rope2.setTranslateY(y2);
     }
-*/
+
     
     private ParallelTransition parallelAnimations(Animation animation1, Animation animation2){
         ParallelTransition parallelAnimations = new ParallelTransition();

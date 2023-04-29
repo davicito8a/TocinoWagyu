@@ -23,6 +23,8 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 
 public class AnimationWindowController {
     private final int type;
@@ -91,7 +93,7 @@ public class AnimationWindowController {
         scene.getStylesheets().add(new File("src/main/java/Resources/Styles.css").toURI().toURL().toExternalForm());
      
         root.getChildren().add(pseudocodeBox);
-        //setCrane();
+        setCrane();
         
     }
     
@@ -201,7 +203,7 @@ public class AnimationWindowController {
             }
         }  
     }
-     /*
+     
     private void setCrane(){
         Rectangle craneUpperBox1 = animator.getCraneUpperBox1();
         Rectangle craneUpperBox2 = animator.getCraneUpperBox2();
@@ -214,7 +216,7 @@ public class AnimationWindowController {
         root.getChildren().addAll(rope1,rope2);
         root.getChildren().addAll(craneUpperBox1,craneUpperBox2,magnet1,magnet2);
     }
-*/
+
     
     private void changeBackground() throws IOException{
         BackgroundImage background = null;
