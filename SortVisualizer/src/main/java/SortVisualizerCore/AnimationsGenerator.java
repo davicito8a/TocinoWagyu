@@ -65,35 +65,27 @@ public class AnimationsGenerator {
                         Main.coordinates.get(i - 1), 
                         craneUpperBox1,rope1,magnet1)); 
             }
-            pseudocodeAnimations.add(null);
-
-        
+            
             translateAnimations.add(mover.moveInX(Main.coordinates.get(j), 
                     Main.coordinates.get(i), 
                     craneUpperBox2,rope2,magnet2)); 
-            pseudocodeAnimations.add(null);
             
-        
             j = i; 
         
             StackPane stackpane = boxes.get(i); 
             int currentNumber = numbers.get(i); 
         
-            translateAnimations.add(mover.moveInY(0.65* Main.windowHeight, 
-                    0.65* Main.windowHeight - 2 * Main.squareDimension, 
-                    boxes.get(i))); 
+            translateAnimations.add(parallelAnimations(mover.moveInY(
+                    0.65* Main.windowHeight, 0.65* Main.windowHeight - 2 * Main.squareDimension, 
+                    boxes.get(i)), pseudocode.changeLabelProperties(1, 
+                    "for i = " + i))); 
             
-            pseudocodeAnimations.add(pseudocode.changeLabelProperties(1, 
-                    "for i = " + i));
-        
             while(j > 0 && currentNumber < numbers.get(j - 1)){ 
-                translateAnimations.add(mover.moveInX(Main.coordinates.get(j - 1), 
+                translateAnimations.add(parallelAnimations(mover.moveInX(Main.coordinates.get(j - 1), 
                         Main.coordinates.get(j), 
-                        boxes.get(j - 1), craneUpperBox1, rope1, magnet1)); 
+                        boxes.get(j - 1), craneUpperBox1, rope1, magnet1), pseudocode.changeLabelProperties(2, 
+                            "\twhile(" + currentNumber + " < numbers[" + (j - 1) + "])\n\t\tnumbers[" + j + "] = numbers [" + (j - 1) + "]"))); 
                 
-                pseudocodeAnimations.add(pseudocode.changeLabelProperties(2, 
-                            "\twhile(" + currentNumber + " < numbers[" + (j - 1) + "])\n\t\tnumbers[" + j + "] = numbers [" + (j - 1) + "]"));
-            
                 boxes.set(j, boxes.get(j - 1)); 
                 numbers.set(j, numbers.get(j - 1)); 
             
@@ -101,7 +93,6 @@ public class AnimationsGenerator {
                     translateAnimations.add(mover.moveInX(Main.coordinates.get(j), 
                     Main.coordinates.get(j - 2), 
                     craneUpperBox1,rope1,magnet1));
-                    pseudocodeAnimations.add(null);
                 }  
                
 
@@ -111,15 +102,12 @@ public class AnimationsGenerator {
                 translateAnimations.add(mover.moveInX(Main.coordinates.get(i), 
                     Main.coordinates.get(j), 
                     stackpane, craneUpperBox2, rope2, magnet2)); 
-                pseudocodeAnimations.add(null);
             }
 
-            translateAnimations.add(mover.moveInY(0.65 * Main.windowHeight - 2 * Main.squareDimension, 
+            translateAnimations.add(parallelAnimations(mover.moveInY(0.65 * Main.windowHeight - 2 * Main.squareDimension, 
                     0.65 * Main.windowHeight, 
-                    stackpane));
-            
-            pseudocodeAnimations.add(pseudocode.changeLabelProperties(3, 
-                    "\tnumbers[" + j + "]" + " = " + currentNumber));
+                    stackpane), pseudocode.changeLabelProperties(3, 
+                    "\tnumbers[" + j + "]" + " = " + currentNumber)));
          
             boxes.set(j, stackpane); 
             numbers.set(j, currentNumber);
@@ -133,20 +121,17 @@ public class AnimationsGenerator {
                     int currentNumber = numbers.get(j);
                     StackPane stackpane = boxes.get(j);
  
-                    translateAnimations.add(mover.moveInY(0.65 * Main.windowHeight, 
+                    translateAnimations.add(parallelAnimations(mover.moveInY(0.65 * Main.windowHeight, 
                             0.65 * Main.windowHeight - 2 * Main.squareDimension, 
-                            stackpane, boxes.get(j + 1)));
-                    pseudocodeAnimations.add(pseudocode.changeLabelProperties(2, "\tfor j = " + j));
+                            stackpane, boxes.get(j + 1)), pseudocode.changeLabelProperties(2, "\tfor j = " + j)));
                     
-                    translateAnimations.add(mover.swapInX(Main.coordinates.get(j), 
+                    translateAnimations.add(parallelAnimations(mover.swapInX(Main.coordinates.get(j), 
                             Main.coordinates.get(j + 1), 
-                            stackpane, boxes.get(j + 1)));
-                    pseudocodeAnimations.add(pseudocode.changeLabelProperties(3, "\t\tswap(" + j + ", " + (j + 1) + ")"));
-                    
+                            stackpane, boxes.get(j + 1)), pseudocode.changeLabelProperties(3, "\t\tswap(" + j + ", " + (j + 1) + ")")));
+                
                     translateAnimations.add(mover.moveInY(0.65 * Main.windowHeight - 2 * Main.squareDimension, 
                             0.65 * Main.windowHeight, 
                             stackpane, boxes.get(j + 1)));
-                    pseudocodeAnimations.add(null);
                     
                     numbers.set(j, numbers.get(j + 1));
                     boxes.set(j, boxes.get(j + 1));

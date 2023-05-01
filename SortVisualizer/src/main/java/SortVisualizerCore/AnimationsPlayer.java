@@ -13,6 +13,7 @@ public class AnimationsPlayer {
     public void createSequentialTransitions(ArrayList<Animation> translateAnimations, ArrayList<Animation> pseudocodeAnimations){
         ArrayList<Animation> animations = new ArrayList();
         
+        /*
         if(!pseudocodeAnimations.isEmpty()){
             for(int i = 0; i < translateAnimations.size(); i++){
                 if(pseudocodeAnimations.get(i) != null){
@@ -25,8 +26,9 @@ public class AnimationsPlayer {
             }
             sequentialTranslateAnimations.getChildren().addAll(animations);
         } else {
+*/
             sequentialTranslateAnimations.getChildren().addAll(translateAnimations);
-        }
+        //}
     }
     
     public void play(){
