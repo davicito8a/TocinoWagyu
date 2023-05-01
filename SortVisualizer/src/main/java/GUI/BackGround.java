@@ -18,8 +18,9 @@ import javafx.scene.paint.Stop;
 
 public class BackGround {
 
-    public BackGround(List<Building> buildings, Canvas canvas) {
-        this.buildings = buildings;
+    GraphicsContext gh;
+    
+    public BackGround(Canvas canvas) {
         this.canvas = canvas;
     }
     
@@ -28,8 +29,51 @@ public class BackGround {
     
     
     
-    
+        public void drawBG(Canvas canvas1) {
+            gh = canvas1.getGraphicsContext2D();
+            canvas.setHeight(600);
+            canvas.setWidth(1500);
+            createBuildings();
+                // Agregar un controlador de eventos de ratón para permitir el zoom
+    canvas.setOnScroll(event -> {
+        double zoomFactor = 1.05;
+        double deltaY = event.getDeltaY();
+
+        if (deltaY < 0) {
+            zoomFactor = 1 / zoomFactor;
+        }
+
+        canvas.setScaleX(canvas.getScaleX() * zoomFactor);
+        canvas.setScaleY(canvas.getScaleY() * zoomFactor);
+
+        event.consume();
+    });
+            drawCity(gh);
+  
+    }
               /**
+        Dibuja la ciudad en el contexto gráfico especificado.
+
+        @param gc el contexto gráfico en el que se dibujará la ciudad
+        */
+     private void createBuildings() {
+        buildings = new ArrayList<>();
+        Random random = new Random();
+
+        for (int i = 0; i < 14; i++) {
+            int x = 25 + i * (75 + 35);  // 75 es el ancho de los edificios originales
+            int y = 200;
+            int width = 75;
+            int height = 150;
+            Color color = Color.rgb(random.nextInt(256), random.nextInt(256), random.nextInt(256));
+            buildings.add(new Building(x, y, width, height, color));
+        }
+    }
+
+
+    
+    
+            /**
         Dibuja la ciudad en el contexto gráfico especificado.
 
         @param gc el contexto gráfico en el que se dibujará la ciudad
@@ -89,8 +133,6 @@ public class BackGround {
     }
 
 
-
-    
     private class Building {
         private int x;
         private int y;
@@ -125,5 +167,4 @@ public class BackGround {
         public Color getColor() {
             return color;
         }
-    }
-}
+    }}

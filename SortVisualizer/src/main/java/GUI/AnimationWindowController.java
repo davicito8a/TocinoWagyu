@@ -65,13 +65,13 @@ public class AnimationWindowController {
     private void start () throws IOException{
         getTransitions();
         
-        /*
+        
         Canvas canvas = new Canvas(Main.windowHeight, Main.windowWidth);
         GraphicsContext gc = canvas.getGraphicsContext2D();
-
-        gc.setFill(Color.BLUE);
-        gc.fillRect(50, 0.65*Main.windowHeight, 100, 50);
-        */
+        BackGround bgc = new BackGround(canvas); 
+        bgc.drawBG(canvas);
+ 
+        
         
         if(type == 0){
             animationPlayer.createSequentialTransitions(translateAnimations, pseudocodeAnimations);        
@@ -83,11 +83,11 @@ public class AnimationWindowController {
         BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT,
         BackgroundSize.DEFAULT);
       
-        
+        root.getChildren().add(canvas);
         root.getChildren().addAll(stackpanes);
-        //root.getChildren().add(canvas);
+
        
-        root.setBackground(new Background(background));
+       // root.setBackground(new Background(background));
         setButtonsLayout();
         scene = new Scene(root);
         scene.getStylesheets().add(new File("src/main/java/Resources/Styles.css").toURI().toURL().toExternalForm());
