@@ -82,10 +82,12 @@ public class AnimationWindowController {
         BackgroundImage background = new BackgroundImage(new Image(new File("src/main/java/Resources/background.png").toURI().toURL().toExternalForm()),
         BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT,
         BackgroundSize.DEFAULT);
-      
+        
+        Crane crane = new Crane();
         root.getChildren().add(canvas);
+        root.getChildren().add(crane.getCanvas());
         root.getChildren().addAll(stackpanes);
-
+        
        
        // root.setBackground(new Background(background));
         setButtonsLayout();
