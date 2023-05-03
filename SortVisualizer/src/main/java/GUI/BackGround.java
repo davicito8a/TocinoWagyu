@@ -102,21 +102,21 @@ public class BackGround {
         gc.setFill(Color.rgb(100, 100, 100));
         gc.fillRect(0, canvas.getHeight() / 2 + 50, canvas.getWidth(), 50);
 
-gc.setFill(Color.rgb(50, 50, 50));
-gc.fillRect(0, canvas.getHeight() / 2 + 100, canvas.getWidth(), canvas.getHeight() / 2 - 100);
-gc.setStroke(Color.YELLOW);
-gc.setLineWidth(5);
-gc.strokeRect(0, canvas.getHeight() / 2 + 100, canvas.getWidth(), canvas.getHeight() / 2 - 100);
+        gc.setFill(Color.rgb(50, 50, 50));
+        gc.fillRect(0, canvas.getHeight() / 2 + 100, canvas.getWidth(), canvas.getHeight() / 2 - 100);
+        gc.setStroke(Color.YELLOW);
+        gc.setLineWidth(5);
+        gc.strokeRect(0, canvas.getHeight() / 2 + 100, canvas.getWidth(), canvas.getHeight() / 2 - 100);
 
-// Dibujar las líneas de tráfico
-gc.setStroke(Color.GRAY);
-gc.setLineWidth(10);
-gc.setLineDashes(20);
-gc.setLineDashOffset(10);
-double lineSpacing = 100;
-for (double y = canvas.getHeight() / 2 + 100 + lineSpacing / 2; y < canvas.getHeight(); y += lineSpacing) {
-    gc.strokeLine(50, y, canvas.getWidth() - 50, y);
-}
+        // Dibujar las líneas de tráfico
+        gc.setStroke(Color.GRAY);
+        gc.setLineWidth(10);
+        gc.setLineDashes(20);
+        gc.setLineDashOffset(10);
+        double lineSpacing = 100;
+        for (double y = canvas.getHeight() / 2 + 100 + lineSpacing / 2; y < canvas.getHeight(); y += lineSpacing) {
+            gc.strokeLine(50, y, canvas.getWidth() - 50, y);
+        }
 
             // Dibujar los edificios
             for (Building building : buildings) {
