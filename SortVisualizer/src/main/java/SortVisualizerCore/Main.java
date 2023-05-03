@@ -58,19 +58,18 @@ public class Main extends Application {
             stackpane.setTranslateX(0.05 * windowWidth + (squareDimension + separation) * i);
             stackpane.setTranslateY(0.65 * windowHeight);
             stackpane.getChildren().addAll(rectangle, canvas);
-            stackpane.setOnScroll((ScrollEvent event) -> {
-            double zoomFactor = 1.05;
-            double deltaY = event.getDeltaY();
-
-            if (deltaY < 0) {
-                zoomFactor = 1 / zoomFactor;
-            }
-            // Escalar el StackPane
-            stackpane.setScaleX(stackpane.getScaleX() * zoomFactor);
-            stackpane.setScaleY(stackpane.getScaleY() * zoomFactor);
-
-            event.consume();
-        });
+            
+            // ZOOM MIAMOR  
+            final double initialScale = 1.0;
+            final double hoverScale = 2.5                ;
+            stackpane.setOnMouseEntered(event -> {
+                stackpane.setScaleX(hoverScale);
+                stackpane.setScaleY(hoverScale);
+            });
+            stackpane.setOnMouseExited(event -> {
+                stackpane.setScaleX(initialScale);
+                stackpane.setScaleY(initialScale);
+            });
             stackpanes.add(stackpane);
         }
         
