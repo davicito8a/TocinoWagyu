@@ -186,10 +186,10 @@ public class AnimationWindowController {
             animation.setOnFinished(e -> currentTransitionIndex++);
             animation.setRate(1);
             animation.play();
-            if(pseudocodeAnimations.get(currentTransitionIndex) != null){
+            /*if(pseudocodeAnimations.get(currentTransitionIndex) != null){
                 Animation pseudocodeAnimation = pseudocodeAnimations.get(currentTransitionIndex);
                 pseudocodeAnimation.play();
-            }
+            }*/
         }
     }
     
@@ -199,10 +199,10 @@ public class AnimationWindowController {
             animation.setOnFinished(e -> currentTransitionIndex--);
             animation.setRate(-1);
             animation.play();
-            if(pseudocodeAnimations.get(currentTransitionIndex - 1) != null){
+            /*if(pseudocodeAnimations.get(currentTransitionIndex - 1) != null){
                 Animation pseudocodeAnimation = pseudocodeAnimations.get(currentTransitionIndex - 1);
                 pseudocodeAnimation.play();
-            }
+            }*/
         }  
     }
      

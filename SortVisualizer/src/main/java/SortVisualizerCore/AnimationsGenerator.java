@@ -120,16 +120,22 @@ public class AnimationsGenerator {
                 if(numbers.get(j + 1) < numbers.get(j)){
                     int currentNumber = numbers.get(j);
                     StackPane stackpane = boxes.get(j);
- 
-                    translateAnimations.add(parallelAnimations(mover.moveInY(0.65 * Main.windowHeight, 
+                    
+                    int current = j + 1; //j
+                    //if(current - 1 >= 0){
+                        translateAnimations.add(mover.moveInX2(Main.coordinates.get(current), Main.coordinates.get(j), craneUpperBox1, rope1, magnet1));
+                        translateAnimations.add(mover.moveInX2(Main.coordinates.get(current - 1), Main.coordinates.get(j + 1), craneUpperBox2, rope2, magnet2));
+                    //}
+                    
+                    translateAnimations.add(parallelAnimations(mover.moveInY2(0.65 * Main.windowHeight, 
                             0.65 * Main.windowHeight - 2 * Main.squareDimension, 
                             stackpane, boxes.get(j + 1)), pseudocode.changeLabelProperties(2, "\tfor j = " + j)));
                     
-                    translateAnimations.add(parallelAnimations(mover.swapInX(Main.coordinates.get(j), 
+                    translateAnimations.add(parallelAnimations(parallelAnimations(mover.swapInX2(Main.coordinates.get(j), 
                             Main.coordinates.get(j + 1), 
-                            stackpane, boxes.get(j + 1)), pseudocode.changeLabelProperties(3, "\t\tswap(" + j + ", " + (j + 1) + ")")));
-                
-                    translateAnimations.add(mover.moveInY(0.65 * Main.windowHeight - 2 * Main.squareDimension, 
+                            stackpane, craneUpperBox1, rope1, magnet1, boxes.get(j + 1), craneUpperBox2, rope2, magnet2), pseudocode.changeLabelProperties(3, "\t\tswap(" + j + ", " + (j + 1) + ")")), mover.swapInX2(Main.coordinates.get(j), Main.coordinates.get(j + 1), craneUpperBox1, craneUpperBox2)));
+                    
+                    translateAnimations.add(mover.moveInY2(0.65 * Main.windowHeight - 2 * Main.squareDimension, 
                             0.65 * Main.windowHeight, 
                             stackpane, boxes.get(j + 1)));
                     

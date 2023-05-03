@@ -15,7 +15,7 @@ public class Mover {
     /*
     Clase Mover ("movedor"). 
     Dentro de esta clase están los métodos que crean las animaciones de movimiento.
-    Los parámetros de los métodos son las coordenadas de inicio y final del movimiento, y las nodos sobre los cuales se aplicará la animación.
+    Los parámetros de los métodos son las coordenadas de inicio y final del movimiento, y los nodos sobre los cuales se aplicará la animación.
     Los métodos permiten mover uno o más nodos en el eje X, Y o intercambiar la posición de dos nodos.
     Las animaciones se crean a partir de las clases KeyValue, KeyFrame y Timeline, y la propiedad translate() de los nodos.
     */
@@ -80,6 +80,44 @@ public class Mover {
         return parallel;
     }
     
+    public Animation moveInX2(double fromX, double toX, Node... nodes){
+        ParallelTransition parallel = new ParallelTransition();
+        for(Node node: nodes){
+            TranslateTransition translate = new TranslateTransition();
+            translate.setNode(node);
+            translate.setToX(toX);
+            parallel.getChildren().add(translate);
+        }
+        return parallel;
+    }
+    
+    public Animation swapInX2(double fromX, double toX,Node...nodes){
+        ParallelTransition swapInX = new ParallelTransition();
+
+        for(int i = 0; i < nodes.length; i++){
+            TranslateTransition t = new TranslateTransition();
+            t.setNode(nodes[i]);
+            if(i < nodes.length / 2){
+                t.setToX(toX);
+            } else {
+                t.setToX(fromX);
+            }
+            swapInX.getChildren().add(t);
+        }
+
+        return swapInX;
+    }
+    
+    public Animation moveInY2(double fromY, double toY, Node... nodes){
+        ParallelTransition parallel = new ParallelTransition();
+        for(Node node: nodes){
+            TranslateTransition translate = new TranslateTransition();
+            translate.setNode(node);
+            translate.setToY(toY);
+            parallel.getChildren().add(translate);
+        }
+        return parallel;
+    }
     /*
     public Animation swapInX(double fromX, double toX, Node node1, Node node2){
         Timeline swapInX = new Timeline(); 
