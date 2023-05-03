@@ -58,19 +58,34 @@ public class Main extends Application {
             stackpane.setTranslateX(0.05 * windowWidth + (squareDimension + separation) * i);
             stackpane.setTranslateY(0.65 * windowHeight);
             stackpane.getChildren().addAll(rectangle, canvas);
-            stackpane.setOnScroll((ScrollEvent event) -> {
-            double zoomFactor = 1.05;
-            double deltaY = event.getDeltaY();
-
-            if (deltaY < 0) {
-                zoomFactor = 1 / zoomFactor;
-            }
-            // Escalar el StackPane
-            stackpane.setScaleX(stackpane.getScaleX() * zoomFactor);
-            stackpane.setScaleY(stackpane.getScaleY() * zoomFactor);
-
-            event.consume();
-        });
+            
+            
+/*
+            La variable "initialScale" representa el factor de escala inicial del objeto, 
+            que en este caso es 1.0. La variable "hoverScale" representa el factor de escala al que se aumentará 
+            el objeto cuando el cursor del ratón se posicione sobre él, que en este caso es 2.5.
+            
+            El código utiliza dos eventos del ratón: "setOnMouseEntered" y "setOnMouseExited":
+            
+            El primero se activa cuando el cursor del ratón entra en el área del objeto "stackpane", 
+            mientras que el segundo se activa cuando el cursor del ratón sale del área del objeto.
+            
+            Dentro del evento "setOnMouseEntered", se establecen los valores de escala de "stackpane" a "hoverScale" 
+            tanto en la dimensión horizontal como vertical, utilizando los métodos "setScaleX" y "setScaleY" del objeto 
+            "stackpane".
+            Dentro del evento "setOnMouseExited", se establecen los valores de escala de "stackpane" a "initialScale" 
+            tanto en la dimensión horizontal como vertical, utilizando los mismos métodos mencionados anteriormente.
+*/
+            final double initialScale = 1.0;
+            final double hoverScale = 2.5                ;
+            stackpane.setOnMouseEntered(event -> {
+                stackpane.setScaleX(hoverScale);
+                stackpane.setScaleY(hoverScale);
+            });
+            stackpane.setOnMouseExited(event -> {
+                stackpane.setScaleX(initialScale);
+                stackpane.setScaleY(initialScale);
+            });
             stackpanes.add(stackpane);
         }
         
