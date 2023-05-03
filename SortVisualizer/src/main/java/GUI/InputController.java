@@ -44,6 +44,10 @@ public class InputController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         modes.setItems(FXCollections.observableArrayList("Normal mode", "Step by step mode"));
         sortAlgorithm.setItems(FXCollections.observableArrayList("Insertion sort", "Bubble sort", "Cocktail sort"));
+        modes.setValue("Normal mode");
+        sortAlgorithm.setValue("Insertion sort");
+        numberOfBoxes.setText("25");
+        generateRandomNumbers(25);
     }    
 
     @FXML
@@ -126,6 +130,15 @@ public class InputController implements Initializable {
         
         String numeros = "";
         int numeroRectangulos = Integer.parseInt(this.numberOfBoxes.getText());
+        for(int i = 0; i < numeroRectangulos; i++){
+        numeros += ((int)(Math.random()*99 + 1)) + ",";
+        }
+        numeros = numeros.substring(0, numeros.length() - 1);
+        numbers.setText(numeros);
+    }
+    
+    private void generateRandomNumbers(int numeroRectangulos) {
+        String numeros = "";
         for(int i = 0; i < numeroRectangulos; i++){
         numeros += ((int)(Math.random()*99 + 1)) + ",";
         }
