@@ -6,6 +6,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.util.Duration;
 
 public class Pseudocode {
@@ -31,30 +32,36 @@ public class Pseudocode {
     }
     
     public void selectCocktailSortLines(){
-        addLines("Rapa el mejor profe",
-                "Daniel shipeteao con Rapa",
-                "Puede que si puede que no");
+        addLines("Rapa: el mejor profe",
+                "Daniel con Rapa",
+                "Puede ser que sí, y puede ser que no");
     }
     
     private void addLines(String... lines){
         for(String line: lines){
             Label label = new Label(line);
             label.setStyle(initialStyle);
+            label.setFont(new Font(14));
             labels.add(label);
         }
         pseudocodeBox.getChildren().addAll(labels);
         pseudocodeBox.setLayoutX(0.0 * Main.windowWidth);
         pseudocodeBox.setLayoutY(0.8 * Main.windowHeight);
+        pseudocodeBox.setStyle("-fx-background-color: black");
     }
     
     public Animation changeLabelProperties(int lineNumber, String newText){
         Timeline changeLabelPropertiesAnimation = new Timeline();
         
-        KeyFrame newTextFrame = new KeyFrame(Duration.millis(1), event -> labels.get(lineNumber - 1).setText(newText));
+        if(!newText.isEmpty()){
+            KeyFrame newTextFrame = new KeyFrame(Duration.millis(1), event -> labels.get(lineNumber - 1).setText(newText));
+            changeLabelPropertiesAnimation.getKeyFrames().addAll(newTextFrame);
+        }
+        
         KeyFrame newStyleFrame = new KeyFrame(Duration.millis(1), event -> labels.get(lineNumber - 1).setStyle(newStyle));
         KeyFrame initialStyleFrame = new KeyFrame(Duration.millis(400), event -> labels.get(lineNumber - 1).setStyle(initialStyle));
         
-        changeLabelPropertiesAnimation.getKeyFrames().addAll(newStyleFrame, newTextFrame, initialStyleFrame);
+        changeLabelPropertiesAnimation.getKeyFrames().addAll(newStyleFrame, initialStyleFrame);
         
         return changeLabelPropertiesAnimation;
     }

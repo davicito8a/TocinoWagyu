@@ -127,10 +127,17 @@ public class AnimationsGenerator {
                         translateAnimations.add(mover.moveInX2(Main.coordinates.get(current - 1), Main.coordinates.get(j + 1), craneUpperBox2, rope2, magnet2));
                     //}
                     
-                    translateAnimations.add(parallelAnimations(mover.moveInY2(0.65 * Main.windowHeight, 
+                    // falta mejorarlo
+                    if(j == 0){
+                        translateAnimations.add(parallelAnimations(parallelAnimations(mover.moveInY2(0.65 * Main.windowHeight, 
+                            0.65 * Main.windowHeight - 2 * Main.squareDimension, 
+                            stackpane, boxes.get(j + 1)), pseudocode.changeLabelProperties(2, "\tfor j = " + j)), pseudocode.changeLabelProperties(1, "for i = " + i)));
+                    } else {
+                        translateAnimations.add(parallelAnimations(mover.moveInY2(0.65 * Main.windowHeight, 
                             0.65 * Main.windowHeight - 2 * Main.squareDimension, 
                             stackpane, boxes.get(j + 1)), pseudocode.changeLabelProperties(2, "\tfor j = " + j)));
-                    
+                    }
+                     
                     translateAnimations.add(parallelAnimations(parallelAnimations(mover.swapInX2(Main.coordinates.get(j), 
                             Main.coordinates.get(j + 1), 
                             stackpane, craneUpperBox1, rope1, magnet1, boxes.get(j + 1), craneUpperBox2, rope2, magnet2), pseudocode.changeLabelProperties(3, "\t\tswap(" + j + ", " + (j + 1) + ")")), mover.swapInX2(Main.coordinates.get(j), Main.coordinates.get(j + 1), craneUpperBox1, craneUpperBox2)));
@@ -162,13 +169,13 @@ public class AnimationsGenerator {
                     int currentNumber = numbers.get(i);
                     StackPane stackpane = boxes.get(i);
                     
-                    translateAnimations.add(mover.moveInY(0.65 * Main.windowHeight, 
+                    translateAnimations.add(parallelAnimations(mover.moveInY(0.65 * Main.windowHeight, 
                             0.65 * Main.windowHeight - 2 * Main.squareDimension, 
-                            stackpane, boxes.get(i + 1)));
+                            stackpane, boxes.get(i + 1)), pseudocode.changeLabelProperties(1, "")));
                     
-                    translateAnimations.add(mover.swapInX(Main.coordinates.get(i), 
+                    translateAnimations.add(parallelAnimations(mover.swapInX(Main.coordinates.get(i), 
                             Main.coordinates.get(i + 1), 
-                            stackpane, boxes.get(i + 1)));
+                            stackpane, boxes.get(i + 1)), pseudocode.changeLabelProperties(2, "")));
                     
                     translateAnimations.add(mover.moveInY(0.65 * Main.windowHeight - 2 * Main.squareDimension, 
                             0.65 * Main.windowHeight, 
@@ -197,13 +204,13 @@ public class AnimationsGenerator {
                     int currentNumber = numbers.get(i);
                     StackPane stackpane = boxes.get(i);
                     
-                    translateAnimations.add(mover.moveInY(0.65 * Main.windowHeight, 
+                    translateAnimations.add(parallelAnimations(mover.moveInY(0.65 * Main.windowHeight, 
                             0.65 * Main.windowHeight - 2 * Main.squareDimension, 
-                            stackpane, boxes.get(i + 1)));
+                            stackpane, boxes.get(i + 1)), pseudocode.changeLabelProperties(1, "")));
                     
-                    translateAnimations.add(mover.swapInX(Main.coordinates.get(i), 
+                    translateAnimations.add(parallelAnimations(mover.swapInX(Main.coordinates.get(i), 
                             Main.coordinates.get(i + 1), 
-                            stackpane, boxes.get(i + 1)));
+                            stackpane, boxes.get(i + 1)), pseudocode.changeLabelProperties(2, "")));
                     
                     translateAnimations.add(mover.moveInY(0.65 * Main.windowHeight - 2 * Main.squareDimension, 
                             0.65 * Main.windowHeight, 
@@ -248,8 +255,8 @@ public class AnimationsGenerator {
         
         magnet1.setTranslateX(Main.coordinates.get(0));
         magnet1.setTranslateY(y);
-        magnet1.setWidth(40);
-        magnet1.setHeight(20);
+        magnet1.setWidth(25);
+        magnet1.setHeight(10);
         magnet1.setLayoutX(Main.squareDimension/2- magnet1.getWidth()/2);
         magnet1.setFill(Color.BLUE);
         magnet1.setStroke(Color.BLACK);
@@ -257,8 +264,8 @@ public class AnimationsGenerator {
         
         magnet2.setTranslateX(Main.coordinates.get(1));
         magnet2.setTranslateY(y2);
-        magnet2.setWidth(40);
-        magnet2.setHeight(20);
+        magnet2.setWidth(25);
+        magnet2.setHeight(10);
         magnet2.setLayoutX(Main.squareDimension/2-magnet2.getWidth()/2);
         magnet2.setFill(Color.BLUE);
         magnet2.setStroke(Color.BLACK);

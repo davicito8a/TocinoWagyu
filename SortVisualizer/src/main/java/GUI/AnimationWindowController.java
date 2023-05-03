@@ -49,7 +49,7 @@ public class AnimationWindowController {
     private final Button decreaseSpeed = new Button("Decrease");
     private final Button stepForward = new Button("Forward");
     private final Button stepBackward = new Button("Backward");
-    private final Button changeBackground = new Button("Background");
+    private final Button changeBackground = new Button("BG");
     private final int prefWidth = Main.windowWidth/20;
     
     private int backgroundCounter = 1;
@@ -100,19 +100,19 @@ public class AnimationWindowController {
     }
     
     private void setButtonsLayout(){
-        play.setLayoutX(0.6 * Main.windowWidth);
+        play.setLayoutX(0.62 * Main.windowWidth);
         play.setLayoutY(0.85 * Main.windowHeight);
         play.setPrefWidth(prefWidth);
         
-        pause.setLayoutX(0.675 * Main.windowWidth);
+        pause.setLayoutX(0.695 * Main.windowWidth);
         pause.setLayoutY(0.85 * Main.windowHeight);
         pause.setPrefWidth(prefWidth);
         
-        increaseSpeed.setLayoutX(0.75 * Main.windowWidth);
+        increaseSpeed.setLayoutX(0.77 * Main.windowWidth);
         increaseSpeed.setLayoutY(0.85 * Main.windowHeight);
         increaseSpeed.setPrefWidth(prefWidth);
         
-        decreaseSpeed.setLayoutX(0.825 * Main.windowWidth);
+        decreaseSpeed.setLayoutX(0.845 * Main.windowWidth);
         decreaseSpeed.setLayoutY(0.85 * Main.windowHeight);
         decreaseSpeed.setPrefWidth(prefWidth);
         
@@ -125,7 +125,7 @@ public class AnimationWindowController {
         stepBackward.setPrefWidth(prefWidth);
         
         changeBackground.setLayoutX(0.9 * Main.windowWidth);
-        changeBackground.setLayoutY(0.05 * Main.windowHeight);
+        changeBackground.setLayoutY(0.1 * Main.windowHeight);
         changeBackground.setPrefWidth(prefWidth);
         
         play.setOnAction(event -> {
@@ -159,6 +159,7 @@ public class AnimationWindowController {
                 Logger.getLogger(AnimationWindowController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
+        changeBackground.setVisible(false);
         
         root.getChildren().addAll(play, pause, increaseSpeed, decreaseSpeed, stepForward, stepBackward, changeBackground);
         
