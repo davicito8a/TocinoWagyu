@@ -139,7 +139,7 @@ public class BackGround {
                 // Dibujar la puerta del edificio
                 gc.setFill(Color.rgb(150, 75, 0));
                 int doorWidth = (int) (building.getWidth() * 0.2);
-                int doorHeight = (int) (building.getHeight() * 0.4);
+                int doorHeight = (int) (building.getHeight() * 0.15);
                 gc.fillRect(building.getX() + building.getWidth() / 2 - doorWidth / 2, building.getY() + building.getHeight() - doorHeight, doorWidth, doorHeight);
             }
     }
