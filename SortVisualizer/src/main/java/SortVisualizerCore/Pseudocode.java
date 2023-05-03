@@ -31,7 +31,9 @@ public class Pseudocode {
     }
     
     public void selectCocktailSortLines(){
-        
+        addLines("Rapa el mejor profe",
+                "Daniel shipeteao con Rapa",
+                "Puede que si puede que no");
     }
     
     private void addLines(String... lines){
