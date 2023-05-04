@@ -120,32 +120,18 @@ public class AnimationsGenerator {
                 if(numbers.get(j + 1) < numbers.get(j)){
                     int currentNumber = numbers.get(j);
                     StackPane stackpane = boxes.get(j);
-                    
-                    int current = j + 1; //j
-                    //if(current - 1 >= 0){
-                        translateAnimations.add(mover.moveInX2(Main.coordinates.get(current), Main.coordinates.get(j), craneUpperBox1, rope1, magnet1));
-                        translateAnimations.add(mover.moveInX2(Main.coordinates.get(current - 1), Main.coordinates.get(j + 1), craneUpperBox2, rope2, magnet2));
-                    //}
-                    
-                    // falta mejorarlo
-                    if(j == 0){
-                        translateAnimations.add(parallelAnimations(parallelAnimations(mover.moveInY2(0.65 * Main.windowHeight, 
-                            0.65 * Main.windowHeight - 2 * Main.squareDimension, 
-                            stackpane, boxes.get(j + 1)), pseudocode.changeLabelProperties(2, "\tfor j = " + j)), pseudocode.changeLabelProperties(1, "for i = " + i)));
-                    } else {
-                        translateAnimations.add(parallelAnimations(mover.moveInY2(0.65 * Main.windowHeight, 
-                            0.65 * Main.windowHeight - 2 * Main.squareDimension, 
-                            stackpane, boxes.get(j + 1)), pseudocode.changeLabelProperties(2, "\tfor j = " + j)));
-                    }
-                     
-                    translateAnimations.add(parallelAnimations(parallelAnimations(mover.swapInX2(Main.coordinates.get(j), 
-                            Main.coordinates.get(j + 1), 
-                            stackpane, craneUpperBox1, rope1, magnet1, boxes.get(j + 1), craneUpperBox2, rope2, magnet2), pseudocode.changeLabelProperties(3, "\t\tswap(" + j + ", " + (j + 1) + ")")), mover.swapInX2(Main.coordinates.get(j), Main.coordinates.get(j + 1), craneUpperBox1, craneUpperBox2)));
-                    
-                    translateAnimations.add(mover.moveInY2(0.65 * Main.windowHeight - 2 * Main.squareDimension, 
-                            0.65 * Main.windowHeight, 
-                            stackpane, boxes.get(j + 1)));
-                    
+
+                    translateAnimations.add(mover.moveInX2(0, Main.coordinates.get(j + 1), craneUpperBox2, rope2, magnet2));  
+                    translateAnimations.add(mover.moveInY2(0, 0.65 * Main.windowHeight - 4 * Main.squareDimension, boxes.get(j + 1))); 
+                    translateAnimations.add(mover.moveInX2(0, 50, boxes.get(j + 1), craneUpperBox2, rope2, magnet2));
+                    translateAnimations.add(mover.moveInX2(0, Main.coordinates.get(j), craneUpperBox2, rope2, magnet2));  
+                    translateAnimations.add(mover.moveInY2(0, 0.65 * Main.windowHeight - 4 * Main.squareDimension, boxes.get(j)));
+                    translateAnimations.add(mover.moveInX2(0, Main.coordinates.get(j + 1), boxes.get(j), craneUpperBox2, rope2, magnet2));
+                    translateAnimations.add(mover.moveInY2(0, 0.65 * Main.windowHeight, boxes.get(j)));    
+                    translateAnimations.add(mover.moveInX2(0, 50 , craneUpperBox2, rope2, magnet2));
+                    translateAnimations.add(mover.moveInX2(0, Main.coordinates.get(j), boxes.get(j + 1), craneUpperBox2, rope2, magnet2));
+                    translateAnimations.add(mover.moveInY2(0, 0.65 * Main.windowHeight, boxes.get(j + 1))); 
+
                     numbers.set(j, numbers.get(j + 1));
                     boxes.set(j, boxes.get(j + 1));
                     
@@ -234,7 +220,7 @@ public class AnimationsGenerator {
     private void setCrane(){
         int y = 10;
         int y2 = 35;
-        
+        /*
         craneUpperBox1.setTranslateX(Main.coordinates.get(0));
         craneUpperBox1.setTranslateY(y);
         craneUpperBox1.setWidth(40);
@@ -243,6 +229,7 @@ public class AnimationsGenerator {
         craneUpperBox1.setFill(Color.YELLOW);
         craneUpperBox1.setStroke(Color.BLACK);
         craneUpperBox1.setStrokeWidth(3);
+*/
         
         craneUpperBox2.setTranslateX(Main.coordinates.get(1));
         craneUpperBox2.setTranslateY(y2);
@@ -253,6 +240,7 @@ public class AnimationsGenerator {
         craneUpperBox2.setStroke(Color.BLACK);
         craneUpperBox2.setStrokeWidth(3);
         
+        /*
         magnet1.setTranslateX(Main.coordinates.get(0));
         magnet1.setTranslateY(y);
         magnet1.setWidth(25);
@@ -261,6 +249,7 @@ public class AnimationsGenerator {
         magnet1.setFill(Color.BLUE);
         magnet1.setStroke(Color.BLACK);
         magnet1.setStrokeWidth(3);
+*/
         
         magnet2.setTranslateX(Main.coordinates.get(1));
         magnet2.setTranslateY(y2);
@@ -272,18 +261,18 @@ public class AnimationsGenerator {
         magnet2.setStrokeWidth(3);
         
         if(Main.sortType == 1 || Main.sortType == 2){
-            magnet1.setLayoutY(0.65*Main.windowHeight -  2*Main.squareDimension - magnet1.getHeight() - y);
-            magnet2.setLayoutY(0.65*Main.windowHeight-2*Main.squareDimension - magnet2.getHeight() - y2);
-            rope1 = new Line(Main.squareDimension/2,0,Main.squareDimension/2,0.65*Main.windowHeight - 2 * Main.squareDimension - magnet1.getHeight() - y);
+            //magnet1.setLayoutY(0.65*Main.windowHeight -  2*Main.squareDimension - magnet1.getHeight() - y);
+            magnet2.setLayoutY(0.65*Main.windowHeight-4*Main.squareDimension - magnet2.getHeight() - y2);
+            //rope1 = new Line(Main.squareDimension/2,0,Main.squareDimension/2,0.65*Main.windowHeight - 2 * Main.squareDimension - magnet1.getHeight() - y);
             
         } else {
-            magnet1.setLayoutY(0.65*Main.windowHeight - magnet1.getHeight() - y);
-            magnet2.setLayoutY(0.65*Main.windowHeight-2*Main.squareDimension - magnet2.getHeight() - y2);
-            rope1 = new Line(Main.squareDimension/2,0,Main.squareDimension/2,0.65*Main.windowHeight - y);    
+            //magnet1.setLayoutY(0.65*Main.windowHeight - magnet1.getHeight() - y);
+            magnet2.setLayoutY(0.65*Main.windowHeight-4*Main.squareDimension - magnet2.getHeight() - y2);
+            //rope1 = new Line(Main.squareDimension/2,0,Main.squareDimension/2,0.65*Main.windowHeight - y);    
         }
-        rope2 = new Line(Main.squareDimension/2,0,Main.squareDimension/2,0.65*Main.windowHeight - 2 * Main.squareDimension - magnet2.getHeight() - y2);
-        rope1.setTranslateX(Main.coordinates.get(0));
-        rope1.setTranslateY(y);
+        rope2 = new Line(Main.squareDimension/2,0,Main.squareDimension/2,0.65*Main.windowHeight - 4 * Main.squareDimension - magnet2.getHeight() - y2);
+        //rope1.setTranslateX(Main.coordinates.get(0));
+        //rope1.setTranslateY(y);
         rope2.setTranslateX(Main.coordinates.get(1));
         rope2.setTranslateY(y2);
         
