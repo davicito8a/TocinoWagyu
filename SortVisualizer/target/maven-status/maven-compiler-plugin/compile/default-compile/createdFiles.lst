@@ -8,5 +8,4 @@ GUI\BackGround$Building.class
 GUI\BackGround.class
 GUI\Crane.class
 GUI\InputController.class
-.netbeans_automatic_build
 SortVisualizerCore\Mover.class
