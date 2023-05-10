@@ -1,6 +1,7 @@
 package SortVisualizerCore;
 
 import GUI.AnimationWindowController;
+import GUI.Wagon;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,29 +36,26 @@ public class Main extends Application {
         ArrayList<StackPane> stackpanes = new ArrayList();
         
         for(int i = 0; i < numbers.size(); i++){
-            Rectangle rectangle = new Rectangle();
-            DropShadow shadow = new DropShadow();
-            shadow.setRadius(10.0);
-            shadow.setOffsetX(5.0);
-            shadow.setOffsetY(5.0);
-            shadow.setColor(Color.BLACK);
-            rectangle.setEffect(shadow);
-            rectangle.setHeight(squareDimension);
-            rectangle.setWidth(squareDimension);
-            rectangle.setFill(Color.rgb(101, 67, 33));
-            rectangle.setStroke(Color.BLACK);
-            rectangle.setStrokeWidth(50/numbers.size());
+
+
+            
+            
+            
+            Canvas canvasBox = new Canvas();
+            Wagon wagonn = new Wagon(canvasBox);
+            wagonn.DrawWagon();
 
             Canvas canvas = new Canvas(squareDimension, squareDimension);
             NumberDrawer numberDrawer = new NumberDrawer(canvas);
-            numberDrawer.drawNumber(numbers.get(i),size);
-            
+            numberDrawer.drawNumber(numbers.get(i), size);
+
             coordinates.add(0.05 * windowWidth + (squareDimension + separation) * i);
-            
+
             StackPane stackpane = new StackPane();
             stackpane.setTranslateX(0.05 * windowWidth + (squareDimension + separation) * i);
             stackpane.setTranslateY(0.65 * windowHeight);
-            stackpane.getChildren().addAll(rectangle, canvas);
+            stackpane.getChildren().addAll( canvasBox, canvas); // Agregar canvasBox al StackPane
+
             
             
 /*
