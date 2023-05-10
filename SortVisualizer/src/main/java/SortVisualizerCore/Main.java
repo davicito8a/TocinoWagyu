@@ -41,20 +41,21 @@ public class Main extends Application {
             
             
             
-            Canvas canvasBox = new Canvas();
-            Wagon wagonn = new Wagon(canvasBox);
-            wagonn.DrawWagon();
+            
 
             Canvas canvas = new Canvas(squareDimension, squareDimension);
-            NumberDrawer numberDrawer = new NumberDrawer(canvas);
-            numberDrawer.drawNumber(numbers.get(i), size);
+            //NumberDrawer numberDrawer = new NumberDrawer(canvas);
+            //numberDrawer.drawNumber(numbers.get(i), size);
+            
+            Wagon wagonn = new Wagon(canvas);
+            wagonn.DrawWagon(canvas, squareDimension);
 
             coordinates.add(0.05 * windowWidth + (squareDimension + separation) * i);
 
             StackPane stackpane = new StackPane();
             stackpane.setTranslateX(0.05 * windowWidth + (squareDimension + separation) * i);
             stackpane.setTranslateY(0.65 * windowHeight);
-            stackpane.getChildren().addAll( canvasBox, canvas); // Agregar canvasBox al StackPane
+            stackpane.getChildren().addAll( canvas); // Agregar canvasBox al StackPane
 
             
             
