@@ -1,33 +1,35 @@
-/* styles.css */
-.root {
-    -fx-background-color: white;
+.root-container {
+    -fx-background-color: #f4f4f4;
 }
 
-.label-title {
+.header-label {
     -fx-font-size: 18px;
-    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
 }
 
-.label {
-    -fx-font-size: 14px;
+.generate-button {
+    -fx-background-color: #4caf50;
+    -fx-text-fill: white;
 }
 
-.text-field {
-    -fx-pref-width: 200px;
-    -fx-pref-height: 25px;
+.numbers-textfield {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cccccc;
 }
 
-.button {
-    -fx-pref-width: 100px;
+.modes-combobox,
+.sort-algorithm-combobox {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cccccc;
     -fx-pref-height: 30px;
+    -fx-font-size: 12px;
 }
 
-.combo-box {
-    -fx-pref-width: 200px;
-    -fx-pref-height: 25px;
+.continue-button {
+    -fx-background-color: #2196f3;
+    -fx-text-fill: white;
 }
 
-.error-label {
+.errorLabel {
     -fx-text-fill: red;
 }
-

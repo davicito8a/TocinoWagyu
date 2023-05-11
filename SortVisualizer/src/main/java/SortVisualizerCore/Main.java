@@ -38,11 +38,6 @@ public class Main extends Application {
         for(int i = 0; i < numbers.size(); i++){
 
 
-            
-            
-            
-            
-
             Canvas canvas = new Canvas(squareDimension, squareDimension);
 
             
@@ -137,7 +132,9 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(new File("src/main/java/Resources/Input.fxml").toURI().toURL());
-        stage.setScene(new Scene(fxmlLoader.load()));
+        Scene scene = new Scene(fxmlLoader.load());
+        scene.getStylesheets().add(new File("src/main/java/Resources/Styles.css").toURI().toURL().toExternalForm());
+        stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle("SortVisualizer");
         stage.show();

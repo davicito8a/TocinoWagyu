@@ -44,6 +44,7 @@ public class InputController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         modes.setItems(FXCollections.observableArrayList("Normal mode", "Step by step mode"));
         sortAlgorithm.setItems(FXCollections.observableArrayList("Insertion sort", "Bubble sort", "Cocktail sort"));
+        
     }    
 
     @FXML
