@@ -47,7 +47,9 @@ public class Main extends Application {
 
             
             Wagon wagonn = new Wagon(canvas);
-            wagonn.DrawWagon(canvas, squareDimension);
+            wagonn.DrawWagon(canvas, squareDimension, size);
+            
+            
             NumberDrawer numberDrawer = new NumberDrawer(canvas);
             numberDrawer.drawNumber(numbers.get(i), size);
             coordinates.add(0.05 * windowWidth + (squareDimension + separation) * i);
@@ -93,19 +95,20 @@ public class Main extends Application {
 
     // Método para determinar el tamaño del número a dibujar
     public static int NumberSize(int num) {
-        if (num >= 0 && num < 10) {
-            return 1; 
-        } else if (num < 20) {
+        
+        if (num >15 && num < 20) {
             return 4; 
         } else if (num < 30) {
             return 5; 
-        } else if (num <= 48) {
-            return 6; 
-        } else if (num <= 70) {
+        } else if (num <= 39) {
+            return 7; 
+        } else if (num <= 47) {
             return 10; 
-        } else {
+        } 
+          else if (num <= 64) {
             return 12; 
-        }
+        } 
+        return 0;
     }
     
     /**

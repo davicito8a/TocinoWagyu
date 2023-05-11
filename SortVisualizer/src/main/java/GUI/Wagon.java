@@ -24,12 +24,12 @@ public class Wagon {
     
     
     
-    public void DrawWagon(Canvas canvasBox, double squareDimension){
+    public void DrawWagon(Canvas canvasBox, double squareDimension, int size){
         gw = canvasBox.getGraphicsContext2D();
         System.out.println(squareDimension);
             canvasBox.setHeight(squareDimension);
             canvasBox.setWidth(squareDimension);
-            createTrainCanvas(20, 20, Color.RED, canvasBox);
+            createTrainCanvas(20, 20, Color.RED, canvasBox, size);
         
         
     }
@@ -37,9 +37,33 @@ public class Wagon {
     
     
     
- private void createTrainCanvas(double x, double y, Color color, Canvas canvas) {
+ private void createTrainCanvas(double x, double y, Color color, Canvas canvas, int scale) {
     GraphicsContext gc = canvas.getGraphicsContext2D();
-    double SizeOfWagon = .5;
+     System.out.println("scale: " +   scale);
+     double SizeOfWagon = 0;
+     
+
+switch (scale) {
+    case 4:
+        SizeOfWagon = .5;
+        break;
+    case 5:
+       SizeOfWagon = .4;
+        break;
+    case 7:
+       SizeOfWagon = .25;
+        break;
+    case 10:
+       SizeOfWagon = .2;
+        break;
+    case 12:
+       SizeOfWagon = .15;
+        break;
+    default:
+        System.out.println("Caso invalido");
+        break;
+}
+
 
     // Dibujar el cuerpo del vagón
     gc.setFill(color);

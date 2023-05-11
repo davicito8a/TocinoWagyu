@@ -6,8 +6,8 @@ import javafx.scene.paint.Color;
 
     public class NumberDrawer{
         GraphicsContext gc;
-        int coordinateX = 20;
-        int coordinateY = 20;
+        int coordinateX = 55;
+        int coordinateY = 40;
         int scale;
 
     public NumberDrawer(Canvas canvas){
