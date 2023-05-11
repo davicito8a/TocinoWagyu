@@ -96,15 +96,15 @@ public class Main extends Application {
         if (num >= 0 && num < 10) {
             return 1; 
         } else if (num < 20) {
-            return 2; 
+            return 4; 
         } else if (num < 30) {
-            return 3; 
-        } else if (num <= 48) {
             return 5; 
+        } else if (num <= 48) {
+            return 6; 
         } else if (num <= 70) {
-            return 8; 
-        } else {
             return 10; 
+        } else {
+            return 12; 
         }
     }
     

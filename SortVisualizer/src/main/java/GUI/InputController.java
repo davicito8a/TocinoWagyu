@@ -42,8 +42,8 @@ public class InputController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        modes.setItems(FXCollections.observableArrayList("Normal", "Paso por paso"));
-        sortAlgorithm.setItems(FXCollections.observableArrayList("Inserción", "Burbuja", "Coctelera"));
+        modes.setItems(FXCollections.observableArrayList("Normal mode", "Step by step mode"));
+        sortAlgorithm.setItems(FXCollections.observableArrayList("Insertion sort", "Bubble sort", "Cocktail sort"));
     }    
 
     @FXML
@@ -121,7 +121,7 @@ public class InputController implements Initializable {
             ButtonType okButton = new ButtonType("Aceptar", ButtonData.OK_DONE);
             alert.getButtonTypes().setAll(okButton);
 
-            
+            //Optional<ButtonType> result = alert.showAndWait();
         }
         
         String numeros = "";
