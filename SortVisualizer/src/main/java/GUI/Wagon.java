@@ -39,7 +39,7 @@ public class Wagon {
     
  private void createTrainCanvas(double x, double y, Color color, Canvas canvas) {
     GraphicsContext gc = canvas.getGraphicsContext2D();
-    double SizeOfWagon = 1;
+    double SizeOfWagon = .5;
 
     // Dibujar el cuerpo del vagón
     gc.setFill(color);

@@ -5,25 +5,33 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.InputController">
-   <children>
-      <ComboBox fx:id="modes" layoutX="124.0" layoutY="260.0" prefWidth="150.0" />
-      <TextField fx:id="numbers" layoutX="124.0" layoutY="175.0" />
-      <Button fx:id="continueButton" layoutX="166.0" layoutY="313.0" mnemonicParsing="false" onAction="#continueToVisualization" stylesheets="@Styles.css" text="Continue" />
-      <Label layoutX="126.0" layoutY="151.0" text="Números del arreglo[n1,...,nN]">
-         <font>
-            <Font name="System Bold" size="11.0" />
-         </font>
-      </Label>
-      <TextField fx:id="numberOfBoxes" layoutX="124.0" layoutY="108.0" prefHeight="25.0" prefWidth="75.0" />
-      <Label layoutX="124.0" layoutY="81.0" prefHeight="16.0" prefWidth="162.0" text="Número de cajas (16 - 64)">
-         <font>
-            <Font name="System Bold" size="11.0" />
-         </font>
-      </Label>
-      <Button fx:id="randomButton" layoutX="212.0" layoutY="108.0" mnemonicParsing="false" onAction="#generateRandomNumbers" stylesheets="@Styles.css" text="Random" />
-      <ComboBox fx:id="sortAlgorithm" layoutX="124.0" layoutY="217.0" prefWidth="150.0" />
-   </children>
+    <children>
+        <Label layoutX="64.0" layoutY="40.0" style="-fx-font-size: 18px;" text="Sort Visualizer" />
+        <Label layoutX="40.0" layoutY="90.0" text="Número de elementos:" />
+        <TextField fx:id="numberOfBoxes" layoutX="200.0" layoutY="85.0" prefWidth="100.0" text="16" />
+        <Button fx:id="generateRandomButton" layoutX="310.0" layoutY="85.0" onAction="#generateRandomNumbers" prefHeight="26.0" prefWidth="72.0" text="Generar" />
+
+        <Label layoutX="40.0" layoutY="140.0" text="Números del arreglo (separados por comas):" />
+        <TextField fx:id="numbers" layoutX="40.0" layoutY="165.0" prefWidth="320.0" text="14,38,80,10,98,80,32,52,92,67,69,77,1,77,96,69" />
+        
+        <Label layoutX="40.0" layoutY="220.0" text="Modo de visualización:" />
+        <ComboBox fx:id="modes" layoutX="200.0" layoutY="215.0" prefWidth="160.0">
+            <items>
+
+            </items>
+        </ComboBox>
+
+        <Label layoutX="40.0" layoutY="270.0" text="Algoritmo de ordenamiento:" />
+        <ComboBox fx:id="sortAlgorithm" layoutX="200.0" layoutY="265.0" prefWidth="160.0">
+            <items>
+   
+            </items>
+        </ComboBox>
+
+        <Button fx:id="continueButton" layoutX="160.0" layoutY="330.0" onAction="#continueToVisualization" text="Iniciar Visualización" />
+
+        <Label fx:id="errorLabel" layoutX="40.0" layoutY="370.0" style="-fx-text-fill: red;" />
+    </children>
 </AnchorPane>
