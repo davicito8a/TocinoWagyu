@@ -35,19 +35,7 @@ public class BackGround {
             canvas.setWidth(1500);
             createBuildings();
                 // Agregar un controlador de eventos de ratón para permitir el zoom
-            canvas.setOnScroll(event -> {
-                double zoomFactor = 1.05;
-                double deltaY = event.getDeltaY();
 
-                if (deltaY < 0) {
-                    zoomFactor = 1 / zoomFactor;
-                }
-
-                canvas.setScaleX(canvas.getScaleX() * zoomFactor);
-                canvas.setScaleY(canvas.getScaleY() * zoomFactor);
-
-                event.consume();
-            });
             drawCity(gh);
   
     }
