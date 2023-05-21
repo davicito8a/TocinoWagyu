@@ -220,9 +220,13 @@ public class AnimationWindowController {
         root.getChildren().addAll(rope1,rope2);
         root.getChildren().addAll(craneUpperBox1,craneUpperBox2,magnet1,magnet2);*/
         
-        root.getChildren().add(rope2);
-        root.getChildren().addAll(craneUpperBox2,magnet2);
-        
+        if(Main.sortType==0){
+            root.getChildren().addAll(rope1,rope2);
+            root.getChildren().addAll(craneUpperBox1,craneUpperBox2,magnet1,magnet2);
+        }else{
+             root.getChildren().add(rope2);
+            root.getChildren().addAll(craneUpperBox2,magnet2);
+        }
     }
 
     
