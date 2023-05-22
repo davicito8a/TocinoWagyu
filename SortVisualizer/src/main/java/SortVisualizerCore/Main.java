@@ -1,6 +1,7 @@
 package SortVisualizerCore;
 
 import GUI.AnimationWindowController;
+import GUI.Wagon;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,29 +36,24 @@ public class Main extends Application {
         ArrayList<StackPane> stackpanes = new ArrayList();
         
         for(int i = 0; i < numbers.size(); i++){
-            Rectangle rectangle = new Rectangle();
-            DropShadow shadow = new DropShadow();
-            shadow.setRadius(10.0);
-            shadow.setOffsetX(5.0);
-            shadow.setOffsetY(5.0);
-            shadow.setColor(Color.BLACK);
-            rectangle.setEffect(shadow);
-            rectangle.setHeight(squareDimension);
-            rectangle.setWidth(squareDimension);
-            rectangle.setFill(Color.rgb(101, 67, 33));
-            rectangle.setStroke(Color.BLACK);
-            rectangle.setStrokeWidth(50/numbers.size());
+
 
             Canvas canvas = new Canvas(squareDimension, squareDimension);
+
+            
+            Wagon wagonn = new Wagon(canvas);
+            wagonn.DrawWagon(canvas, squareDimension, size);
+            
+            
             NumberDrawer numberDrawer = new NumberDrawer(canvas);
-            numberDrawer.drawNumber(numbers.get(i),size);
-            
+            numberDrawer.drawNumber(numbers.get(i), size);
             coordinates.add(0.05 * windowWidth + (squareDimension + separation) * i);
-            
+
             StackPane stackpane = new StackPane();
             stackpane.setTranslateX(0.05 * windowWidth + (squareDimension + separation) * i);
             stackpane.setTranslateY(0.65 * windowHeight);
-            stackpane.getChildren().addAll(rectangle, canvas);
+            stackpane.getChildren().addAll( canvas); // Agregar canvasBox al StackPane
+
             
             
 /*
@@ -94,19 +90,20 @@ public class Main extends Application {
 
     // Método para determinar el tamaño del número a dibujar
     public static int NumberSize(int num) {
-        if (num >= 0 && num < 10) {
-            return 1; 
-        } else if (num < 20) {
-            return 2; 
+        
+        if (num >15 && num < 20) {
+            return 4; 
         } else if (num < 30) {
-            return 3; 
-        } else if (num <= 48) {
             return 5; 
-        } else if (num <= 70) {
-            return 8; 
-        } else {
+        } else if (num <= 39) {
+            return 7; 
+        } else if (num <= 47) {
             return 10; 
-        }
+        } 
+          else if (num <= 64) {
+            return 12; 
+        } 
+        return 0;
     }
     
     /**
@@ -135,7 +132,9 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(new File("src/main/java/Resources/Input.fxml").toURI().toURL());
-        stage.setScene(new Scene(fxmlLoader.load()));
+        Scene scene = new Scene(fxmlLoader.load());
+        scene.getStylesheets().add(new File("src/main/java/Resources/Styles.css").toURI().toURL().toExternalForm());
+        stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle("SortVisualizer");
         stage.show();

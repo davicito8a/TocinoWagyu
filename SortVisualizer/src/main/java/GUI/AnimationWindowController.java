@@ -67,7 +67,6 @@ public class AnimationWindowController {
         
         
         Canvas canvas = new Canvas(Main.windowHeight, Main.windowWidth);
-        GraphicsContext gc = canvas.getGraphicsContext2D();
         BackGround bgc = new BackGround(canvas); 
         bgc.drawBG(canvas);
  
