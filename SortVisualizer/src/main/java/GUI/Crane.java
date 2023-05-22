@@ -112,6 +112,13 @@ public class Crane {
             coory14=coory14-50;
             coory24=coory24-50;
         }
+        
+        double[] apoyo={40,150,130,40};
+        double[] apoyo2={200,200,230,230};
+        
+        gc.setStroke(ColorInterno);
+        gc.fillPolygon(apoyo, apoyo2, 4);
+        
 
 
     }

@@ -42,12 +42,9 @@ public class InputController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        modes.setItems(FXCollections.observableArrayList("Normal mode", "Step by step mode"));
-        sortAlgorithm.setItems(FXCollections.observableArrayList("Insertion sort", "Bubble sort", "Cocktail sort"));
-        modes.setValue("Normal mode");
-        sortAlgorithm.setValue("Insertion sort");
-        numberOfBoxes.setText("25");
-        generateRandomNumbers(25);
+        modes.setItems(FXCollections.observableArrayList("Normal", "Paso a paso"));
+        sortAlgorithm.setItems(FXCollections.observableArrayList("Inserción", "Burbuja", "Coctelera"));
+        
     }    
 
     @FXML
@@ -65,14 +62,14 @@ public class InputController implements Initializable {
         }
 
         if(numberValidation()){ 
-            if(modes.getValue().equals("Normal mode"))
+            if(modes.getValue().equals("Normal"))
                 Main.modeType = 0;
             else
                 Main.modeType = 1;
             
-            if(sortAlgorithm.getValue().equals("Insertion sort"))
+            if(sortAlgorithm.getValue().equals("Inserción"))
                 Main.sortType = 0;
-            else if(sortAlgorithm.getValue().equals("Bubble sort"))
+            else if(sortAlgorithm.getValue().equals("Burbuja"))
                 Main.sortType = 1;
             else
                 Main.sortType = 2;
@@ -130,15 +127,6 @@ public class InputController implements Initializable {
         
         String numeros = "";
         int numeroRectangulos = Integer.parseInt(this.numberOfBoxes.getText());
-        for(int i = 0; i < numeroRectangulos; i++){
-        numeros += ((int)(Math.random()*99 + 1)) + ",";
-        }
-        numeros = numeros.substring(0, numeros.length() - 1);
-        numbers.setText(numeros);
-    }
-    
-    private void generateRandomNumbers(int numeroRectangulos) {
-        String numeros = "";
         for(int i = 0; i < numeroRectangulos; i++){
         numeros += ((int)(Math.random()*99 + 1)) + ",";
         }

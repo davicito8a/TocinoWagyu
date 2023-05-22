@@ -32,9 +32,9 @@ public class Pseudocode {
     }
     
     public void selectCocktailSortLines(){
-        addLines("Rapa: el mejor profe",
-                "Daniel con Rapa",
-                "Puede ser que sí, y puede ser que no");
+        addLines("Rapa y Daniel: los mejores profes",
+                "Y Luis Silvestre",
+                "Confirmo");
     }
     
     private void addLines(String... lines){
