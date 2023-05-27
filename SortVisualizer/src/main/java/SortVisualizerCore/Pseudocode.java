@@ -28,13 +28,24 @@ public class Pseudocode {
     public void selectBubbleSortLines(){
         addLines("for i = n", 
                 "\tfor j = n2", 
-                "\t\tswap(j, j + 1)");
+                "\t\tif(numbers[j + 1] < numbers [j])",
+                "\t\t\tswap(j, j + 1)");
     }
     
     public void selectCocktailSortLines(){
-        addLines("Rapa y Daniel: los mejores profes",
-                "Y Luis Silvestre",
-                "Confirmo");
+        addLines("while(swapped)",
+                "\tswapped = false",
+                "\tfor i = n",  
+                "\t\tif(numbers[i + 1] < numbers [i])",
+                "\t\t\tswap(i, i + 1)",
+                "\t\t\tswapped = true",
+                "\tif(swapped = false)",
+                "\t\tbreak",
+                "\tswapped = false",
+                "\tfor i = n2",  
+                "\t\tif(numbers[i + 1] < numbers [i])",
+                "\t\t\tswap(i, i + 1)",
+                "\t\t\tswapped = true");
     }
     
     private void addLines(String... lines){
@@ -46,7 +57,7 @@ public class Pseudocode {
         }
         pseudocodeBox.getChildren().addAll(labels);
         pseudocodeBox.setLayoutX(0.0 * Main.windowWidth);
-        pseudocodeBox.setLayoutY(0.8 * Main.windowHeight);
+        pseudocodeBox.setLayoutY(0.5 * Main.windowHeight);
         pseudocodeBox.setStyle("-fx-background-color: black");
     }
     
@@ -66,4 +77,45 @@ public class Pseudocode {
         return changeLabelPropertiesAnimation;
     }
     
+    public Animation changeLabelProperties(int lineNumber, String newText, int duration){
+        Timeline changeLabelPropertiesAnimation = new Timeline();
+        
+        if(!newText.isEmpty()){
+            KeyFrame newTextFrame = new KeyFrame(Duration.millis(1), event -> labels.get(lineNumber - 1).setText(newText));
+            changeLabelPropertiesAnimation.getKeyFrames().addAll(newTextFrame);
+        }
+        
+        KeyFrame newStyleFrame = new KeyFrame(Duration.millis(1), event -> labels.get(lineNumber - 1).setStyle(newStyle));
+        KeyFrame initialStyleFrame = new KeyFrame(Duration.millis(duration), event -> labels.get(lineNumber - 1).setStyle(initialStyle));
+        
+        changeLabelPropertiesAnimation.getKeyFrames().addAll(newStyleFrame, initialStyleFrame);
+        
+        return changeLabelPropertiesAnimation;
+    }
+    
+    public Animation changeLabelProperties(int lineNumber, String newText, int duration, boolean wannaSelect){
+        Timeline changeLabelPropertiesAnimation = new Timeline();
+        
+        if(!newText.isEmpty()){
+            KeyFrame newTextFrame = new KeyFrame(Duration.millis(1), event -> labels.get(lineNumber - 1).setText(newText));
+            changeLabelPropertiesAnimation.getKeyFrames().addAll(newTextFrame);
+        }
+        
+        KeyFrame newStyleFrame = new KeyFrame(Duration.millis(1), event -> labels.get(lineNumber - 1).setStyle(newStyle));
+        KeyFrame initialStyleFrame = new KeyFrame(Duration.millis(duration), event -> labels.get(lineNumber - 1).setStyle(initialStyle));
+        
+        changeLabelPropertiesAnimation.getKeyFrames().addAll(newStyleFrame);
+        
+        return changeLabelPropertiesAnimation;
+    }
+    
+    public Animation unselectLine(int lineNumber){
+        Timeline changeLabelPropertiesAnimation = new Timeline();
+        
+        KeyFrame initialStyleFrame = new KeyFrame(Duration.millis(1), event -> labels.get(lineNumber - 1).setStyle(initialStyle));
+        changeLabelPropertiesAnimation.getKeyFrames().add(initialStyleFrame);
+        
+        return changeLabelPropertiesAnimation;
+    }
+       
 }

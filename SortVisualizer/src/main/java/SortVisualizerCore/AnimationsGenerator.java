@@ -116,12 +116,15 @@ public class AnimationsGenerator {
     
     private void getBubbleSortAnimations(){
         for(int i = numbers.size() - 1; i > 0; i--){
+            translateAnimations.add(pseudocode.changeLabelProperties(1, "for i = " + i, 200));
             for(int j = 0; j < i; j++){
+                translateAnimations.add(pseudocode.changeLabelProperties(2, "\tfor j = " + j, 200));
+                translateAnimations.add(pseudocode.changeLabelProperties(3, "\t\tif(numbers[" + (j + 1) + "] < numbers [" + j + "])", 200));
                 if(numbers.get(j + 1) < numbers.get(j)){
                     int currentNumber = numbers.get(j);
                     StackPane stackpane = boxes.get(j);
-
-                    translateAnimations.add(mover.moveInX2(0, Main.coordinates.get(j + 1), craneUpperBox2, rope2, magnet2));  
+                    translateAnimations.add(mover.moveInX2(0, Main.coordinates.get(j + 1), craneUpperBox2, rope2, magnet2)); 
+                    translateAnimations.add(pseudocode.changeLabelProperties(4, "\t\t\tswap(" + j + ", " + (j + 1) + ")" , 1, true));
                     translateAnimations.add(mover.moveInY2(0, 0.65 * Main.windowHeight - 4 * Main.squareDimension, boxes.get(j + 1))); 
                     translateAnimations.add(mover.moveInX2(0, 50, boxes.get(j + 1), craneUpperBox2, rope2, magnet2));
                     translateAnimations.add(mover.moveInX2(0, Main.coordinates.get(j), craneUpperBox2, rope2, magnet2));  
@@ -131,6 +134,7 @@ public class AnimationsGenerator {
                     translateAnimations.add(mover.moveInX2(0, 50 , craneUpperBox2, rope2, magnet2));
                     translateAnimations.add(mover.moveInX2(0, Main.coordinates.get(j), boxes.get(j + 1), craneUpperBox2, rope2, magnet2));
                     translateAnimations.add(mover.moveInY2(0, 0.65 * Main.windowHeight, boxes.get(j + 1))); 
+                    translateAnimations.add(pseudocode.unselectLine(4));
 
                     numbers.set(j, numbers.get(j + 1));
                     boxes.set(j, boxes.get(j + 1));
@@ -147,15 +151,21 @@ public class AnimationsGenerator {
         int start = 0;
         int end = numbers.size();
         
+        
         while(swapped){
+            translateAnimations.add(pseudocode.changeLabelProperties(1, "while(swapped)", 200));
             swapped = false;
+            translateAnimations.add(pseudocode.changeLabelProperties(2, "\tswapped = false", 200));
             
             for(int i = start; i < end - 1; i++){
+                translateAnimations.add(pseudocode.changeLabelProperties(3, "\tfor i = " + i, 200));
+                translateAnimations.add(pseudocode.changeLabelProperties(4, "\t\tif(numbers[" + (i + 1) + "] < numbers [" + i + "])", 200));
                 if(numbers.get(i + 1) < numbers.get(i)){
                     int currentNumber = numbers.get(i);
                     StackPane stackpane = boxes.get(i);
                     
-                    translateAnimations.add(mover.moveInX2(0, Main.coordinates.get(i + 1), craneUpperBox2, rope2, magnet2));  
+                    translateAnimations.add(mover.moveInX2(0, Main.coordinates.get(i + 1), craneUpperBox2, rope2, magnet2)); 
+                    translateAnimations.add(pseudocode.changeLabelProperties(5, "\t\t\tswap(" + i + ", " + (i + 1) + ")" , 1, true));
                     // la caja sube
                     translateAnimations.add(mover.moveInY2(0, 0.65 * Main.windowHeight - 4 * Main.squareDimension, boxes.get(i + 1))); 
                     // la caja se mueve hasta el piso auxiliar, junto con la grua
@@ -174,7 +184,7 @@ public class AnimationsGenerator {
                     translateAnimations.add(mover.moveInX2(0, Main.coordinates.get(i), boxes.get(i + 1), craneUpperBox2, rope2, magnet2));
                     // la caja baja
                     translateAnimations.add(mover.moveInY2(0, 0.65 * Main.windowHeight, boxes.get(i + 1))); 
-
+                    translateAnimations.add(pseudocode.unselectLine(5));
                     
                     numbers.set(i, numbers.get(i + 1));
                     boxes.set(i, boxes.get(i + 1));
@@ -183,23 +193,30 @@ public class AnimationsGenerator {
                     boxes.set(i + 1, stackpane);
                     
                     swapped = true;
+                    translateAnimations.add(pseudocode.changeLabelProperties(6, "\t\t\tswapped = true", 200));
                 }
             }
             
+            translateAnimations.add(pseudocode.changeLabelProperties(7, "\tif(swapped = false)", 200));
             if(swapped == false){
-                break;
+                translateAnimations.add(pseudocode.changeLabelProperties(8, "\t\tbreak", 200));
+                break; 
             }
             
             swapped = false;
+            translateAnimations.add(pseudocode.changeLabelProperties(9, "\tswapped = false", 200));
             
             end = end - 1;
             
             for(int i = end - 1; i >= start; i--){
+                translateAnimations.add(pseudocode.changeLabelProperties(10, "\tfor i = " + i, 200));
+                translateAnimations.add(pseudocode.changeLabelProperties(11, "\t\tif(numbers[" + (i + 1) + "] < numbers [" + i + "])", 200));
                 if(numbers.get(i + 1) < numbers.get(i)){
                     int currentNumber = numbers.get(i);
                     StackPane stackpane = boxes.get(i);
                     
                     translateAnimations.add(mover.moveInX2(0, Main.coordinates.get(i + 1), craneUpperBox2, rope2, magnet2));  
+                    translateAnimations.add(pseudocode.changeLabelProperties(12, "\t\t\tswap(" + i + ", " + (i + 1) + ")" , 1, true));
                     // la caja sube
                     translateAnimations.add(mover.moveInY2(0, 0.65 * Main.windowHeight - 4 * Main.squareDimension, boxes.get(i + 1))); 
                     // la caja se mueve hasta el piso auxiliar, junto con la grua
@@ -218,6 +235,7 @@ public class AnimationsGenerator {
                     translateAnimations.add(mover.moveInX2(0, Main.coordinates.get(i), boxes.get(i + 1), craneUpperBox2, rope2, magnet2));
                     // la caja baja
                     translateAnimations.add(mover.moveInY2(0, 0.65 * Main.windowHeight, boxes.get(i + 1))); 
+                    translateAnimations.add(pseudocode.unselectLine(12));
 
                     numbers.set(i, numbers.get(i + 1));
                     boxes.set(i, boxes.get(i + 1));
@@ -226,6 +244,7 @@ public class AnimationsGenerator {
                     boxes.set(i + 1, stackpane);
                     
                     swapped = true;
+                    translateAnimations.add(pseudocode.changeLabelProperties(13, "\t\t\tswapped = true", 200));
                 }
             }
             
