@@ -120,15 +120,15 @@ public class AnimationsGenerator {
             for(int j = 0; j < i; j++){
                 translateAnimations.add(pseudocode.changeLabelProperties(2, "\tfor j = " + j, 200));
                 translateAnimations.add(pseudocode.changeLabelProperties(3, "\t\tif(numbers[" + (j + 1) + "] < numbers [" + j + "])", 200));
-                if(numbers.get(j + 1) < numbers.get(j)){
+                if(numbers.get(j + 1) < numbers.get(j)){                    
                     int currentNumber = numbers.get(j);
                     StackPane stackpane = boxes.get(j);
                     translateAnimations.add(mover.moveInX2(0, Main.coordinates.get(j + 1), craneUpperBox2, rope2, magnet2)); 
                     translateAnimations.add(pseudocode.changeLabelProperties(4, "\t\t\tswap(" + j + ", " + (j + 1) + ")" , 1, true));
-                    translateAnimations.add(mover.moveInY2(0, 0.65 * Main.windowHeight - 4 * Main.squareDimension, boxes.get(j + 1))); 
+                    translateAnimations.add(mover.moveInY2(0, 0.65 * Main.windowHeight - 230, boxes.get(j + 1))); 
                     translateAnimations.add(mover.moveInX2(0, 50, boxes.get(j + 1), craneUpperBox2, rope2, magnet2));
                     translateAnimations.add(mover.moveInX2(0, Main.coordinates.get(j), craneUpperBox2, rope2, magnet2));  
-                    translateAnimations.add(mover.moveInY2(0, 0.65 * Main.windowHeight - 4 * Main.squareDimension, boxes.get(j)));
+                    translateAnimations.add(mover.moveInY2(0, 0.65 * Main.windowHeight - 230, boxes.get(j)));
                     translateAnimations.add(mover.moveInX2(0, Main.coordinates.get(j + 1), boxes.get(j), craneUpperBox2, rope2, magnet2));
                     translateAnimations.add(mover.moveInY2(0, 0.65 * Main.windowHeight, boxes.get(j)));    
                     translateAnimations.add(mover.moveInX2(0, 50 , craneUpperBox2, rope2, magnet2));
@@ -167,13 +167,13 @@ public class AnimationsGenerator {
                     translateAnimations.add(mover.moveInX2(0, Main.coordinates.get(i + 1), craneUpperBox2, rope2, magnet2)); 
                     translateAnimations.add(pseudocode.changeLabelProperties(5, "\t\t\tswap(" + i + ", " + (i + 1) + ")" , 1, true));
                     // la caja sube
-                    translateAnimations.add(mover.moveInY2(0, 0.65 * Main.windowHeight - 4 * Main.squareDimension, boxes.get(i + 1))); 
+                    translateAnimations.add(mover.moveInY2(0, 0.65 * Main.windowHeight - 230, boxes.get(i + 1))); 
                     // la caja se mueve hasta el piso auxiliar, junto con la grua
                     translateAnimations.add(mover.moveInX2(0, 50, boxes.get(i + 1), craneUpperBox2, rope2, magnet2));
                     // la grua va a mover la otra caja
                     translateAnimations.add(mover.moveInX2(0, Main.coordinates.get(i), craneUpperBox2, rope2, magnet2));  
                     // la otra caja sube
-                    translateAnimations.add(mover.moveInY2(0, 0.65 * Main.windowHeight - 4 * Main.squareDimension, boxes.get(i)));
+                    translateAnimations.add(mover.moveInY2(0, 0.65 * Main.windowHeight - 230, boxes.get(i)));
                     // la grua mueve la otra caja hacia la derecha
                     translateAnimations.add(mover.moveInX2(0, Main.coordinates.get(i + 1), boxes.get(i), craneUpperBox2, rope2, magnet2));
                     // la caja baja
@@ -218,13 +218,13 @@ public class AnimationsGenerator {
                     translateAnimations.add(mover.moveInX2(0, Main.coordinates.get(i + 1), craneUpperBox2, rope2, magnet2));  
                     translateAnimations.add(pseudocode.changeLabelProperties(12, "\t\t\tswap(" + i + ", " + (i + 1) + ")" , 1, true));
                     // la caja sube
-                    translateAnimations.add(mover.moveInY2(0, 0.65 * Main.windowHeight - 4 * Main.squareDimension, boxes.get(i + 1))); 
+                    translateAnimations.add(mover.moveInY2(0, 0.65 * Main.windowHeight - 230, boxes.get(i + 1))); 
                     // la caja se mueve hasta el piso auxiliar, junto con la grua
                     translateAnimations.add(mover.moveInX2(0, 1350, boxes.get(i + 1), craneUpperBox2, rope2, magnet2));
                     // la grua va a mover la otra caja
                     translateAnimations.add(mover.moveInX2(0, Main.coordinates.get(i), craneUpperBox2, rope2, magnet2));  
                     // la otra caja sube
-                    translateAnimations.add(mover.moveInY2(0, 0.65 * Main.windowHeight - 4 * Main.squareDimension, boxes.get(i)));
+                    translateAnimations.add(mover.moveInY2(0, 0.65 * Main.windowHeight - 230, boxes.get(i)));
                     // la grua mueve la otra caja hacia la derecha
                     translateAnimations.add(mover.moveInX2(0, Main.coordinates.get(i + 1), boxes.get(i), craneUpperBox2, rope2, magnet2));
                     // la caja baja

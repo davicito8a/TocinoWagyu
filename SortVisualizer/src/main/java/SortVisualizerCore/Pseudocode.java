@@ -57,7 +57,7 @@ public class Pseudocode {
         }
         pseudocodeBox.getChildren().addAll(labels);
         pseudocodeBox.setLayoutX(0.0 * Main.windowWidth);
-        pseudocodeBox.setLayoutY(0.5 * Main.windowHeight);
+        pseudocodeBox.setLayoutY(0.8 * Main.windowHeight);
         pseudocodeBox.setStyle("-fx-background-color: black");
     }
     

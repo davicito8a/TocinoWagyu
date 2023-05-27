@@ -113,14 +113,34 @@ public class Crane {
             coory24=coory24-50;
         }
         
-        double[] apoyo={40,150,130,40};
-        double[] apoyo2={200,200,230,230};
+        //Posiciones Auxiliares para Bubble y Cocktail 
+        //Lado Izquierda 
+        double[] apoyoIzquiera1={40,150,130,40};
+        double[] apoyoIzquiera2={200,200,230,230};
         
         gc.setStroke(ColorInterno);
-        gc.fillPolygon(apoyo, apoyo2, 4);
+        gc.fillPolygon(apoyoIzquiera1, apoyoIzquiera2, 4);
         
-
-
+        gc.setLineWidth(5.5);
+        gc.setStroke(ColorExterno);
+        gc.strokeLine(40,200,150 , 200);
+        gc.strokeLine(150, 200, 130, 230);
+        gc.strokeLine(130, 230, 40, 230);
+        
+        //Lado Derecha
+        double[] apoyoDerecha1 = {1450,1340,1360,1450};
+        double[] apoyoDerecha2 = {200,200,230,230};
+        
+        gc.setStroke(ColorInterno);
+        gc.fillPolygon(apoyoDerecha1, apoyoDerecha2, 4);
+        
+        gc.setLineWidth(5.5);
+        gc.setStroke(ColorExterno);
+        gc.strokeLine(1450,200 , 1340, 200);
+        gc.strokeLine(1340,200,1360,230);
+        gc.strokeLine(1360,230,1450,230);
+        
+        
     }
     
 }

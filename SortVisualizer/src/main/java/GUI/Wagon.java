@@ -19,7 +19,7 @@ public class Wagon {
   
     public void DrawWagon(Canvas canvasBox, double squareDimension, int size){
         gw = canvasBox.getGraphicsContext2D();
-        System.out.println(squareDimension);
+        //System.out.println(squareDimension);
             canvasBox.setHeight(squareDimension);
             canvasBox.setWidth(squareDimension);
             createTrainCanvas(20, 20, Color.RED, canvasBox, size);
@@ -30,7 +30,7 @@ public class Wagon {
 
     private void createTrainCanvas(double x, double y, Color color, Canvas canvas, int scale) {
        GraphicsContext gc = canvas.getGraphicsContext2D();
-        System.out.println("scale: " +   scale);
+        //System.out.println("scale: " +   scale);
         double SizeOfWagon = 0;
 
 
