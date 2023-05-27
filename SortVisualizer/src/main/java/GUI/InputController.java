@@ -47,54 +47,83 @@ public class InputController implements Initializable {
         
     }    
 
-    @FXML
-    private void continueToVisualization(ActionEvent event) throws IOException { 
-        if(modes.getValue() == null) { 
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("Por favor, seleccione un modo");
+@FXML
+private void continueToVisualization(ActionEvent event) throws IOException {
+    if (modes.getValue() == null) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("Por favor, seleccione un modo");
 
-            ButtonType okButton = new ButtonType("Aceptar", ButtonData.OK_DONE); 
-            alert.getButtonTypes().setAll(okButton); 
+        ButtonType okButton = new ButtonType("Aceptar", ButtonData.OK_DONE);
+        alert.getButtonTypes().setAll(okButton);
 
-            Optional<ButtonType> result = alert.showAndWait();    
-        }
+        alert.showAndWait();
+        return; // Sale del método si no se ha seleccionado un modo
+    }
 
-        if(numberValidation()){ 
-            if(modes.getValue().equals("Normal"))
-                Main.modeType = 0;
-            else
-                Main.modeType = 1;
-            
-            if(sortAlgorithm.getValue().equals("Inserción"))
-                Main.sortType = 0;
-            else if(sortAlgorithm.getValue().equals("Burbuja"))
-                Main.sortType = 1;
-            else
-                Main.sortType = 2;
-        
-            ArrayList<Integer> numbers = new ArrayList(); 
-            String[] numberStrings = this.numbers.getText().split(","); 
-            for (String numberString : numberStrings) { 
-                int number = Integer.parseInt(numberString); 
-                numbers.add(number); 
+    if (sortAlgorithm.getValue() == null) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("Por favor, seleccione un tipo de ordenamiento");
+
+        ButtonType okButton = new ButtonType("Aceptar", ButtonData.OK_DONE);
+        alert.getButtonTypes().setAll(okButton);
+
+        alert.showAndWait();
+        return; // Sale del método si no se ha seleccionado un tipo de ordenamiento
+    }
+
+    if (numberValidation()) {
+        if (modes.getValue().equals("Normal"))
+            Main.modeType = 0;
+        else
+            Main.modeType = 1;
+
+        if (sortAlgorithm.getValue().equals("Inserción"))
+            Main.sortType = 0;
+        else if (sortAlgorithm.getValue().equals("Burbuja"))
+            Main.sortType = 1;
+        else
+            Main.sortType = 2;
+
+        ArrayList<Integer> numbers = new ArrayList<>();
+        String[] numberStrings = this.numbers.getText().split(",");
+        for (String numberString : numberStrings) {
+            try {
+                int number = Integer.parseInt(numberString);
+                numbers.add(number);
+            } catch (NumberFormatException e) {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("El campo de números contiene valores no válidos");
+
+                ButtonType okButton = new ButtonType("Aceptar", ButtonData.OK_DONE);
+                alert.getButtonTypes().setAll(okButton);
+
+                alert.showAndWait();
+                return; // Sale del método si se encuentra un valor no válido
             }
-            Main.coordinates.clear();
-            ArrayList<StackPane> rectangles = Main.getRectangles(numbers);
-            Main.newAnimationWindow(numbers, rectangles);
-        } else {
-            Alert alert = new Alert(AlertType.ERROR); 
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("Por favor, inténtalo de nuevo");
+        }
+        Main.coordinates.clear();
+        ArrayList<StackPane> rectangles = Main.getRectangles(numbers);
+        Main.newAnimationWindow(numbers, rectangles);
+    } else {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("Por favor, inténtalo de nuevo");
 
-            ButtonType okButton = new ButtonType("Aceptar", ButtonData.OK_DONE); 
-            alert.getButtonTypes().setAll(okButton); 
+        ButtonType okButton = new ButtonType("Aceptar", ButtonData.OK_DONE);
+        alert.getButtonTypes().setAll(okButton);
 
-            //Optional<ButtonType> result = alert.showAndWait(); 
+        alert.showAndWait();
     }
 }
+
+
 
     private boolean numberValidation(){
         Pattern pattern = Pattern.compile("^[0-9]+(,[0-9]+)*$");
@@ -112,26 +141,28 @@ public class InputController implements Initializable {
     }
 
     @FXML
-    private void generateRandomNumbers(ActionEvent event) {
-        if (!numberOfBoxes.getText().matches("^[0-9]+$")) {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("El campo debe contener solo números naturales");
+private void generateRandomNumbers(ActionEvent event) {
+    if (!numberOfBoxes.getText().matches("^[0-9]+$")) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("El campo debe contener solo números naturales");
 
-            ButtonType okButton = new ButtonType("Aceptar", ButtonData.OK_DONE);
-            alert.getButtonTypes().setAll(okButton);
+        ButtonType okButton = new ButtonType("Aceptar", ButtonData.OK_DONE);
+        alert.getButtonTypes().setAll(okButton);
 
-            //Optional<ButtonType> result = alert.showAndWait();
-        }
-        
-        String numeros = "";
-        int numeroRectangulos = Integer.parseInt(this.numberOfBoxes.getText());
-        for(int i = 0; i < numeroRectangulos; i++){
-        numeros += ((int)(Math.random()*99 + 1)) + ",";
-        }
-        numeros = numeros.substring(0, numeros.length() - 1);
-        numbers.setText(numeros);
+        alert.showAndWait();
+        return; // Sale del método si el campo no contiene solo números
     }
+
+    String numeros = "";
+    int numeroRectangulos = Integer.parseInt(this.numberOfBoxes.getText());
+    for (int i = 0; i < numeroRectangulos; i++) {
+        numeros += ((int)(Math.random() * 99 + 1)) + ",";
+    }
+    numeros = numeros.substring(0, numeros.length() - 1);
+    numbers.setText(numeros);
+}
+
 
 }
