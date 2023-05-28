@@ -1,5 +1,6 @@
 package GUI;
 
+import SortVisualizerCore.Main;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -21,7 +22,7 @@ public class Wagon {
         gw = canvasBox.getGraphicsContext2D();
         //System.out.println(squareDimension);
             canvasBox.setHeight(squareDimension);
-            canvasBox.setWidth(squareDimension);
+            canvasBox.setWidth(squareDimension*1.25);
             createTrainCanvas(0, -5, Color.RED, canvasBox, size);
     }
 
@@ -71,7 +72,32 @@ public class Wagon {
        gc.fillOval(80 * SizeOfWagon, 60 * SizeOfWagon, 20 * SizeOfWagon, 20 * SizeOfWagon);
 
        // Configurar la posición del canvas dentro del StackPane
-       canvas.setTranslateX(x);
+       int tamanoint =(int)Main.size;
+       double Centrar=0;
+       switch(tamanoint){
+            case 4:
+                Centrar = -2;
+                
+                break;
+            case 5:
+                Centrar = 4;
+                
+                break;
+            case 7:
+                Centrar = 13;
+                
+                break;
+            case 10:
+                Centrar = 16.5;
+                
+                break;
+            case 12:
+                Centrar = 19;
+                
+                break;
+       }
+       
+       canvas.setTranslateX(x+Centrar);
        canvas.setTranslateY(y);
    }
 

@@ -65,7 +65,6 @@ public class AnimationsGenerator {
                         Main.coordinates.get(i - 1), 
                         craneUpperBox1,rope1,magnet1)); 
             }
-            
             translateAnimations.add(mover.moveInX(Main.coordinates.get(j), 
                     Main.coordinates.get(i), 
                     craneUpperBox2,rope2,magnet2)); 
@@ -76,7 +75,7 @@ public class AnimationsGenerator {
             int currentNumber = numbers.get(i); 
         
             translateAnimations.add(parallelAnimations(mover.moveInY(
-                    0.65* Main.windowHeight, 0.65* Main.windowHeight - 2 * Main.squareDimension, 
+                    0.65* Main.windowHeight, 0.65* Main.windowHeight - 115, 
                     boxes.get(i)), pseudocode.changeLabelProperties(1, 
                     "for i = " + i))); 
             
@@ -104,7 +103,7 @@ public class AnimationsGenerator {
                     stackpane, craneUpperBox2, rope2, magnet2)); 
             }
 
-            translateAnimations.add(parallelAnimations(mover.moveInY(0.65 * Main.windowHeight - 2 * Main.squareDimension, 
+            translateAnimations.add(parallelAnimations(mover.moveInY(0.65 * Main.windowHeight - 115, 
                     0.65 * Main.windowHeight, 
                     stackpane), pseudocode.changeLabelProperties(3, 
                     "\tnumbers[" + j + "]" + " = " + currentNumber)));

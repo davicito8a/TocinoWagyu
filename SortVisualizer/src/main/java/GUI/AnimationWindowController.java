@@ -91,7 +91,7 @@ public class AnimationWindowController {
        // root.setBackground(new Background(background));
         setButtonsLayout();
         scene = new Scene(root);
-        scene.getStylesheets().add(new File("src/main/java/Resources/Styles.css").toURI().toURL().toExternalForm());
+        scene.getStylesheets().add(new File("src/main/java/Resources/WindowStyles.css").toURI().toURL().toExternalForm());
      
         root.getChildren().add(pseudocodeBox);
         setCrane();
