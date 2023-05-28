@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -56,9 +57,25 @@ public class Pseudocode {
             labels.add(label);
         }
         pseudocodeBox.getChildren().addAll(labels);
-        pseudocodeBox.setLayoutX(0.0 * Main.windowWidth);
-        pseudocodeBox.setLayoutY(0.8 * Main.windowHeight);
+        pseudocodeBox.setTranslateX(0.0 * Main.windowWidth);
+        pseudocodeBox.setTranslateY(0.8 * Main.windowHeight);
         pseudocodeBox.setStyle("-fx-background-color: black");
+        
+        if(Main.sortType == 2){
+            pseudocodeBox.setOnMouseEntered(e ->{
+            TranslateTransition moveUpward = new TranslateTransition();
+            moveUpward.setNode(pseudocodeBox);
+            moveUpward.setToY(0.5 * Main.windowHeight);
+            moveUpward.play();
+            });
+        
+        pseudocodeBox.setOnMouseExited(e ->{
+            TranslateTransition moveUpward = new TranslateTransition();
+            moveUpward.setNode(pseudocodeBox);
+            moveUpward.setToY(0.8 * Main.windowHeight);
+            moveUpward.play();
+            });
+        }
     }
     
     public Animation changeLabelProperties(int lineNumber, String newText){
