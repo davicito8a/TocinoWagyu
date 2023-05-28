@@ -23,16 +23,17 @@ public class Main extends Application {
     
     public static ArrayList<Double> coordinates = new ArrayList();
     
-    static double squareDimension;
+    public static double squareDimension;
     static double separation;
     
     public static int modeType = 0;
     public static int sortType = 2;
+    public static int size;
 
     public static ArrayList<StackPane> getRectangles(ArrayList<Integer> numbers) {
         squareDimension = 0.75 * 0.9 * windowWidth / numbers.size();
         separation = 0.25 * 0.9 * windowWidth / numbers.size();
-        int size = NumberSize(numbers.size());
+        size = NumberSize(numbers.size());
         ArrayList<StackPane> stackpanes = new ArrayList();
         
         for(int i = 0; i < numbers.size(); i++){

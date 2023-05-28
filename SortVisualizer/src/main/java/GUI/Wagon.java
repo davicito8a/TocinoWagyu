@@ -22,17 +22,13 @@ public class Wagon {
         //System.out.println(squareDimension);
             canvasBox.setHeight(squareDimension);
             canvasBox.setWidth(squareDimension);
-            createTrainCanvas(20, 20, Color.RED, canvasBox, size);
-        
-        
+            createTrainCanvas(0, -5, Color.RED, canvasBox, size);
     }
-    
 
     private void createTrainCanvas(double x, double y, Color color, Canvas canvas, int scale) {
        GraphicsContext gc = canvas.getGraphicsContext2D();
         //System.out.println("scale: " +   scale);
         double SizeOfWagon = 0;
-
 
            switch (scale) {
                case 4:

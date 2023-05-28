@@ -1,5 +1,6 @@
 package GUI;
 
+import SortVisualizerCore.Main;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -115,30 +116,88 @@ public class Crane {
         
         //Posiciones Auxiliares para Bubble y Cocktail 
         //Lado Izquierda 
-        double[] apoyoIzquiera1={40,150,130,40};
-        double[] apoyoIzquiera2={200,200,230,230};
+        double plataforma = Main.squareDimension;
+        double tamano = Main.size;
+        int tamanoint =(int)tamano;
+        double sizePlata=0;
+        
+        switch (tamanoint) {
+            case 4:
+                sizePlata= 0.97;
+                
+                break;
+            case 5:
+                sizePlata=0.93;
+                
+                break;
+            case 7:
+                sizePlata=0.87;
+                
+                break;
+            case 10:
+                sizePlata=0.85;
+                
+                break;
+            case 12:
+                sizePlata=0.83;
+                
+                break;
+            default:
+                System.out.println("Algo salio terriblemente mal");
+        }
+        
+        
+        double[] apoyoIzquiera1={40*sizePlata,150*sizePlata,130*sizePlata,40*sizePlata};
+        double[] apoyoIzquiera2={200*sizePlata,200*sizePlata,230*sizePlata,230*sizePlata};
+        
         
         gc.setStroke(ColorInterno);
         gc.fillPolygon(apoyoIzquiera1, apoyoIzquiera2, 4);
         
         gc.setLineWidth(5.5);
         gc.setStroke(ColorExterno);
-        gc.strokeLine(40,200,150 , 200);
-        gc.strokeLine(150, 200, 130, 230);
-        gc.strokeLine(130, 230, 40, 230);
+        gc.strokeLine(40*sizePlata,200*sizePlata,150*sizePlata , 200*sizePlata);
+        gc.strokeLine(150*sizePlata, 200*sizePlata, 130*sizePlata, 230*sizePlata);
+        gc.strokeLine(130*sizePlata, 230*sizePlata, 40*sizePlata, 230*sizePlata);
         
         //Lado Derecha
-        double[] apoyoDerecha1 = {1450,1340,1360,1450};
-        double[] apoyoDerecha2 = {200,200,230,230};
+        double acomodarderecha=0;
+        switch (tamanoint) {
+            case 4:
+                acomodarderecha = 42;
+                
+                break;
+            case 5:
+                acomodarderecha = 100;
+                
+                break;
+            case 7:
+                acomodarderecha = 187;
+                
+                break;
+            case 10:
+                acomodarderecha = 217;
+                
+                break;
+            case 12:
+                acomodarderecha = 247;
+                
+                break;
+            default:
+                System.out.println("Algo salio terriblemente mal");
+        }
+        
+        double[] apoyoDerecha1 = {1450*sizePlata+acomodarderecha,1340*sizePlata+acomodarderecha,1360*sizePlata+acomodarderecha,1450*sizePlata+acomodarderecha};
+        double[] apoyoDerecha2 = {200*sizePlata,200*sizePlata,230*sizePlata,230*sizePlata};
         
         gc.setStroke(ColorInterno);
         gc.fillPolygon(apoyoDerecha1, apoyoDerecha2, 4);
         
         gc.setLineWidth(5.5);
         gc.setStroke(ColorExterno);
-        gc.strokeLine(1450,200 , 1340, 200);
-        gc.strokeLine(1340,200,1360,230);
-        gc.strokeLine(1360,230,1450,230);
+        gc.strokeLine(1450*sizePlata+acomodarderecha,200*sizePlata , 1340*sizePlata+acomodarderecha, 200*sizePlata);
+        gc.strokeLine(1340*sizePlata+acomodarderecha,200*sizePlata,1360*sizePlata+acomodarderecha,230*sizePlata);
+        gc.strokeLine(1360*sizePlata+acomodarderecha,230*sizePlata,1450*sizePlata+acomodarderecha,230*sizePlata);
         
         
     }

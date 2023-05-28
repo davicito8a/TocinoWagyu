@@ -263,7 +263,7 @@ public class AnimationsGenerator {
         craneUpperBox1.setTranslateY(y);
         craneUpperBox1.setWidth(40);
         craneUpperBox1.setHeight(20);
-        craneUpperBox1.setLayoutX(Main.squareDimension/2 - craneUpperBox1.getWidth()/2);
+        craneUpperBox1.setLayoutX((230/4)/2 - craneUpperBox1.getWidth()/2);
         craneUpperBox1.setFill(Color.YELLOW);
         craneUpperBox1.setStroke(Color.BLACK);
         craneUpperBox1.setStrokeWidth(3);
@@ -273,7 +273,7 @@ public class AnimationsGenerator {
         craneUpperBox2.setTranslateY(y2);
         craneUpperBox2.setWidth(40);
         craneUpperBox2.setHeight(20);
-        craneUpperBox2.setLayoutX(Main.squareDimension/2 - craneUpperBox2.getWidth()/2);
+        craneUpperBox2.setLayoutX((230/4)/2 - craneUpperBox2.getWidth()/2);
         craneUpperBox2.setFill(Color.GREEN);
         craneUpperBox2.setStroke(Color.BLACK);
         craneUpperBox2.setStrokeWidth(3);
@@ -283,7 +283,7 @@ public class AnimationsGenerator {
         magnet1.setTranslateY(y);
         magnet1.setWidth(25);
         magnet1.setHeight(10);
-        magnet1.setLayoutX(Main.squareDimension/2- magnet1.getWidth()/2);
+        magnet1.setLayoutX((230/4)/2- magnet1.getWidth()/2);
         magnet1.setFill(Color.BLUE);
         magnet1.setStroke(Color.BLACK);
         magnet1.setStrokeWidth(3);
@@ -293,31 +293,31 @@ public class AnimationsGenerator {
         magnet2.setTranslateY(y2);
         magnet2.setWidth(25);
         magnet2.setHeight(10);
-        magnet2.setLayoutX(Main.squareDimension/2-magnet2.getWidth()/2);
+        magnet2.setLayoutX((230/4)/2-magnet2.getWidth()/2);
         magnet2.setFill(Color.BLUE);
         magnet2.setStroke(Color.BLACK);
         magnet2.setStrokeWidth(3);
         
         if(Main.sortType == 1 || Main.sortType == 2){
             //magnet1.setLayoutY(0.65*Main.windowHeight -  2*Main.squareDimension - magnet1.getHeight() - y);
-            magnet2.setLayoutY(0.65*Main.windowHeight-4*Main.squareDimension - magnet2.getHeight() - y2);
+            magnet2.setLayoutY(0.65*Main.windowHeight-230- magnet2.getHeight() - y2);
             //rope1 = new Line(Main.squareDimension/2,0,Main.squareDimension/2,0.65*Main.windowHeight - 2 * Main.squareDimension - magnet1.getHeight() - y);
             
         } else {
             magnet1.setLayoutY(0.65*Main.windowHeight - magnet1.getHeight() - y);
-            magnet2.setLayoutY(0.65*Main.windowHeight-2*Main.squareDimension - magnet2.getHeight() - y2);
-            rope1 = new Line(Main.squareDimension/2,0,Main.squareDimension/2,0.65*Main.windowHeight - y);
+            magnet2.setLayoutY(0.65*Main.windowHeight-115 - magnet2.getHeight() - y2);
+            rope1 = new Line((230/4)/2,0,(230/4)/2,0.65*Main.windowHeight - y);
             
         }
         if(Main.sortType==0){
             rope1.setTranslateX(Main.coordinates.get(0));
             rope1.setTranslateY(y);
         }
-        
+ 
         if(Main.sortType==0){
-            rope2 = new Line(Main.squareDimension/2,0,Main.squareDimension/2,0.65*Main.windowHeight - 2 *Main.squareDimension - magnet2.getHeight() - 35);
+            rope2 = new Line((230/4)/2,0,(230/4)/2,0.65*Main.windowHeight - 115 - magnet2.getHeight() - 35);
         }else{
-        rope2 = new Line(Main.squareDimension/2,0,Main.squareDimension/2,0.65*Main.windowHeight - 4 * Main.squareDimension - magnet2.getHeight() - y2);
+        rope2 = new Line((230/4)/2,0,(230/4)/2,0.65*Main.windowHeight - 230 - magnet2.getHeight() - y2);
         }
         //rope1.setTranslateX(Main.coordinates.get(0));
         //rope1.setTranslateY(y);

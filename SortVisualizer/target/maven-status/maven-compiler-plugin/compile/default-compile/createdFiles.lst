@@ -1,11 +1,12 @@
 SortVisualizerCore\AnimationsPlayer.class
 SortVisualizerCore\Main.class
+SortVisualizerCore\AnimationsGenerator.class
+SortVisualizerCore\Pseudocode.class
 SortVisualizerCore\NumberDrawer.class
+GUI\AnimationWindowController.class
 GUI\BackGround$Building.class
 GUI\BackGround.class
-SortVisualizerCore\Mover.class
-SortVisualizerCore\Pseudocode.class
-GUI\AnimationWindowController.class
 GUI\Crane.class
 GUI\Wagon.class
 GUI\InputController.class
+SortVisualizerCore\Mover.class
