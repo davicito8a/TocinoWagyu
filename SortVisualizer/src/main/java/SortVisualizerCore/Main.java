@@ -18,8 +18,6 @@ import javafx.scene.input.ScrollEvent;
 
 public class Main extends Application {
     
-    //comentando
-    public static int saving;
     public static int windowHeight = 600;
     public static int windowWidth = 1500;
     
