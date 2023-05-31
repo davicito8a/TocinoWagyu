@@ -47,7 +47,7 @@ public class BackGround {
      private void createBuildings() {
         buildings = new ArrayList<>();
         Random random = new Random();
-
+/*
         for (int i = 0; i < 14; i++) {
             int x = 25 + i * (75 + 35);  // 75 es el ancho de los edificios originales
             int y = 200;
@@ -56,6 +56,7 @@ public class BackGround {
             Color color = Color.rgb(random.nextInt(256), random.nextInt(256), random.nextInt(256));
             buildings.add(new Building(x, y, width, height, color));
         }
+        */
     }
 
 
