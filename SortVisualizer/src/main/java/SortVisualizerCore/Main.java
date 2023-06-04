@@ -53,6 +53,9 @@ public class Main extends Application {
             StackPane stackpane = new StackPane();
             stackpane.setTranslateX(0.05 * windowWidth + (squareDimension + separation) * i);
             stackpane.setTranslateY(0.65 * windowHeight);
+            if(Main.sortType == 3){
+            stackpane.setTranslateY(0.45 * windowHeight);                
+            }
             stackpane.getChildren().addAll( canvas); // Agregar canvasBox al StackPane
 
             

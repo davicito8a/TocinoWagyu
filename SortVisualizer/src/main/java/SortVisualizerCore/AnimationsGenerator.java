@@ -32,20 +32,30 @@ public class AnimationsGenerator {
         this.numbers = numbers;
         this.boxes = stackpanes;
         
-        setCrane();
+
         
         switch (Main.sortType){
             case 0: 
+                        setCrane();
                 getInsertionSortAnimations(); 
                 pseudocode.selectInsertionSortLines();
                 break;
             case 1: 
+                        setCrane();
                 getBubbleSortAnimations();
                 pseudocode.selectBubbleSortLines();
                 break;
             case 2:
+                        setCrane();
                 getCocktailSortAnimations();
                 pseudocode.selectCocktailSortLines();
+                break;
+            case 3:
+          
+                getSelectionSortAnimations();
+                pseudocode.selectCocktailSortLines();
+
+                break;
             default:
                 break;
         }
@@ -286,6 +296,35 @@ public class AnimationsGenerator {
             start = start + 1;   
         }
         
+    }
+    
+    private void getSelectionSortAnimations(){
+        System.out.println(numbers.toString());
+        for (int i = 0; i < numbers.size() - 1; i++){
+            int min_idx = i;
+            for (int j = i + 1; j < numbers.size(); j++){
+                if (numbers.get(j) < numbers.get(min_idx)){
+                    min_idx = j;
+                }
+            }
+            
+            translateAnimations.add(parallelAnimations(mover.moveInY2(0, 230, boxes.get(i)),
+                    mover.moveInY2(0, 230, boxes.get(min_idx))));
+            translateAnimations.add(parallelAnimations(mover.moveInX2(Main.coordinates.get(i), Main.coordinates.get(min_idx), boxes.get(i)),
+                    mover.moveInX2(Main.coordinates.get(min_idx), Main.coordinates.get(i), boxes.get(min_idx))));
+            translateAnimations.add(parallelAnimations(mover.moveInY2(0, 0.45*Main.windowHeight, boxes.get(i)),
+                    mover.moveInY2(0, 0.45*Main.windowHeight, boxes.get(min_idx))));
+            
+
+                 
+            int temp = numbers.get(min_idx);
+            StackPane temp1 = boxes.get(min_idx);
+            numbers.set(min_idx, numbers.get(i));
+            boxes.set(min_idx, boxes.get(i));
+            numbers.set(i, temp);
+            boxes.set(i, temp1);
+        }
+        System.out.println(numbers.toString());
     }
     
     private void setCrane(){

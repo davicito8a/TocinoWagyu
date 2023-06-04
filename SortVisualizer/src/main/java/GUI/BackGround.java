@@ -22,6 +22,7 @@ public class BackGround {
     
     public BackGround(Canvas canvas) {
         this.canvas = canvas;
+
     }
     
     private List<Building> buildings;
@@ -33,6 +34,8 @@ public class BackGround {
             gh = canvas1.getGraphicsContext2D();
             canvas.setHeight(600);
             canvas.setWidth(1500);
+            
+            
             createBuildings();
                 // Agregar un controlador de eventos de ratón para permitir el zoom
 
@@ -47,7 +50,7 @@ public class BackGround {
      private void createBuildings() {
         buildings = new ArrayList<>();
         Random random = new Random();
-/*
+
         for (int i = 0; i < 14; i++) {
             int x = 25 + i * (75 + 35);  // 75 es el ancho de los edificios originales
             int y = 200;
@@ -56,7 +59,6 @@ public class BackGround {
             Color color = Color.rgb(random.nextInt(256), random.nextInt(256), random.nextInt(256));
             buildings.add(new Building(x, y, width, height, color));
         }
-        */
     }
 
 
@@ -67,7 +69,7 @@ public class BackGround {
 
         @param gc el contexto gráfico en el que se dibujará la ciudad
         */
-    private void drawCity(GraphicsContext gc) {
+        public void drawCity(GraphicsContext gc) {
         // Definir los colores para el cielo
         Color topColor = Color.rgb(135, 206, 235);
         Color bottomColor = Color.rgb(255, 165, 0);
@@ -131,6 +133,42 @@ public class BackGround {
                 int doorHeight = (int) (building.getHeight() * 0.15);
                 gc.fillRect(building.getX() + building.getWidth() / 2 - doorWidth / 2, building.getY() + building.getHeight() - doorHeight, doorWidth, doorHeight);
             }
+    }
+    
+    
+        public void Desert(Canvas canvas){
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        canvas.setHeight(600);
+        canvas.setWidth(1500);
+        // Fondo desértico
+        gc.setFill(Color.SANDYBROWN);
+        gc.fillRect(0, 0, 1500, 600);
+
+        // Detalles desérticos
+        
+        //CARRIL PRINCIPAL
+        
+        // Línea horizontal 1
+        gc.setStroke(Color.BLACK);
+        gc.setLineWidth(10);
+        gc.strokeLine(0, 310, 1000, 310);
+        // Línea horizontal paralela a la anterior
+        gc.strokeLine(0, 270, 1000, 270);
+    
+        //CARRIL DIAGONAL 1(DOWNONE)
+        gc.setStroke(Color.BLACK);
+        gc.strokeLine(1000, 310, 1200, 600);
+        gc.strokeLine(1050, 310, 1250, 600);
+        
+        //CARRIL DIAGONAL 2 (UPONE)          
+        gc.setStroke(Color.BLACK);
+        gc.strokeLine(1000, 270, 1200, 0);
+        gc.strokeLine(1050, 270, 1250, 0);    
+        
+        //CARRIL RECTO DESPUÉS DE ENCRUCIJADA
+        gc.setStroke(Color.BLACK);
+        gc.strokeLine(1050, 310, 1500, 310);
+        gc.strokeLine(1050, 270, 1500, 270);
     }
 
 

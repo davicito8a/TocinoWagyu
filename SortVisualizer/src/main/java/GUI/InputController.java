@@ -43,7 +43,7 @@ public class InputController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         modes.setItems(FXCollections.observableArrayList("Normal", "Paso a paso"));
-        sortAlgorithm.setItems(FXCollections.observableArrayList("Inserción", "Burbuja", "Coctelera"));
+        sortAlgorithm.setItems(FXCollections.observableArrayList("Inserción", "Burbuja", "Coctelera", "Seleccion"));
         
     }    
 
@@ -85,8 +85,10 @@ private void continueToVisualization(ActionEvent event) throws IOException {
             Main.sortType = 0;
         else if (sortAlgorithm.getValue().equals("Burbuja"))
             Main.sortType = 1;
-        else
+        else if(sortAlgorithm.getValue().equals("Coctelera"))
             Main.sortType = 2;
+        else
+            Main.sortType = 3;
 
         ArrayList<Integer> numbers = new ArrayList<>();
         String[] numberStrings = this.numbers.getText().split(",");

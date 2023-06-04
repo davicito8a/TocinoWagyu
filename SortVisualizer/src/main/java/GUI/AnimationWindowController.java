@@ -68,7 +68,19 @@ public class AnimationWindowController {
         
         Canvas canvas = new Canvas(Main.windowHeight, Main.windowWidth);
         BackGround bgc = new BackGround(canvas); 
-        bgc.drawBG(canvas);
+               
+        if(Main.sortType == 3){
+            bgc.Desert(canvas);
+            
+        }
+        else{
+            bgc.drawBG(canvas);
+            
+            
+        }
+        
+
+
  
         
         
@@ -78,13 +90,11 @@ public class AnimationWindowController {
    
         root = new AnchorPane();
   
-        BackgroundImage background = new BackgroundImage(new Image(new File("src/main/java/Resources/background.png").toURI().toURL().toExternalForm()),
-        BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT,
-        BackgroundSize.DEFAULT);
         
-        Crane crane = new Crane();
+
         root.getChildren().add(canvas);
-        root.getChildren().add(crane.getCanvas());
+
+        
         root.getChildren().addAll(stackpanes);
         
        
@@ -94,7 +104,13 @@ public class AnimationWindowController {
         scene.getStylesheets().add(new File("src/main/java/Resources/WindowStyles.css").toURI().toURL().toExternalForm());
      
         root.getChildren().add(pseudocodeBox);
-        setCrane();
+        if (Main.sortType != 3){
+          Crane crane = new Crane(); 
+          root.getChildren().add(crane.getCanvas());
+          setCrane();
+        }
+ 
+
         
     }
     
