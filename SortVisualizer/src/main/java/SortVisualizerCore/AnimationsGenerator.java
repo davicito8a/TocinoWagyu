@@ -3,11 +3,18 @@ package SortVisualizerCore;
 import java.util.ArrayList;
 import javafx.animation.Animation;
 import javafx.animation.ParallelTransition;
+import javafx.animation.PathTransition;
+import javafx.animation.RotateTransition;
+import javafx.animation.TranslateTransition;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.ArcTo;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 
 public class AnimationsGenerator {
     private final Mover mover = new Mover();
@@ -299,6 +306,51 @@ public class AnimationsGenerator {
     }
     
     private void getSelectionSortAnimations(){
+        
+         ArrayList<Animation> animations = new ArrayList();
+       for(StackPane box: boxes){
+             TranslateTransition moverDerecha = new TranslateTransition();
+             moverDerecha.setNode(box);
+             moverDerecha.setByX(113);
+             moverDerecha.setDuration(Duration.millis(500));
+             animations.add(moverDerecha);
+        }
+        ParallelTransition mover = new ParallelTransition();
+        mover.getChildren().addAll(animations);
+        translateAnimations.add(mover); 
+        
+         double angle = -20;
+         ArrayList<Animation> animations2 = new ArrayList();
+        for(int i = boxes.size() - 1; i >= 0; i--){
+            RotateTransition rotar = new RotateTransition();
+            rotar.setNode(boxes.get(i));
+            rotar.setByAngle(angle);
+            rotar.setDuration(Duration.millis(25));
+            translateAnimations.add(rotar);
+            
+            ArrayList<Animation> arreglo2 = new ArrayList();
+     
+            
+            for(int k = i; k <= boxes.size() - 1; k++){
+                TranslateTransition mover2 = new TranslateTransition();
+                mover2.setNode(boxes.get(k));
+                mover2.setByX((Main.separation + Main.squareDimension) * Math.cos(angle * Math.PI/180));
+                mover2.setByY((Main.separation + Main.squareDimension) * Math.sin(angle * Math.PI/180));
+                mover2.setDuration(Duration.millis(200));
+                arreglo2.add(mover2);
+            }
+            for(int j = i - 1; j >= 0; j--){
+             TranslateTransition moverDerecha = new TranslateTransition();
+             moverDerecha.setNode(boxes.get(j));
+             moverDerecha.setByX(Main.separation + Main.squareDimension);
+             moverDerecha.setDuration(Duration.millis(200));
+             arreglo2.add(moverDerecha);
+            }
+            ParallelTransition same = new ParallelTransition();
+            same.getChildren().addAll(arreglo2);
+            translateAnimations.add(same);
+        }
+        
         System.out.println(numbers.toString());
         for (int i = 0; i < numbers.size() - 1; i++){
             int min_idx = i;
@@ -308,24 +360,73 @@ public class AnimationsGenerator {
                 }
             }
             
-            translateAnimations.add(parallelAnimations(mover.moveInY2(0, 230, boxes.get(i)),
-                    mover.moveInY2(0, 230, boxes.get(min_idx))));
-            translateAnimations.add(parallelAnimations(mover.moveInX2(Main.coordinates.get(i), Main.coordinates.get(min_idx), boxes.get(i)),
-                    mover.moveInX2(Main.coordinates.get(min_idx), Main.coordinates.get(i), boxes.get(min_idx))));
-            translateAnimations.add(parallelAnimations(mover.moveInY2(0, 0.45*Main.windowHeight, boxes.get(i)),
-                    mover.moveInY2(0, 0.45*Main.windowHeight, boxes.get(min_idx))));
+            ArrayList<Animation> array = new ArrayList();
+            for(int k = 0; k < min_idx; k++){
+                TranslateTransition mover2 = new TranslateTransition();
+                mover2.setNode(boxes.get(k));
+                mover2.setByX(-1 * (Main.separation + Main.squareDimension) * Math.cos(angle * Math.PI/180));
+                mover2.setByY(-1 * (Main.separation + Main.squareDimension) * Math.sin(angle * Math.PI/180));
+                mover2.setDuration(Duration.millis(200));
+                array.add(mover2);
+            }
+            ParallelTransition pa = new ParallelTransition();
+            pa.getChildren().addAll(array);
+            translateAnimations.add(pa);
             
+            for(int r = 0; r < min_idx; r++){
+            RotateTransition rotar = new RotateTransition();
+            rotar.setNode(boxes.get(r));
+            rotar.setByAngle(-angle);
+            rotar.setDuration(Duration.millis(25));
+            translateAnimations.add(rotar);
+            
+            ArrayList<Animation> arreglo2 = new ArrayList();
+            
+            
+            
+            for(int t = 0; t <= r; t++){
+                TranslateTransition moverDerecha = new TranslateTransition();
+                moverDerecha.setNode(boxes.get(t));
+                moverDerecha.setByX(- 1 * (Main.separation + Main.squareDimension));
+                moverDerecha.setDuration(Duration.millis(200));
+                arreglo2.add(moverDerecha);
+            }
 
-                 
-            int temp = numbers.get(min_idx);
-            StackPane temp1 = boxes.get(min_idx);
-            numbers.set(min_idx, numbers.get(i));
-            boxes.set(min_idx, boxes.get(i));
-            numbers.set(i, temp);
-            boxes.set(i, temp1);
+            for(int k = r + 1; k < min_idx; k++){
+                TranslateTransition mover2 = new TranslateTransition();
+                mover2.setNode(boxes.get(k));
+                mover2.setByX(-1 * (Main.separation + Main.squareDimension) * Math.cos(angle * Math.PI/180));
+                mover2.setByY(-1 * (Main.separation + Main.squareDimension) * Math.sin(angle * Math.PI/180));
+                mover2.setDuration(Duration.millis(200));
+                arreglo2.add(mover2);
+            }
+            
+            ParallelTransition pap = new ParallelTransition();
+            pap.getChildren().addAll(arreglo2);
+            translateAnimations.add(pap);
+            }
+            
+            TranslateTransition moverCentro = new TranslateTransition();
+            moverCentro.setNode(boxes.get(min_idx));
+            moverCentro.setToX(1000);
+            translateAnimations.add(moverCentro);
+            
+          
+            break;
+           
+           
         }
         System.out.println(numbers.toString());
-    }
+        
+       
+    
+       
+                
+        
+        
+        }
+       
+    
     
     private void setCrane(){
         int y = 10;

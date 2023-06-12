@@ -33,6 +33,11 @@ public class Main extends Application {
     public static ArrayList<StackPane> getRectangles(ArrayList<Integer> numbers) {
         squareDimension = 0.75 * 0.9 * windowWidth / numbers.size();
         separation = 0.25 * 0.9 * windowWidth / numbers.size();
+        
+        if(Main.sortType == 3){
+            squareDimension = 0.75 * 0.5 * windowWidth / numbers.size();
+            separation = 0.25 * 0.5 * windowWidth / numbers.size();
+        }
         size = NumberSize(numbers.size());
         ArrayList<StackPane> stackpanes = new ArrayList();
         
@@ -54,7 +59,8 @@ public class Main extends Application {
             stackpane.setTranslateX(0.05 * windowWidth + (squareDimension + separation) * i);
             stackpane.setTranslateY(0.65 * windowHeight);
             if(Main.sortType == 3){
-            stackpane.setTranslateY(0.45 * windowHeight);                
+                stackpane.setTranslateX(0.05 * windowWidth + (squareDimension + separation) * i);
+                stackpane.setTranslateY(0.45 * windowHeight);                
             }
             stackpane.getChildren().addAll( canvas); // Agregar canvasBox al StackPane
 
