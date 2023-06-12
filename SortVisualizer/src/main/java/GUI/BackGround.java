@@ -147,7 +147,7 @@ public class BackGround {
         // Detalles desérticos
         
         //CARRIL PRINCIPAL
-        
+        /*
         // Línea horizontal 1
         gc.setStroke(Color.BLACK);
         gc.setLineWidth(10);
@@ -166,7 +166,7 @@ public class BackGround {
         gc.strokeLine(1050, 270, 1250, 0);    
         
         //CARRIL RECTO DESPUÉS DE ENCRUCIJADA
-
+*/
     }
 
 
