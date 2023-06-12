@@ -309,8 +309,8 @@ public class AnimationsGenerator {
     }
     
     private void getSelectionSortAnimations(){
-        double angle = -20;
-        translateAnimations.add(moverEnLinea(boxes, 1, 0));
+        double angle = -53;
+        translateAnimations.add(moverEnLinea(boxes, 4.37, 0));
         translateAnimations.addAll(cambioDireccion(boxes, angle));
         
         System.out.println(numbers.toString());
@@ -331,8 +331,8 @@ public class AnimationsGenerator {
             
             TranslateTransition moverCentro = new TranslateTransition();
             moverCentro.setNode(boxes.get(min_idx));
-            moverCentro.setToX(1200);
-            moverCentro.setByY(200);
+            moverCentro.setToX(1000);
+            moverCentro.setToY(270);
             translateAnimations.add(moverCentro);
             break;
 
