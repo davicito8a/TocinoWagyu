@@ -166,9 +166,7 @@ public class BackGround {
         gc.strokeLine(1050, 270, 1250, 0);    
         
         //CARRIL RECTO DESPUÉS DE ENCRUCIJADA
-        gc.setStroke(Color.BLACK);
-        gc.strokeLine(1050, 310, 1500, 310);
-        gc.strokeLine(1050, 270, 1500, 270);
+
     }
 
 
