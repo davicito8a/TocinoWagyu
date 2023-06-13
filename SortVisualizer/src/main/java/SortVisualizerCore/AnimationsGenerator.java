@@ -309,7 +309,7 @@ public class AnimationsGenerator {
     }
     
     private void getSelectionSortAnimations(){
-        double angle = -53;
+        double angle = -20;
         translateAnimations.add(moverEnLinea(boxes, 4.37, 0));
         translateAnimations.addAll(cambioDireccion(boxes, angle, angle, 0, 1));
         
@@ -337,7 +337,7 @@ public class AnimationsGenerator {
             vagonesDespuesDeMinimo.addAll(vagonesNoOrdenados.subList(min_idx, vagonesNoOrdenados.size()));
             translateAnimations.add(moverEnLinea(vagonesDespuesDeMinimo, -(vagonesAntesDeMinimo.size() + 1), angle));
             Collections.reverse(vagonesDespuesDeMinimo);
-            translateAnimations.addAll(cambioDireccion(vagonesDespuesDeMinimo, -254, angle, -127, -1));
+            translateAnimations.addAll(cambioDireccion(vagonesDespuesDeMinimo, 2*-1*angle-360, angle, -1*angle-180, -1));
             translateAnimations.add(moverEnLinea(vagonesDespuesDeMinimo, vagonesAntesDeMinimo.size() + 1, -angle));
             Collections.reverse(vagonesAntesDeMinimo);
            
@@ -347,7 +347,7 @@ public class AnimationsGenerator {
             vagonesSinMinimo.addAll(vagonesDespuesDeMinimo.subList(0, vagonesDespuesDeMinimo.size() - 1));
             Collections.reverse(vagonesSinMinimo);
             translateAnimations.add(moverEnLinea(vagonesSinMinimo, -(vagonesAntesDeMinimo.size() + 2), -angle));
-            translateAnimations.addAll(cambioDireccion(vagonesSinMinimo, 254, angle, -127, 1));
+            translateAnimations.addAll(cambioDireccion(vagonesSinMinimo, 360-2*-1*angle, angle, angle*-1-180, 1));
             translateAnimations.add(moverEnLinea(vagonesSinMinimo, vagonesAntesDeMinimo.size(), angle));
             
             
@@ -362,12 +362,6 @@ public class AnimationsGenerator {
             numbers.add(i, temp);
             boxes.add(i, stack);
             System.out.println(numbers.toString());
-            
-          
-            
-            
-           
-
         }
         System.out.println(numbers.toString());
     }
