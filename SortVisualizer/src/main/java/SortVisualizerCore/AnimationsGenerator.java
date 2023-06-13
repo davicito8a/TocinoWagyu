@@ -314,16 +314,19 @@ public class AnimationsGenerator {
         translateAnimations.addAll(cambioDireccion(boxes, angle, angle, 0, 1));
         
         System.out.println(numbers.toString());
-        for (int i = 0; i < numbers.size() - 1; i++){
+        for (int i = 0; i < numbers.size(); i++){
             int min_idx = i;
             for (int j = i + 1; j < numbers.size(); j++){
-                if (numbers.get(j) < numbers.get(min_idx)){
+                if (numbers.get(j) > numbers.get(min_idx)){
                     min_idx = j;
                 }
             }
             
+            ArrayList<StackPane> vagonesNoOrdenados = new ArrayList();
+            vagonesNoOrdenados.addAll(boxes.subList(0, boxes.size()));
+            
             ArrayList<StackPane> vagonesAntesDeMinimo = new ArrayList();
-            vagonesAntesDeMinimo.addAll(boxes.subList(0, min_idx));
+            vagonesAntesDeMinimo.addAll(vagonesNoOrdenados.subList(i, min_idx));
             
             translateAnimations.add(moverEnLinea(vagonesAntesDeMinimo, -1, angle));
             Collections.reverse(vagonesAntesDeMinimo);
@@ -331,10 +334,11 @@ public class AnimationsGenerator {
             
             
             ArrayList<StackPane> vagonesDespuesDeMinimo = new ArrayList();
-            vagonesDespuesDeMinimo.addAll(boxes.subList(min_idx, boxes.size()));
+            vagonesDespuesDeMinimo.addAll(vagonesNoOrdenados.subList(min_idx, vagonesNoOrdenados.size()));
             translateAnimations.add(moverEnLinea(vagonesDespuesDeMinimo, -(vagonesAntesDeMinimo.size() + 1), angle));
             Collections.reverse(vagonesDespuesDeMinimo);
             translateAnimations.addAll(cambioDireccion(vagonesDespuesDeMinimo, -254, angle, -127, -1));
+            translateAnimations.add(moverEnLinea(vagonesDespuesDeMinimo, vagonesAntesDeMinimo.size() + 1, -angle));
             Collections.reverse(vagonesAntesDeMinimo);
            
             
@@ -342,7 +346,7 @@ public class AnimationsGenerator {
             ArrayList<StackPane> vagonesSinMinimo = new ArrayList();
             vagonesSinMinimo.addAll(vagonesDespuesDeMinimo.subList(0, vagonesDespuesDeMinimo.size() - 1));
             Collections.reverse(vagonesSinMinimo);
-            translateAnimations.add(moverEnLinea(vagonesSinMinimo, -1, -angle));
+            translateAnimations.add(moverEnLinea(vagonesSinMinimo, -(vagonesAntesDeMinimo.size() + 2), -angle));
             translateAnimations.addAll(cambioDireccion(vagonesSinMinimo, 254, angle, -127, 1));
             translateAnimations.add(moverEnLinea(vagonesSinMinimo, vagonesAntesDeMinimo.size(), angle));
             
@@ -350,7 +354,19 @@ public class AnimationsGenerator {
             translateAnimations.add(moverEnLinea(vagonesAntesDeMinimo, 1, 0));
             translateAnimations.addAll(cambioDireccion(vagonesAntesDeMinimo, angle, angle, 0, 1));
             
-            break;
+            System.out.println(numbers.toString());
+            int temp = numbers.get(min_idx);
+            StackPane stack = boxes.get(min_idx);
+            numbers.remove(min_idx);
+            boxes.remove(min_idx);
+            numbers.add(i, temp);
+            boxes.add(i, stack);
+            System.out.println(numbers.toString());
+            
+          
+            
+            
+           
 
         }
         System.out.println(numbers.toString());
