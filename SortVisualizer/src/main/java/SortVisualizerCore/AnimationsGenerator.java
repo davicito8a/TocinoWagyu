@@ -310,6 +310,8 @@ public class AnimationsGenerator {
     
     private void getSelectionSortAnimations(){
         double angle = -53;
+        
+        // Mover vagones a vía superior
         translateAnimations.add(moverEnLinea(boxes, 4.37, 0));
         translateAnimations.addAll(cambioDireccion(boxes, angle, angle, 0, 1));
         
@@ -325,32 +327,38 @@ public class AnimationsGenerator {
             ArrayList<StackPane> vagonesNoOrdenados = new ArrayList();
             vagonesNoOrdenados.addAll(boxes.subList(0, boxes.size()));
             
+            // Sacar todos los vagones ubicados antes del mínimo de la vía superior y meterlos en la vía central
             ArrayList<StackPane> vagonesAntesDeMinimo = new ArrayList();
             vagonesAntesDeMinimo.addAll(vagonesNoOrdenados.subList(i, min_idx));
-            
+            // Desplazar una posición hacia atrás en la vía superior
             translateAnimations.add(moverEnLinea(vagonesAntesDeMinimo, -1, angle));
             Collections.reverse(vagonesAntesDeMinimo);
+            // meter en vía central
             translateAnimations.addAll(cambioDireccion(vagonesAntesDeMinimo, -angle, angle, 0, -1));
             
-            
+            // Sacar el vagon mínimo junto con todos los que le siguen de la vía superior y meterlos en la vía inferior.
             ArrayList<StackPane> vagonesDespuesDeMinimo = new ArrayList();
             vagonesDespuesDeMinimo.addAll(vagonesNoOrdenados.subList(min_idx, vagonesNoOrdenados.size()));
+            // Mover los vagones la cantidad de posiciones equivalente al número de vagones retirados con anterioridad.
             translateAnimations.add(moverEnLinea(vagonesDespuesDeMinimo, -(vagonesAntesDeMinimo.size() + 1), angle));
             Collections.reverse(vagonesDespuesDeMinimo);
+            // Cambio de dirección de los vagones sobrantes hacia la vía inferior.
             translateAnimations.addAll(cambioDireccion(vagonesDespuesDeMinimo, 2*-1*angle-360, angle, -1*angle-180, -1));
+            // Mover los vagones sobrantes la cantidad de posiciones equivalente al número de vagones retirados con anterioridad.
             translateAnimations.add(moverEnLinea(vagonesDespuesDeMinimo, vagonesAntesDeMinimo.size() + 1, -angle));
             Collections.reverse(vagonesAntesDeMinimo);
            
-            
-            
             ArrayList<StackPane> vagonesSinMinimo = new ArrayList();
             vagonesSinMinimo.addAll(vagonesDespuesDeMinimo.subList(0, vagonesDespuesDeMinimo.size() - 1));
-            Collections.reverse(vagonesSinMinimo);
+            // Retroceso de los vagones la misma cantidad de posiciones que los vagones retirados con anterioridad.
             translateAnimations.add(moverEnLinea(vagonesSinMinimo, -(vagonesAntesDeMinimo.size() + 2), -angle));
+            Collections.reverse(vagonesSinMinimo);
+            // Cambio de dirección hacia vía superior
             translateAnimations.addAll(cambioDireccion(vagonesSinMinimo, 360-2*-1*angle, angle, angle*-1-180, 1));
+            // Movimiento de vagones en vía superior la misma cantidad de posiciones que el número de vagones retirados con anterioridad.
             translateAnimations.add(moverEnLinea(vagonesSinMinimo, vagonesAntesDeMinimo.size(), angle));
             
-            
+            // Reinserción de los vagones retirados.
             translateAnimations.add(moverEnLinea(vagonesAntesDeMinimo, 1, 0));
             translateAnimations.addAll(cambioDireccion(vagonesAntesDeMinimo, angle, angle, 0, 1));
             
