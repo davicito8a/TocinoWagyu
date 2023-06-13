@@ -311,7 +311,7 @@ public class AnimationsGenerator {
     private void getSelectionSortAnimations(){
         double angle = -53;
         translateAnimations.add(moverEnLinea(boxes, 4.37, 0));
-        translateAnimations.addAll(cambioDireccion(boxes, angle));
+        translateAnimations.addAll(cambioDireccion(boxes, angle, angle, 0, 1));
         
         System.out.println(numbers.toString());
         for (int i = 0; i < numbers.size() - 1; i++){
@@ -327,13 +327,29 @@ public class AnimationsGenerator {
             
             translateAnimations.add(moverEnLinea(vagonesAntesDeMinimo, -1, angle));
             Collections.reverse(vagonesAntesDeMinimo);
-            translateAnimations.addAll(cambioDireccion(vagonesAntesDeMinimo, -angle));
+            translateAnimations.addAll(cambioDireccion(vagonesAntesDeMinimo, -angle, angle, 0, -1));
             
-            TranslateTransition moverCentro = new TranslateTransition();
-            moverCentro.setNode(boxes.get(min_idx));
-            moverCentro.setToX(1000);
-            moverCentro.setToY(270);
-            translateAnimations.add(moverCentro);
+            
+            ArrayList<StackPane> vagonesDespuesDeMinimo = new ArrayList();
+            vagonesDespuesDeMinimo.addAll(boxes.subList(min_idx, boxes.size()));
+            translateAnimations.add(moverEnLinea(vagonesDespuesDeMinimo, -(vagonesAntesDeMinimo.size() + 1), angle));
+            Collections.reverse(vagonesDespuesDeMinimo);
+            translateAnimations.addAll(cambioDireccion(vagonesDespuesDeMinimo, -254, angle, -127, -1));
+            Collections.reverse(vagonesAntesDeMinimo);
+           
+            
+            
+            ArrayList<StackPane> vagonesSinMinimo = new ArrayList();
+            vagonesSinMinimo.addAll(vagonesDespuesDeMinimo.subList(0, vagonesDespuesDeMinimo.size() - 1));
+            Collections.reverse(vagonesSinMinimo);
+            translateAnimations.add(moverEnLinea(vagonesSinMinimo, -1, -angle));
+            translateAnimations.addAll(cambioDireccion(vagonesSinMinimo, 254, angle, -127, 1));
+            translateAnimations.add(moverEnLinea(vagonesSinMinimo, vagonesAntesDeMinimo.size(), angle));
+            
+            
+            translateAnimations.add(moverEnLinea(vagonesAntesDeMinimo, 1, 0));
+            translateAnimations.addAll(cambioDireccion(vagonesAntesDeMinimo, angle, angle, 0, 1));
+            
             break;
 
         }
@@ -358,26 +374,27 @@ public class AnimationsGenerator {
         return moverEnConjunto;
     }
     
-    private ArrayList<Animation> cambioDireccion(List<StackPane> vagones, double angulo){
+    private ArrayList<Animation> cambioDireccion(List<StackPane> vagones,  double anguloGiro, double anguloMovimiento1, double anguloMovimiento2, double desplazamientoPosicion){
         ArrayList<Animation> movimientosVagones = new ArrayList();
         
         for(int i = vagones.size() - 1; i >= 0; i--){
             RotateTransition rotarVagon = new RotateTransition();
             rotarVagon.setNode(vagones.get(i));
-            rotarVagon.setByAngle(angulo);
+            rotarVagon.setByAngle(anguloGiro);
             rotarVagon.setDuration(Duration.millis(25));
             
             movimientosVagones.add(rotarVagon);
             
             ArrayList<Animation> desplazamientosVagones = new ArrayList();
             
-            if(angulo < 0){
-                desplazamientosVagones.add(moverEnLinea( vagones.subList(i, vagones.size()), 1, angulo));
-                desplazamientosVagones.add(moverEnLinea(vagones.subList(0, i), 1, 0));
-            } else {
-                desplazamientosVagones.add(moverEnLinea( vagones.subList(i, vagones.size()), -1, 0));
-                desplazamientosVagones.add(moverEnLinea(vagones.subList(0, i), -1, -angulo));
+            if(desplazamientoPosicion == 1){
+                desplazamientosVagones.add(moverEnLinea( vagones.subList(i, vagones.size()), desplazamientoPosicion, anguloMovimiento1));
+                desplazamientosVagones.add(moverEnLinea(vagones.subList(0, i), desplazamientoPosicion, anguloMovimiento2));
+            } else if(desplazamientoPosicion == -1){
+                desplazamientosVagones.add(moverEnLinea( vagones.subList(i, vagones.size()), desplazamientoPosicion, anguloMovimiento2));
+                desplazamientosVagones.add(moverEnLinea(vagones.subList(0, i), desplazamientoPosicion, anguloMovimiento1));
             }
+            
             
             ParallelTransition moverEnConjunto = new ParallelTransition();
             moverEnConjunto.getChildren().addAll(desplazamientosVagones);
