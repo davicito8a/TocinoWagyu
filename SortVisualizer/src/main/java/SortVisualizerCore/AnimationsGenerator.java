@@ -309,7 +309,7 @@ public class AnimationsGenerator {
     }
     
     private void getSelectionSortAnimations(){
-        double angle = -20;
+        double angle = -53;
         translateAnimations.add(moverEnLinea(boxes, 4.37, 0));
         translateAnimations.addAll(cambioDireccion(boxes, angle, angle, 0, 1));
         
