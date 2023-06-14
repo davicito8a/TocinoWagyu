@@ -30,7 +30,6 @@ public class Wagon {
        GraphicsContext gc = canvas.getGraphicsContext2D();
         //System.out.println("scale: " +   scale);
         double SizeOfWagon = 0;
-
            switch (scale) {
                case 4:
                    SizeOfWagon = .5;
@@ -51,14 +50,21 @@ public class Wagon {
                    System.out.println("Caso invalido");
                    break;
            }
-
+           
+        // Dibujar las ruedas
+       gc.setFill(Color.BLACK);
+       gc.fillOval(20 * SizeOfWagon, 45 * SizeOfWagon, 20 * SizeOfWagon, 20 * SizeOfWagon);
+       gc.fillOval(80 * SizeOfWagon, 45 * SizeOfWagon, 20 * SizeOfWagon, 20 * SizeOfWagon);
+       
+       gc.fillOval(20 * SizeOfWagon, 5 * SizeOfWagon, 20 * SizeOfWagon, 20 * SizeOfWagon);
+       gc.fillOval(80 * SizeOfWagon, 5 * SizeOfWagon, 20 * SizeOfWagon, 20 * SizeOfWagon);
 
        // Dibujar el cuerpo del vagón
        gc.setFill(color);
        gc.fillRoundRect(10 * SizeOfWagon, 10 * SizeOfWagon, 100 * SizeOfWagon, 50 * SizeOfWagon, 10 * SizeOfWagon, 10 * SizeOfWagon);
 
        // Dibujar el espacio para el número identificador
-       gc.setFill(Color.WHITE);
+       gc.setFill(Color.PERU);
        gc.fillRoundRect(20 * SizeOfWagon, 20 * SizeOfWagon, 80 * SizeOfWagon, 30 * SizeOfWagon, 5 * SizeOfWagon, 5 * SizeOfWagon);
 
        // Dibujar el número identificador
@@ -66,10 +72,6 @@ public class Wagon {
        gc.setFont(Font.font("Arial", FontWeight.BOLD, 18 * SizeOfWagon));
        gc.setTextAlign(TextAlignment.CENTER);
 
-       // Dibujar las ruedas
-       gc.setFill(Color.BLACK);
-       gc.fillOval(20 * SizeOfWagon, 60 * SizeOfWagon, 20 * SizeOfWagon, 20 * SizeOfWagon);
-       gc.fillOval(80 * SizeOfWagon, 60 * SizeOfWagon, 20 * SizeOfWagon, 20 * SizeOfWagon);
 
        // Configurar la posición del canvas dentro del StackPane
        int tamanoint =(int)Main.size;

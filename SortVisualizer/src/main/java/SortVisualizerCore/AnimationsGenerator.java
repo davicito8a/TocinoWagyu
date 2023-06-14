@@ -1,5 +1,6 @@
 package SortVisualizerCore;
 
+import static SortVisualizerCore.Main.windowWidth;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -309,10 +310,25 @@ public class AnimationsGenerator {
     }
     
     private void getSelectionSortAnimations(){
-        double angle = -53;
+        double angle = -20;
         
         // Mover vagones a vía superior
-        translateAnimations.add(moverEnLinea(boxes, 4.37, 0));
+        if(numbers.size()>=16 && numbers.size()<=19){
+            translateAnimations.add(moverEnLinea(boxes, 0.5, 0));
+        }
+        else if(numbers.size()>=20 && numbers.size()<=29){
+            translateAnimations.add(moverEnLinea(boxes, 2, 0));
+        }
+        else if(numbers.size()>=30 && numbers.size()<=39){
+            translateAnimations.add(moverEnLinea(boxes, 5, 0));
+        }
+        else if(numbers.size()>=40 && numbers.size()<=47){
+            translateAnimations.add(moverEnLinea(boxes, 7, 0));
+        }
+        else if(numbers.size()>=48 && numbers.size()<=64){
+            translateAnimations.add(moverEnLinea(boxes, 10, 0));
+        }
+        //translateAnimations.add(moverEnLinea(boxes, 4.37, 0));
         translateAnimations.addAll(cambioDireccion(boxes, angle, angle, 0, 1));
         
         System.out.println(numbers.toString());
