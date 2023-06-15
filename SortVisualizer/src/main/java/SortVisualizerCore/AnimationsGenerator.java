@@ -62,10 +62,8 @@ public class AnimationsGenerator {
                 pseudocode.selectCocktailSortLines();
                 break;
             case 3:
-          
                 getSelectionSortAnimations();
-                pseudocode.selectCocktailSortLines();
-
+                pseudocode.selectSelecionSortLines();
                 break;
             default:
                 break;
@@ -333,12 +331,20 @@ public class AnimationsGenerator {
         
         System.out.println(numbers.toString());
         for (int i = 0; i < numbers.size(); i++){
+            translateAnimations.add(pseudocode.changeLabelProperties(1, "for i = " + i, 200));
             int min_idx = i;
+            translateAnimations.add(pseudocode.changeLabelProperties(2, "\tmax_idx = " + min_idx, 200));
             for (int j = i + 1; j < numbers.size(); j++){
+                translateAnimations.add(pseudocode.changeLabelProperties(3, "\tfor j = " + j, 200));
+                translateAnimations.add(pseudocode.changeLabelProperties(4, "\t\tif(numbers[" + j + "] > numbers[" + min_idx + "]", 200));
                 if (numbers.get(j) > numbers.get(min_idx)){
                     min_idx = j;
+                    translateAnimations.add(pseudocode.changeLabelProperties(5, "\t\t\tmax_idx = " + min_idx, 100));
                 }
             }
+            
+            translateAnimations.add(pseudocode.changeLabelProperties(6, "\tremoveInCurrentArray(" + min_idx + ")" , 1, true));
+            translateAnimations.add(pseudocode.changeLabelProperties(7, "\taddInNewArray(" + (numbers.size() - 1 - i) + ", " + numbers.get(min_idx) + ")" , 1, true));
             
             ArrayList<StackPane> vagonesNoOrdenados = new ArrayList();
             vagonesNoOrdenados.addAll(boxes.subList(0, boxes.size()));
@@ -363,6 +369,8 @@ public class AnimationsGenerator {
             // Mover los vagones sobrantes la cantidad de posiciones equivalente al número de vagones retirados con anterioridad.
             translateAnimations.add(moverEnLinea(vagonesDespuesDeMinimo, vagonesAntesDeMinimo.size() + 1, -angle));
             Collections.reverse(vagonesAntesDeMinimo);
+            
+            translateAnimations.add(parallelAnimations(pseudocode.unselectLine(6), pseudocode.unselectLine(7)));
            
             ArrayList<StackPane> vagonesSinMinimo = new ArrayList();
             vagonesSinMinimo.addAll(vagonesDespuesDeMinimo.subList(0, vagonesDespuesDeMinimo.size() - 1));
