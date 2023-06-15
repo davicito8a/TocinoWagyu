@@ -156,13 +156,13 @@ public class BackGround {
         for (int i = 0; i < 1500; i++) {
             double x = random.nextDouble() * 1500; // Generar coordenada x aleatoria en el rango [0, 1500)
             double y = random.nextDouble() * 600; // Generar coordenada y aleatoria en el rango [0, 600)
-            gc.fillOval(x, y, 4, 4);
+            gc.fillRect(x, y, 4, 4);
         }
         gc.setFill(Color.CHOCOLATE);
         for (int i = 0; i < 1500; i++) {
             double x = random.nextDouble() * 1500; // Generar coordenada x aleatoria en el rango [0, 1500)
             double y = random.nextDouble() * 600; // Generar coordenada y aleatoria en el rango [0, 600)
-            gc.fillOval(x, y, 4, 4);
+            gc.fillRect(x, y, 4, 4);
         }
        
         
