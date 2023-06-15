@@ -13,11 +13,10 @@ public class Wagon {
     GraphicsContext gw;
     private final Canvas canvasBox;
     
-    
     public Wagon(Canvas canvasBox) {
         this.canvasBox = canvasBox;
     }
-  
+
     public void DrawWagon(Canvas canvasBox, double squareDimension, int size){
         gw = canvasBox.getGraphicsContext2D();
         //System.out.println(squareDimension);
@@ -25,6 +24,38 @@ public class Wagon {
             canvasBox.setWidth(squareDimension*2);
             createTrainCanvas(0, -5, Color.RED, canvasBox, size);
     }
+    
+    public void DrawTrain( double squareDimension, int size,double x, double y, Color color, int scale){
+        GraphicsContext gw = canvasBox.getGraphicsContext2D();
+        double SizeOfWagon=0;
+            //canvasBox.setHeight(squareDimension*1.5);
+            //canvasBox.setWidth(squareDimension*2);
+            
+        switch (scale) {
+               case 4:
+                   SizeOfWagon = .5;
+                   break;
+               case 5:
+                  SizeOfWagon = .4;
+                   break;
+               case 7:
+                  SizeOfWagon = .25;
+                   break;
+               case 10:
+                  SizeOfWagon = .2;
+                   break;
+               case 12:
+                  SizeOfWagon = .15;
+                   break;
+               default:
+                   System.out.println("Caso invalido");
+                   break;
+           }
+            
+        gw.fillRect(70*SizeOfWagon,70*SizeOfWagon,70*SizeOfWagon,70*SizeOfWagon);
+        
+    }
+    
 
     private void createTrainCanvas(double x, double y, Color color, Canvas canvas, int scale) {
        GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -51,7 +82,7 @@ public class Wagon {
                    break;
            }
            
-        // Dibujar las ruedas
+       // Dibujar las ruedas
        gc.setFill(Color.BLACK);
        gc.fillOval(20 * SizeOfWagon, 45 * SizeOfWagon, 20 * SizeOfWagon, 20 * SizeOfWagon);
        gc.fillOval(80 * SizeOfWagon, 45 * SizeOfWagon, 20 * SizeOfWagon, 20 * SizeOfWagon);

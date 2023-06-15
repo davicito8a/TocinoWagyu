@@ -310,7 +310,7 @@ public class AnimationsGenerator {
     }
     
     private void getSelectionSortAnimations(){
-        double angle = -20;
+        double angle = -35;
         
         // Mover vagones a vía superior
         if(numbers.size()>=16 && numbers.size()<=19){

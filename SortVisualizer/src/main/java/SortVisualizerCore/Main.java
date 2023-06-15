@@ -49,7 +49,7 @@ public class Main extends Application {
             
             Wagon wagonn = new Wagon(canvas);
             wagonn.DrawWagon(canvas, squareDimension, size);
-            
+            wagonn.DrawTrain(squareDimension, size, separation, separation, Color.CORAL, size);
             
             NumberDrawer numberDrawer = new NumberDrawer(canvas);
             numberDrawer.drawNumber(numbers.get(i), size);
