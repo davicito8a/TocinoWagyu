@@ -167,42 +167,70 @@ public class BackGround {
        
         
         
-        // Base rieles
-        gc.setLineWidth(60); 
-        gc.setStroke(Color.DARKGREY);
-        gc.strokeLine(0, 300, 895, 300);
+    // Base rieles
+    gc.setLineWidth(80);
+    gc.setStroke(Color.DARKGREY);
+    gc.strokeLine(0, 300, 895, 300);
 
-        // Base diagonales 1 y 2
-        
-        gc.setLineWidth(50); 
-        gc.setStroke(Color.DARKGREY);
-        gc.strokeLine(895, 310, 1550, 600);
-        gc.strokeLine(895, 290, 1550, 0);        
-        
-        
-        // Riel horizontal 1
-        gc.setStroke(Color.DIMGRAY);
-        
-        
-        gc.setLineWidth(13);
-        gc.strokeLine(0, 309, 890, 309);
-        gc.strokeLine(0, 309, 890, 309);
-        // Riel horizontal paralelo al anterior
-        gc.strokeLine(0, 289, 890, 289);
+    // Base diagonales 1 y 2
+    gc.setStroke(Color.DARKGREY);
+    gc.strokeLine(895, 310, 1550, 600);
+    gc.strokeLine(895, 290, 1550, 0);
 
-  
+    
+    // Riel (madera) vertical
+    gc.setStroke(Color.BROWN);
+    gc.setLineWidth(13);
+    double railX = 0;
 
-        // Riel diagonal 1 (HACIA ABAJO)
-        gc.setStroke(Color.DIMGRAY);
-        gc.setLineWidth(13);
-        gc.strokeLine(895, 310, 1500, 595);
-        gc.strokeLine(911, 300, 1550, 590);
 
-        // Riel diagonal 2 (HACIA ARRIBA)
-        gc.setStroke(Color.DIMGRAY);
-        gc.setLineWidth(13);
-        gc.strokeLine(895, 285, 1500, 5);
-        gc.strokeLine(912, 300, 1550, 10);
+    for (int i = 0; i < 45; i++) { // Dibujar 6 líneas verticales
+        gc.strokeLine(railX, 285, railX, 315);
+        railX += 20; // Espaciado entre las líneas verticales
+    }
+    
+    
+    // Riel (madera) vertical diagonal
+    gc.setStroke(Color.BROWN);
+    double railXUP1 = 925;
+    double railXUP2 = 940;
+    double railYUP1 = 265;
+    double railYUP2 = 295;
+
+    for(int j = 0; j < 45; j++){
+        gc.strokeLine(railXUP1, railYUP1, railXUP2 ,  railYUP2);
+        
+        railXUP1 += 20;
+        railXUP2 += 20;
+        
+        railYUP1 -= 20;
+        railYUP2 -= 20;                        
+                
+    }
+
+
+    
+    
+    
+    // Riel horizontal 1
+    gc.setStroke(Color.DIMGRAY);
+    gc.setLineWidth(13);
+    gc.strokeLine(0, 309, 890, 309);
+    gc.strokeLine(0, 289, 890, 289);
+
+
+
+    // Riel diagonal 1 (HACIA ABAJO)
+    gc.setStroke(Color.DIMGRAY);
+    gc.setLineWidth(13);
+    gc.strokeLine(895, 310, 1500, 595);
+    gc.strokeLine(911, 300, 1550, 590);
+
+    // Riel diagonal 2 (HACIA ARRIBA)
+    gc.setStroke(Color.DIMGRAY);
+    gc.setLineWidth(13);
+    gc.strokeLine(895, 285, 1500, 5);
+    gc.strokeLine(912, 300, 1550, 10);
 
 
     }
