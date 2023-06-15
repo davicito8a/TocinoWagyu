@@ -138,34 +138,71 @@ public class BackGround {
     
         public void Desert(Canvas canvas){
         GraphicsContext gc = canvas.getGraphicsContext2D();
+
         canvas.setHeight(600);
         canvas.setWidth(1500);
         // Fondo desértico
         gc.setFill(Color.SANDYBROWN);
         gc.fillRect(0, 0, 1500, 600);
 
-        // Detalles desérticos
         
-        //CARRIL PRINCIPAL
         
-        // Línea horizontal 1
-        gc.setStroke(Color.BLACK);
-        gc.setLineWidth(10);
-        gc.strokeLine(0, 310, 1000, 310);
-        // Línea horizontal paralela a la anterior
-        gc.strokeLine(0, 270, 1000, 270);
-    
-        //CARRIL DIAGONAL 1(DOWNONE)
-        gc.setStroke(Color.BLACK);
-        gc.strokeLine(1000, 310, 1200, 600);
-        gc.strokeLine(1050, 310, 1250, 600);
         
-        //CARRIL DIAGONAL 2 (UPONE)          
-        gc.setStroke(Color.BLACK);
-        gc.strokeLine(1000, 270, 1200, 0);
-        gc.strokeLine(1050, 270, 1250, 0);    
+        // Detalle de relleno (IMPORTANTE)
+        Random random = new Random();
+
+        // Dibujar puntos aleatorios
+        gc.setFill(Color.PERU);
+        for (int i = 0; i < 1500; i++) {
+            double x = random.nextDouble() * 1500; // Generar coordenada x aleatoria en el rango [0, 1500)
+            double y = random.nextDouble() * 600; // Generar coordenada y aleatoria en el rango [0, 600)
+            gc.fillOval(x, y, 4, 4);
+        }
+        gc.setFill(Color.CHOCOLATE);
+        for (int i = 0; i < 1500; i++) {
+            double x = random.nextDouble() * 1500; // Generar coordenada x aleatoria en el rango [0, 1500)
+            double y = random.nextDouble() * 600; // Generar coordenada y aleatoria en el rango [0, 600)
+            gc.fillOval(x, y, 4, 4);
+        }
+       
         
-        //CARRIL RECTO DESPUÉS DE ENCRUCIJADA
+        
+        // Base rieles
+        gc.setLineWidth(60); 
+        gc.setStroke(Color.DARKGREY);
+        gc.strokeLine(0, 300, 1020, 300);
+
+        // Base diagonales 1 y 2
+        
+        gc.setLineWidth(50); 
+        gc.setStroke(Color.DARKGREY);
+        gc.strokeLine(1050, 310, 1550, 600);
+        gc.strokeLine(1050, 290, 1550, 0);        
+        
+        // Riel horizontal 1
+        gc.setStroke(Color.DIMGRAY);
+        
+        
+        gc.setLineWidth(20);
+        gc.strokeLine(0, 320, 1020, 320);
+        gc.strokeLine(0, 320, 1020, 320);
+        // Riel horizontal paralelo al anterior
+        gc.strokeLine(0, 280, 1020, 280);
+
+  
+
+        // Riel diagonal 1 (HACIA ABAJO)
+        gc.setStroke(Color.DIMGRAY);
+        gc.setLineWidth(20);
+        gc.strokeLine(1000, 310, 1500, 600);
+        gc.strokeLine(1050, 310, 1550, 600);
+
+        // Riel diagonal 2 (HACIA ARRIBA)
+        gc.setStroke(Color.DIMGRAY);
+        gc.setLineWidth(20);
+        gc.strokeLine(1000, 290, 1500, 0);
+        gc.strokeLine(1050, 290, 1550, 0);
+
 
     }
 
