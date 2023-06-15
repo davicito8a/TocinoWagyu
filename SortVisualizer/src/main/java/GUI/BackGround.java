@@ -170,38 +170,39 @@ public class BackGround {
         // Base rieles
         gc.setLineWidth(60); 
         gc.setStroke(Color.DARKGREY);
-        gc.strokeLine(0, 300, 1020, 300);
+        gc.strokeLine(0, 300, 895, 300);
 
         // Base diagonales 1 y 2
         
         gc.setLineWidth(50); 
         gc.setStroke(Color.DARKGREY);
-        gc.strokeLine(1050, 310, 1550, 600);
-        gc.strokeLine(1050, 290, 1550, 0);        
+        gc.strokeLine(895, 310, 1550, 600);
+        gc.strokeLine(895, 290, 1550, 0);        
+        
         
         // Riel horizontal 1
         gc.setStroke(Color.DIMGRAY);
         
         
-        gc.setLineWidth(20);
-        gc.strokeLine(0, 320, 1020, 320);
-        gc.strokeLine(0, 320, 1020, 320);
+        gc.setLineWidth(13);
+        gc.strokeLine(0, 309, 890, 309);
+        gc.strokeLine(0, 309, 890, 309);
         // Riel horizontal paralelo al anterior
-        gc.strokeLine(0, 280, 1020, 280);
+        gc.strokeLine(0, 289, 890, 289);
 
   
 
         // Riel diagonal 1 (HACIA ABAJO)
         gc.setStroke(Color.DIMGRAY);
-        gc.setLineWidth(20);
-        gc.strokeLine(1000, 310, 1500, 600);
-        gc.strokeLine(1050, 310, 1550, 600);
+        gc.setLineWidth(13);
+        gc.strokeLine(895, 310, 1500, 595);
+        gc.strokeLine(911, 300, 1550, 590);
 
         // Riel diagonal 2 (HACIA ARRIBA)
         gc.setStroke(Color.DIMGRAY);
-        gc.setLineWidth(20);
-        gc.strokeLine(1000, 290, 1500, 0);
-        gc.strokeLine(1050, 290, 1550, 0);
+        gc.setLineWidth(13);
+        gc.strokeLine(895, 285, 1500, 5);
+        gc.strokeLine(912, 300, 1550, 10);
 
 
     }
