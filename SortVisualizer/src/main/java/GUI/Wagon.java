@@ -25,7 +25,7 @@ public class Wagon {
             createTrainCanvas(0, -5, Color.RED, canvasBox, size);
     }
     
-    public void DrawTrain( double squareDimension, int size,double x, double y, Color color, int scale){
+    public void DrawTrain( int scale){
         GraphicsContext gw = canvasBox.getGraphicsContext2D();
         double SizeOfWagon=0;
             //canvasBox.setHeight(squareDimension*1.5);
@@ -52,8 +52,28 @@ public class Wagon {
                    break;
            }
             
-        gw.fillRect(70*SizeOfWagon,70*SizeOfWagon,70*SizeOfWagon,70*SizeOfWagon);
+        gw.setFill(Color.BLACK);
+        //Ruedas
+        gw.fillOval(405* SizeOfWagon,290* SizeOfWagon,20* SizeOfWagon,20* SizeOfWagon);
+        gw.fillOval(430* SizeOfWagon,290* SizeOfWagon,20* SizeOfWagon,20* SizeOfWagon);
+        gw.fillOval(460* SizeOfWagon,290* SizeOfWagon,40* SizeOfWagon,40* SizeOfWagon);
         
+        gw.fillOval(405* SizeOfWagon,340* SizeOfWagon,20* SizeOfWagon,20* SizeOfWagon);
+        gw.fillOval(430* SizeOfWagon,340* SizeOfWagon,20* SizeOfWagon,20* SizeOfWagon);
+        gw.fillOval(460* SizeOfWagon,320* SizeOfWagon,40* SizeOfWagon,40* SizeOfWagon);
+        
+        gw.setFill(Color.YELLOW);
+        gw.fillRect(30* SizeOfWagon,20* SizeOfWagon,100* SizeOfWagon,50* SizeOfWagon);
+        
+        //Frontal
+        gw.setFill(Color.BLACK);
+        double dobleX[] = {405* SizeOfWagon,405* SizeOfWagon,380* SizeOfWagon};
+        double dobleY[] = {300* SizeOfWagon,350* SizeOfWagon,325* SizeOfWagon};
+        gw.fillPolygon(dobleX, dobleY, 3);
+        
+        gw.fillRect(450* SizeOfWagon,305* SizeOfWagon,45* SizeOfWagon,40* SizeOfWagon);
+        
+         gw.fillOval(415* SizeOfWagon,310* SizeOfWagon,25* SizeOfWagon,25* SizeOfWagon);       
     }
     
 
