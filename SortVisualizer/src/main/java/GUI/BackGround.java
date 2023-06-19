@@ -183,7 +183,7 @@ public class BackGround {
     gc.setLineWidth(13);
     double railX = 0;
 
-
+    
     for (int i = 0; i < 45; i++) { // Dibujar 6 líneas verticales
         gc.strokeLine(railX, 285, railX, 315);
         railX += 20; // Espaciado entre las líneas verticales
@@ -196,17 +196,32 @@ public class BackGround {
     double railXUP2 = 940;
     double railYUP1 = 265;
     double railYUP2 = 295;
-
+    
     for(int j = 0; j < 45; j++){
         gc.strokeLine(railXUP1, railYUP1, railXUP2 ,  railYUP2);
         
-        railXUP1 += 20;
-        railXUP2 += 20;
+        railXUP1 += 20*Math.cos(25.2239234*Math.PI/180);
+        railXUP2 += 20*Math.cos(25.2239234*Math.PI/180);
         
-        railYUP1 -= 20;
-        railYUP2 -= 20;                        
-                
+        railYUP1 -= 20*Math.sin(25.2239234*Math.PI/180);
+        railYUP2 -= 20*Math.sin(25.2239234*Math.PI/180);                                        
     }
+    
+    railXUP1 = 925;
+    railXUP2 = 940;
+    railYUP1 = 330;
+    railYUP2 = 300;
+    
+    for(int k = 0; k < 45; k++){
+        gc.strokeLine(railXUP1, railYUP1, railXUP2 ,  railYUP2);
+        
+        railXUP1 += 20*Math.cos(25.2239234*Math.PI/180);
+        railXUP2 += 20*Math.cos(25.2239234*Math.PI/180);
+        
+        railYUP1 += 20*Math.sin(25.2239234*Math.PI/180);
+        railYUP2 += 20*Math.sin(25.2239234*Math.PI/180);                                        
+    }
+    
 
 
     

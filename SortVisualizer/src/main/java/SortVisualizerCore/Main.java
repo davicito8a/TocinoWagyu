@@ -36,7 +36,7 @@ public class Main extends Application {
         
         if(Main.sortType == 3){
             squareDimension = 0.75 * 0.7 * windowWidth / numbers.size();   //Boris Tocó muchas cosas aquí
-            separation = ((0.25 * 0.4 * windowWidth) + 200)/ numbers.size(); //Aqui tambien XD
+            separation = ((0.25 * 0.05 * windowWidth) + 100)/ numbers.size(); //Aqui tambien XD
         }
         size = NumberSize(numbers.size());
         ArrayList<StackPane> stackpanes = new ArrayList();
@@ -60,7 +60,7 @@ public class Main extends Application {
             stackpane.setTranslateY(0.65 * windowHeight);
             if(Main.sortType == 3){
                 //(0.5*windowWidth/(numbers.size()-16))
-                stackpane.setTranslateX(0.05 * windowWidth + (squareDimension + separation) * i);
+                stackpane.setTranslateX(0 * windowWidth + (squareDimension + separation) * i);
                 stackpane.setTranslateY(0.45 * windowHeight);                
             }
             stackpane.getChildren().addAll( canvas); // Agregar canvasBox al StackPane

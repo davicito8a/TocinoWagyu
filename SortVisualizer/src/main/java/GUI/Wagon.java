@@ -20,8 +20,8 @@ public class Wagon {
     public void DrawWagon(Canvas canvasBox, double squareDimension, int size){
         gw = canvasBox.getGraphicsContext2D();
         //System.out.println(squareDimension);
-            canvasBox.setHeight(squareDimension*1.5);
-            canvasBox.setWidth(squareDimension*2);
+            canvasBox.setHeight(squareDimension*2.5);
+            canvasBox.setWidth(squareDimension*3);
             createTrainCanvas(0, -5, Color.RED, canvasBox, size);
     }
     
