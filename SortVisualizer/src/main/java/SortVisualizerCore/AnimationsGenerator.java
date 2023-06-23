@@ -327,7 +327,7 @@ public class AnimationsGenerator {
             translateAnimations.add(moverEnLinea(boxes, 0, 0));
         }
         //translateAnimations.add(moverEnLinea(boxes, 4.37, 0));
-        translateAnimations.addAll(cambioDireccion(boxes, angle, angle, 0, 1));
+        translateAnimations.addAll(cambioDireccion(boxes, angle, 0, angle, 1));
         
         System.out.println(numbers.toString());
         for (int i = 0; i < numbers.size(); i++){
@@ -378,13 +378,13 @@ public class AnimationsGenerator {
             translateAnimations.add(moverEnLinea(vagonesSinMinimo, -(vagonesAntesDeMinimo.size() + 2), -angle));
             Collections.reverse(vagonesSinMinimo);
             // Cambio de dirección hacia vía superior
-            translateAnimations.addAll(cambioDireccion(vagonesSinMinimo, 360-2*-1*angle, angle, angle*-1-180, 1));
+            translateAnimations.addAll(cambioDireccion(vagonesSinMinimo, 360-2*-1*angle, angle*-1-180, angle, 1));
             // Movimiento de vagones en vía superior la misma cantidad de posiciones que el número de vagones retirados con anterioridad.
             translateAnimations.add(moverEnLinea(vagonesSinMinimo, vagonesAntesDeMinimo.size(), angle));
             
             // Reinserción de los vagones retirados.
             translateAnimations.add(moverEnLinea(vagonesAntesDeMinimo, 1, 0));
-            translateAnimations.addAll(cambioDireccion(vagonesAntesDeMinimo, angle, angle, 0, 1));
+            translateAnimations.addAll(cambioDireccion(vagonesAntesDeMinimo, angle, 0, angle, 1));
             
             System.out.println(numbers.toString());
             int temp = numbers.get(min_idx);
@@ -429,15 +429,9 @@ public class AnimationsGenerator {
             
             ArrayList<Animation> desplazamientosVagones = new ArrayList();
             
-            if(desplazamientoPosicion == 1){
-                desplazamientosVagones.add(moverEnLinea( vagones.subList(i, vagones.size()), desplazamientoPosicion, anguloMovimiento1));
-                desplazamientosVagones.add(moverEnLinea(vagones.subList(0, i), desplazamientoPosicion, anguloMovimiento2));
-            } else if(desplazamientoPosicion == -1){
-                desplazamientosVagones.add(moverEnLinea( vagones.subList(i, vagones.size()), desplazamientoPosicion, anguloMovimiento2));
-                desplazamientosVagones.add(moverEnLinea(vagones.subList(0, i), desplazamientoPosicion, anguloMovimiento1));
-            }
-            
-            
+            desplazamientosVagones.add(moverEnLinea( vagones.subList(i, vagones.size()), desplazamientoPosicion, anguloMovimiento2));
+            desplazamientosVagones.add(moverEnLinea(vagones.subList(0, i), desplazamientoPosicion, anguloMovimiento1));
+          
             ParallelTransition moverEnConjunto = new ParallelTransition();
             moverEnConjunto.getChildren().addAll(desplazamientosVagones);
             movimientosVagones.add(moverEnConjunto);
