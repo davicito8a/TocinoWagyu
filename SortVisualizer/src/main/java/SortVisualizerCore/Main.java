@@ -49,8 +49,8 @@ public class Main extends Application {
             
             Wagon wagonn = new Wagon(canvas);
             //wagonn.DrawWagon(canvas, squareDimension, size);
+            //wagonn.DrawWagon(canvas, squareDimension, size);
             wagonn.DrawTrain(size);
-            
             NumberDrawer numberDrawer = new NumberDrawer(canvas);
             numberDrawer.drawNumber(numbers.get(i), size);
             coordinates.add(0.05 * windowWidth + (squareDimension + separation) * i);
