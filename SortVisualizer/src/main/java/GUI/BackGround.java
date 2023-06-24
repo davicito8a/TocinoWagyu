@@ -251,7 +251,7 @@ public class BackGround {
     
     // Riel horizontal 
     gc.setStroke(Color.DIMGRAY);
-    gc.setLineWidth(13);
+    gc.setLineWidth(9);
     gc.strokeLine(0, 313, 890, 313);
     gc.strokeLine(0, 287, 890, 287);
 
@@ -259,13 +259,11 @@ public class BackGround {
 
     // Riel diagonal 1 (HACIA ABAJO)
     gc.setStroke(Color.DIMGRAY);
-    gc.setLineWidth(13);
     gc.strokeLine(895, 317, 1500, 591);
     gc.strokeLine(911, 300, 1550, 590);
 
     // Riel diagonal 2 (HACIA ARRIBA)
     gc.setStroke(Color.DIMGRAY);
-    gc.setLineWidth(13);
     gc.strokeLine(895, 285, 1500, 11);
     gc.strokeLine(912, 300, 1550, 15);
 }
