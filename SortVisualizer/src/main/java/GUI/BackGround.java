@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
@@ -148,7 +149,7 @@ public class BackGround {
         
         
         
-   // Detalle de relleno (IMPORTANTE)
+     // Detalle de relleno (IMPORTANTE)
     Random random = new Random();
 
     // Dibujar puntos aleatorios
@@ -167,8 +168,30 @@ public class BackGround {
         gc.fillRect(x, y, 4, 4);
     }
     
+    gc.setFill(Color.DARKOLIVEGREEN);
+    for (int i = 0; i < 1500; i++) {
+        double x = random.nextDouble() * 900; // Generar coordenada x aleatoria en el rango [0, 1500)
+        double y = random.nextDouble() * (300 - 250) + 300; // Generar coordenada y aleatoria en el rango [0, 600)
+        gc.fillRect(x, y, 4, 4);
+    }
+    
+    gc.setFill(Color.DARKOLIVEGREEN);
+    for (int i = 0; i < 1500; i++) {
+        double x = random.nextDouble() * 900; // Generar coordenada x aleatoria en el rango [0, 1500)
+        double y = random.nextDouble() * (300 - 250) + 250; // Generar coordenada y aleatoria en el rango [0, 600)
+        gc.fillRect(x, y, 4, 4);
+    }
+    
 
+    
+    
+    
     // Base rieles
+    DropShadow shadow = new DropShadow();
+    shadow.setOffsetX(5);
+    shadow.setOffsetY(5);
+    shadow.setColor(Color.BLACK);
+    gc.setEffect(shadow);
     gc.setLineWidth(80);
     gc.setStroke(Color.DARKGREY);
     gc.strokeLine(0, 300, 895, 300);
@@ -194,27 +217,27 @@ public class BackGround {
             
     
     
-gc.setStroke(Color.BROWN);
-double railXUP1 = 906;
-double railXUP2 = 920;
-double railYUP1 = 274;
-double railYUP2 = 304;
+    gc.setStroke(Color.BROWN);
+    double railXUP1 = 906;
+    double railXUP2 = 920;
+    double railYUP1 = 274;
+    double railYUP2 = 304;
 
-for (int i = 0; i < 2; i++) {
-    for (int j = 0; j < 45; j++) {
-        gc.strokeLine(railXUP1, railYUP1, railXUP2, railYUP2);
+    for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < 45; j++) {
+            gc.strokeLine(railXUP1, railYUP1, railXUP2, railYUP2);
 
-        railXUP1 += 20;
-        railXUP2 += 20;
+            railXUP1 += 20;
+            railXUP2 += 20;
 
-        if (i == 0) {
-            railYUP1 -= 9;
-            railYUP2 -= 9;
-        } else {
-            railYUP1 += 9;
-            railYUP2 += 9;
+            if (i == 0) {
+                railYUP1 -= 9;
+                railYUP2 -= 9;
+            } else {
+                railYUP1 += 9;
+                railYUP2 += 9;
+            }
         }
-    }
 
     // Restaurar los valores iniciales después de completar el primer conjunto de líneas
     railXUP1 = 919;
