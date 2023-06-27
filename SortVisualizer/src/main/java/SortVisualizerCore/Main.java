@@ -10,11 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.input.ScrollEvent;
 
 public class Main extends Application {
     
@@ -34,10 +30,9 @@ public class Main extends Application {
         squareDimension = 0.75 * 0.9 * windowWidth / numbers.size();
         separation = 0.25 * 0.9 * windowWidth / numbers.size();
         
-        if(Main.sortType == 3){
-            squareDimension = 0.85 * 0.9 * 910 / numbers.size();   //Boris Tocó muchas cosas aquí
-            separation = 1;
-        }
+        squareDimension = (Main.sortType == 3) ? (0.85 * 0.9 * 910 / numbers.size()) : squareDimension;
+        separation = (Main.sortType == 3) ? 1 : separation;
+
         size = NumberSize(numbers.size());
         ArrayList<StackPane> stackpanes = new ArrayList();
         
@@ -53,22 +48,17 @@ public class Main extends Application {
             
             //wagonn.DrawTrain(size);
             NumberDrawer numberDrawer = new NumberDrawer(canvas);
-            if(Main.sortType==3){
-                numberDrawer.drawNumber(numbers.get(i), size * 1/0.5625);
-            }else{
-                 numberDrawer.drawNumber(numbers.get(i), size);
-            }
+            numberDrawer.drawNumber(numbers.get(i), (Main.sortType == 3) ? (size * 1/0.5625) : size);
+
             
             coordinates.add(0.05 * windowWidth + (squareDimension + separation) * i);
 
             StackPane stackpane = new StackPane();
             stackpane.setTranslateX(0.05 * windowWidth + (squareDimension + separation) * i);
             stackpane.setTranslateY(0.65 * windowHeight);
-            if(Main.sortType == 3){
-                //(0.5*windowWidth/(numbers.size()-16))
-                stackpane.setTranslateX(0.05 * 910 + (squareDimension + separation) * i);
-                stackpane.setTranslateY(0.45 * windowHeight);                
-            }
+            stackpane.setTranslateX((Main.sortType == 3) ? (0.05 * 910 + (squareDimension + separation) * i) : stackpane.getTranslateX());
+            stackpane.setTranslateY((Main.sortType == 3) ? (0.45 * windowHeight) : stackpane.getTranslateY());
+
             stackpane.getChildren().addAll( canvas); // Agregar canvasBox al StackPane
 
             
