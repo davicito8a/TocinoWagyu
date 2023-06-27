@@ -25,61 +25,69 @@ public class Wagon {
             createTrainCanvas(0, -5, Color.RED, canvasBox, size);
     }
     
-    public void DrawTrain( int scale){
+    public void DrawTrain(int scale) {
         GraphicsContext gw = canvasBox.getGraphicsContext2D();
-        double SizeOfWagon=0;
-            //canvasBox.setHeight(squareDimension*1.5);
-            //canvasBox.setWidth(squareDimension*2);
-            
-        switch (scale) {
-               case 4:
-                   SizeOfWagon = .5;
-                   break;
-               case 5:
-                  SizeOfWagon = .4;
-                   break;
-               case 7:
-                  SizeOfWagon = .25;
-                   break;
-               case 10:
-                  SizeOfWagon = .2;
-                   break;
-               case 12:
-                  SizeOfWagon = .15;
-                   break;
-               default:
-                   System.out.println("Caso invalido");
-                   break;
-           }
-            
-        gw.setFill(Color.BLACK);
-        //Ruedas
-        gw.fillOval(12* SizeOfWagon,1* SizeOfWagon,20* SizeOfWagon,20* SizeOfWagon);
-        gw.fillOval(37* SizeOfWagon,1* SizeOfWagon,20* SizeOfWagon,20* SizeOfWagon);
-        gw.fillOval(60* SizeOfWagon,1* SizeOfWagon,40* SizeOfWagon,40* SizeOfWagon);
         
-        gw.fillOval(12* SizeOfWagon,60* SizeOfWagon,20* SizeOfWagon,20* SizeOfWagon);
-        gw.fillOval(37* SizeOfWagon,60* SizeOfWagon,20* SizeOfWagon,20* SizeOfWagon);
-        gw.fillOval(60* SizeOfWagon,40* SizeOfWagon,40* SizeOfWagon,40* SizeOfWagon);
+        // Determinar el factor de escala relativo
+        double scaleFactor = 1.0;
+        switch (scale) {
+            case 4:
+                scaleFactor = 0.5;
+                break;
+            case 5:
+                scaleFactor = 0.4;
+                break;
+            case 7:
+                scaleFactor = 0.25;
+                break;
+            case 10:
+                scaleFactor = 0.2;
+                break;
+            case 12:
+                scaleFactor = 0.15;
+                break;
+            default:
+                System.out.println("Caso inválido");
+                return;
+        }
+        
+        // Guardar la transformación actual
+        gw.save();
+        
+        // Aplicar la escala al contexto de gráficos
+        gw.scale(scaleFactor, scaleFactor);
+        
+        double sizeOfWagon = 1.0; // Factor de tamaño original
+        
+        gw.setFill(Color.BLACK);
+        // Ruedas
+        gw.fillOval(12 * sizeOfWagon, 1 * sizeOfWagon, 20 * sizeOfWagon, 20 * sizeOfWagon);
+        gw.fillOval(37 * sizeOfWagon, 1 * sizeOfWagon, 20 * sizeOfWagon, 20 * sizeOfWagon);
+        gw.fillOval(60 * sizeOfWagon, 1 * sizeOfWagon, 40 * sizeOfWagon, 40 * sizeOfWagon);
+        
+        gw.fillOval(12 * sizeOfWagon, 60 * sizeOfWagon, 20 * sizeOfWagon, 20 * sizeOfWagon);
+        gw.fillOval(37 * sizeOfWagon, 60 * sizeOfWagon, 20 * sizeOfWagon, 20 * sizeOfWagon);
+        gw.fillOval(60 * sizeOfWagon, 40 * sizeOfWagon, 40 * sizeOfWagon, 40 * sizeOfWagon);
         
         gw.setFill(Color.RED);
-        gw.fillRect(10* SizeOfWagon,10* SizeOfWagon,110* SizeOfWagon,60* SizeOfWagon);
+        gw.fillRect(10 * sizeOfWagon, 10 * sizeOfWagon, 110 * sizeOfWagon, 60 * sizeOfWagon);
         
-        //Frontal
+        // Frontal
         gw.setFill(Color.BLACK);
-        double dobleX[] = {10* SizeOfWagon,10* SizeOfWagon,1* SizeOfWagon};
-        double dobleY[] = {10* SizeOfWagon,70* SizeOfWagon,35* SizeOfWagon};
+        double[] dobleX = {10 * sizeOfWagon, 10 * sizeOfWagon, 1 * sizeOfWagon};
+        double[] dobleY = {10 * sizeOfWagon, 70 * sizeOfWagon, 35 * sizeOfWagon};
         gw.fillPolygon(dobleX, dobleY, 3);
         
-        //Cañon y cabina
-        gw.fillRect(50* SizeOfWagon,15* SizeOfWagon,45* SizeOfWagon,50* SizeOfWagon);
+        // Cañon y cabina
+        gw.fillRect(50 * sizeOfWagon, 15 * sizeOfWagon, 45 * sizeOfWagon, 50 * sizeOfWagon);
         
-        gw.fillOval(15* SizeOfWagon,25* SizeOfWagon,25* SizeOfWagon,25* SizeOfWagon);
+        gw.fillOval(15 * sizeOfWagon, 25 * sizeOfWagon, 25 * sizeOfWagon, 25 * sizeOfWagon);
         gw.setFill(Color.GRAY);
-        gw.fillOval(17.5* SizeOfWagon,27* SizeOfWagon,20* SizeOfWagon,20* SizeOfWagon);
+        gw.fillOval(17.5 * sizeOfWagon, 27 * sizeOfWagon, 20 * sizeOfWagon, 20 * sizeOfWagon);
         
-        
-}
+        // Restaurar la transformación original
+        gw.restore();
+    }
     
 
     private void createTrainCanvas(double x, double y, Color color, Canvas canvas, int scale) {
