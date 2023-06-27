@@ -35,8 +35,8 @@ public class Main extends Application {
         separation = 0.25 * 0.9 * windowWidth / numbers.size();
         
         if(Main.sortType == 3){
-            squareDimension = 0.75 * 0.7 * windowWidth / numbers.size();   //Boris Tocó muchas cosas aquí
-            separation = ((0.25 * 0.05 * windowWidth) + 100)/ numbers.size(); //Aqui tambien XD
+            squareDimension = 0.85 * 0.7 * windowWidth / numbers.size();   //Boris Tocó muchas cosas aquí
+            separation = ((0.15 * 0.05 * windowWidth) + 100)/ numbers.size(); //Aqui tambien XD
         }
         size = NumberSize(numbers.size());
         ArrayList<StackPane> stackpanes = new ArrayList();
@@ -48,9 +48,10 @@ public class Main extends Application {
 
             
             Wagon wagonn = new Wagon(canvas);
-            //wagonn.DrawWagon(canvas, squareDimension, size);
-            //wagonn.DrawWagon(canvas, squareDimension, size);
-            wagonn.DrawTrain(size);
+            
+            wagonn.DrawWagon(canvas, squareDimension, size);
+            
+            //wagonn.DrawTrain(size);
             NumberDrawer numberDrawer = new NumberDrawer(canvas);
             numberDrawer.drawNumber(numbers.get(i), size);
             coordinates.add(0.05 * windowWidth + (squareDimension + separation) * i);
