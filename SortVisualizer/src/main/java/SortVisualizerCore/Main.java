@@ -29,13 +29,13 @@ public class Main extends Application {
     public static int modeType = 0;
     public static int sortType = 2;
     public static double size;
-
+    //Hoy es la muerte de SizeOfWagon
     public static ArrayList<StackPane> getRectangles(ArrayList<Integer> numbers) {
         squareDimension = 0.75 * 0.9 * windowWidth / numbers.size();
         separation = 0.25 * 0.9 * windowWidth / numbers.size();
         
         if(Main.sortType == 3){
-            squareDimension = 0.85 * 0.9 * 910 / numbers.size();   //Boris Tocó muchas cosas aquí
+            squareDimension = 0.85 * 0.9 * 910 / numbers.size();
             separation = 1;
         }
         size = NumberSize(numbers.size());
