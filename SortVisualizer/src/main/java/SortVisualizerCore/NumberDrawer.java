@@ -8,14 +8,14 @@ import javafx.scene.paint.Color;
         GraphicsContext gc;
         int coordinateX = 70;
         int coordinateY = 45;
-        int scale;
+        double scale;
         Color colorNumers = Color.WHITE;
 
     public NumberDrawer(Canvas canvas){
         gc = canvas.getGraphicsContext2D();
     }
     
-    public void drawNumber(int number, int scale) {
+    public void drawNumber(int number, double scale) {
         this.scale = scale;
     
         int digit1 = number / 10;
