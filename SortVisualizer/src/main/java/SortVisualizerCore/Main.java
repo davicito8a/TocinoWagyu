@@ -44,7 +44,7 @@ public class Main extends Application {
             
             Wagon wagonn = new Wagon(canvas);
             
-            wagonn.DrawWagon(canvas, squareDimension, size);
+            wagonn.DrawWagon(canvas, squareDimension);
             
             //wagonn.DrawTrain(size);
             NumberDrawer numberDrawer = new NumberDrawer(canvas);
