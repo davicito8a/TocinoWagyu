@@ -28,11 +28,16 @@ public class Main extends Application {
     
     public static int modeType = 0;
     public static int sortType = 2;
-    public static int size;
+    public static double size;
 
     public static ArrayList<StackPane> getRectangles(ArrayList<Integer> numbers) {
         squareDimension = 0.75 * 0.9 * windowWidth / numbers.size();
         separation = 0.25 * 0.9 * windowWidth / numbers.size();
+        
+        if(Main.sortType == 3){
+            squareDimension = 0.85 * 0.9 * 910 / numbers.size();   //Boris Tocó muchas cosas aquí
+            separation = 1;
+        }
         size = NumberSize(numbers.size());
         ArrayList<StackPane> stackpanes = new ArrayList();
         
@@ -43,18 +48,26 @@ public class Main extends Application {
 
             
             Wagon wagonn = new Wagon(canvas);
+            
             wagonn.DrawWagon(canvas, squareDimension, size);
             
-            
+            //wagonn.DrawTrain(size);
             NumberDrawer numberDrawer = new NumberDrawer(canvas);
-            numberDrawer.drawNumber(numbers.get(i), size);
+            if(Main.sortType==3){
+                numberDrawer.drawNumber(numbers.get(i), size * 1/0.5625);
+            }else{
+                 numberDrawer.drawNumber(numbers.get(i), size);
+            }
+            
             coordinates.add(0.05 * windowWidth + (squareDimension + separation) * i);
 
             StackPane stackpane = new StackPane();
             stackpane.setTranslateX(0.05 * windowWidth + (squareDimension + separation) * i);
             stackpane.setTranslateY(0.65 * windowHeight);
             if(Main.sortType == 3){
-            stackpane.setTranslateY(0.45 * windowHeight);                
+                //(0.5*windowWidth/(numbers.size()-16))
+                stackpane.setTranslateX(0.05 * 910 + (squareDimension + separation) * i);
+                stackpane.setTranslateY(0.45 * windowHeight);                
             }
             stackpane.getChildren().addAll( canvas); // Agregar canvasBox al StackPane
 
@@ -93,21 +106,8 @@ public class Main extends Application {
     }
 
     // Método para determinar el tamaño del número a dibujar
-    public static int NumberSize(int num) {
-        
-        if (num >15 && num < 20) {
-            return 4; 
-        } else if (num < 30) {
-            return 5; 
-        } else if (num <= 39) {
-            return 7; 
-        } else if (num <= 47) {
-            return 10; 
-        } 
-          else if (num <= 64) {
-            return 12; 
-        } 
-        return 0;
+    public static double NumberSize(int num) {
+        return (0.2078*num)+0.3636;
     }
     
     /**

@@ -1,13 +1,24 @@
 package SortVisualizerCore;
 
+import static SortVisualizerCore.Main.windowWidth;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import javafx.animation.Animation;
 import javafx.animation.ParallelTransition;
+import javafx.animation.PathTransition;
+import javafx.animation.RotateTransition;
+import javafx.animation.TranslateTransition;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.ArcTo;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 
 public class AnimationsGenerator {
     private final Mover mover = new Mover();
@@ -51,10 +62,8 @@ public class AnimationsGenerator {
                 pseudocode.selectCocktailSortLines();
                 break;
             case 3:
-          
                 getSelectionSortAnimations();
-                pseudocode.selectCocktailSortLines();
-
+                pseudocode.selectSelecionSortLines();
                 break;
             default:
                 break;
@@ -299,32 +308,168 @@ public class AnimationsGenerator {
     }
     
     private void getSelectionSortAnimations(){
+        double angle = -25.22;
+        
+        // Mover vagones a vía superior
+        if(numbers.size()>=16 && numbers.size()<=19){
+            translateAnimations.add(moverEnLinea(boxes, 0.5, 0));
+        }
+        else if(numbers.size()>=20 && numbers.size()<=29){
+            translateAnimations.add(moverEnLinea(boxes, 0, 0));
+        }
+        else if(numbers.size()>=30 && numbers.size()<=39){
+            translateAnimations.add(moverEnLinea(boxes, 0, 0));
+        }
+        else if(numbers.size()>=40 && numbers.size()<=47){
+            translateAnimations.add(moverEnLinea(boxes, 0, 0));
+        }
+        else if(numbers.size()>=48 && numbers.size()<=64){
+            translateAnimations.add(moverEnLinea(boxes, 0, 0));
+        }
+        //translateAnimations.add(moverEnLinea(boxes, 4.37, 0));
+        translateAnimations.addAll(cambioDireccion(boxes, angle, 0, angle, 1));
+        
         System.out.println(numbers.toString());
-        for (int i = 0; i < numbers.size() - 1; i++){
+        for (int i = 0; i < numbers.size(); i++){
+            //translateAnimations.add(pseudocode.changeLabelProperties(1, "for i = " + i, 200));
             int min_idx = i;
+            //translateAnimations.add(pseudocode.changeLabelProperties(2, "\tmax_idx = " + min_idx, 200));
             for (int j = i + 1; j < numbers.size(); j++){
-                if (numbers.get(j) < numbers.get(min_idx)){
+                //translateAnimations.add(pseudocode.changeLabelProperties(3, "\tfor j = " + j, 200));
+                //translateAnimations.add(pseudocode.changeLabelProperties(4, "\t\tif(numbers[" + j + "] > numbers[" + min_idx + "]", 200));
+                if (numbers.get(j) > numbers.get(min_idx)){
                     min_idx = j;
+                    //translateAnimations.add(pseudocode.changeLabelProperties(5, "\t\t\tmax_idx = " + min_idx, 100));
                 }
             }
             
-            translateAnimations.add(parallelAnimations(mover.moveInY2(0, 230, boxes.get(i)),
-                    mover.moveInY2(0, 230, boxes.get(min_idx))));
-            translateAnimations.add(parallelAnimations(mover.moveInX2(Main.coordinates.get(i), Main.coordinates.get(min_idx), boxes.get(i)),
-                    mover.moveInX2(Main.coordinates.get(min_idx), Main.coordinates.get(i), boxes.get(min_idx))));
-            translateAnimations.add(parallelAnimations(mover.moveInY2(0, 0.45*Main.windowHeight, boxes.get(i)),
-                    mover.moveInY2(0, 0.45*Main.windowHeight, boxes.get(min_idx))));
+            //translateAnimations.add(pseudocode.changeLabelProperties(6, "\tremoveInCurrentArray(" + min_idx + ")" , 1, true));
+            //translateAnimations.add(pseudocode.changeLabelProperties(7, "\taddInNewArray(" + (numbers.size() - 1 - i) + ", " + numbers.get(min_idx) + ")" , 1, true));
             
-
-                 
+            ArrayList<StackPane> vagonesNoOrdenados = new ArrayList();
+            vagonesNoOrdenados.addAll(boxes.subList(0, boxes.size()));
+            
+            // Sacar todos los vagones ubicados antes del mínimo de la vía superior y meterlos en la vía central
+            ArrayList<StackPane> vagonesConMinimo = new ArrayList();
+            vagonesConMinimo.addAll(vagonesNoOrdenados.subList(i, min_idx+1));
+            // Desplazar una posición hacia atrás en la vía superior
+            translateAnimations.add(moverEnLinea(vagonesConMinimo, -1, angle));
+            Collections.reverse(vagonesConMinimo);
+            // meter en vía central
+            translateAnimations.addAll(cambioDireccion(vagonesConMinimo, -angle, angle, 0, -1));
+            
+            translateAnimations.add(moverEnLinea(vagonesConMinimo, 1, 0));
+            Collections.reverse(vagonesConMinimo);
+            translateAnimations.addAll(cambioDireccion(vagonesConMinimo,-angle, 0, -angle, 1));
+            translateAnimations.add(moverEnLinea(vagonesConMinimo,boxes.size()-vagonesConMinimo.size()-i,-angle));
+            
+            ArrayList<StackPane> vagonesSinMinimo = new ArrayList();
+            vagonesSinMinimo.addAll(vagonesConMinimo.subList(0, vagonesConMinimo.size()-1));
+            translateAnimations.add(moverEnLinea(vagonesSinMinimo,-(boxes.size()-vagonesConMinimo.size()-i+1),-angle));
+            Collections.reverse(vagonesSinMinimo);
+            translateAnimations.addAll(cambioDireccion(vagonesSinMinimo,angle,-angle,0,-1));
+            translateAnimations.add(moverEnLinea(vagonesSinMinimo,-(boxes.size()-vagonesSinMinimo.size()-1),0));
+            
+            ArrayList<StackPane> vagonesRestantes = new ArrayList();
+            vagonesRestantes.addAll(vagonesNoOrdenados.subList(min_idx+1, vagonesNoOrdenados.size()));
+            Collections.reverse(vagonesRestantes);
+            translateAnimations.add(moverEnLinea(vagonesRestantes,-(vagonesConMinimo.size()+1),angle));
+            translateAnimations.addAll(cambioDireccion(vagonesRestantes,-angle,angle,0,-1));
+            translateAnimations.add(moverEnLinea(vagonesRestantes,-i,0));
+            
+            ArrayList<StackPane> vagonesEnProceso = new ArrayList();
+            Collections.reverse(vagonesSinMinimo);
+            Collections.reverse(vagonesRestantes);
+            
+            vagonesEnProceso.addAll(vagonesSinMinimo);
+            vagonesEnProceso.addAll(vagonesRestantes);
+            
+            translateAnimations.add(moverEnLinea(vagonesEnProceso,i+1,0));
+            translateAnimations.addAll(cambioDireccion(vagonesEnProceso,angle,0,angle,1));
+            
+            
+            
+            /*
+            // Sacar el vagon mínimo junto con todos los que le siguen de la vía superior y meterlos en la vía inferior.
+            ArrayList<StackPane> vagonesDespuesDeMinimo = new ArrayList();
+            vagonesDespuesDeMinimo.addAll(vagonesNoOrdenados.subList(min_idx, vagonesNoOrdenados.size()));
+            // Mover los vagones la cantidad de posiciones equivalente al número de vagones retirados con anterioridad.
+            translateAnimations.add(moverEnLinea(vagonesDespuesDeMinimo, -(vagonesConMinimo.size() + 1), angle));
+            Collections.reverse(vagonesDespuesDeMinimo);
+            // Cambio de dirección de los vagones sobrantes hacia la vía inferior.
+            translateAnimations.addAll(cambioDireccion(vagonesDespuesDeMinimo, 2*-1*angle-360, angle, -1*angle-180, -1));
+            // Mover los vagones sobrantes la cantidad de posiciones equivalente al número de vagones retirados con anterioridad.
+            translateAnimations.add(moverEnLinea(vagonesDespuesDeMinimo, vagonesConMinimo.size() + 1, -angle));
+            Collections.reverse(vagonesConMinimo);
+            
+            translateAnimations.add(parallelAnimations(pseudocode.unselectLine(6), pseudocode.unselectLine(7)));
+           
+            //ArrayList<StackPane> vagonesSinMinimo = new ArrayList();
+            vagonesSinMinimo.addAll(vagonesDespuesDeMinimo.subList(0, vagonesDespuesDeMinimo.size() - 1));
+            // Retroceso de los vagones la misma cantidad de posiciones que los vagones retirados con anterioridad.
+            translateAnimations.add(moverEnLinea(vagonesSinMinimo, -(vagonesConMinimo.size() + 2), -angle));
+            Collections.reverse(vagonesSinMinimo);
+            // Cambio de dirección hacia vía superior
+            translateAnimations.addAll(cambioDireccion(vagonesSinMinimo, 360-2*-1*angle, angle*-1-180, angle, 1));
+            // Movimiento de vagones en vía superior la misma cantidad de posiciones que el número de vagones retirados con anterioridad.
+            translateAnimations.add(moverEnLinea(vagonesSinMinimo, vagonesConMinimo.size(), angle));
+            
+            // Reinserción de los vagones retirados.
+            translateAnimations.add(moverEnLinea(vagonesConMinimo, 1, 0));
+            translateAnimations.addAll(cambioDireccion(vagonesConMinimo, angle, 0, angle, 1));*/
+            
+            System.out.println(numbers.toString());
             int temp = numbers.get(min_idx);
-            StackPane temp1 = boxes.get(min_idx);
-            numbers.set(min_idx, numbers.get(i));
-            boxes.set(min_idx, boxes.get(i));
-            numbers.set(i, temp);
-            boxes.set(i, temp1);
+            StackPane stack = boxes.get(min_idx);
+            numbers.remove(min_idx);
+            boxes.remove(min_idx);
+            numbers.add(i, temp);
+            boxes.add(i, stack);
+            System.out.println(numbers.toString());
         }
         System.out.println(numbers.toString());
+    }
+    
+    private Animation moverEnLinea(List<StackPane> vagones, double desplazamientoPosicion, double angulo){
+        ArrayList<Animation> movimientosVagones = new ArrayList();
+        
+        for(int i = 0; i < vagones.size(); i++){
+            TranslateTransition moverVagon = new TranslateTransition();
+            moverVagon.setNode(vagones.get(i));
+            moverVagon.setByX(desplazamientoPosicion * (Main.separation + Main.squareDimension) * Math.cos(angulo * Math.PI/180));
+            moverVagon.setByY(desplazamientoPosicion * (Main.separation + Main.squareDimension) * Math.sin(angulo * Math.PI/180));
+            moverVagon.setDuration(Duration.millis(200));
+            movimientosVagones.add(moverVagon);
+        }
+        
+        ParallelTransition moverEnConjunto = new ParallelTransition();
+        moverEnConjunto.getChildren().addAll(movimientosVagones);
+        
+        return moverEnConjunto;
+    }
+    
+    private ArrayList<Animation> cambioDireccion(List<StackPane> vagones,  double anguloGiro, double anguloMovimiento1, double anguloMovimiento2, double desplazamientoPosicion){
+        ArrayList<Animation> movimientosVagones = new ArrayList();
+        
+        for(int i = vagones.size() - 1; i >= 0; i--){
+            RotateTransition rotarVagon = new RotateTransition();
+            rotarVagon.setNode(vagones.get(i));
+            rotarVagon.setByAngle(anguloGiro);
+            rotarVagon.setDuration(Duration.millis(25));
+            
+            movimientosVagones.add(rotarVagon);
+            
+            ArrayList<Animation> desplazamientosVagones = new ArrayList();
+            
+            desplazamientosVagones.add(moverEnLinea( vagones.subList(i, vagones.size()), desplazamientoPosicion, anguloMovimiento2));
+            desplazamientosVagones.add(moverEnLinea(vagones.subList(0, i), desplazamientoPosicion, anguloMovimiento1));
+          
+            ParallelTransition moverEnConjunto = new ParallelTransition();
+            moverEnConjunto.getChildren().addAll(desplazamientosVagones);
+            movimientosVagones.add(moverEnConjunto);
+        }
+        
+        return movimientosVagones;
     }
     
     private void setCrane(){

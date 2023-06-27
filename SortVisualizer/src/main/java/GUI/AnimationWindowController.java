@@ -78,12 +78,7 @@ public class AnimationWindowController {
             
             
         }
-        
 
-
- 
-        
-        
         if(type == 0){
             animationPlayer.createSequentialTransitions(translateAnimations, pseudocodeAnimations);        
         }    
@@ -93,22 +88,22 @@ public class AnimationWindowController {
         
 
         root.getChildren().add(canvas);
-
         
-        root.getChildren().addAll(stackpanes);
         
-       
-       // root.setBackground(new Background(background));
-        setButtonsLayout();
-        scene = new Scene(root);
-        scene.getStylesheets().add(new File("src/main/java/Resources/WindowStyles.css").toURI().toURL().toExternalForm());
-     
-        root.getChildren().add(pseudocodeBox);
         if (Main.sortType != 3){
           Crane crane = new Crane(); 
           root.getChildren().add(crane.getCanvas());
           setCrane();
         }
+        
+       root.getChildren().addAll(stackpanes);
+        root.getChildren().add(pseudocodeBox);
+       // root.setBackground(new Background(background));
+        setButtonsLayout();
+        scene = new Scene(root);
+        scene.getStylesheets().add(new File("src/main/java/Resources/WindowStyles.css").toURI().toURL().toExternalForm());
+     
+       
  
 
         

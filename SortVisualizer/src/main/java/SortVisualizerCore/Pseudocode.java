@@ -49,6 +49,16 @@ public class Pseudocode {
                 "\t\t\tswapped = true");
     }
     
+    public void selectSelecionSortLines(){
+        addLines("for i = n",
+                "\tmax_idx = c",
+                "\tfor j = n2",
+                "\t\tif(numbers[j] > numbers[max_idx]",
+                "\t\t\tmax_idx = j",
+                "\tremoveInCurrentArray(max_idx)",
+                "\taddInNewArray(n3, max)");
+    }
+    
     private void addLines(String... lines){
         for(String line: lines){
             Label label = new Label(line);
@@ -61,11 +71,17 @@ public class Pseudocode {
         pseudocodeBox.setTranslateY(0.8 * Main.windowHeight);
         pseudocodeBox.setStyle("-fx-background-color: black");
         
-        if(Main.sortType == 2){
+        if(Main.sortType == 2 || Main.sortType == 3){
+            double toY;
+            if(Main.sortType == 2)
+                toY = 0.5;
+            else
+                toY = 0.7;
+                
             pseudocodeBox.setOnMouseEntered(e ->{
             TranslateTransition moveUpward = new TranslateTransition();
             moveUpward.setNode(pseudocodeBox);
-            moveUpward.setToY(0.5 * Main.windowHeight);
+            moveUpward.setToY(toY * Main.windowHeight);
             moveUpward.play();
             });
         
