@@ -369,11 +369,18 @@ public class AnimationsGenerator {
             translateAnimations.add(moverEnLinea(vagonesConMinimo, 1, 0));
             Collections.reverse(vagonesConMinimo);
             translateAnimations.addAll(cambioDireccion(vagonesConMinimo,-angle, 0, -angle, 1));
-            translateAnimations.add(moverEnLinea(vagonesConMinimo,boxes.size()-2-vagonesConMinimo.size()-i,-angle));
-            
+            if(min_idx==boxes.size()-3){
+                translateAnimations.add(moverEnLinea(vagonesConMinimo,boxes.size()-2-vagonesConMinimo.size()-i+1,-angle));
+            }else{
+                translateAnimations.add(moverEnLinea(vagonesConMinimo,boxes.size()-2-vagonesConMinimo.size()-i,-angle));
+            }
             ArrayList<StackPane> vagonesSinMinimo = new ArrayList();
             vagonesSinMinimo.addAll(vagonesConMinimo.subList(0, vagonesConMinimo.size()-1));
-            translateAnimations.add(moverEnLinea(vagonesSinMinimo,-(boxes.size()-2-vagonesConMinimo.size()-i+1),-angle));
+            if(min_idx==boxes.size()-3){
+                translateAnimations.add(moverEnLinea(vagonesSinMinimo,-(boxes.size()-2-vagonesConMinimo.size()-i+2),-angle));
+            }else{
+                translateAnimations.add(moverEnLinea(vagonesSinMinimo,-(boxes.size()-2-vagonesConMinimo.size()-i+1),-angle));
+            }
             Collections.reverse(vagonesSinMinimo);
             translateAnimations.addAll(cambioDireccion(vagonesSinMinimo,angle,-angle,0,-1));
             translateAnimations.add(moverEnLinea(vagonesSinMinimo,-(boxes.size()-2-vagonesSinMinimo.size()),0));
