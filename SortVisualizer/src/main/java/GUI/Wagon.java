@@ -84,31 +84,63 @@ public class Wagon {
 
     private void createTrainCanvas(double x, double y, Color color, Canvas canvas, double scale) {
        GraphicsContext gc = canvas.getGraphicsContext2D();
-       
-       
 
+           gc.setFill(Color.web("#008080")); // Color principal del vagón (turquesa oscuro)
+            gc.fillRect(0, 0, scale, scale / 1.4);
 
-          
-        // Dibujar las ruedas
-        /*
-        gc.setFill(Color.BLACK);
-        gc.fillOval(10 * SizeOfWagon, -3 * SizeOfWagon, 20 * SizeOfWagon, 20 * SizeOfWagon);
-        gc.fillOval(60 * SizeOfWagon, -3 * SizeOfWagon, 20 * SizeOfWagon, 20 * SizeOfWagon);
+            // Detalles decorativos del vagón
 
-        gc.fillOval(10 * SizeOfWagon, 35 * SizeOfWagon, 20 * SizeOfWagon, 20 * SizeOfWagon);
-        gc.fillOval(60 * SizeOfWagon, 35 * SizeOfWagon, 20 * SizeOfWagon, 20 * SizeOfWagon);
-        */
+            // Ventanas del vagón
+            gc.setFill(Color.web("#F5F5F5")); // Color de las ventanas (blanco humo)
+
+            double windowWidth = scale / 5;
+            double windowHeight = scale / 2.5;
+            double windowSpacing = scale / 16;
+            double windowX = (scale - (4 * windowWidth) - (3 * windowSpacing)) / 2;
+            double windowY = scale / 6;
+
+            for (int i = 0; i < 4; i++) {
+                gc.fillRect(windowX, windowY, windowWidth, windowHeight);
+                windowX += windowWidth + windowSpacing;
+            }
+
+            // Ruedas del vagón
+            gc.setFill(Color.web("#444444")); // Color de las ruedas (gris oscuro)
+
+            double wheelRadius = scale / 12;
+            double wheelY = (scale / 1.4) - (wheelRadius / 2);
+
+            double wheelX1 = scale / 5;
+            double wheelX2 = (scale / 1.5) - (wheelRadius * 2);
+
+            gc.fillOval(wheelX1, wheelY, wheelRadius, wheelRadius);
+            gc.fillOval(wheelX2, wheelY, wheelRadius, wheelRadius);
+
+            gc.setFill(Color.web("#808080")); // Color del eje de las ruedas (gris medio)
+            gc.fillRect(wheelX1 + (wheelRadius / 2), wheelY, wheelRadius, wheelRadius);
+            gc.fillRect(wheelX2 + (wheelRadius / 2), wheelY, wheelRadius, wheelRadius);
+
+            // Detalles adicionales
+            gc.setFill(Color.web("#FFD700")); // Color para detalles adicionales (oro)
+
+            double detailWidth = scale / 2.5;
+            double detailHeight = scale / 12;
+            double detailX = (scale - detailWidth) / 2;
+            double detailY = scale / 2.5;
+
+            gc.fillRect(detailX, detailY, detailWidth, detailHeight);
+
+            gc.setFill(Color.web("#A0522D")); // Color para detalles adicionales (marrón)
+
+            double roofWidth = scale / 1.1;
+            double roofHeight = scale / 8;
+            double roofX = (scale - roofWidth) / 2;
+            double roofY = detailY - (roofHeight / 1.5);
+
+            gc.fillRoundRect(roofX, roofY, roofWidth, roofHeight, roofHeight, roofHeight);
+
         
         
-        // Dibujar el cuerpo del vagón
-        gc.setFill(color);
-        //gc.fillRoundRect(0, scale, scale, scale, 10, 10 );
-        gc.fillRect(0, 0, scale, scale);
-        // Dibujar el espacio para el número identificador
-       // gc.setFill(Color.BLACK);
-        //gc.fillRoundRect(11 * SizeOfWagon, 11 * SizeOfWagon, 65 * SizeOfWagon, 30 * SizeOfWagon, 5 * SizeOfWagon, 5 * SizeOfWagon);
-
-
    }
 
 }

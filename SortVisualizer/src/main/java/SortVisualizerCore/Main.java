@@ -31,7 +31,7 @@ public class Main extends Application {
         separation = 0.25 * 0.9 * windowWidth / numbers.size();
         
         squareDimension = (Main.sortType == 3) ? (0.85 * 0.9 * 910 / numbers.size()) : squareDimension;
-        separation = (Main.sortType == 3) ? 1 : separation;
+        separation = (Main.sortType == 3) ? 1.5 : separation;
 
         size = NumberSize(numbers.size());
         ArrayList<StackPane> stackpanes = new ArrayList();
@@ -61,7 +61,7 @@ public class Main extends Application {
 
             stackpane.getChildren().addAll( canvas); // Agregar canvasBox al StackPane
 
-            
+            System.out.println("a == "+ squareDimension);
             
 /*
             La variable "initialScale" representa el factor de escala inicial del objeto, 

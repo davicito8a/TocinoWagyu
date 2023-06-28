@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
         int coordinateX = 70;
         int coordinateY = 45;
         double scale;
-        Color colorNumers = Color.WHITE;
+        Color colorNumers = Color.BLACK;
 
     public NumberDrawer(Canvas canvas){
         gc = canvas.getGraphicsContext2D();
@@ -17,7 +17,7 @@ import javafx.scene.paint.Color;
     
     public void drawNumber(int number, double scale) {
         this.scale = scale;
-    
+         scale = (Main.squareDimension * 0.08)/ 34.08;
         int digit1 = number / 10;
         int digit2 = number % 10;
         int space = 50;
@@ -75,22 +75,25 @@ import javafx.scene.paint.Color;
     }
 
     public void drawOne(GraphicsContext gc, double x, double y) {
-        gc.setStroke(colorNumers);  
-        gc.setLineWidth(1.5); 
-        gc.strokeLine((x + 25)/scale, y/scale, (x + 25)/scale, (y + 50)/scale);
-        gc.strokeLine((x + 25)/scale,y/scale, (x + 10)/scale, (y + 17)/scale );
-        gc.strokeLine((x + 10)/scale,(y + 50)/scale, (x + 40)/scale, (y+50)/scale);
+       double coorX = 0.5 * Main.squareDimension;
+        double coorY = Main.squareDimension/1.4 - 10;
+        gc.setFill(Color.BLACK);
+        gc.strokeLine(coorX, coorY, coorX, coorY - 200 * scale);
+        gc.strokeLine(coorX, coorY - 200 * scale, coorX - 50 * scale, coorY -  200 * scale + 50 * scale);
     }
 
     public void drawTwo(GraphicsContext gc, double x, double y) {
-        gc.setStroke(colorNumers);  
-        gc.setLineWidth(1.5);      
-        gc.strokeLine(x/scale, y/scale, (x + 35)/scale, y/scale); 
-        gc.strokeLine((x + 35)/scale, y/scale, (x + 35)/scale, (y + 25)/scale);
-        gc.strokeLine((x + 35)/scale, (y + 25)/scale, x/scale, (y + 25)/scale); 
-        gc.strokeLine(x/scale, (y + 25)/scale, x/scale, (y + 50)/scale);
-        gc.strokeLine(x/scale, (y + 50)/scale, (x + 35)/scale, (y + 50)/scale); 
+        double coorX = 0.5 * Main.squareDimension;
+        double coorY = Main.squareDimension / 1.4 - 10;
+        gc.setFill(Color.BLACK);
+        gc.strokeLine(coorX, coorY, coorX - 100 * scale, coorY);
+        gc.strokeLine(coorX - 100 * scale, coorY, coorX - 100 * scale, coorY - 100 * scale); 
+        gc.strokeLine(coorX - 100 * scale, coorY - 100 * scale, coorX, coorY - 100 * scale); 
+        gc.strokeLine(coorX, coorY - 100 * scale, coorX, coorY - 200 * scale); 
+        gc.strokeLine(coorX, coorY - 200 * scale, coorX - 100 * scale, coorY - 200 * scale);
     }
+
+
 
     public void drawThree(GraphicsContext gc, double x, double y) {
         gc.setStroke(colorNumers); 
