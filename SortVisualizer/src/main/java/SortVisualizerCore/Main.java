@@ -71,7 +71,7 @@ public class Main extends Application {
             }
             stackpane.getChildren().addAll( canvas); // Agregar canvasBox al StackPane
 
-            
+               
             
 /*
             La variable "initialScale" representa el factor de escala inicial del objeto, 
@@ -104,7 +104,34 @@ public class Main extends Application {
         
         return stackpanes;
     }
-
+    
+    public static ArrayList<StackPane> getLocomotoras(){
+            ArrayList<StackPane> locomotives = new ArrayList();
+            
+            StackPane stackpane = new StackPane();
+            Canvas canvas1 = new Canvas(squareDimension*1.3, squareDimension);
+            Wagon Vagon = new Wagon(canvas1);
+            Vagon.DrawTrain(size);
+            stackpane.setTranslateX(0.05 * 910 - (squareDimension + separation));
+            stackpane.setTranslateY(0.45 * windowHeight);
+            stackpane.getChildren().addAll( canvas1);
+            
+            StackPane stackpane2 = new StackPane();
+            Canvas canvas2 = new Canvas(squareDimension*1.3, squareDimension);
+            Wagon Vagon2 = new Wagon(canvas2);
+            Vagon2.DrawTrain(size);
+            stackpane2.setTranslateX(1450);
+            stackpane2.setTranslateY(20);
+            stackpane2.getChildren().addAll( canvas2);
+            
+            locomotives.add(stackpane);
+            locomotives.add(stackpane2);
+            return locomotives;
+    }
+    
+    
+    
+    
     // Método para determinar el tamaño del número a dibujar
     public static double NumberSize(int num) {
         return (0.2078*num)+0.3636;

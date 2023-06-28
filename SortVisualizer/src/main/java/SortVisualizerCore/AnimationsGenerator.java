@@ -311,7 +311,7 @@ public class AnimationsGenerator {
         double angle = -25.22;
         
         // Mover vagones a vía superior
-        if(numbers.size()>=16 && numbers.size()<=19){
+        /*if(numbers.size()>=16 && numbers.size()<=19){
             translateAnimations.add(moverEnLinea(boxes, 0.5, 0));
         }
         else if(numbers.size()>=20 && numbers.size()<=29){
@@ -325,9 +325,15 @@ public class AnimationsGenerator {
         }
         else if(numbers.size()>=48 && numbers.size()<=64){
             translateAnimations.add(moverEnLinea(boxes, 0, 0));
-        }
-        //translateAnimations.add(moverEnLinea(boxes, 4.37, 0));
-        translateAnimations.addAll(cambioDireccion(boxes, angle, 0, angle, 1));
+        }*/
+        ArrayList<StackPane> Salvadore = new ArrayList();
+        Salvadore.addAll(boxes.subList(0, boxes.size()-2));
+        Salvadore.add(0,boxes.get(boxes.size()-2));
+        
+        translateAnimations.add(moverEnLinea(Salvadore, 4.37, 0));
+        translateAnimations.addAll(cambioDireccion(Salvadore, angle, 0, angle, 1));
+        
+        
         
         System.out.println(numbers.toString());
         for (int i = 0; i < numbers.size(); i++){
@@ -347,11 +353,13 @@ public class AnimationsGenerator {
             //translateAnimations.add(pseudocode.changeLabelProperties(7, "\taddInNewArray(" + (numbers.size() - 1 - i) + ", " + numbers.get(min_idx) + ")" , 1, true));
             
             ArrayList<StackPane> vagonesNoOrdenados = new ArrayList();
-            vagonesNoOrdenados.addAll(boxes.subList(0, boxes.size()));
+            vagonesNoOrdenados.addAll(boxes.subList(0, boxes.size()-2));
             
             // Sacar todos los vagones ubicados antes del mínimo de la vía superior y meterlos en la vía central
-            ArrayList<StackPane> vagonesConMinimo = new ArrayList();
+            ArrayList<StackPane> vagonesConMinimo = new ArrayList(); 
             vagonesConMinimo.addAll(vagonesNoOrdenados.subList(i, min_idx+1));
+            vagonesConMinimo.add(0,boxes.get(boxes.size()-2));
+            
             // Desplazar una posición hacia atrás en la vía superior
             translateAnimations.add(moverEnLinea(vagonesConMinimo, -1, angle));
             Collections.reverse(vagonesConMinimo);
@@ -361,14 +369,15 @@ public class AnimationsGenerator {
             translateAnimations.add(moverEnLinea(vagonesConMinimo, 1, 0));
             Collections.reverse(vagonesConMinimo);
             translateAnimations.addAll(cambioDireccion(vagonesConMinimo,-angle, 0, -angle, 1));
-            translateAnimations.add(moverEnLinea(vagonesConMinimo,boxes.size()-vagonesConMinimo.size()-i,-angle));
+            translateAnimations.add(moverEnLinea(vagonesConMinimo,boxes.size()-2-vagonesConMinimo.size()-i,-angle));
             
             ArrayList<StackPane> vagonesSinMinimo = new ArrayList();
             vagonesSinMinimo.addAll(vagonesConMinimo.subList(0, vagonesConMinimo.size()-1));
-            translateAnimations.add(moverEnLinea(vagonesSinMinimo,-(boxes.size()-vagonesConMinimo.size()-i+1),-angle));
+            translateAnimations.add(moverEnLinea(vagonesSinMinimo,-(boxes.size()-2-vagonesConMinimo.size()-i+1),-angle));
             Collections.reverse(vagonesSinMinimo);
             translateAnimations.addAll(cambioDireccion(vagonesSinMinimo,angle,-angle,0,-1));
-            translateAnimations.add(moverEnLinea(vagonesSinMinimo,-(boxes.size()-vagonesSinMinimo.size()-1),0));
+            translateAnimations.add(moverEnLinea(vagonesSinMinimo,-(boxes.size()-2-vagonesSinMinimo.size()),0));
+            
             
             ArrayList<StackPane> vagonesRestantes = new ArrayList();
             vagonesRestantes.addAll(vagonesNoOrdenados.subList(min_idx+1, vagonesNoOrdenados.size()));
