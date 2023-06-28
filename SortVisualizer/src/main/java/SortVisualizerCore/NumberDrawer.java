@@ -72,19 +72,16 @@ public void drawZero(GraphicsContext gc, double x, double y) {
         double scale = (Main.squareDimension)/ (43.5/0.08);
         double coorX = 0.5 * Main.squareDimension;
         double coorY = Main.squareDimension / 1.4 - (Main.squareDimension/(43.5/10));
-        gc.setFill(Color.BLACK);
+        gc.setFill(Color.BLACK);    
         
-        
-    gc.strokeLine(coorX - 100 * scale, coorY - 200 * scale, coorX + 100 * scale, coorY - 200 * scale); // horizontal
-    
-    gc.strokeLine(coorX - 100 * scale, coorY, coorX - 100 * scale, coorY - 200 * scale); // vertical
-    
-    gc.strokeLine(coorX + 100 * scale, coorY, coorX + 100 * scale, coorY - 200 * scale); // vertical
-    
-    gc.strokeLine(coorX - 100 * scale, coorY, coorX + 100 * scale,  coorY); // horizontal
+        gc.strokeLine(coorX - 100 * scale, coorY - 200 * scale, coorX + 100 * scale, coorY - 200 * scale); // horizontal
+
+        gc.strokeLine(coorX - 100 * scale, coorY, coorX - 100 * scale, coorY - 200 * scale); // vertical
+
+        gc.strokeLine(coorX + 100 * scale, coorY, coorX + 100 * scale, coorY - 200 * scale); // vertical
+
+        gc.strokeLine(coorX - 100 * scale, coorY, coorX + 100 * scale,  coorY); // horizontal
 }
-
-
 
     public void drawOne(GraphicsContext gc, double x, double y) {
         double scale = (Main.squareDimension)/ (43.5/0.08);
@@ -109,8 +106,6 @@ public void drawZero(GraphicsContext gc, double x, double y) {
         gc.strokeLine(coorX, coorY - 200 * scale, coorX - 100 * scale, coorY - 200 * scale);
     }
 
-
-
     public void drawThree(GraphicsContext gc, double x, double y) {
         double scale = (Main.squareDimension)/ (43.5/0.08);       
         double coorX = 0.5 * Main.squareDimension;
@@ -130,25 +125,42 @@ public void drawZero(GraphicsContext gc, double x, double y) {
 
 
 
-    public void drawFour(GraphicsContext gc, double x, double y) {
-        gc.setStroke(colorNumers);  
-        gc.setLineWidth(1.5); 
-        gc.strokeLine(x/scale, y/scale, x/scale, (y + 25)/scale);
-        gc.strokeLine(x/scale, (y + 25)/scale, (x + 30)/scale, (y + 25)/scale);
-        gc.strokeLine((x + 25)/scale, y/scale, (x + 25)/scale, (y + 50)/scale);
-        
-    }
+public void drawFour(GraphicsContext gc, double x, double y) {
+    double scale = (Main.squareDimension) / (43.5 / 0.08);
+    double coorX = 0.5 * Main.squareDimension;
+    double coorY = Main.squareDimension / 1.4 - (Main.squareDimension / (43.5 / 10));
+    gc.setFill(Color.BLACK);
+
+  
+
+    gc.strokeLine(coorX, coorY, coorX, coorY - 100 * scale); // vertical
+    
+    gc.strokeLine(coorX - 100 * scale, coorY - 100 * scale, coorX, coorY - 100 * scale); // horizontal
+
+    gc.strokeLine(coorX, coorY - 100 * scale, coorX, coorY - 200 * scale); // vertical
+    
+    gc.strokeLine(coorX - 100 * scale, coorY - 100 * scale, coorX - 100 * scale, coorY - 200 * scale); // vertical
+}
+
     public void drawFive(GraphicsContext gc, double x, double y) {
-        gc.setStroke(colorNumers); 
-        gc.setLineWidth(1.5);  
-        gc.strokeLine(x/scale, y/scale, (x + 35)/scale, y/scale);
-        gc.strokeLine(x/scale, y/scale, x/scale , (y + 25)/scale);
-        gc.strokeLine((x + 35)/scale, (y + 25)/scale, x/scale, (y + 25)/scale);
-        gc.strokeLine((x + 35)/scale, (y + 25)/scale, (x + 35)/scale, (y + 50)/scale);
-        gc.strokeLine(x/scale, (y + 50)/scale, (x + 35)/scale, (y + 50)/scale);
+        double scale = (Main.squareDimension)/ (43.5/0.08);
+        double coorX = 0.5 * Main.squareDimension;
+        double coorY = Main.squareDimension / 1.4 - (Main.squareDimension/(43.5/10));
+        gc.setFill(Color.BLACK);
+        
+        gc.strokeLine(coorX, coorY, coorX - 100 * scale, coorY);//horizontal
+        
+        gc.strokeLine(coorX, coorY, coorX, coorY - 100 * scale); // vertical 
+        
+        gc.strokeLine(coorX - 100 * scale, coorY - 100 * scale, coorX, coorY - 100 * scale); // horizontal 
+        
+        gc.strokeLine(coorX - 100 * scale, coorY - 100 * scale, coorX - 100 * scale, coorY - 200 * scale); 
+        
+        gc.strokeLine(coorX, coorY - 200 * scale, coorX - 100 * scale, coorY - 200 * scale);
     }
 
     public void drawSix(GraphicsContext gc, double x, double y) {
+        
         gc.setStroke(colorNumers); 
         gc.setLineWidth(1.5);  
         gc.strokeOval(x/scale, (y + 18)/scale, 35/scale, 35/scale);
