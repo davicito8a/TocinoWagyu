@@ -17,7 +17,7 @@ import javafx.scene.paint.Color;
     
     public void drawNumber(int number, double scale) {
         this.scale = scale;
-         scale = (Main.squareDimension * 0.08)/ 34.08;
+
         int digit1 = number / 10;
         int digit2 = number % 10;
         int space = 50;
@@ -75,16 +75,18 @@ import javafx.scene.paint.Color;
     }
 
     public void drawOne(GraphicsContext gc, double x, double y) {
+                double scale = (Main.squareDimension)/ (43.5/0.08);
        double coorX = 0.5 * Main.squareDimension;
-        double coorY = Main.squareDimension/1.4 - 10;
+        double coorY = Main.squareDimension/1.4;
         gc.setFill(Color.BLACK);
         gc.strokeLine(coorX, coorY, coorX, coorY - 200 * scale);
         gc.strokeLine(coorX, coorY - 200 * scale, coorX - 50 * scale, coorY -  200 * scale + 50 * scale);
     }
 
     public void drawTwo(GraphicsContext gc, double x, double y) {
+                double scale = (Main.squareDimension)/ (43.5/0.08);
         double coorX = 0.5 * Main.squareDimension;
-        double coorY = Main.squareDimension / 1.4 - 10;
+        double coorY = Main.squareDimension / 1.4;
         gc.setFill(Color.BLACK);
         gc.strokeLine(coorX, coorY, coorX - 100 * scale, coorY);
         gc.strokeLine(coorX - 100 * scale, coorY, coorX - 100 * scale, coorY - 100 * scale); 
