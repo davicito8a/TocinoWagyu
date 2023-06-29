@@ -112,7 +112,6 @@ private void continueToVisualization(ActionEvent event) throws IOException {
         Main.coordinates.clear();
         ArrayList<StackPane> rectangles = Main.getRectangles(numbers);
         if(Main.sortType==3){
-            
             rectangles.addAll(Main.getLocomotoras());           
         }
         

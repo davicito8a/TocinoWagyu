@@ -8,6 +8,7 @@ import java.util.List;
 import javafx.animation.Animation;
 import javafx.animation.ParallelTransition;
 import javafx.animation.PathTransition;
+import javafx.animation.PauseTransition;
 import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
 import javafx.scene.layout.StackPane;
@@ -326,9 +327,15 @@ public class AnimationsGenerator {
         else if(numbers.size()>=48 && numbers.size()<=64){
             translateAnimations.add(moverEnLinea(boxes, 0, 0));
         }*/
+        
         ArrayList<StackPane> Salvadore = new ArrayList();
         Salvadore.addAll(boxes.subList(0, boxes.size()-2));
         Salvadore.add(0,boxes.get(boxes.size()-2));
+        
+        translateAnimations.add(moverEnLinea(boxes.subList(boxes.size()-1,boxes.size()), 3.37, 0));
+        translateAnimations.addAll(cambioDireccion(boxes.subList(boxes.size()-1,boxes.size()), angle, 0, angle, 1));
+        translateAnimations.add(moverEnLinea(boxes.subList(boxes.size()-1,boxes.size()),boxes.size()-1,angle));
+        
         
         translateAnimations.add(moverEnLinea(Salvadore, 4.37, 0));
         translateAnimations.addAll(cambioDireccion(Salvadore, angle, 0, angle, 1));
@@ -365,34 +372,34 @@ public class AnimationsGenerator {
             Collections.reverse(vagonesConMinimo);
             // meter en vía central
             translateAnimations.addAll(cambioDireccion(vagonesConMinimo, -angle, angle, 0, -1));
-            
             translateAnimations.add(moverEnLinea(vagonesConMinimo, 1, 0));
             Collections.reverse(vagonesConMinimo);
             translateAnimations.addAll(cambioDireccion(vagonesConMinimo,-angle, 0, -angle, 1));
-            if(min_idx==boxes.size()-3){
-                translateAnimations.add(moverEnLinea(vagonesConMinimo,boxes.size()-2-vagonesConMinimo.size()-i+1,-angle));
-            }else{
-                translateAnimations.add(moverEnLinea(vagonesConMinimo,boxes.size()-2-vagonesConMinimo.size()-i,-angle));
-            }
+            translateAnimations.add(moverEnLinea(vagonesConMinimo,boxes.size()-2-vagonesConMinimo.size()-i+1,-angle));
+            
+            
             ArrayList<StackPane> vagonesSinMinimo = new ArrayList();
             vagonesSinMinimo.addAll(vagonesConMinimo.subList(0, vagonesConMinimo.size()-1));
-            if(min_idx==boxes.size()-3){
-                translateAnimations.add(moverEnLinea(vagonesSinMinimo,-(boxes.size()-2-vagonesConMinimo.size()-i+2),-angle));
-            }else{
-                translateAnimations.add(moverEnLinea(vagonesSinMinimo,-(boxes.size()-2-vagonesConMinimo.size()-i+1),-angle));
-            }
+            translateAnimations.add(moverEnLinea(vagonesSinMinimo,-(boxes.size()-2-vagonesConMinimo.size()-i+2),-angle));//Esta bien
             Collections.reverse(vagonesSinMinimo);
             translateAnimations.addAll(cambioDireccion(vagonesSinMinimo,angle,-angle,0,-1));
-            translateAnimations.add(moverEnLinea(vagonesSinMinimo,-(boxes.size()-2-vagonesSinMinimo.size()),0));
-            
+            translateAnimations.add(moverEnLinea(vagonesSinMinimo,-(boxes.size()-2-vagonesSinMinimo.size()+1),0));
             
             ArrayList<StackPane> vagonesRestantes = new ArrayList();
             vagonesRestantes.addAll(vagonesNoOrdenados.subList(min_idx+1, vagonesNoOrdenados.size()));
+            vagonesRestantes.add(boxes.get(boxes.size()-1));
             Collections.reverse(vagonesRestantes);
             translateAnimations.add(moverEnLinea(vagonesRestantes,-(vagonesConMinimo.size()+1),angle));
             translateAnimations.addAll(cambioDireccion(vagonesRestantes,-angle,angle,0,-1));
             translateAnimations.add(moverEnLinea(vagonesRestantes,-i,0));
             
+
+            //vagonesRestantes.remove(0);
+            
+            /*translateAnimations.add(moverEnLinea(boxes.subList(boxes.size()-1,boxes.size()), 0, 0));
+            translateAnimations.addAll(cambioDireccion(boxes.subList(boxes.size()-1,boxes.size()), angle, 0, angle, 1));
+            translateAnimations.add(moverEnLinea(boxes.subList(boxes.size()-1,boxes.size()),boxes.size()-i-2,angle));
+            */
             ArrayList<StackPane> vagonesEnProceso = new ArrayList();
             Collections.reverse(vagonesSinMinimo);
             Collections.reverse(vagonesRestantes);
