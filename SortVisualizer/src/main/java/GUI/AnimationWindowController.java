@@ -11,7 +11,6 @@ import java.util.logging.Logger;
 import javafx.animation.Animation;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
@@ -22,27 +21,27 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 
 public class AnimationWindowController {
+
     private final int type;
-    
+
     private final ArrayList<Integer> numbers;
     private final ArrayList<StackPane> stackpanes;
-    
+
     private final AnimationsGenerator animator;
     private final AnimationsPlayer animationPlayer = new AnimationsPlayer();
-   
+
     private ArrayList<Animation> translateAnimations;
     private ArrayList<Animation> pseudocodeAnimations;
     private int currentTransitionIndex = 0;
-  
+
     private Scene scene;
     private AnchorPane root;
     private VBox pseudocodeBox;
-    
+
     private final Button play = new Button("Play");
     private final Button pause = new Button("Pause");
     private final Button increaseSpeed = new Button("Increase");
@@ -50,11 +49,11 @@ public class AnimationWindowController {
     private final Button stepForward = new Button("Forward");
     private final Button stepBackward = new Button("Backward");
     private final Button changeBackground = new Button("BG");
-    private final int prefWidth = Main.windowWidth/20;
-    
+    private final int prefWidth = Main.windowWidth / 20;
+
     private int backgroundCounter = 1;
-    
-    public AnimationWindowController(ArrayList<Integer> numbers, ArrayList<StackPane> stackpanes, int type) throws IOException{
+
+    public AnimationWindowController(ArrayList<Integer> numbers, ArrayList<StackPane> stackpanes, int type) throws IOException {
         this.type = type;
         this.numbers = numbers;
         this.stackpanes = stackpanes;
@@ -62,106 +61,96 @@ public class AnimationWindowController {
         start();
     }
 
-    private void start () throws IOException{
+    private void start() throws IOException {
         getTransitions();
-        
-        
+
         Canvas canvas = new Canvas(Main.windowHeight, Main.windowWidth);
-        BackGround bgc = new BackGround(canvas); 
-               
-        if(Main.sortType == 3){
+        BackGround bgc = new BackGround(canvas);
+
+        if (Main.sortType == 3) {
             bgc.Desert(canvas);
-            
-        }
-        else{
+
+        } else {
             bgc.drawBG(canvas);
-            
-            
+
         }
 
-        if(type == 0){
-            animationPlayer.createSequentialTransitions(translateAnimations, pseudocodeAnimations);        
-        }    
-   
+        if (type == 0) {
+            animationPlayer.createSequentialTransitions(translateAnimations, pseudocodeAnimations);
+        }
+
         root = new AnchorPane();
-  
-        
 
         root.getChildren().add(canvas);
-        
-        
-        if (Main.sortType != 3){
-          Crane crane = new Crane(); 
-          root.getChildren().add(crane.getCanvas());
-          setCrane();
+
+        if (Main.sortType != 3) {
+            Crane crane = new Crane();
+            root.getChildren().add(crane.getCanvas());
+            setCrane();
         }
-        
-       root.getChildren().addAll(stackpanes);
+
+        root.getChildren().addAll(stackpanes);
         root.getChildren().add(pseudocodeBox);
-       // root.setBackground(new Background(background));
+        // root.setBackground(new Background(background));
         setButtonsLayout();
         scene = new Scene(root);
         scene.getStylesheets().add(new File("src/main/java/Resources/WindowStyles.css").toURI().toURL().toExternalForm());
-     
-       
- 
 
-        
     }
-    
-    private void setButtonsLayout(){
+
+    private void setButtonsLayout() {
         play.setLayoutX(0.62 * Main.windowWidth);
         play.setLayoutY(0.85 * Main.windowHeight);
         play.setPrefWidth(prefWidth);
-        
+
         pause.setLayoutX(0.695 * Main.windowWidth);
         pause.setLayoutY(0.85 * Main.windowHeight);
         pause.setPrefWidth(prefWidth);
-        
+
         increaseSpeed.setLayoutX(0.77 * Main.windowWidth);
         increaseSpeed.setLayoutY(0.85 * Main.windowHeight);
         increaseSpeed.setPrefWidth(prefWidth);
-        
+
         decreaseSpeed.setLayoutX(0.845 * Main.windowWidth);
         decreaseSpeed.setLayoutY(0.85 * Main.windowHeight);
         decreaseSpeed.setPrefWidth(prefWidth);
-        
+
         stepForward.setLayoutX(0.75 * Main.windowWidth);
         stepForward.setLayoutY(0.85 * Main.windowHeight);
         stepForward.setPrefWidth(prefWidth);
-        
+
         stepBackward.setLayoutX(0.85 * Main.windowWidth);
         stepBackward.setLayoutY(0.85 * Main.windowHeight);
         stepBackward.setPrefWidth(prefWidth);
-        
+
         changeBackground.setLayoutX(0.9 * Main.windowWidth);
         changeBackground.setLayoutY(0.1 * Main.windowHeight);
         changeBackground.setPrefWidth(prefWidth);
-        
+
         play.setOnAction(event -> {
             animationPlayer.play();
         });
-        
+
         pause.setOnAction(event -> {
             animationPlayer.pause();
         });
-        
+
         increaseSpeed.setOnAction(event -> {
             animationPlayer.increaseSpeed();
         });
-        
+
         decreaseSpeed.setOnAction(event -> {
             animationPlayer.decreaseSpeed();
         });
-        
+
         stepForward.setOnAction(event -> {
             stepForward(translateAnimations, pseudocodeAnimations);
         });
-        
+
         stepBackward.setOnAction(event -> {
             stepBackward(translateAnimations, pseudocodeAnimations);
-        });  
-        
+        });
+
         changeBackground.setOnAction(event -> {
             try {
                 changeBackground();
@@ -170,29 +159,29 @@ public class AnimationWindowController {
             }
         });
         changeBackground.setVisible(false);
-        
+
         root.getChildren().addAll(play, pause, increaseSpeed, decreaseSpeed, stepForward, stepBackward, changeBackground);
-        
-        if(type == 0){
+
+        if (type == 0) {
             stepForward.setVisible(false);
             stepBackward.setVisible(false);
-        } else if(type == 1) {
+        } else if (type == 1) {
             play.setVisible(false);
             pause.setVisible(false);
             increaseSpeed.setVisible(false);
             decreaseSpeed.setVisible(false);
         }
-        
+
     }
-    
-    private void getTransitions(){
+
+    private void getTransitions() {
         translateAnimations = animator.getTranslateAnimations();
         pseudocodeAnimations = animator.getPseudocodeAnimations();
-        pseudocodeBox = animator.getPseudocodeBox();               
+        pseudocodeBox = animator.getPseudocodeBox();
     }
-    
-    private void stepForward(ArrayList<Animation> transitions, ArrayList<Animation> pseudocodeAnimations){
-        if(currentTransitionIndex <= transitions.size() - 1){
+
+    private void stepForward(ArrayList<Animation> transitions, ArrayList<Animation> pseudocodeAnimations) {
+        if (currentTransitionIndex <= transitions.size() - 1) {
             Animation animation = transitions.get(currentTransitionIndex);
             animation.setOnFinished(e -> currentTransitionIndex++);
             animation.setRate(1);
@@ -203,9 +192,9 @@ public class AnimationWindowController {
             }*/
         }
     }
-    
-    private void stepBackward(ArrayList<Animation> transitions, ArrayList<Animation> pseudocodeAnimations){
-        if(currentTransitionIndex >= 1){
+
+    private void stepBackward(ArrayList<Animation> transitions, ArrayList<Animation> pseudocodeAnimations) {
+        if (currentTransitionIndex >= 1) {
             Animation animation = transitions.get(currentTransitionIndex - 1);
             animation.setOnFinished(e -> currentTransitionIndex--);
             animation.setRate(-1);
@@ -214,49 +203,47 @@ public class AnimationWindowController {
                 Animation pseudocodeAnimation = pseudocodeAnimations.get(currentTransitionIndex - 1);
                 pseudocodeAnimation.play();
             }*/
-        }  
+        }
     }
-     
-    private void setCrane(){
+
+    private void setCrane() {
         Rectangle craneUpperBox1 = animator.getCraneUpperBox1();
         Rectangle craneUpperBox2 = animator.getCraneUpperBox2();
         Rectangle magnet1 = animator.getMagnet1();
         Rectangle magnet2 = animator.getMagnet2();
-        
+
         Line rope1 = animator.getRope1();
         Line rope2 = animator.getRope2();
-        
+
         /*
         root.getChildren().addAll(rope1,rope2);
         root.getChildren().addAll(craneUpperBox1,craneUpperBox2,magnet1,magnet2);*/
-        
-        if(Main.sortType==0){
-            root.getChildren().addAll(rope1,rope2);
-            root.getChildren().addAll(craneUpperBox1,craneUpperBox2,magnet1,magnet2);
-        }else{
-             root.getChildren().add(rope2);
-            root.getChildren().addAll(craneUpperBox2,magnet2);
+        if (Main.sortType == 0) {
+            root.getChildren().addAll(rope1, rope2);
+            root.getChildren().addAll(craneUpperBox1, craneUpperBox2, magnet1, magnet2);
+        } else {
+            root.getChildren().add(rope2);
+            root.getChildren().addAll(craneUpperBox2, magnet2);
         }
     }
 
-    
-    private void changeBackground() throws IOException{
+    private void changeBackground() throws IOException {
         BackgroundImage background = null;
-        if(backgroundCounter % 2 == 1){
+        if (backgroundCounter % 2 == 1) {
             background = new BackgroundImage(new Image(new File("src/main/java/Resources/background2.jpg").toURI().toURL().toExternalForm()),
-            BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT,
-            BackgroundSize.DEFAULT);
+                    BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT,
+                    BackgroundSize.DEFAULT);
         } else {
             background = new BackgroundImage(new Image(new File("src/main/java/Resources/background.png").toURI().toURL().toExternalForm()),
-            BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT,
-            BackgroundSize.DEFAULT);
+                    BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT,
+                    BackgroundSize.DEFAULT);
         }
-        
+
         backgroundCounter++;
         root.setBackground(new Background(background));
     }
-    
-    public Scene getScene(){
+
+    public Scene getScene() {
         return scene;
     }
 }
