@@ -25,9 +25,12 @@ public class Main extends Application {
     public static int modeType = 0;
     public static int sortType = 2;
     public static double size;
-
+    public static int n;
+    
+    //Hoy es la muerte de SizeOfWagon
     public static ArrayList<StackPane> getRectangles(ArrayList<Integer> numbers) {
-        squareDimension = 0.75 * 0.9 * windowWidth / numbers.size();
+        n=numbers.size();
+        squareDimension = 0.75 * 0.9 * windowWidth / numbers.size(); //59.55
         separation = 0.25 * 0.9 * windowWidth / numbers.size();
         
         squareDimension = (Main.sortType == 3) ? (0.85 * 0.9 * 910 / numbers.size()) : squareDimension;
@@ -60,8 +63,6 @@ public class Main extends Application {
             stackpane.setTranslateY((Main.sortType == 3) ? (0.45 * windowHeight) : stackpane.getTranslateY());
 
             stackpane.getChildren().addAll( canvas); // Agregar canvasBox al StackPane
-
-            System.out.println("a == "+ squareDimension);
             
 /*
             La variable "initialScale" representa el factor de escala inicial del objeto, 
@@ -94,6 +95,38 @@ public class Main extends Application {
         
         return stackpanes;
     }
+    
+    public static ArrayList<StackPane> getLocomotoras(){
+            ArrayList<StackPane> locomotives = new ArrayList();
+            
+            StackPane stackpane = new StackPane();
+            Canvas canvas1 = new Canvas(squareDimension*2, squareDimension*2);
+            Wagon Vagon = new Wagon(canvas1);
+            Vagon.DrawTrain(size);
+            stackpane.setTranslateX(0.05 * 910 - (squareDimension + separation));
+            stackpane.setTranslateY(0.45 * windowHeight);
+            stackpane.getChildren().addAll( canvas1);
+            
+            StackPane stackpane2 = new StackPane();
+            Canvas canvas2 = new Canvas(squareDimension*1.5, squareDimension*1);
+            
+            
+            Wagon Vagon2 = new Wagon(canvas2);
+            Vagon2.DrawTrain(size);
+            //stackpane2.setTranslateX(1 * 1440 - (squareDimension + separation));
+            //stackpane2.setTranslateY(-20);
+            stackpane2.setTranslateX(0.05 * 910 + (squareDimension + separation) * (n));
+            stackpane2.setTranslateY(0.45 * windowHeight);
+            
+            stackpane2.setRotate(180);
+            stackpane2.getChildren().addAll( canvas2);
+            
+            
+            locomotives.add(stackpane);
+            locomotives.add(stackpane2);
+            return locomotives;
+    }
+    
 
     // Método para determinar el tamaño del número a dibujar
     public static double NumberSize(int num) {
