@@ -25,32 +25,12 @@ public class Wagon {
             createTrainCanvas(0, -5, Color.RED, canvasBox, squareDimension);
     }
     
-    public void DrawTrain( int scale){
+    public void DrawTrain(double scale){
         GraphicsContext gw = canvasBox.getGraphicsContext2D();
         double SizeOfWagon=0;
             //canvasBox.setHeight(squareDimension*1.5);
             //canvasBox.setWidth(squareDimension*2);
-            
-        switch (scale) {
-               case 4:
-                   SizeOfWagon = .5;
-                   break;
-               case 5:
-                  SizeOfWagon = .4;
-                   break;
-               case 7:
-                  SizeOfWagon = .25;
-                   break;
-               case 10:
-                  SizeOfWagon = .2;
-                   break;
-               case 12:
-                  SizeOfWagon = .15;
-                   break;
-               default:
-                   System.out.println("Caso invalido");
-                   break;
-           }
+        SizeOfWagon = (-0.04375*scale)+0.675;
             
         gw.setFill(Color.BLACK);
         //Ruedas
