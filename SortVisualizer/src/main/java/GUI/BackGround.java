@@ -182,7 +182,7 @@ public class BackGround {
         gc.fillRect(x, y, 4, 4);
     }
     
-        Stickman(canvas, 1000,1000);
+        Stickman(canvas, 5500,1300);
     
     
     
