@@ -134,7 +134,7 @@ public class AnimationsGenerator {
                     int currentNumber = numbers.get(j);
                     StackPane stackpane = boxes.get(j);
                     translateAnimations.add(mover.moveInX2(0, Main.coordinates.get(j + 1), craneUpperBox2, rope2, magnet2));
-                    translateAnimations.add(pseudocode.changeLabelProperties(4, "\t\t\tswap(" + j + ", " + (j + 1) + ")", 1, true));
+                    translateAnimations.add(pseudocode.selectLine(4, "\t\t\tswap(" + j + ", " + (j + 1) + ")", 1, true));
                     translateAnimations.add(parallelAnimations(
                             mover.moveInY2(0, 0.65 * Main.windowHeight - 230, boxes.get(j + 1)),
                             mover.moveInY2(0, 35, magnet2),
@@ -192,7 +192,7 @@ public class AnimationsGenerator {
                     StackPane stackpane = boxes.get(i);
 
                     translateAnimations.add(mover.moveInX2(0, Main.coordinates.get(i + 1), craneUpperBox2, rope2, magnet2));
-                    translateAnimations.add(pseudocode.changeLabelProperties(5, "\t\t\tswap(" + i + ", " + (i + 1) + ")", 1, true));
+                    translateAnimations.add(pseudocode.selectLine(5, "\t\t\tswap(" + i + ", " + (i + 1) + ")", 1, true));
                     translateAnimations.add(parallelAnimations(
                             mover.moveInY2(0, 0.65 * Main.windowHeight - 230, boxes.get(i + 1)),
                             mover.moveInY2(0, 35, magnet2),
@@ -252,7 +252,7 @@ public class AnimationsGenerator {
                     StackPane stackpane = boxes.get(i);
 
                     translateAnimations.add(mover.moveInX2(0, Main.coordinates.get(i + 1), craneUpperBox2, rope2, magnet2));
-                    translateAnimations.add(pseudocode.changeLabelProperties(12, "\t\t\tswap(" + i + ", " + (i + 1) + ")", 1, true));
+                    translateAnimations.add(pseudocode.selectLine(12, "\t\t\tswap(" + i + ", " + (i + 1) + ")", 1, true));
                     translateAnimations.add(parallelAnimations(
                             mover.moveInY2(0, 0.65 * Main.windowHeight - 230, boxes.get(i + 1)),
                             mover.moveInY2(0, 35, magnet2),

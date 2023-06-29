@@ -6,7 +6,7 @@ import javafx.scene.paint.Color;
 
 public class Wagon {
 
-    GraphicsContext gw;
+    GraphicsContext gc;
     private final Canvas canvasBox;
 
     public Wagon(Canvas canvasBox) {
@@ -14,7 +14,7 @@ public class Wagon {
     }
 
     public void DrawWagon(Canvas canvasBox, double squareDimension) {
-        gw = canvasBox.getGraphicsContext2D();
+        gc = canvasBox.getGraphicsContext2D();
         System.out.println(squareDimension);
 
         createTrainCanvas(0, -5, Color.RED, canvasBox, squareDimension);

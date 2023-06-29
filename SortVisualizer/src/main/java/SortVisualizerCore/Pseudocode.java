@@ -128,7 +128,7 @@ public class Pseudocode {
         return changeLabelPropertiesAnimation;
     }
 
-    public Animation changeLabelProperties(int lineNumber, String newText, int duration, boolean wannaSelect) {
+    public Animation selectLine(int lineNumber, String newText, int duration, boolean wannaSelect) {
         Timeline changeLabelPropertiesAnimation = new Timeline();
 
         if (!newText.isEmpty()) {
@@ -137,8 +137,6 @@ public class Pseudocode {
         }
 
         KeyFrame newStyleFrame = new KeyFrame(Duration.millis(1), event -> labels.get(lineNumber - 1).setStyle(newStyle));
-        KeyFrame initialStyleFrame = new KeyFrame(Duration.millis(duration), event -> labels.get(lineNumber - 1).setStyle(initialStyle));
-
         changeLabelPropertiesAnimation.getKeyFrames().addAll(newStyleFrame);
 
         return changeLabelPropertiesAnimation;
