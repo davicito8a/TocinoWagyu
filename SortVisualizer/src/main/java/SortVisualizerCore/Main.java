@@ -61,7 +61,6 @@ public class Main extends Application {
 
             stackpane.getChildren().addAll( canvas); // Agregar canvasBox al StackPane
 
-            System.out.println("a == "+ squareDimension);
             
 /*
             La variable "initialScale" representa el factor de escala inicial del objeto, 

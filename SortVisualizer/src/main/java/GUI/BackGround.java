@@ -182,7 +182,7 @@ public class BackGround {
         gc.fillRect(x, y, 4, 4);
     }
     
-
+        Stickman(canvas, 1000,1000);
     
     
     
@@ -268,7 +268,30 @@ public class BackGround {
     gc.strokeLine(912, 300, 1550, 15);
 }
 
+    public void Stickman(Canvas canvas, double x, double y) {
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        double EscaladoS = .2;
 
+        // Dibujar el cuerpo del stickman
+        gc.setFill(Color.BLACK);
+        gc.setStroke(Color.BLACK);
+        gc.setLineWidth(2);
+
+        gc.strokeOval(x * EscaladoS, y * EscaladoS, 100 * EscaladoS, 100 * EscaladoS); // Cabeza
+        gc.strokeLine((x + 50) * EscaladoS, (y + 100) * EscaladoS, (x + 50) * EscaladoS, (y + 200) * EscaladoS); // Cuerpo
+        gc.strokeLine((x + 50) * EscaladoS, (y + 200) * EscaladoS, (x - 50) * EscaladoS, (y + 250) * EscaladoS); // Pierna izquierda
+        gc.strokeLine((x + 50) * EscaladoS, (y + 200) * EscaladoS, (x + 150) * EscaladoS, (y + 250) * EscaladoS); // Pierna derecha
+        gc.strokeLine((x + 50) * EscaladoS, (y + 120) * EscaladoS, (x - 50) * EscaladoS, (y + 170) * EscaladoS); // Brazo izquierdo
+        gc.strokeLine((x + 50) * EscaladoS, (y + 120) * EscaladoS, (x + 150) * EscaladoS, (y + 170) * EscaladoS); // Brazo derecho
+
+        // Dibujar el sombrero
+        gc.setFill(Color.BLUE);
+        gc.setStroke(Color.BLUE);
+        gc.setLineWidth(2);
+
+        gc.fillRect((x + 15) * EscaladoS, (y - 5 ) * EscaladoS, 70 * EscaladoS, 25 * EscaladoS); // Parte superior del sombrero
+        gc.fillRect((x) * EscaladoS, (y + 10) * EscaladoS, 100 * EscaladoS, 20 * EscaladoS); // Borde del sombrero
+    }
     private class Building {
         private int x;
         private int y;
