@@ -1,19 +1,14 @@
 package GUI;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
+
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tooltip;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
