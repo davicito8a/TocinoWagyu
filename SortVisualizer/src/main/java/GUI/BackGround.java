@@ -11,11 +11,11 @@ import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
 
-public class Background {
+public class BackGround {
 
     GraphicsContext gh;
 
-    public Background(Canvas canvas) {
+    public BackGround(Canvas canvas) {
         this.canvas = canvas;
 
     }
