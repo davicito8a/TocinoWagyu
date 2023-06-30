@@ -7,6 +7,7 @@ import javafx.animation.Animation;
 import javafx.animation.ParallelTransition;
 import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -33,7 +34,7 @@ public class AnimationsGenerator {
     Line rope2;
     Rectangle magnet1 = new Rectangle();
     Rectangle magnet2 = new Rectangle();
-    
+
     double vn = Main.squareDimension;
 
     public AnimationsGenerator(ArrayList<Integer> numbers, ArrayList<StackPane> stackpanes) {
@@ -153,16 +154,16 @@ public class AnimationsGenerator {
                     translateAnimations.add(mover.moveInX2(0, Main.coordinates.get(j + 1), boxes.get(j), craneUpperBox2, rope2, magnet2));
                     translateAnimations.add(parallelAnimations(
                             mover.moveInY2(0, 0.65 * Main.windowHeight, boxes.get(j)),
-                            mover.moveInY2(0, 35 + vn*4, magnet2),
+                            mover.moveInY2(0, 35 + vn * 4, magnet2),
                             mover.moveRope(rope2, 0, 0.65 * Main.windowHeight - 10 - 35)));
                     translateAnimations.add(parallelAnimations(
                             mover.moveInY2(0, 35, magnet2),
-                            mover.moveRope(rope2, 0, 0.65 * Main.windowHeight - vn*4 - 10 - 35)));
+                            mover.moveRope(rope2, 0, 0.65 * Main.windowHeight - vn * 4 - 10 - 35)));
                     translateAnimations.add(mover.moveInX2(0, 50, craneUpperBox2, rope2, magnet2));
                     translateAnimations.add(mover.moveInX2(0, Main.coordinates.get(j), boxes.get(j + 1), craneUpperBox2, rope2, magnet2));
                     translateAnimations.add(parallelAnimations(
                             mover.moveInY2(0, 0.65 * Main.windowHeight, boxes.get(j + 1)),
-                            mover.moveInY2(0, 35 + vn*4, magnet2),
+                            mover.moveInY2(0, 35 + vn * 4, magnet2),
                             mover.moveRope(rope2, 0, 0.65 * Main.windowHeight - 10 - 35)));
                     translateAnimations.add(pseudocode.unselectLine(4));
 
@@ -303,7 +304,6 @@ public class AnimationsGenerator {
     private void getSelectionSortAnimations() {
         double angle = -25.22;
 
-        
         ArrayList<StackPane> Salvadore = new ArrayList();
         Salvadore.addAll(boxes.subList(0, boxes.size() - 2));
         Salvadore.add(0, boxes.get(boxes.size() - 2));
@@ -329,8 +329,8 @@ public class AnimationsGenerator {
                 }
             }
 
-            translateAnimations.add(pseudocode.selectLine(6, "\tremoveInCurrentArray(" + min_idx + ")" , 1, true));
-            translateAnimations.add(pseudocode.selectLine(7, "\taddInNewArray(" + (numbers.size() - 1 - i) + ", " + numbers.get(min_idx) + ")" , 1, true));
+            translateAnimations.add(pseudocode.selectLine(6, "\tremoveInCurrentArray(" + min_idx + ")", 1, true));
+            translateAnimations.add(pseudocode.selectLine(7, "\taddInNewArray(" + (numbers.size() - 1 - i) + ", " + numbers.get(min_idx) + ")", 1, true));
             ArrayList<StackPane> vagonesNoOrdenados = new ArrayList();
             vagonesNoOrdenados.addAll(boxes.subList(0, boxes.size() - 2));
 
@@ -348,7 +348,7 @@ public class AnimationsGenerator {
             Collections.reverse(vagonesConMinimo);
             translateAnimations.addAll(cambioDireccion(vagonesConMinimo, -angle, 0, -angle, 1));
             translateAnimations.add(moverEnLinea(vagonesConMinimo, boxes.size() - 2 - vagonesConMinimo.size() - i + 1, -angle));
-            
+
             translateAnimations.add(parallelAnimations(pseudocode.unselectLine(6), pseudocode.unselectLine(7)));
 
             ArrayList<StackPane> vagonesSinMinimo = new ArrayList();
@@ -371,7 +371,6 @@ public class AnimationsGenerator {
             translateAnimations.addAll(cambioDireccion(boxes.subList(boxes.size()-1,boxes.size()), angle, 0, angle, 1));
             translateAnimations.add(moverEnLinea(boxes.subList(boxes.size()-1,boxes.size()),boxes.size()-i-2,angle));
              */
-            
             ArrayList<StackPane> vagonesEnProceso = new ArrayList();
             Collections.reverse(vagonesSinMinimo);
             Collections.reverse(vagonesRestantes);
@@ -420,7 +419,7 @@ public class AnimationsGenerator {
             rotarVagon.setNode(vagones.get(i));
             rotarVagon.setByAngle(anguloGiro);
             rotarVagon.setDuration(Duration.millis(25));
-
+            
             movimientosVagones.add(rotarVagon);
 
             ArrayList<Animation> desplazamientosVagones = new ArrayList();
@@ -502,7 +501,7 @@ public class AnimationsGenerator {
         } else {
             rope2 = new Line(vn / 2, 0, vn / 2, 0.65 * Main.windowHeight - magnet2.getHeight() - y2);
         }
-       
+
         rope2.setTranslateX(Main.coordinates.get(1));
         rope2.setTranslateY(y2);
 

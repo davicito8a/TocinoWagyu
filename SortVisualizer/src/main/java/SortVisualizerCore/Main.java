@@ -32,8 +32,8 @@ public class Main extends Application {
         squareDimension = 0.75 * 0.9 * windowWidth / numbers.size(); //59.55
         separation = 0.25 * 0.9 * windowWidth / numbers.size();
 
-        squareDimension = (Main.sortType == 3) ? (0.85 * 0.9 * 910 / numbers.size()) : squareDimension;
-        separation = (Main.sortType == 3) ? 1.5 : separation;
+        squareDimension = (Main.sortType == 3) ? (0.85 * 0.9 * 700 / numbers.size()) : squareDimension;
+        separation = (Main.sortType == 3) ? 0.15 * 0.9 * 700 / numbers.size() : separation;
 
         size = NumberSize(numbers.size());
         ArrayList<StackPane> stackpanes = new ArrayList();
@@ -45,7 +45,7 @@ public class Main extends Application {
             wagonn.DrawWagon(canvas, squareDimension);
 
             NumberDrawer numberDrawer = new NumberDrawer(canvas);
-            numberDrawer.drawNumber(numbers.get(i), Main.squareDimension / 540); //43.5 / 0.08
+            numberDrawer.drawNumber(numbers.get(i), Main.squareDimension / 540, 1); //43.5 / 0.08
 
             coordinates.add(0.05 * windowWidth + (squareDimension + separation) * i);
 
@@ -57,16 +57,24 @@ public class Main extends Application {
 
             stackpane.getChildren().addAll(canvas); // Agregar canvasBox al StackPane
 
-            final double initialScale = 1.0;
-            final double hoverScale = 2.5;
+            final double hoverScale = 15;
+            final int number = numbers.get(i);
             stackpane.setOnMouseEntered(event -> {
-                stackpane.setScaleX(hoverScale);
-                stackpane.setScaleY(hoverScale);
+                canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+                canvas.setHeight(hoverScale * Main.squareDimension);
+                canvas.setWidth(hoverScale * Main.squareDimension);
+                wagonn.DrawWagon(canvas, squareDimension * hoverScale);
+                numberDrawer.drawNumber(number, (Main.squareDimension / (43.5/0.08)) * hoverScale, hoverScale);
             });
+            
             stackpane.setOnMouseExited(event -> {
-                stackpane.setScaleX(initialScale);
-                stackpane.setScaleY(initialScale);
+                canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+                canvas.setHeight(Main.squareDimension);
+                canvas.setWidth(Main.squareDimension);
+                wagonn.DrawWagon(canvas, squareDimension);
+                numberDrawer.drawNumber(number, (Main.squareDimension / (43.5/0.08)), 1);
             });
+            
             stackpanes.add(stackpane);
         }
 

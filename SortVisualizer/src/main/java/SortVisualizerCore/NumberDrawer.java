@@ -5,10 +5,9 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 public class NumberDrawer {
-
     GraphicsContext gc;
-    double coorX = 0.4 * Main.squareDimension;
-    double coorY = Main.squareDimension / 1.4 - (Main.squareDimension / (43.5 / 10));
+    double coorX;
+    double coorY;
     double scale;
     Color numbersColor = Color.BLACK;
 
@@ -16,8 +15,10 @@ public class NumberDrawer {
         gc = canvas.getGraphicsContext2D();
     }
 
-    public void drawNumber(int number, double scale) {
+    public void drawNumber(int number, double scale, double scale2) {
         this.scale = scale;
+        coorX = 0.4 * Main.squareDimension * scale2;
+        coorY = Main.squareDimension / 1.4 * 0.8 * scale2;
         gc.setLineWidth(2);
 
         int digit1 = number / 10;
@@ -25,10 +26,10 @@ public class NumberDrawer {
 
         if (number > 9) {
             drawDigit(digit1, coorX, coorY);
-            coorX = 0.7 * Main.squareDimension;
+            coorX = 0.7 * Main.squareDimension * scale2;
             drawDigit(digit2, coorX, coorY);
         } else {
-            coorX = 0.5 * Main.squareDimension;
+            coorX = 0.5 * Main.squareDimension * scale2;
             drawDigit(number, coorX, coorY);
         }
     }

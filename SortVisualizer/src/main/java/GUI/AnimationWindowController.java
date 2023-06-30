@@ -52,7 +52,7 @@ public class AnimationWindowController {
         getTransitions();
 
         Canvas canvas = new Canvas(Main.windowHeight, Main.windowWidth);
-        BackGround bgc = new BackGround(canvas);
+        Background bgc = new Background(canvas);
 
         if (Main.sortType == 3) {
             bgc.Desert(canvas);

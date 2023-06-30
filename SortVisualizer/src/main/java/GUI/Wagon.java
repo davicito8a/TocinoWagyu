@@ -15,7 +15,6 @@ public class Wagon {
 
     public void DrawWagon(Canvas canvasBox, double squareDimension) {
         gc = canvasBox.getGraphicsContext2D();
-        System.out.println(squareDimension);
 
         createTrainCanvas(0, -5, Color.RED, canvasBox, squareDimension);
     }
