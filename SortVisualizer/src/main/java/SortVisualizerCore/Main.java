@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.StackPane;
+import javafx.scene.transform.Translate;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -57,24 +58,32 @@ public class Main extends Application {
 
             stackpane.getChildren().addAll(canvas); // Agregar canvasBox al StackPane
 
-            final double hoverScale = 15;
+            final double hoverScale = 8;
             final int number = numbers.get(i);
+            Translate hoverTranslate = new Translate(); // Crear una instancia de Translate
+
             stackpane.setOnMouseEntered(event -> {
                 canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
                 canvas.setHeight(hoverScale * Main.squareDimension);
                 canvas.setWidth(hoverScale * Main.squareDimension);
                 wagonn.DrawWagon(canvas, squareDimension * hoverScale);
-                numberDrawer.drawNumber(number, (Main.squareDimension / (43.5/0.08)) * hoverScale, hoverScale);
+                numberDrawer.drawNumber(number, (Main.squareDimension / (43.5 / 0.08)) * hoverScale, hoverScale);
+                // Mover el canvas a una posición específica en la pantalla
+                canvas.getTransforms().setAll(hoverTranslate);
+                hoverTranslate.setX(100); // Cambia estos valores para ajustar la posición
+                hoverTranslate.setY(100);
             });
-            
+
             stackpane.setOnMouseExited(event -> {
                 canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
                 canvas.setHeight(Main.squareDimension);
                 canvas.setWidth(Main.squareDimension);
                 wagonn.DrawWagon(canvas, squareDimension);
-                numberDrawer.drawNumber(number, (Main.squareDimension / (43.5/0.08)), 1);
+                numberDrawer.drawNumber(number, (Main.squareDimension / (43.5 / 0.08)), 1);
+                // Restablecer la posición del canvas
+                canvas.getTransforms().clear();
             });
-            
+
             stackpanes.add(stackpane);
         }
 
@@ -122,7 +131,7 @@ public class Main extends Application {
         stage.setTitle("SortVisualizer");
         stage.show();
     }
-    
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(new File("src/main/java/Resources/Input.fxml").toURI().toURL());
