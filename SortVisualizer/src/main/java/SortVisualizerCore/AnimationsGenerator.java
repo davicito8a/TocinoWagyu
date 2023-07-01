@@ -307,12 +307,15 @@ public class AnimationsGenerator {
         ArrayList<StackPane> Salvadore = new ArrayList();
         Salvadore.addAll(boxes.subList(0, boxes.size() - 2));
         Salvadore.add(0, boxes.get(boxes.size() - 2));
+        
+        double mover = (1050 - (boxes.get(boxes.size() - 3).getTranslateX()))/(Main.squareDimension + Main.squareDimension);
+        System.out.println(mover);
 
-        translateAnimations.add(moverEnLinea(boxes.subList(boxes.size() - 1, boxes.size()), 3.37, 0));
+        translateAnimations.add(moverEnLinea(boxes.subList(boxes.size() - 1, boxes.size()), mover - 1, 0));
         translateAnimations.addAll(cambioDireccion(boxes.subList(boxes.size() - 1, boxes.size()), angle, 0, angle, 1));
         translateAnimations.add(moverEnLinea(boxes.subList(boxes.size() - 1, boxes.size()), boxes.size() - 1, angle));
 
-        translateAnimations.add(moverEnLinea(Salvadore, 4.37, 0));
+        translateAnimations.add(moverEnLinea(Salvadore, mover, 0));
         translateAnimations.addAll(cambioDireccion(Salvadore, angle, 0, angle, 1));
 
         System.out.println(numbers.toString());

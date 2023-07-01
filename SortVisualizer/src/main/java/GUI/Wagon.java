@@ -19,25 +19,28 @@ public class Wagon {
         createTrainCanvas(0, -5, Color.RED, canvasBox, squareDimension);
     }
 
-    public void DrawTrain(double scale) {
-        GraphicsContext gw = canvasBox.getGraphicsContext2D();
-        double SizeOfWagon = 0;
-        //canvasBox.setHeight(squareDimension*1.5);
-        //canvasBox.setWidth(squareDimension*2);
-        SizeOfWagon = (-0.04375 * scale) + 0.675;
+    public void DrawTrain(double width) {
+        GraphicsContext gc = canvasBox.getGraphicsContext2D();
+        
+        double height = width/ 1.4;
+        // Color locomotora.
+        gc.setFill(Color.RED);
+        
+        // Cuerpo.
+        gc.fillRect(0, 0, width, height);
+        
+        gc.setFill(Color.BLACK);
+        gc.fillRect(0.2 * width, 0.1 * height, 0.4 * width, 0.8 * height);
+        
+        gc.setFill(Color.GRAY);
+        gc.fillOval(0.7 * width, 0.4 * height, 0.2 * width, 0.2 * height); // falta hacer calculos
+        //gc.fillOval(17.5 * SizeOfWagon, 27 * SizeOfWagon, 20 * SizeOfWagon, 20 * SizeOfWagon);
+        
+        /*
+        
 
-        gw.setFill(Color.BLACK);
-        //Ruedas
-        gw.fillOval(12 * SizeOfWagon, 1 * SizeOfWagon, 20 * SizeOfWagon, 20 * SizeOfWagon);
-        gw.fillOval(37 * SizeOfWagon, 1 * SizeOfWagon, 20 * SizeOfWagon, 20 * SizeOfWagon);
-        gw.fillOval(60 * SizeOfWagon, 1 * SizeOfWagon, 40 * SizeOfWagon, 40 * SizeOfWagon);
-
-        gw.fillOval(12 * SizeOfWagon, 60 * SizeOfWagon, 20 * SizeOfWagon, 20 * SizeOfWagon);
-        gw.fillOval(37 * SizeOfWagon, 60 * SizeOfWagon, 20 * SizeOfWagon, 20 * SizeOfWagon);
-        gw.fillOval(60 * SizeOfWagon, 40 * SizeOfWagon, 40 * SizeOfWagon, 40 * SizeOfWagon);
-
-        gw.setFill(Color.RED);
-        gw.fillRect(10 * SizeOfWagon, 10 * SizeOfWagon, 110 * SizeOfWagon, 60 * SizeOfWagon);
+    
+        
 
         //Frontal
         gw.setFill(Color.BLACK);
@@ -51,6 +54,7 @@ public class Wagon {
         gw.fillOval(15 * SizeOfWagon, 25 * SizeOfWagon, 25 * SizeOfWagon, 25 * SizeOfWagon);
         gw.setFill(Color.GRAY);
         gw.fillOval(17.5 * SizeOfWagon, 27 * SizeOfWagon, 20 * SizeOfWagon, 20 * SizeOfWagon);
+        */
 
     }
 

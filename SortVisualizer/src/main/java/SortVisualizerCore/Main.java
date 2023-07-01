@@ -54,7 +54,7 @@ public class Main extends Application {
             stackpane.setTranslateX(0.05 * windowWidth + (squareDimension + separation) * i);
             stackpane.setTranslateY(0.65 * windowHeight);
             stackpane.setTranslateX((Main.sortType == 3) ? (0.05 * 910 + (squareDimension + separation) * i) : stackpane.getTranslateX());
-            stackpane.setTranslateY((Main.sortType == 3) ? (0.45 * windowHeight) : stackpane.getTranslateY());
+            stackpane.setTranslateY((Main.sortType == 3) ? (287 + 13 - Main.squareDimension/1.4/2) : stackpane.getTranslateY());
 
             stackpane.getChildren().addAll(canvas); // Agregar canvasBox al StackPane
 
@@ -94,22 +94,20 @@ public class Main extends Application {
         ArrayList<StackPane> locomotives = new ArrayList();
 
         StackPane stackpane = new StackPane();
-        Canvas canvas1 = new Canvas(squareDimension * 2, squareDimension * 2);
+        Canvas canvas1 = new Canvas(squareDimension, squareDimension);
         Wagon vagon = new Wagon(canvas1);
-        vagon.DrawTrain(size);
+        vagon.DrawTrain(Main.squareDimension);
         stackpane.setTranslateX(0.05 * 910 - (squareDimension + separation));
-        stackpane.setTranslateY(0.45 * windowHeight);
+        stackpane.setTranslateY(287 + 13 - Main.squareDimension/1.4/2);
         stackpane.getChildren().addAll(canvas1);
 
         StackPane stackpane2 = new StackPane();
-        Canvas canvas2 = new Canvas(squareDimension * 1.5, squareDimension * 1);
+        Canvas canvas2 = new Canvas(squareDimension, squareDimension);
 
         Wagon vagon2 = new Wagon(canvas2);
-        vagon2.DrawTrain(size);
+        vagon2.DrawTrain(Main.squareDimension);
         stackpane2.setTranslateX(0.05 * 910 + (squareDimension + separation) * (n));
-        stackpane2.setTranslateY(0.45 * windowHeight);
-
-        stackpane2.setRotate(180);
+        stackpane2.setTranslateY(287 + 13 - Main.squareDimension/1.4/2);
         stackpane2.getChildren().addAll(canvas2);
 
         locomotives.add(stackpane);
