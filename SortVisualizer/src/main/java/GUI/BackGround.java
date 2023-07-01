@@ -127,7 +127,7 @@ public class BackGround {
 
     public void Desert(Canvas canvas) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
-
+       
         canvas.setHeight(600);
         canvas.setWidth(1500);
         // Fondo desértico
