@@ -58,7 +58,7 @@ public class Main extends Application {
 
             stackpane.getChildren().addAll(canvas); // Agregar canvasBox al StackPane
 
-            final double hoverScale = 8;
+            final double hoverScale = 5;
             final int number = numbers.get(i);
             Translate hoverTranslate = new Translate(); // Crear una instancia de Translate
 
@@ -70,8 +70,9 @@ public class Main extends Application {
                 numberDrawer.drawNumber(number, (Main.squareDimension / (43.5 / 0.08)) * hoverScale, hoverScale);
                 // Mover el canvas a una posición específica en la pantalla
                 canvas.getTransforms().setAll(hoverTranslate);
-                hoverTranslate.setX(100); // Cambia estos valores para ajustar la posición
-                hoverTranslate.setY(100);
+                hoverTranslate.setX(Main.sortType == 3 ? 100 : -300);
+                hoverTranslate.setY(Main.sortType == 3 ? 100 : -350);
+                
             });
 
             stackpane.setOnMouseExited(event -> {
