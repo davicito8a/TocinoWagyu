@@ -36,7 +36,7 @@ public class Main extends Application {
         squareDimension = (Main.sortType == 3) ? (0.85 * 0.9 * 700 / numbers.size()) : squareDimension;
         separation = (Main.sortType == 3) ? 0.15 * 0.9 * 700 / numbers.size() : separation;
 
-        size = NumberSize(numbers.size());
+        
         ArrayList<StackPane> stackpanes = new ArrayList();
 
         for (int i = 0; i < numbers.size(); i++) {
@@ -97,7 +97,7 @@ public class Main extends Application {
         StackPane stackpane = new StackPane();
         Canvas canvas1 = new Canvas(squareDimension, squareDimension);
         Wagon vagon = new Wagon(canvas1);
-        vagon.DrawTrain(Main.squareDimension);
+        vagon.DrawTrain(Main.squareDimension,true);
         stackpane.setTranslateX(0.05 * 910 - (squareDimension + separation));
         stackpane.setTranslateY(287 + 13 - Main.squareDimension/1.4/2);
         stackpane.getChildren().addAll(canvas1);
@@ -106,18 +106,15 @@ public class Main extends Application {
         Canvas canvas2 = new Canvas(squareDimension, squareDimension);
 
         Wagon vagon2 = new Wagon(canvas2);
-        vagon2.DrawTrain(Main.squareDimension);
+        vagon2.DrawTrain(Main.squareDimension,false);
         stackpane2.setTranslateX(0.05 * 910 + (squareDimension + separation) * (n));
         stackpane2.setTranslateY(287 + 13 - Main.squareDimension/1.4/2);
         stackpane2.getChildren().addAll(canvas2);
+        
 
         locomotives.add(stackpane);
         locomotives.add(stackpane2);
         return locomotives;
-    }
-
-    public static double NumberSize(int num) {
-        return (0.2078 * num) + 0.3636;
     }
 
     public static void newAnimationWindow(ArrayList<Integer> numbers, ArrayList<StackPane> stackpanes) throws IOException {
