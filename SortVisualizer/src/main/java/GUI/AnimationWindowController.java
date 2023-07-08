@@ -110,8 +110,10 @@ public class AnimationWindowController {
         stepBackward.setPrefWidth(prefWidth);
         
         play.setOnAction(event -> {
-            for(StackPane box: stackpanes){
-                box.setRotate(0);
+            if(animationPlayer.isReplay()){
+                for(StackPane box: stackpanes){
+                    box.setRotate(0);
+                }
             }
             animationPlayer.play();
         });
