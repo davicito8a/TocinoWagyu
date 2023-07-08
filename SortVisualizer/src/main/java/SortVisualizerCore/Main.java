@@ -25,7 +25,6 @@ public class Main extends Application {
 
     public static int modeType = 0;
     public static int sortType = 2;
-    public static double size;
     public static int n;
 
     public static ArrayList<StackPane> getRectangles(ArrayList<Integer> numbers) {
@@ -33,8 +32,8 @@ public class Main extends Application {
         squareDimension = 0.75 * 0.9 * windowWidth / numbers.size(); //59.55
         separation = 0.25 * 0.9 * windowWidth / numbers.size();
 
-        squareDimension = (Main.sortType == 3) ? (0.85 * 0.9 * 700 / numbers.size()) : squareDimension;
-        separation = (Main.sortType == 3) ? 0.15 * 0.9 * 700 / numbers.size() : separation;
+        squareDimension = (Main.sortType == 3) ? (0.85 * 0.9 * 620 / numbers.size()) : squareDimension;
+        separation = (Main.sortType == 3) ? 0.15 * 0.9 * 620 / numbers.size() : separation;
 
         ArrayList<StackPane> stackpanes = new ArrayList();
 

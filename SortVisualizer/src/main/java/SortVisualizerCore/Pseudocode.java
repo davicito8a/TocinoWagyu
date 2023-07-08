@@ -69,17 +69,16 @@ public class Pseudocode {
         }
         pseudocodeBox.getChildren().addAll(labels);
         pseudocodeBox.setTranslateX(0.0 * Main.windowWidth);
-        pseudocodeBox.setTranslateY(0.8 * Main.windowHeight);
+        if(Main.sortType == 3){
+            pseudocodeBox.setTranslateY(0.7 * Main.windowHeight);
+        }
+        else{
+            pseudocodeBox.setTranslateY(0.8 * Main.windowHeight);
+        }
         pseudocodeBox.setStyle("-fx-background-color: black");
 
-        if (Main.sortType == 2 || Main.sortType == 3) {
-            double toY;
-            if (Main.sortType == 2) {
-                toY = 0.5;
-            } else {
-                toY = 0.7;
-            }
-
+        if (Main.sortType == 2) {
+            double toY = 0.5;
             pseudocodeBox.setOnMouseEntered(e -> {
                 TranslateTransition moveUpward = new TranslateTransition();
                 moveUpward.setNode(pseudocodeBox);

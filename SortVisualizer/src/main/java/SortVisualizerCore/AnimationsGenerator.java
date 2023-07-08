@@ -90,7 +90,7 @@ public class AnimationsGenerator {
             int currentNumber = numbers.get(i);
 
             translateAnimations.add(parallelAnimations(mover.moveInY(
-                    0.65 * Main.windowHeight, 0.65 * Main.windowHeight - 115,
+                    0.65 * Main.windowHeight, 0.65 * Main.windowHeight - vn * 2,
                     boxes.get(i)), pseudocode.changeLabelProperties(1,
                     "for i = " + i)));
 
@@ -117,7 +117,7 @@ public class AnimationsGenerator {
                         stackpane, craneUpperBox2, rope2, magnet2));
             }
 
-            translateAnimations.add(parallelAnimations(mover.moveInY(0.65 * Main.windowHeight - 115,
+            translateAnimations.add(parallelAnimations(mover.moveInY(0.65 * Main.windowHeight - vn * 2,
                     0.65 * Main.windowHeight,
                     stackpane), pseudocode.changeLabelProperties(3,
                             "\tnumbers[" + j + "]" + " = " + currentNumber)));
@@ -308,7 +308,7 @@ public class AnimationsGenerator {
         Salvadore.addAll(boxes.subList(0, boxes.size() - 2));
         Salvadore.add(0, boxes.get(boxes.size() - 2));
 
-        double mover = (1050 - (boxes.get(boxes.size() - 3).getTranslateX())) / (Main.squareDimension + Main.squareDimension);
+        double mover = (1115 - (boxes.get(boxes.size() - 3).getTranslateX())) / (Main.squareDimension + Main.squareDimension);
         System.out.println(mover);
 
         translateAnimations.add(moverEnLinea(boxes.subList(boxes.size() - 1, boxes.size()), mover - 1, 0));
@@ -320,15 +320,15 @@ public class AnimationsGenerator {
 
         System.out.println(numbers.toString());
         for (int i = 0; i < numbers.size(); i++) {
-            translateAnimations.add(pseudocode.changeLabelProperties(1, "for i = " + i, 200));
+            translateAnimations.add(pseudocode.changeLabelProperties(1, "for i = " + i, 100));
             int min_idx = i;
-            translateAnimations.add(pseudocode.changeLabelProperties(2, "\tmax_idx = " + min_idx, 200));
+            translateAnimations.add(pseudocode.changeLabelProperties(2, "\tmax_idx = " + min_idx, 100));
             for (int j = i + 1; j < numbers.size(); j++) {
-                translateAnimations.add(pseudocode.changeLabelProperties(3, "\tfor j = " + j, 200));
-                translateAnimations.add(pseudocode.changeLabelProperties(4, "\t\tif(numbers[" + j + "] > numbers[" + min_idx + "]", 200));
+                translateAnimations.add(pseudocode.changeLabelProperties(3, "\tfor j = " + j, 100));
+                translateAnimations.add(pseudocode.changeLabelProperties(4, "\t\tif(numbers[" + j + "] > numbers[" + min_idx + "]", 100));
                 if (numbers.get(j) > numbers.get(min_idx)) {
                     min_idx = j;
-                    translateAnimations.add(pseudocode.changeLabelProperties(5, "\t\t\tmax_idx = " + min_idx, 100));
+                    translateAnimations.add(pseudocode.changeLabelProperties(5, "\t\t\tmax_idx = " + min_idx, 50));
                 }
             }
 
@@ -557,5 +557,4 @@ public class AnimationsGenerator {
     public Rectangle getMagnet2() {
         return magnet2;
     }
-
 }
