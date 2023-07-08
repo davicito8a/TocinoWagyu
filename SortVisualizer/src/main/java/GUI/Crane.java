@@ -1,7 +1,6 @@
 package GUI;
 
 import SortVisualizerCore.Main;
-import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -10,8 +9,6 @@ public class Crane {
 
     public static Color ColorInterno = Color.GOLD;
     public static Color ColorExterno = Color.BLACK;
-    Group root = new Group();
-    Group root2 = new Group();
     Canvas canvas = new Canvas(1500, 600);
     GraphicsContext gc = canvas.getGraphicsContext2D();
     int CoorBigaSuperior = 1300;
@@ -115,7 +112,7 @@ public class Crane {
 
         //Posiciones Auxiliares para Bubble y Cocktail 
         //Lado Izquierda 
-
+        if (Main.sortType == 1) {
             double[] apoyoIzquiera1 = {40, 150, 130, 40};
             double[] apoyoIzquiera2 = {200, 200, 230, 230};
 
@@ -127,11 +124,8 @@ public class Crane {
             gc.strokeLine(40, 200, 150, 200);
             gc.strokeLine(150, 200, 130, 230);
             gc.strokeLine(130, 230, 40, 230);
-            
-            
-            
-            
 
+        } else if (Main.sortType == 2) {
             double[] apoyoIzquiera12 = {40, 150, 130, 40};
             double[] apoyoIzquiera22 = {200, 200, 230, 230};
 
@@ -145,10 +139,7 @@ public class Crane {
             gc.strokeLine(130, 230, 40, 230);
 
             //Lado Derecha
-            double acomodarderecha = 0;
-          
-
-            double[] apoyoDerecha13 = {1450, 1340, 1360 , 1450 };
+            double[] apoyoDerecha13 = {1450, 1340, 1360, 1450};
             double[] apoyoDerecha23 = {200, 200, 230, 230};
 
             gc.setStroke(ColorInterno);
@@ -159,6 +150,7 @@ public class Crane {
             gc.strokeLine(1450, 200, 1340, 200);
             gc.strokeLine(1340, 200, 1360, 230);
             gc.strokeLine(1360, 230, 1450, 230);
-              
-        }   
-    }        
+        }
+
+    }
+}

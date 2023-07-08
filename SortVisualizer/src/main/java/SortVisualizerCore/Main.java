@@ -36,7 +36,6 @@ public class Main extends Application {
         squareDimension = (Main.sortType == 3) ? (0.85 * 0.9 * 700 / numbers.size()) : squareDimension;
         separation = (Main.sortType == 3) ? 0.15 * 0.9 * 700 / numbers.size() : separation;
 
-        
         ArrayList<StackPane> stackpanes = new ArrayList();
 
         for (int i = 0; i < numbers.size(); i++) {
@@ -54,7 +53,7 @@ public class Main extends Application {
             stackpane.setTranslateX(0.05 * windowWidth + (squareDimension + separation) * i);
             stackpane.setTranslateY(0.65 * windowHeight);
             stackpane.setTranslateX((Main.sortType == 3) ? (0.05 * 910 + (squareDimension + separation) * i) : stackpane.getTranslateX());
-            stackpane.setTranslateY((Main.sortType == 3) ? (287 + 13 - Main.squareDimension/1.4/2) : stackpane.getTranslateY());
+            stackpane.setTranslateY((Main.sortType == 3) ? (287 + 13 - Main.squareDimension / 1.4 / 2) : stackpane.getTranslateY());
 
             stackpane.getChildren().addAll(canvas); // Agregar canvasBox al StackPane
 
@@ -72,7 +71,7 @@ public class Main extends Application {
                 canvas.getTransforms().setAll(hoverTranslate);
                 hoverTranslate.setX(Main.sortType == 3 ? 100 : -300);
                 hoverTranslate.setY(Main.sortType == 3 ? 100 : -350);
-                
+
             });
 
             stackpane.setOnMouseExited(event -> {
@@ -97,20 +96,19 @@ public class Main extends Application {
         StackPane stackpane = new StackPane();
         Canvas canvas1 = new Canvas(squareDimension, squareDimension);
         Wagon vagon = new Wagon(canvas1);
-        vagon.DrawTrain(Main.squareDimension,true);
+        vagon.DrawTrain(Main.squareDimension, true);
         stackpane.setTranslateX(0.05 * 910 - (squareDimension + separation));
-        stackpane.setTranslateY(287 + 13 - Main.squareDimension/1.4/2);
+        stackpane.setTranslateY(287 + 13 - Main.squareDimension / 1.4 / 2);
         stackpane.getChildren().addAll(canvas1);
 
         StackPane stackpane2 = new StackPane();
         Canvas canvas2 = new Canvas(squareDimension, squareDimension);
 
         Wagon vagon2 = new Wagon(canvas2);
-        vagon2.DrawTrain(Main.squareDimension,false);
+        vagon2.DrawTrain(Main.squareDimension, false);
         stackpane2.setTranslateX(0.05 * 910 + (squareDimension + separation) * (n));
-        stackpane2.setTranslateY(287 + 13 - Main.squareDimension/1.4/2);
+        stackpane2.setTranslateY(287 + 13 - Main.squareDimension / 1.4 / 2);
         stackpane2.getChildren().addAll(canvas2);
-        
 
         locomotives.add(stackpane);
         locomotives.add(stackpane2);

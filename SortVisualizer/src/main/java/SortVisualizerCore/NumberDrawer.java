@@ -124,5 +124,5 @@ public class NumberDrawer {
         gc.strokeOval(coorX - 100 * scale, coorY - 200 * scale, 100 * scale, 100 * scale);
         gc.strokeLine(coorX, coorY, coorX, coorY - 150 * scale);
     }
-    
+
 }

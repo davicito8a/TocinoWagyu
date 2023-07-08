@@ -1,6 +1,5 @@
 package GUI;
 
-
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -132,7 +131,7 @@ public class BackGround {
 
         canvas.setHeight(600);
         canvas.setWidth(1500);
-    
+
         // Fondo desértico
         gc.setFill(Color.SANDYBROWN);
         gc.fillRect(0, 0, 1500, 600);
@@ -170,9 +169,7 @@ public class BackGround {
             gc.fillRect(x, y, 4, 4);
         }
 
-        
-        
-      Stickman(canvas, 5500, 1300);
+        Stickman(canvas, 5500, 1300);
 
         // Base rieles
         DropShadow shadow = new DropShadow();
@@ -247,10 +244,8 @@ public class BackGround {
 
     public void Stickman(Canvas canvas, double x, double y) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        
-        
-        
-                canvas.setOnMouseEntered(event -> {
+
+        canvas.setOnMouseEntered(event -> {
             Tooltip tooltip = new Tooltip("¡PERVERTIDO, NO ME TOQUES!");
             Tooltip.install(canvas, tooltip);
         });
@@ -258,8 +253,6 @@ public class BackGround {
         canvas.setOnMouseExited(event -> {
             Tooltip.uninstall(canvas, null);
         });
-        
-        
 
         double EscaladoS = .2;
 
@@ -283,9 +276,6 @@ public class BackGround {
         gc.fillRect((x + 15) * EscaladoS, (y - 5) * EscaladoS, 70 * EscaladoS, 25 * EscaladoS); // Parte superior del sombrero
         gc.fillRect((x) * EscaladoS, (y + 10) * EscaladoS, 100 * EscaladoS, 20 * EscaladoS); // Borde del sombrero
     }
-    
-    
-    
 
     private class Building {
 

@@ -19,21 +19,21 @@ public class Wagon {
         createTrainCanvas(0, -5, Color.RED, canvasBox, squareDimension);
     }
 
-    public void DrawTrain(double width,boolean rotate) {
+    public void DrawTrain(double width, boolean rotate) {
         GraphicsContext gc = canvasBox.getGraphicsContext2D();
         double height = width / 1.4;
-        
+
         gc.setFill(Color.RED);
         gc.fillRect(0, 0, width, height);
-        
-        if(rotate==true){
+
+        if (rotate == true) {
             // Simetría axial
             gc.setFill(Color.BLACK);
             gc.fillRect((1 - 0.6) * width, 0.1 * height, 0.4 * width, 0.8 * height);
 
             gc.setFill(Color.GRAY);
             gc.fillOval((1 - 0.9) * width, 0.4 * height, 0.2 * width, 0.2 * height);
-        }else{
+        } else {
             gc.setFill(Color.BLACK);
             gc.fillRect(0.2 * width, 0.1 * height, 0.4 * width, 0.8 * height);
 
@@ -56,7 +56,6 @@ public class Wagon {
         gw.setFill(Color.GRAY);
         gw.fillOval(17.5 * SizeOfWagon, 27 * SizeOfWagon, 20 * SizeOfWagon, 20 * SizeOfWagon);
          */
-        
     }
 
     private void createTrainCanvas(double x, double y, Color color, Canvas canvas, double scale) {

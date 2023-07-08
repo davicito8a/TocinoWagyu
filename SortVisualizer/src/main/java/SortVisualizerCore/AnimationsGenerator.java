@@ -35,7 +35,7 @@ public class AnimationsGenerator {
     Rectangle magnet1 = new Rectangle();
     Rectangle magnet2 = new Rectangle();
 
-    double vn = Main.squareDimension;
+    double vn = (0.65 * Main.windowHeight - 200 + Main.squareDimension / 1.4) / 4;
 
     public AnimationsGenerator(ArrayList<Integer> numbers, ArrayList<StackPane> stackpanes) {
         this.numbers = numbers;
@@ -197,31 +197,31 @@ public class AnimationsGenerator {
                     translateAnimations.add(mover.moveInX2(0, Main.coordinates.get(i + 1), craneUpperBox2, rope2, magnet2));
                     translateAnimations.add(pseudocode.selectLine(5, "\t\t\tswap(" + i + ", " + (i + 1) + ")", 1, true));
                     translateAnimations.add(parallelAnimations(
-                            mover.moveInY2(0, 0.65 * Main.windowHeight - 230, boxes.get(i + 1)),
+                            mover.moveInY2(0, 0.65 * Main.windowHeight - vn * 4, boxes.get(i + 1)),
                             mover.moveInY2(0, 35, magnet2),
-                            mover.moveRope(rope2, 0, 0.65 * Main.windowHeight - 230 - 10 - 35)));
+                            mover.moveRope(rope2, 0, 0.65 * Main.windowHeight - vn * 4 - 10 - 35)));
                     translateAnimations.add(mover.moveInX2(0, 50, boxes.get(i + 1), craneUpperBox2, rope2, magnet2));
                     translateAnimations.add(mover.moveInX2(0, Main.coordinates.get(i), craneUpperBox2, rope2, magnet2));
                     translateAnimations.add(parallelAnimations(
-                            mover.moveInY2(0, 35 + 230, magnet2),
+                            mover.moveInY2(0, 35 + vn * 4, magnet2),
                             mover.moveRope(rope2, 0, 0.65 * Main.windowHeight - 10 - 35)));
                     translateAnimations.add(parallelAnimations(
-                            mover.moveInY2(0, 0.65 * Main.windowHeight - 230, boxes.get(i)),
+                            mover.moveInY2(0, 0.65 * Main.windowHeight - vn * 4, boxes.get(i)),
                             mover.moveInY2(0, 35, magnet2),
-                            mover.moveRope(rope2, 0, 0.65 * Main.windowHeight - 230 - 10 - 35)));
+                            mover.moveRope(rope2, 0, 0.65 * Main.windowHeight - vn * 4 - 10 - 35)));
                     translateAnimations.add(mover.moveInX2(0, Main.coordinates.get(i + 1), boxes.get(i), craneUpperBox2, rope2, magnet2));
                     translateAnimations.add(parallelAnimations(
                             mover.moveInY2(0, 0.65 * Main.windowHeight, boxes.get(i)),
-                            mover.moveInY2(0, 35 + 230, magnet2),
+                            mover.moveInY2(0, 35 + vn * 4, magnet2),
                             mover.moveRope(rope2, 0, 0.65 * Main.windowHeight - 10 - 35)));
                     translateAnimations.add(parallelAnimations(
                             mover.moveInY2(0, 35, magnet2),
-                            mover.moveRope(rope2, 0, 0.65 * Main.windowHeight - 230 - 10 - 35)));
+                            mover.moveRope(rope2, 0, 0.65 * Main.windowHeight - vn * 4 - 10 - 35)));
                     translateAnimations.add(mover.moveInX2(0, 50, craneUpperBox2, rope2, magnet2));
                     translateAnimations.add(mover.moveInX2(0, Main.coordinates.get(i), boxes.get(i + 1), craneUpperBox2, rope2, magnet2));
                     translateAnimations.add(parallelAnimations(
                             mover.moveInY2(0, 0.65 * Main.windowHeight, boxes.get(i + 1)),
-                            mover.moveInY2(0, 35 + 230, magnet2),
+                            mover.moveInY2(0, 35 + vn * 4, magnet2),
                             mover.moveRope(rope2, 0, 0.65 * Main.windowHeight - 10 - 35)));
                     translateAnimations.add(pseudocode.unselectLine(5));
 
@@ -257,31 +257,31 @@ public class AnimationsGenerator {
                     translateAnimations.add(mover.moveInX2(0, Main.coordinates.get(i + 1), craneUpperBox2, rope2, magnet2));
                     translateAnimations.add(pseudocode.selectLine(12, "\t\t\tswap(" + i + ", " + (i + 1) + ")", 1, true));
                     translateAnimations.add(parallelAnimations(
-                            mover.moveInY2(0, 0.65 * Main.windowHeight - 230, boxes.get(i + 1)),
+                            mover.moveInY2(0, 0.65 * Main.windowHeight - vn * 4, boxes.get(i + 1)),
                             mover.moveInY2(0, 35, magnet2),
-                            mover.moveRope(rope2, 0, 0.65 * Main.windowHeight - 230 - 10 - 35)));
+                            mover.moveRope(rope2, 0, 0.65 * Main.windowHeight - vn * 4 - 10 - 35)));
                     translateAnimations.add(mover.moveInX2(0, 1350, boxes.get(i + 1), craneUpperBox2, rope2, magnet2));
                     translateAnimations.add(mover.moveInX2(0, Main.coordinates.get(i), craneUpperBox2, rope2, magnet2));
                     translateAnimations.add(parallelAnimations(
-                            mover.moveInY2(0, 35 + 230, magnet2),
+                            mover.moveInY2(0, 35 + vn * 4, magnet2),
                             mover.moveRope(rope2, 0, 0.65 * Main.windowHeight - 10 - 35)));
                     translateAnimations.add(parallelAnimations(
-                            mover.moveInY2(0, 0.65 * Main.windowHeight - 230, boxes.get(i)),
+                            mover.moveInY2(0, 0.65 * Main.windowHeight - vn * 4, boxes.get(i)),
                             mover.moveInY2(0, 35, magnet2),
-                            mover.moveRope(rope2, 0, 0.65 * Main.windowHeight - 230 - 10 - 35)));
+                            mover.moveRope(rope2, 0, 0.65 * Main.windowHeight - vn * 4 - 10 - 35)));
                     translateAnimations.add(mover.moveInX2(0, Main.coordinates.get(i + 1), boxes.get(i), craneUpperBox2, rope2, magnet2));
                     translateAnimations.add(parallelAnimations(
                             mover.moveInY2(0, 0.65 * Main.windowHeight, boxes.get(i)),
-                            mover.moveInY2(0, 35 + 230, magnet2),
+                            mover.moveInY2(0, 35 + vn * 4, magnet2),
                             mover.moveRope(rope2, 0, 0.65 * Main.windowHeight - 10 - 35)));
                     translateAnimations.add(parallelAnimations(
                             mover.moveInY2(0, 35, magnet2),
-                            mover.moveRope(rope2, 0, 0.65 * Main.windowHeight - 230 - 10 - 35)));
+                            mover.moveRope(rope2, 0, 0.65 * Main.windowHeight - vn * 4 - 10 - 35)));
                     translateAnimations.add(mover.moveInX2(0, 1350, craneUpperBox2, rope2, magnet2));
                     translateAnimations.add(mover.moveInX2(0, Main.coordinates.get(i), boxes.get(i + 1), craneUpperBox2, rope2, magnet2));
                     translateAnimations.add(parallelAnimations(
                             mover.moveInY2(0, 0.65 * Main.windowHeight, boxes.get(i + 1)),
-                            mover.moveInY2(0, 35 + 230, magnet2),
+                            mover.moveInY2(0, 35 + vn * 4, magnet2),
                             mover.moveRope(rope2, 0, 0.65 * Main.windowHeight - 10 - 35)));
                     translateAnimations.add(pseudocode.unselectLine(12));
 
@@ -307,8 +307,8 @@ public class AnimationsGenerator {
         ArrayList<StackPane> Salvadore = new ArrayList();
         Salvadore.addAll(boxes.subList(0, boxes.size() - 2));
         Salvadore.add(0, boxes.get(boxes.size() - 2));
-        
-        double mover = (1050 - (boxes.get(boxes.size() - 3).getTranslateX()))/(Main.squareDimension + Main.squareDimension);
+
+        double mover = (1050 - (boxes.get(boxes.size() - 3).getTranslateX())) / (Main.squareDimension + Main.squareDimension);
         System.out.println(mover);
 
         translateAnimations.add(moverEnLinea(boxes.subList(boxes.size() - 1, boxes.size()), mover - 1, 0));
@@ -422,7 +422,7 @@ public class AnimationsGenerator {
             rotarVagon.setNode(vagones.get(i));
             rotarVagon.setByAngle(anguloGiro);
             rotarVagon.setDuration(Duration.millis(25));
-            
+
             movimientosVagones.add(rotarVagon);
 
             ArrayList<Animation> desplazamientosVagones = new ArrayList();
@@ -447,7 +447,7 @@ public class AnimationsGenerator {
             craneUpperBox1.setTranslateY(y);
             craneUpperBox1.setWidth(40);
             craneUpperBox1.setHeight(20);
-            craneUpperBox1.setLayoutX(vn / 2 - craneUpperBox1.getWidth() / 2);
+            craneUpperBox1.setLayoutX(Main.squareDimension / 2 - craneUpperBox1.getWidth() / 2);
             craneUpperBox1.setFill(Color.YELLOW);
             craneUpperBox1.setStroke(Color.BLACK);
             craneUpperBox1.setStrokeWidth(3);
@@ -457,7 +457,7 @@ public class AnimationsGenerator {
         craneUpperBox2.setTranslateY(y2);
         craneUpperBox2.setWidth(40);
         craneUpperBox2.setHeight(20);
-        craneUpperBox2.setLayoutX(vn / 2 - craneUpperBox2.getWidth() / 2);
+        craneUpperBox2.setLayoutX(Main.squareDimension / 2 - craneUpperBox2.getWidth() / 2);
         craneUpperBox2.setFill(Color.GREEN);
         craneUpperBox2.setStroke(Color.BLACK);
         craneUpperBox2.setStrokeWidth(3);
@@ -467,7 +467,7 @@ public class AnimationsGenerator {
             magnet1.setTranslateY(y);
             magnet1.setWidth(25);
             magnet1.setHeight(10);
-            magnet1.setLayoutX(vn / 2 - magnet1.getWidth() / 2);
+            magnet1.setLayoutX(Main.squareDimension / 2 - magnet1.getWidth() / 2);
             magnet1.setFill(Color.BLUE);
             magnet1.setStroke(Color.BLACK);
             magnet1.setStrokeWidth(3);
@@ -481,7 +481,7 @@ public class AnimationsGenerator {
         }
         magnet2.setWidth(25);
         magnet2.setHeight(10);
-        magnet2.setLayoutX(vn / 2 - magnet2.getWidth() / 2);
+        magnet2.setLayoutX(Main.squareDimension / 2 - magnet2.getWidth() / 2);
         magnet2.setFill(Color.BLUE);
         magnet2.setStroke(Color.BLACK);
         magnet2.setStrokeWidth(3);
@@ -491,7 +491,7 @@ public class AnimationsGenerator {
         } else {
             magnet1.setLayoutY(0.65 * Main.windowHeight - magnet1.getHeight() - y);
             magnet2.setLayoutY(0.65 * Main.windowHeight - vn * 2 - magnet2.getHeight() - y2);
-            rope1 = new Line(vn / 2, 0, vn / 2, 0.65 * Main.windowHeight - y);
+            rope1 = new Line(Main.squareDimension / 2, 0, Main.squareDimension / 2, 0.65 * Main.windowHeight - y);
 
         }
         if (Main.sortType == 0) {
@@ -500,9 +500,9 @@ public class AnimationsGenerator {
         }
 
         if (Main.sortType == 0) {
-            rope2 = new Line(vn / 2, 0, vn / 2, 0.65 * Main.windowHeight - vn * 2 - magnet2.getHeight() - 35);
+            rope2 = new Line(Main.squareDimension / 2, 0, Main.squareDimension / 2, 0.65 * Main.windowHeight - vn * 2 - magnet2.getHeight() - 35);
         } else {
-            rope2 = new Line(vn / 2, 0, vn / 2, 0.65 * Main.windowHeight - magnet2.getHeight() - y2);
+            rope2 = new Line(Main.squareDimension / 2, 0, Main.squareDimension / 2, 0.65 * Main.windowHeight - magnet2.getHeight() - y2);
         }
 
         rope2.setTranslateX(Main.coordinates.get(1));

@@ -7,19 +7,20 @@ import static javafx.animation.Animation.Status.STOPPED;
 import javafx.animation.SequentialTransition;
 
 public class AnimationsPlayer {
-    
+
     SequentialTransition sequentialAnimations = new SequentialTransition();
     boolean replay = false;
-    
+
     public void setAnimations(ArrayList<Animation> translateAnimations) {
-        sequentialAnimations.getChildren().addAll(translateAnimations); 
+        sequentialAnimations.getChildren().addAll(translateAnimations);
         sequentialAnimations.setOnFinished(event -> replay = true);
     }
 
     public void play() {
         sequentialAnimations.play();
-        if(sequentialAnimations.getStatus() != STOPPED)
+        if (sequentialAnimations.getStatus() != STOPPED) {
             replay = false;
+        }
     }
 
     public boolean isReplay() {

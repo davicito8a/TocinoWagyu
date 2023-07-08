@@ -17,6 +17,7 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 
 public class AnimationWindowController {
+
     private final int type;
 
     private final ArrayList<Integer> numbers;
@@ -108,10 +109,10 @@ public class AnimationWindowController {
         stepBackward.setLayoutX(0.85 * Main.windowWidth);
         stepBackward.setLayoutY(0.85 * Main.windowHeight);
         stepBackward.setPrefWidth(prefWidth);
-        
+
         play.setOnAction(event -> {
-            if(animationPlayer.isReplay()){
-                for(StackPane box: stackpanes){
+            if (animationPlayer.isReplay()) {
+                for (StackPane box : stackpanes) {
                     box.setRotate(0);
                 }
             }
@@ -192,7 +193,7 @@ public class AnimationWindowController {
             root.getChildren().addAll(craneUpperBox2, magnet2);
         }
     }
-    
+
     public Scene getScene() {
         return scene;
     }
