@@ -16,6 +16,13 @@ public class NumberDrawer {
         gc.setLineWidth(1.5);
     }
 
+    /**
+     * Dibuja un número en el lienzo del canvas en una determinada escala.
+     *
+     * @param number   El número a dibujar.
+     * @param scale    La escala del dibujo.
+     * @param scale2   La escala adicional para ajustar la posición.
+     */
     public void drawNumber(int number, double scale, double scale2) {
         coorX = 0.35 * Main.squareDimension * scale2 + 50 * scale;
         coorY = Main.squareDimension / 1.4 * 0.775 * scale2;
@@ -34,6 +41,13 @@ public class NumberDrawer {
         }
     }
 
+    /**
+     * Dibuja un dígito en el lienzo del canvas en una posición determinada.
+     *
+     * @param number   El dígito a dibujar.
+     * @param x        La coordenada X de la posición del dibujo.
+     * @param y        La coordenada Y de la posición del dibujo.
+     */
     public void drawDigit(int number, double x, double y) {
         switch (number) {
             case 0:
@@ -71,55 +85,125 @@ public class NumberDrawer {
         }
     }
 
+    /**
+     * Dibuja el número cero en el lienzo del canvas en una posición determinada.
+     *
+     * @param gc   El contexto gráfico del canvas.
+     * @param x    La coordenada X de la posición del dibujo.
+     * @param y    La coordenada Y de la posición del dibujo.
+     */
     public void drawZero(GraphicsContext gc, double x, double y) {
-        gc.strokeOval(coorX - 100 * scale, coorY - 200 * scale, 100 * scale, 200 * scale); // está muy flaco.
+        gc.strokeOval(coorX - 100 * scale, coorY - 200 * scale, 100 * scale, 200 * scale);
     }
 
+    /**
+     * Dibuja el número uno en el lienzo del canvas en una posición determinada.
+     *
+     * @param gc   El contexto gráfico del canvas.
+     * @param x    La coordenada X de la posición del dibujo.
+     * @param y    La coordenada Y de la posición del dibujo.
+     */
     public void drawOne(GraphicsContext gc, double x, double y) {
         gc.strokeLine(coorX, coorY, coorX, coorY - 200 * scale);
-        gc.strokeLine(coorX, coorY - 200 * scale, coorX - 100 * scale, coorY - 150 * scale); // diagonal
+        gc.strokeLine(coorX, coorY - 200 * scale, coorX - 100 * scale, coorY - 150 * scale);
     }
 
+    /**
+     * Dibuja el número dos en el lienzo del canvas en una posición determinada.
+     *
+     * @param gc   El contexto gráfico del canvas.
+     * @param x    La coordenada X de la posición del dibujo.
+     * @param y    La coordenada Y de la posición del dibujo.
+     */
     public void drawTwo(GraphicsContext gc, double x, double y) {
         gc.strokeLine(coorX, coorY, coorX - 100 * scale, coorY);
         gc.strokeLine(coorX - 6.7 * scale, coorY - 125 * scale, coorX - 100 * scale, coorY);
         gc.strokeArc(coorX - 100 * scale, coorY - 200 * scale, 100 * scale, 100 * scale, 180, -210, ArcType.OPEN);
     }
 
+    /**
+     * Dibuja el número tres en el lienzo del canvas en una posición determinada.
+     *
+     * @param gc   El contexto gráfico del canvas.
+     * @param x    La coordenada X de la posición del dibujo.
+     * @param y    La coordenada Y de la posición del dibujo.
+     */
     public void drawThree(GraphicsContext gc, double x, double y) {
         gc.strokeArc(coorX - 100 * scale, coorY - 200 * scale, 100 * scale, 100 * scale, 270, 270, ArcType.OPEN);
         gc.strokeArc(coorX - 100 * scale, coorY - 100 * scale, 100 * scale, 100 * scale, 180, 270, ArcType.OPEN);
     }
 
+    /**
+     * Dibuja el número cuatro en el lienzo del canvas en una posición determinada.
+     *
+     * @param gc   El contexto gráfico del canvas.
+     * @param x    La coordenada X de la posición del dibujo.
+     * @param y    La coordenada Y de la posición del dibujo.
+     */
     public void drawFour(GraphicsContext gc, double x, double y) {
-        gc.strokeLine(coorX - 100 * scale, coorY - 100 * scale, coorX - 100 * scale, coorY - 200 * scale); // vertical
-        gc.strokeLine(coorX - 100 * scale, coorY - 100 * scale, coorX, coorY - 100 * scale); // horizontal
-        gc.strokeLine(coorX, coorY, coorX, coorY - 200 * scale); // vertical
+        gc.strokeLine(coorX - 100 * scale, coorY - 100 * scale, coorX - 100 * scale, coorY - 200 * scale);
+        gc.strokeLine(coorX - 100 * scale, coorY - 100 * scale, coorX, coorY - 100 * scale);
+        gc.strokeLine(coorX, coorY, coorX, coorY - 200 * scale);
     }
 
+    /**
+     * Dibuja el número cinco en el lienzo del canvas en una posición determinada.
+     *
+     * @param gc   El contexto gráfico del canvas.
+     * @param x    La coordenada X de la posición del dibujo.
+     * @param y    La coordenada Y de la posición del dibujo.
+     */
     public void drawFive(GraphicsContext gc, double x, double y) {
         gc.strokeArc(coorX - 100 * scale, coorY - 100 * scale, 100 * scale, 100 * scale, 180, 270, ArcType.OPEN);
         gc.strokeLine(coorX - 50 * scale, coorY - 100 * scale, coorX - 100 * scale, coorY - 100 * scale);
-        gc.strokeLine(coorX - 100 * scale, coorY - 100 * scale, coorX - 100 * scale, coorY - 200 * scale); // vertical
-        gc.strokeLine(coorX - 100 * scale, coorY - 200 * scale, coorX, coorY - 200 * scale); // horizontal  
+        gc.strokeLine(coorX - 100 * scale, coorY - 100 * scale, coorX - 100 * scale, coorY - 200 * scale);
+        gc.strokeLine(coorX - 100 * scale, coorY - 200 * scale, coorX, coorY - 200 * scale);
     }
 
+    /**
+     * Dibuja el número seis en el lienzo del canvas en una posición determinada.
+     *
+     * @param gc   El contexto gráfico del canvas.
+     * @param x    La coordenada X de la posición del dibujo.
+     * @param y    La coordenada Y de la posición del dibujo.
+     */
     public void drawSix(GraphicsContext gc, double x, double y) {
-        gc.strokeLine(coorX - 93 * scale, coorY - 75 * scale, coorX, coorY - 200 * scale); // 93 es una aproximación.
+        gc.strokeLine(coorX - 93 * scale, coorY - 75 * scale, coorX, coorY - 200 * scale);
         gc.strokeOval(coorX - 100 * scale, coorY - 100 * scale, 100 * scale, 100 * scale);
     }
 
+    /**
+     * Dibuja el número siete en el lienzo del canvas en una posición determinada.
+     *
+     * @param gc   El contexto gráfico del canvas.
+     * @param x    La coordenada X de la posición del dibujo.
+     * @param y    La coordenada Y de la posición del dibujo.
+     */
     public void drawSeven(GraphicsContext gc, double x, double y) {
-        gc.strokeLine(coorX, coorY - 200 * scale, coorX - 100 * scale, coorY - 200 * scale); // horizontal
-        gc.strokeLine(coorX, coorY - 200 * scale, coorX - 100 * scale, coorY); // diagonal 
-        gc.strokeLine(coorX - 100 * scale, coorY - 200 * scale, coorX - 100 * scale, coorY - 175 * scale); // detail
+        gc.strokeLine(coorX, coorY - 200 * scale, coorX - 100 * scale, coorY - 200 * scale);
+        gc.strokeLine(coorX, coorY - 200 * scale, coorX - 100 * scale, coorY);
+        gc.strokeLine(coorX - 100 * scale, coorY - 200 * scale, coorX - 100 * scale, coorY - 175 * scale);
     }
 
+    /**
+     * Dibuja el número ocho en el lienzo del canvas en una posición determinada.
+     *
+     * @param gc   El contexto gráfico del canvas.
+     * @param x    La coordenada X de la posición del dibujo.
+     * @param y    La coordenada Y de la posición del dibujo.
+     */
     public void drawEight(GraphicsContext gc, double x, double y) {
         gc.strokeOval(coorX - 100 * scale, coorY - 200 * scale, 100 * scale, 100 * scale);
         gc.strokeOval(coorX - 100 * scale, coorY - 100 * scale, 100 * scale, 100 * scale);
     }
 
+    /**
+     * Dibuja el número nueve en el lienzo del canvas en una posición determinada.
+     *
+     * @param gc   El contexto gráfico del canvas.
+     * @param x    La coordenada X de la posición del dibujo.
+     * @param y    La coordenada Y de la posición del dibujo.
+     */
     public void drawNine(GraphicsContext gc, double x, double y) {
         gc.strokeOval(coorX - 100 * scale, coorY - 200 * scale, 100 * scale, 100 * scale);
         gc.strokeLine(coorX, coorY, coorX, coorY - 150 * scale);

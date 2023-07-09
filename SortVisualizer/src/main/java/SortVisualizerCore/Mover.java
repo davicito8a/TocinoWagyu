@@ -13,6 +13,14 @@ import javafx.util.Duration;
 
 public class Mover {
 
+    /**
+     * Crea una animación para mover la línea verticalmente.
+     *
+     * @param line   La línea a mover.
+     * @param fromY  La posición inicial en el eje Y.
+     * @param toY    La posición final en el eje Y.
+     * @return La animación de movimiento de la línea.
+     */
     public Animation moveRope(Line line, double fromY, double toY) {
         Timeline lengthening = new Timeline();
 
@@ -24,6 +32,14 @@ public class Mover {
         return lengthening;
     }
 
+    /**
+     * Crea una animación para mover nodos horizontalmente en el eje X.
+     *
+     * @param fromX  La posición inicial en el eje X.
+     * @param toX    La posición final en el eje X.
+     * @param nodes  Los nodos a mover.
+     * @return La animación de movimiento horizontal.
+     */
     public Animation moveInX(double fromX, double toX, Node... nodes) {
         ParallelTransition parallel = new ParallelTransition();
         for (Node node : nodes) {
@@ -36,6 +52,15 @@ public class Mover {
         return parallel;
     }
 
+    /**
+     * Crea una animación para intercambiar dos nodos horizontalmente en el eje X.
+     *
+     * @param fromX   La posición inicial en el eje X.
+     * @param toX     La posición final en el eje X.
+     * @param node1   El primer nodo a intercambiar.
+     * @param node2   El segundo nodo a intercambiar.
+     * @return La animación de intercambio horizontal.
+     */
     public Animation swapInX(double fromX, double toX, Node node1, Node node2) {
         ParallelTransition swapInX = new ParallelTransition();
 
@@ -54,6 +79,14 @@ public class Mover {
         return swapInX;
     }
 
+    /**
+     * Crea una animación para mover nodos verticalmente en el eje Y.
+     *
+     * @param fromY  La posición inicial en el eje Y.
+     * @param toY    La posición final en el eje Y.
+     * @param nodes  Los nodos a mover.
+     * @return La animación de movimiento vertical.
+     */
     public Animation moveInY(double fromY, double toY, Node... nodes) {
         ParallelTransition parallel = new ParallelTransition();
         for (Node node : nodes) {
@@ -66,6 +99,14 @@ public class Mover {
         return parallel;
     }
 
+    /**
+     * Crea una animación para mover nodos horizontalmente en el eje X con interpolación lineal.
+     *
+     * @param fromX  La posición inicial en el eje X.
+     * @param toX    La posición final en el eje X.
+     * @param nodes  Los nodos a mover.
+     * @return La animación de movimiento horizontal con interpolación lineal.
+     */
     public Animation moveInX2(double fromX, double toX, Node... nodes) {
         ParallelTransition parallel = new ParallelTransition();
         Interpolator interpolator = Interpolator.LINEAR;
@@ -79,6 +120,14 @@ public class Mover {
         return parallel;
     }
 
+    /**
+     * Crea una animación para intercambiar nodos horizontalmente en el eje X con interpolación lineal.
+     *
+     * @param fromX  La posición inicial en el eje X.
+     * @param toX    La posición final en el eje X.
+     * @param nodes  Los nodos a intercambiar.
+     * @return La animación de intercambio horizontal con interpolación lineal.
+     */
     public Animation swapInX2(double fromX, double toX, Node... nodes) {
         ParallelTransition swapInX = new ParallelTransition();
         Interpolator interpolator = Interpolator.LINEAR;
@@ -98,6 +147,14 @@ public class Mover {
         return swapInX;
     }
 
+    /**
+     * Crea una animación para mover nodos verticalmente en el eje Y con interpolación lineal.
+     *
+     * @param fromY  La posición inicial en el eje Y.
+     * @param toY    La posición final en el eje Y.
+     * @param nodes  Los nodos a mover.
+     * @return La animación de movimiento vertical con interpolación lineal.
+     */
     public Animation moveInY2(double fromY, double toY, Node... nodes) {
         ParallelTransition parallel = new ParallelTransition();
         Interpolator interpolator = Interpolator.LINEAR;

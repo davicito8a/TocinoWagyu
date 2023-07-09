@@ -18,7 +18,7 @@ public class Main extends Application {
     public static int windowHeight = 600;
     public static int windowWidth = 1500;
 
-    public static ArrayList<Double> coordinates = new ArrayList();
+    public static ArrayList<Double> coordinates = new ArrayList<>();
 
     public static double squareDimension;
     static double separation;
@@ -27,15 +27,21 @@ public class Main extends Application {
     public static int sortType = 2;
     public static int n;
 
+    /**
+     * Obtiene los rectángulos (vagones) correspondientes a los números proporcionados.
+     *
+     * @param numbers Lista de números para visualizar.
+     * @return Lista de StackPane que contienen los vagones con los números.
+     */
     public static ArrayList<StackPane> getRectangles(ArrayList<Integer> numbers) {
         n = numbers.size();
-        squareDimension = 0.75 * 0.9 * windowWidth / numbers.size(); //59.55
+        squareDimension = 0.75 * 0.9 * windowWidth / numbers.size(); // 59.55
         separation = 0.25 * 0.9 * windowWidth / numbers.size();
 
         squareDimension = (Main.sortType == 3) ? (0.85 * 0.9 * 620 / numbers.size()) : squareDimension;
         separation = (Main.sortType == 3) ? 0.15 * 0.9 * 620 / numbers.size() : separation;
 
-        ArrayList<StackPane> stackpanes = new ArrayList();
+        ArrayList<StackPane> stackpanes = new ArrayList<>();
 
         for (int i = 0; i < numbers.size(); i++) {
             Canvas canvas = new Canvas(squareDimension, squareDimension);
@@ -44,7 +50,7 @@ public class Main extends Application {
             wagonn.DrawWagon(canvas, squareDimension);
 
             NumberDrawer numberDrawer = new NumberDrawer(canvas);
-            numberDrawer.drawNumber(numbers.get(i), Main.squareDimension / 540, 1); //43.5 / 0.08
+            numberDrawer.drawNumber(numbers.get(i), Main.squareDimension / 540, 1); // 43.5 / 0.08
 
             coordinates.add(0.05 * windowWidth + (squareDimension + separation) * i);
 
@@ -70,7 +76,6 @@ public class Main extends Application {
                 canvas.getTransforms().setAll(hoverTranslate);
                 hoverTranslate.setX(Main.sortType == 3 ? 100 : -300);
                 hoverTranslate.setY(Main.sortType == 3 ? 100 : -350);
-
             });
 
             stackpane.setOnMouseExited(event -> {
@@ -89,14 +94,19 @@ public class Main extends Application {
         return stackpanes;
     }
 
+    /**
+     * Obtiene las locomotoras (vagones de tren) utilizadas para la animación.
+     *
+     * @return Lista de StackPane que contienen las locomotoras.
+     */
     public static ArrayList<StackPane> getLocomotoras() {
-        ArrayList<StackPane> locomotives = new ArrayList();
+        ArrayList<StackPane> locomotives = new ArrayList<>();
 
         StackPane stackpane = new StackPane();
         Canvas canvas1 = new Canvas(squareDimension * 1.2, squareDimension);
         Wagon vagon = new Wagon(canvas1);
         vagon.DrawTrain(Main.squareDimension, true);
-        stackpane.setTranslateX(0.05 * 910 - (squareDimension + separation)- (0.2 * Main.squareDimension));
+        stackpane.setTranslateX(0.05 * 910 - (squareDimension + separation) - (0.2 * Main.squareDimension));
         stackpane.setTranslateY(287 + 13 - Main.squareDimension / 1.4 / 2);
         stackpane.getChildren().addAll(canvas1);
 
@@ -114,6 +124,13 @@ public class Main extends Application {
         return locomotives;
     }
 
+    /**
+     * Crea una nueva ventana de animación con los números y vagones proporcionados.
+     *
+     * @param numbers     Lista de números para visualizar.
+     * @param stackpanes  Lista de StackPane que contienen los vagones con los números.
+     * @throws IOException si ocurre un error durante la carga de la ventana de animación.
+     */
     public static void newAnimationWindow(ArrayList<Integer> numbers, ArrayList<StackPane> stackpanes) throws IOException {
         Stage stage = new Stage();
         AnimationWindowController windowGenerator = new AnimationWindowController(numbers, stackpanes, modeType);
@@ -136,7 +153,7 @@ public class Main extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[]args) {
         launch();
     }
 }

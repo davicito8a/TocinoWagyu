@@ -21,12 +21,14 @@ public class Pseudocode {
         this.pseudocodeBox = pseudocodeBox;
     }
 
+    // Agrega las líneas correspondientes al algoritmo Insertion Sort en el pseudocódigo
     public void selectInsertionSortLines() {
         addLines("for i = n",
                 "\twhile(currentNumber < numbers[j - 1])\n\t\tnumbers[j] = numbers [j - 1]",
                 "\tnumbers[j] = currentNumber");
     }
 
+    // Agrega las líneas correspondientes al algoritmo Bubble Sort en el pseudocódigo
     public void selectBubbleSortLines() {
         addLines("for i = n",
                 "\tfor j = n2",
@@ -34,6 +36,7 @@ public class Pseudocode {
                 "\t\t\tswap(j, j + 1)");
     }
 
+    // Agrega las líneas correspondientes al algoritmo Cocktail Sort en el pseudocódigo
     public void selectCocktailSortLines() {
         addLines("while(swapped)",
                 "\tswapped = false",
@@ -50,6 +53,7 @@ public class Pseudocode {
                 "\t\t\tswapped = true");
     }
 
+    // Agrega las líneas correspondientes al algoritmo Selection Sort en el pseudocódigo
     public void selectSelecionSortLines() {
         addLines("for i = n",
                 "\tmax_idx = c",
@@ -60,6 +64,7 @@ public class Pseudocode {
                 "\taddInNewArray(n3, max)");
     }
 
+    // Agrega las líneas de código al pseudocódigo
     private void addLines(String... lines) {
         for (String line : lines) {
             Label label = new Label(line);
@@ -95,6 +100,7 @@ public class Pseudocode {
         }
     }
 
+    // Crea una animación para cambiar las propiedades de un label en el pseudocódigo (texto y estilo)
     public Animation changeLabelProperties(int lineNumber, String newText) {
         Timeline changeLabelPropertiesAnimation = new Timeline();
 
@@ -111,6 +117,7 @@ public class Pseudocode {
         return changeLabelPropertiesAnimation;
     }
 
+    // Crea una animación para cambiar las propiedades de un label en el pseudocódigo (texto, estilo y duración personalizada)
     public Animation changeLabelProperties(int lineNumber, String newText, int duration) {
         Timeline changeLabelPropertiesAnimation = new Timeline();
 
@@ -127,6 +134,7 @@ public class Pseudocode {
         return changeLabelPropertiesAnimation;
     }
 
+    // Crea una animación para seleccionar una línea en el pseudocódigo (cambiar estilo)
     public Animation selectLine(int lineNumber, String newText, int duration, boolean wannaSelect) {
         Timeline changeLabelPropertiesAnimation = new Timeline();
 
@@ -141,6 +149,7 @@ public class Pseudocode {
         return changeLabelPropertiesAnimation;
     }
 
+    // Crea una animación para deseleccionar una línea en el pseudocódigo (restaurar estilo inicial)
     public Animation unselectLine(int lineNumber) {
         Timeline changeLabelPropertiesAnimation = new Timeline();
 
