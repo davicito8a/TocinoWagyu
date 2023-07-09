@@ -93,16 +93,16 @@ public class Main extends Application {
         ArrayList<StackPane> locomotives = new ArrayList();
 
         StackPane stackpane = new StackPane();
-        Canvas canvas1 = new Canvas(squareDimension, squareDimension);
+        Canvas canvas1 = new Canvas(squareDimension * 1.2, squareDimension);
         Wagon vagon = new Wagon(canvas1);
         vagon.DrawTrain(Main.squareDimension, true);
-        stackpane.setTranslateX(0.05 * 910 - (squareDimension + separation));
+        stackpane.setTranslateX(0.05 * 910 - (squareDimension + separation)- (0.2 * Main.squareDimension));
         stackpane.setTranslateY(287 + 13 - Main.squareDimension / 1.4 / 2);
         stackpane.getChildren().addAll(canvas1);
 
         StackPane stackpane2 = new StackPane();
-        Canvas canvas2 = new Canvas(squareDimension, squareDimension);
-
+        Canvas canvas2 = new Canvas(squareDimension * 1.2, squareDimension);
+        
         Wagon vagon2 = new Wagon(canvas2);
         vagon2.DrawTrain(Main.squareDimension, false);
         stackpane2.setTranslateX(0.05 * 910 + (squareDimension + separation) * (n));

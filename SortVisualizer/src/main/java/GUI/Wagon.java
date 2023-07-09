@@ -16,49 +16,48 @@ public class Wagon {
     public void DrawWagon(Canvas canvasBox, double squareDimension) {
         gc = canvasBox.getGraphicsContext2D();
 
-        createTrainCanvas(0, -5, Color.RED, canvasBox, squareDimension);
+        createTrainCanvas(canvasBox, squareDimension);
     }
 
     public void DrawTrain(double width, boolean rotate) {
         GraphicsContext gc = canvasBox.getGraphicsContext2D();
         double height = width / 1.4;
-
-        gc.setFill(Color.RED);
-        gc.fillRect(0, 0, width, height);
-
+         
         if (rotate == true) {
             // Simetría axial
+            gc.setFill(Color.SLATEGREY);
+            double[] reflectedX = {0.2 * width, 0.2 * width, 0 * width};
+            double[] reflectedY = {0, height, height/2};
+            gc.fillPolygon(reflectedX, reflectedY, 3);
+            
+            gc.setFill(Color.RED);
+            gc.fillRect(0.2 * width, 0, width, height);
+            
             gc.setFill(Color.BLACK);
-            gc.fillRect((1 - 0.6) * width, 0.1 * height, 0.4 * width, 0.8 * height);
+            gc.fillRect((1 - 0.4) * width, 0.1 * height, 0.4 * width, 0.8 * height);
 
             gc.setFill(Color.GRAY);
-            gc.fillOval((1 - 0.9) * width, 0.4 * height, 0.2 * width, 0.2 * height);
+            gc.fillOval((1 - 0.7) * width, 0.4 * height, 0.2 * width, 0.2 * height);
         } else {
+            //Frontal
+            gc.setFill(Color.SLATEGREY);
+            double dobleX[] = {width, width, 1.2 * width};
+            double dobleY[] = {0, height, height/2};
+            gc.fillPolygon(dobleX, dobleY, 3);
+            
+            gc.setFill(Color.RED);
+            gc.fillRect(0, 0, width, height);
+            
             gc.setFill(Color.BLACK);
             gc.fillRect(0.2 * width, 0.1 * height, 0.4 * width, 0.8 * height);
 
             gc.setFill(Color.GRAY);
-            gc.fillOval(0.7 * width, 0.4 * height, 0.2 * width, 0.2 * height); // falta hacer calculos
+            gc.fillOval(0.7 * width, 0.4 * height, 0.2 * width, 0.2 * height);
         }
-        //gc.fillOval(17.5 * SizeOfWagon, 27 * SizeOfWagon, 20 * SizeOfWagon, 20 * SizeOfWagon);
-
-        /*
-        //Frontal
-        gw.setFill(Color.BLACK);
-        double dobleX[] = {10 * SizeOfWagon, 10 * SizeOfWagon, 1 * SizeOfWagon};
-        double dobleY[] = {10 * SizeOfWagon, 70 * SizeOfWagon, 35 * SizeOfWagon};
-        gw.fillPolygon(dobleX, dobleY, 3);
-
-        //Cañon y cabina
-        gw.fillRect(50 * SizeOfWagon, 15 * SizeOfWagon, 45 * SizeOfWagon, 50 * SizeOfWagon);
-
-        gw.fillOval(15 * SizeOfWagon, 25 * SizeOfWagon, 25 * SizeOfWagon, 25 * SizeOfWagon);
-        gw.setFill(Color.GRAY);
-        gw.fillOval(17.5 * SizeOfWagon, 27 * SizeOfWagon, 20 * SizeOfWagon, 20 * SizeOfWagon);
-         */
+        
     }
 
-    private void createTrainCanvas(double x, double y, Color color, Canvas canvas, double scale) {
+    private void createTrainCanvas( Canvas canvas, double scale) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
         // Dibujar el cuerpo del vagón
