@@ -39,37 +39,28 @@ public class InputController implements Initializable {
     @FXML
     private Button continueButton;
 
+    Alert alert = new Alert(AlertType.ERROR);
+    ButtonType okButton = new ButtonType("Aceptar", ButtonData.OK_DONE);
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         modes.setItems(FXCollections.observableArrayList("Normal", "Paso a paso"));
         sortAlgorithm.setItems(FXCollections.observableArrayList("Inserción", "Burbuja", "Coctelera", "Seleccion"));
-
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.getButtonTypes().setAll(okButton);
     }
 
     @FXML
     private void continueToVisualization(ActionEvent event) throws IOException {
         if (modes.getValue() == null) {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
             alert.setContentText("Por favor, seleccione un modo");
-
-            ButtonType okButton = new ButtonType("Aceptar", ButtonData.OK_DONE);
-            alert.getButtonTypes().setAll(okButton);
-
             alert.showAndWait();
             return; // Sale del método si no se ha seleccionado un modo
         }
 
         if (sortAlgorithm.getValue() == null) {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
             alert.setContentText("Por favor, seleccione un tipo de ordenamiento");
-
-            ButtonType okButton = new ButtonType("Aceptar", ButtonData.OK_DONE);
-            alert.getButtonTypes().setAll(okButton);
-
             alert.showAndWait();
             return; // Sale del método si no se ha seleccionado un tipo de ordenamiento
         }
@@ -98,14 +89,8 @@ public class InputController implements Initializable {
                     int number = Integer.parseInt(numberString);
                     numbers.add(number);
                 } catch (NumberFormatException e) {
-                    Alert alert = new Alert(AlertType.ERROR);
-                    alert.setTitle("Error");
-                    alert.setHeaderText(null);
+
                     alert.setContentText("El campo de números contiene valores no válidos");
-
-                    ButtonType okButton = new ButtonType("Aceptar", ButtonData.OK_DONE);
-                    alert.getButtonTypes().setAll(okButton);
-
                     alert.showAndWait();
                     return; // Sale del método si se encuentra un valor no válido
                 }
@@ -115,17 +100,10 @@ public class InputController implements Initializable {
             if (Main.sortType == 3) {
                 rectangles.addAll(Main.getLocomotoras());
             }
-
+            
             Main.newAnimationWindow(numbers, rectangles);
         } else {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
             alert.setContentText("Por favor, inténtalo de nuevo");
-
-            ButtonType okButton = new ButtonType("Aceptar", ButtonData.OK_DONE);
-            alert.getButtonTypes().setAll(okButton);
-
             alert.showAndWait();
         }
     }
@@ -146,14 +124,7 @@ public class InputController implements Initializable {
     @FXML
     private void generateRandomNumbers(ActionEvent event) {
         if (!numberOfBoxes.getText().matches("^[0-9]+$")) {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
             alert.setContentText("El campo debe contener solo números naturales");
-
-            ButtonType okButton = new ButtonType("Aceptar", ButtonData.OK_DONE);
-            alert.getButtonTypes().setAll(okButton);
-
             alert.showAndWait();
             return; // Sale del método si el campo no contiene solo números
         }
